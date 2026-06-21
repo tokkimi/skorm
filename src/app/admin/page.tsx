@@ -1,62 +1,71 @@
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { AdminPageHeading, AdminPanel, MetricCard, Status } from "@/components/admin-ui";
+import { getAdminData } from "@/lib/admin-data";
 
 export default async function AdminPage() {
-  const supabase = await getSupabaseServerClient();
-  const [{ data: inquiries }, { data: events }] = supabase
-    ? await Promise.all([
-        supabase.from("inquiries").select("*").order("created_at", { ascending: false }).limit(20),
-        supabase.from("events").select("*, artists(name)").order("starts_at").limit(20),
-      ])
-    : [{ data: [] }, { data: [] }];
+  const data = await getAdminData();
+  const { artists, events, inquiries, tasks, campaigns, bookings } = data;
 
   return (
-    <main className="min-h-screen bg-neutral-950 p-5 text-neutral-50 md:p-10">
-      <div className="mx-auto max-w-7xl space-y-8">
-        <div className="flex items-end justify-between border-b border-white/15 pb-6">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-[.2em] text-neutral-500">Estérel / Back-office</p>
-            <h1 className="mt-2 text-4xl font-semibold tracking-[-.06em]">Pilotage agence</h1>
+    <main className="admin-main">
+      <AdminPageHeading title="Vue d’ensemble" description="Tout ce qui demande votre attention aujourd’hui." action="+ Nouvelle action" />
+      <section className="metrics-grid">
+        <MetricCard label="Demandes ouvertes" value={inquiries.length} hint="Booking, marques, presse et artistes" />
+        <MetricCard label="Dates à venir" value={events.length} hint="Tous artistes confondus" />
+        <MetricCard label="Bookings en cours" value={bookings.length} hint="Prospection → contrat signé" />
+        <MetricCard label="Campagnes actives" value={campaigns.length} hint="Partenariats et contenus" />
+      </section>
+
+      <section className="admin-grid">
+        <AdminPanel title="Pipeline des demandes" wide>
+          <div className="admin-table">
+            <div className="admin-table-head"><span>Contact</span><span>Type</span><span>Artiste</span><span>Statut</span></div>
+            {inquiries.length ? inquiries.map((item) => (
+              <div className="admin-table-row" key={item.id}>
+                <span><b>{item.contact_name}</b><small>{item.company || item.email}</small></span>
+                <span>{item.inquiry_type}</span><span>{item.artist_slug || "Général"}</span>
+                <span><Status tone={item.status === "new" ? "warn" : "neutral"}>{item.status}</Status></span>
+              </div>
+            )) : <Empty text="Aucune demande reçue." />}
           </div>
-          <Link href="/" className="text-sm text-neutral-400">Voir le site ↗</Link>
-        </div>
-        {!supabase && (
-          <Card className="border-amber-500/30 bg-amber-500/5 text-neutral-50">
-            <CardHeader><CardTitle>Connexion Supabase en attente</CardTitle></CardHeader>
-            <CardContent className="text-neutral-400">Le tableau de bord est prêt. Ajoutez les variables d’environnement pour activer les données, l’authentification et les formulaires.</CardContent>
-          </Card>
-        )}
-        <div className="grid gap-4 md:grid-cols-3">
-          <Metric label="Demandes reçues" value={inquiries?.length ?? 0} />
-          <Metric label="Dates à venir" value={events?.length ?? 0} />
-          <Metric label="Artistes actifs" value={2} />
-        </div>
-        <Card className="border-white/10 bg-neutral-900 text-neutral-50">
-          <CardHeader><CardTitle>Dernières demandes</CardTitle></CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader><TableRow className="border-white/10"><TableHead>Contact</TableHead><TableHead>Type</TableHead><TableHead>Artiste</TableHead><TableHead>Statut</TableHead></TableRow></TableHeader>
-              <TableBody>
-                {inquiries?.length ? inquiries.map((item) => (
-                  <TableRow key={item.id} className="border-white/10">
-                    <TableCell><strong>{item.contact_name}</strong><br/><span className="text-neutral-500">{item.email}</span></TableCell>
-                    <TableCell>{item.inquiry_type}</TableCell>
-                    <TableCell>{item.artist_slug ?? "Général"}</TableCell>
-                    <TableCell><Badge variant="outline">{item.status}</Badge></TableCell>
-                  </TableRow>
-                )) : <TableRow><TableCell colSpan={4} className="py-12 text-center text-neutral-500">Aucune donnée pour le moment.</TableCell></TableRow>}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      </div>
+        </AdminPanel>
+
+        <AdminPanel title="Priorités">
+          <div className="task-list">
+            {tasks.length ? tasks.map((task) => (
+              <div key={task.id}><i className={task.priority === "urgent" ? "urgent" : ""} /><span><b>{task.title}</b><small>{task.category}</small></span></div>
+            )) : <Empty text="Aucune tâche urgente." />}
+          </div>
+        </AdminPanel>
+
+        <AdminPanel title="Roster">
+          <div className="admin-roster">
+            {artists.map((artist) => (
+              <div key={artist.id}><span>{artist.name.slice(0, 2).toUpperCase()}</span><p><b>{artist.name}</b><small>{artist.tagline}</small></p><Status tone="good">Actif</Status></div>
+            ))}
+          </div>
+        </AdminPanel>
+
+        <AdminPanel title="Prochaines dates" wide>
+          <div className="compact-events">
+            {events.length ? events.map((event) => (
+              <div key={event.id}><time>{new Date(event.starts_at).toLocaleDateString("fr-FR", { day: "2-digit", month: "short" })}</time><span><b>{event.title}</b><small>{event.city} · {event.artist_name}</small></span><Status tone="good">{event.status}</Status></div>
+            )) : <Empty text="Ajoutez les dates confirmées au calendrier." />}
+          </div>
+        </AdminPanel>
+
+        <AdminPanel title="Suivi business">
+          <div className="pipeline-mini">
+            <p><span>Prospection</span><b>{bookings.filter((b) => b.status === "lead").length}</b></p>
+            <p><span>Négociation</span><b>{bookings.filter((b) => b.status === "negotiation").length}</b></p>
+            <p><span>Confirmé</span><b>{bookings.filter((b) => b.status === "confirmed").length}</b></p>
+            <p><span>À facturer</span><b>{bookings.filter((b) => b.payment_status === "pending").length}</b></p>
+          </div>
+        </AdminPanel>
+      </section>
     </main>
   );
 }
 
-function Metric({ label, value }: { label: string; value: number }) {
-  return <Card className="border-white/10 bg-neutral-900 text-neutral-50"><CardHeader><p className="font-mono text-xs uppercase tracking-widest text-neutral-500">{label}</p><CardTitle className="text-5xl tracking-[-.08em]">{value}</CardTitle></CardHeader></Card>;
+function Empty({ text }: { text: string }) {
+  return <p className="admin-empty">{text}</p>;
 }

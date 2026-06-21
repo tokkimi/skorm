@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SiteChrome } from "@/components/site-chrome";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -19,8 +20,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+    <html lang="fr" data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body>
+        {children}
+        <SiteChrome />
+      </body>
     </html>
   );
 }
