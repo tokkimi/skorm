@@ -31,7 +31,7 @@ export function SiteChrome() {
     <>
       <header className="floating-header">
         <Link className="brand brand-logo" href={base || "/"} aria-label="SKORM Agency">
-          <img src="/skorm-logo.svg" alt="SKORM Agency" />
+          <img src="/skorm-logo.png" alt="SKORM Agency" />
         </Link>
         <nav>
           <Link href={withBase(base, "/artistes")}>{isEn ? "Artists" : "Artistes"}</Link>

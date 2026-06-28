@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Bot, BriefcaseBusiness, CalendarDays, Mail, Sparkles } from "lucide-react";
 import { HorizontalRail } from "@/components/horizontal-rail";
 import { AgencyHero } from "@/components/agency-hero";
@@ -8,8 +8,8 @@ import { artistMedia, artists } from "@/lib/content";
 const features = [
   {
     icon: Sparkles,
-    title: "Direction d?셢mage",
-    text: "Positionnement, identit챕, contenus et coh챕rence visuelle.",
+    title: "Direction d?image",
+    text: "Positionnement, identit?, contenus et coh?rence visuelle.",
     href: "/contact",
   },
   {
@@ -21,13 +21,13 @@ const features = [
   {
     icon: Mail,
     title: "Demandes pros",
-    text: "Bookers, m챕dias, marques et partenaires au m챗me endroit.",
+    text: "Bookers, m?dias, marques et partenaires au m?me endroit.",
     href: "/contact",
   },
   {
     icon: BriefcaseBusiness,
-    title: "Gestion de carri챔re",
-    text: "Priorit챕s, strat챕gie, arbitrages et d챕veloppement long terme.",
+    title: "Gestion de carri?re",
+    text: "Priorit?s, strat?gie, arbitrages et d?veloppement long terme.",
     href: "/rejoindre-agence",
   },
 ];
@@ -59,14 +59,14 @@ export default function Home() {
           <span><Bot size={18} /></span>
           <div>
             <p className="eyebrow">Artistes IA</p>
-            <h2>Management, cr챕ation et formation d?셙rtistes IA.</h2>
+            <h2>Management, cr?ation et formation d?artistes IA.</h2>
             <p>
-              SKORM peut aussi accompagner des projets d?셙rtistes IA : direction artistique,
+              SKORM peut aussi accompagner des projets d?artistes IA : direction artistique,
               image, contenus, narration, lancement, calendrier de sorties et structuration
-              d?셵n univers cr챕dible avant exposition publique.
+              d?un univers cr?dible avant exposition publique.
             </p>
           </div>
-          <Link href="/rejoindre-agence">Pr챕senter un projet IA</Link>
+          <Link href="/rejoindre-agence">Pr?senter un projet IA</Link>
         </div>
       </section>
 
@@ -86,4 +86,3 @@ export default function Home() {
     </main>
   );
 }
-

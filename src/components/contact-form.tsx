@@ -11,23 +11,23 @@ const variantCopy = {
       type: "booking",
       eyebrow: "Demande professionnelle",
       title: "Envoyer un brief clair",
-      intro: "Booking, m챕dia, partenariat ou question directe pour l?셙gence.",
+      intro: "Booking, média, partenariat ou question directe pour l’agence.",
       steps: ["Contact", "Projet", "Envoi"],
       submit: "Envoyer la demande",
     },
     artist: {
       type: "artist",
-      eyebrow: "D챕p척t artiste",
-      title: "Pr챕senter ton projet",
-      intro: "Profil, r챕seaux, sons, vocaux, dates et besoins d?셙ccompagnement.",
-      steps: ["Identit챕", "Musique", "Objectifs"],
-      submit: "D챕poser le profil",
+      eyebrow: "Dépôt artiste",
+      title: "Présenter ton projet",
+      intro: "Profil, réseaux, sons, vocaux, dates et besoins d’accompagnement.",
+      steps: ["Identité", "Musique", "Objectifs"],
+      submit: "Déposer le profil",
     },
     sponsor: {
       type: "brand",
       eyebrow: "Brief marque",
       title: "Proposer une activation",
-      intro: "Sponsoring, campagne, 챕v챕nement, contenu social ou partenariat artiste.",
+      intro: "Sponsoring, campagne, événement, contenu social ou partenariat artiste.",
       steps: ["Marque", "Activation", "Budget"],
       submit: "Envoyer le brief",
     },
@@ -108,13 +108,13 @@ export function ContactForm({ variant = "contact", lang = "fr" }: { variant?: Fo
   const isEn = lang === "en";
 
   const subjectOptions = useMemo(() => {
-    if (variant === "artist") return [{ value: "artist", label: isEn ? "Artist submission" : "Proposition d?셙rtiste" }];
+    if (variant === "artist") return [{ value: "artist", label: isEn ? "Artist submission" : "Proposition d’artiste" }];
     if (variant === "sponsor") return [{ value: "brand", label: isEn ? "Brand / sponsor collaboration" : "Collaboration de marque / sponsor" }];
     return [
       { value: "booking", label: isEn ? "Booking / programming" : "Booking / programmation" },
       { value: "brand", label: isEn ? "Brand collaboration" : "Collaboration de marque" },
-      { value: "press", label: isEn ? "Press / media" : "Presse / m챕dia" },
-      { value: "artist", label: isEn ? "Artist submission" : "Proposition d?셙rtiste" },
+      { value: "press", label: isEn ? "Press / media" : "Presse / média" },
+      { value: "artist", label: isEn ? "Artist submission" : "Proposition d’artiste" },
       { value: "other", label: isEn ? "Other project" : "Autre projet" },
     ];
   }, [variant, isEn]);
@@ -193,11 +193,11 @@ export function ContactForm({ variant = "contact", lang = "fr" }: { variant?: Fo
             {subjectOptions.map((option) => <option value={option.value} key={option.value}>{option.label}</option>)}
           </select>
         </label>
-        <Field label={isEn ? "Name" : "Nom / pr챕nom"} name="name" required autoComplete="name" />
+        <Field label={isEn ? "Name" : "Nom / prénom"} name="name" required autoComplete="name" />
       </div>
 
       <div className="form-row">
-        <Field label={variant === "artist" ? (isEn ? "Artist name" : "Nom d?셙rtiste") : (isEn ? "Company / organization" : "Soci챕t챕 / organisation")} name="company" required={variant !== "contact"} autoComplete="organization" />
+        <Field label={variant === "artist" ? (isEn ? "Artist name" : "Nom d’artiste") : (isEn ? "Company / organization" : "Société / organisation")} name="company" required={variant !== "contact"} autoComplete="organization" />
         <Field label={isEn ? "Professional e-mail" : "E-mail professionnel"} name="email" type="email" required autoComplete="email" />
       </div>
 
@@ -205,9 +205,9 @@ export function ContactForm({ variant = "contact", lang = "fr" }: { variant?: Fo
         <>
           <div className="form-row">
             <label className="field">
-              <span>{isEn ? "Artist concerned" : "Artiste concern챕"}</span>
+              <span>{isEn ? "Artist concerned" : "Artiste concerné"}</span>
               <select name="artist" defaultValue="general">
-                <option value="general">{isEn ? "SKORM / general request" : "SKORM / demande g챕n챕rale"}</option>
+                <option value="general">{isEn ? "SKORM / general request" : "SKORM / demande générale"}</option>
                 <option value="cgl-rave-unit">CGL Rave Unit</option>
                 <option value="paga">Paga</option>
               </select>
@@ -215,10 +215,10 @@ export function ContactForm({ variant = "contact", lang = "fr" }: { variant?: Fo
             <Field label={isEn ? "City / country" : "Ville / pays"} name="lieu" placeholder="Paris, Belgium, Switzerland..." />
           </div>
           <div className="form-row">
-            <Field label={isEn ? "Preferred date" : "Date souhait챕e"} name="date" type="date" />
-            <Field label={isEn ? "Budget range" : "Budget indicatif"} name="budget" placeholder={isEn ? "Fee, envelope or to define" : "Cachet, enveloppe ou 횪 d챕finir"} />
+            <Field label={isEn ? "Preferred date" : "Date souhaitée"} name="date" type="date" />
+            <Field label={isEn ? "Budget range" : "Budget indicatif"} name="budget" placeholder={isEn ? "Fee, envelope or to define" : "Cachet, enveloppe ou à définir"} />
           </div>
-          <TextArea label={isEn ? "Project / request" : "Projet / demande"} name="message" required placeholder={isEn ? "Event type, context, artist, timing, expectations..." : "Type d?쇒쯸챕nement, contexte, artiste vis챕, timing, attentes..."} />
+          <TextArea label={isEn ? "Project / request" : "Projet / demande"} name="message" required placeholder={isEn ? "Event type, context, artist, timing, expectations..." : "Type d’événement, contexte, artiste visé, timing, attentes..."} />
         </>
       )}
 
@@ -240,19 +240,19 @@ export function ContactForm({ variant = "contact", lang = "fr" }: { variant?: Fo
             <Field label="Instagram" name="instagram" placeholder="https://instagram.com/..." />
           </div>
           <div className="form-row">
-            <Field label="TikTok / YouTube" name="social_video" placeholder={isEn ? "Profile or channel link" : "Lien profil ou cha챤ne"} />
-            <Field label="Spotify / Apple Music" name="streaming" placeholder={isEn ? "Artist or latest release link" : "Lien artiste ou derni챔re sortie"} />
+            <Field label="TikTok / YouTube" name="social_video" placeholder={isEn ? "Profile or channel link" : "Lien profil ou chaîne"} />
+            <Field label="Spotify / Apple Music" name="streaming" placeholder={isEn ? "Artist or latest release link" : "Lien artiste ou dernière sortie"} />
           </div>
           <div className="form-row">
-            <Field label="SoundCloud / d챕mos priv챕es" name="soundcloud" placeholder={isEn ? "Private links accepted" : "Lien priv챕 accept챕"} />
+            <Field label="SoundCloud / démos privées" name="soundcloud" placeholder={isEn ? "Private links accepted" : "Lien privé accepté"} />
             <Field label={isEn ? "Sounds / voice notes folder" : "Dossier sons / vocaux"} name="audio_folder" placeholder="Drive, WeTransfer, Dropbox..." />
           </div>
           <div className="form-row">
             <Field label="Presskit / photos HD" name="presskit" placeholder="EPK, bio, photos, logo..." />
-            <Field label={isEn ? "Past dates" : "Derni챔res dates jou챕es"} name="past_dates" placeholder={isEn ? "Clubs, festivals, cities..." : "Clubs, festivals, villes..."} />
+            <Field label={isEn ? "Past dates" : "Dernières dates jouées"} name="past_dates" placeholder={isEn ? "Clubs, festivals, cities..." : "Clubs, festivals, villes..."} />
           </div>
           <TextArea label={isEn ? "What you expect from SKORM" : "Ce que tu attends de SKORM"} name="message" required placeholder={isEn ? "Communication, European booking, image, management, content, brands..." : "Communication, booking Europe, image, management, contenus, marques..."} />
-          <TextArea label={isEn ? "Important information" : "Infos importantes"} name="extra_notes" placeholder={isEn ? "Current team, labels, constraints, goals, availability..." : "횋quipe actuelle, labels, contraintes, objectifs, disponibilit챕s..."} />
+          <TextArea label={isEn ? "Important information" : "Infos importantes"} name="extra_notes" placeholder={isEn ? "Current team, labels, constraints, goals, availability..." : "Équipe actuelle, labels, contraintes, objectifs, disponibilités..."} />
         </>
       )}
 
@@ -260,32 +260,32 @@ export function ContactForm({ variant = "contact", lang = "fr" }: { variant?: Fo
         <>
           <div className="form-row">
             <Field label={isEn ? "Brand name" : "Nom de marque"} name="brand_name" required />
-            <Field label={isEn ? "Website / main social" : "Site / r챕seau principal"} name="brand_link" placeholder="https://..." />
+            <Field label={isEn ? "Website / main social" : "Site / réseau principal"} name="brand_link" placeholder="https://..." />
           </div>
           <div className="form-row">
             <label className="field">
               <span>{isEn ? "Partnership target" : "Destination du partenariat"}</span>
               <select name="sponsor_scope" required defaultValue="agency">
-                <option value="agency">{isEn ? "Full agency / SKORM roster" : "Agence compl챔te / roster SKORM"}</option>
-                <option value="artist">{isEn ? "A specific artist" : "Un artiste pr챕cis"}</option>
+                <option value="agency">{isEn ? "Full agency / SKORM roster" : "Agence complète / roster SKORM"}</option>
+                <option value="artist">{isEn ? "A specific artist" : "Un artiste précis"}</option>
               </select>
             </label>
             <label className="field">
-              <span>{isEn ? "Selected artist" : "Artiste vis챕"}</span>
+              <span>{isEn ? "Selected artist" : "Artiste visé"}</span>
               <select name="artist" defaultValue="general">
-                <option value="general">{isEn ? "Full agency / no specific artist" : "Agence compl챔te / aucun artiste pr챕cis"}</option>
+                <option value="general">{isEn ? "Full agency / no specific artist" : "Agence complète / aucun artiste précis"}</option>
                 <option value="paga">Paga</option>
                 <option value="cgl-rave-unit">Cagoule Rave Unit</option>
               </select>
             </label>
           </div>
           <div className="form-row">
-            <Field label={isEn ? "Activation type" : "Type d?셙ctivation"} name="activation_type" placeholder="Sponsoring, event, content, ambassador..." required />
+            <Field label={isEn ? "Activation type" : "Type d’activation"} name="activation_type" placeholder="Sponsoring, event, content, ambassador..." required />
             <Field label={isEn ? "Territory" : "Territoire"} name="territory" placeholder="France, Europe, local..." />
           </div>
           <div className="form-row">
-            <Field label={isEn ? "Budget range" : "Budget indicatif"} name="budget" placeholder={isEn ? "Starting from..." : "? partir de..."} />
-            <Field label="Timing" name="timing" placeholder={isEn ? "Date, period, launch..." : "Date, p챕riode, lancement..."} />
+            <Field label={isEn ? "Budget range" : "Budget indicatif"} name="budget" placeholder={isEn ? "Starting from..." : "À partir de..."} />
+            <Field label="Timing" name="timing" placeholder={isEn ? "Date, period, launch..." : "Date, période, lancement..."} />
           </div>
           <TextArea label={isEn ? "Campaign brief" : "Brief de campagne"} name="message" required placeholder={isEn ? "Goal, target, deliverables, context, constraints, KPI..." : "Objectif, cible, livrables, contexte, contraintes, KPI..."} />
           <TextArea label={isEn ? "Useful links" : "Liens utiles"} name="links" placeholder="Moodboard, assets, deck, examples, drive..." />
@@ -295,8 +295,7 @@ export function ContactForm({ variant = "contact", lang = "fr" }: { variant?: Fo
       <button className="submit-button" disabled={status === "sending"}>
         {status === "sending" ? (isEn ? "Sending..." : "Envoi...") : copy.submit}
       </button>
-      {status === "error" && <p className="form-message error">{isEn ? "Unable to send right now." : "Impossible d?셞nvoyer pour le moment."}</p>}
+      {status === "error" && <p className="form-message error">{isEn ? "Unable to send right now." : "Impossible d’envoyer pour le moment."}</p>}
     </form>
   );
 }
-

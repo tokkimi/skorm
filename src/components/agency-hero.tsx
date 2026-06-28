@@ -20,7 +20,7 @@ export function AgencyHero({ lang = "fr" }: { lang?: Lang }) {
       <div className="agency-paga-shell">
         <div className="agency-paga-copy">
           <p className="eyebrow">{isEn ? "Management · Communication · Partnerships · AI · Training" : "Management · Communication · Partenariats · IA · Formation"}</p>
-          <img className="agency-hero-logo" src="/skorm-logo.svg" alt="SKORM Agency" />
+          <img className="agency-hero-logo" src="/skorm-logo.png" alt="SKORM Agency" />
           <p>
             {isEn
               ? "A dark-tech agency shaping image, content, dates and opportunities around electronic artists, AI artists and ambitious creative projects."

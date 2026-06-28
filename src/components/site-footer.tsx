@@ -66,7 +66,7 @@ export function SiteFooter() {
         <div className="footer-bottom">
           <div className="footer-intro">
             <Link className="footer-brand footer-logo" href="/" aria-label="SKORM Agency">
-              <img src="/skorm-logo.svg" alt="SKORM Agency" />
+              <img src="/skorm-logo.png" alt="SKORM Agency" />
             </Link>
             <p>Management, communication, partnerships, AI & training pour artistes électroniques.</p>
             <a href="https://www.instagram.com/skormagency/" target="_blank" rel="noreferrer">Instagram</a>

@@ -40,7 +40,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
     <div className="admin-shell">
       <aside className="admin-sidebar">
         <Link href="/admin" className="admin-logo admin-logo-image" aria-label="SKORM Back Office">
-          <img src="/skorm-logo.svg" alt="SKORM" />
+          <img src="/skorm-logo.png" alt="SKORM" />
           <span>BACK OFFICE</span>
         </Link>
         <nav>
