@@ -8,6 +8,8 @@ type EventRow = { id: string; starts_at: string; title: string; city: string; st
 type InquiryRow = {
   id: string; contact_name: string; company: string | null; email: string; inquiry_type: string;
   artist_slug: string | null; message: string; status: string; created_at: string;
+  phone?: string | null; event_date?: string | null; budget_range?: string | null;
+  internal_notes?: string | null; source?: string | null; updated_at?: string | null;
 };
 type BookingRow = {
   id: string; status: string; payment_status: string; fee: number | null; event_name: string;

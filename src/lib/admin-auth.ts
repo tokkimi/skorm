@@ -1,12 +1,12 @@
-import { createHmac, timingSafeEqual } from "node:crypto";
+﻿import { createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 
-const COOKIE_NAME = "esterel_admin";
+const COOKIE_NAME = "SKORM_admin";
 
 function sessionToken() {
   const secret = process.env.ADMIN_SESSION_SECRET;
   if (!secret) return "";
-  return createHmac("sha256", secret).update("esterel-admin-session").digest("hex");
+  return createHmac("sha256", secret).update("SKORM-admin-session").digest("hex");
 }
 
 export function validAdminCredentials(email: string, password: string) {
@@ -38,3 +38,4 @@ export function getAdminCookie() {
     options: { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax" as const, path: "/", maxAge: 60 * 60 * 12 },
   };
 }
+

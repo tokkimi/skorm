@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  Ban,
   CalendarDays,
   CircleDollarSign,
   ContactRound,
@@ -13,6 +14,8 @@ import {
   LayoutDashboard,
   ListChecks,
   Music2,
+  Network,
+  ReceiptText,
 } from "lucide-react";
 
 const items = [
@@ -20,6 +23,9 @@ const items = [
   { href: "/admin/demandes", label: "Demandes", icon: Inbox },
   { href: "/admin/artistes", label: "Artistes", icon: Music2 },
   { href: "/admin/calendriers", label: "Agendas privés", icon: CalendarDays },
+  { href: "/admin/prestations-tarifs", label: "Prestations & tarifs", icon: ReceiptText },
+  { href: "/admin/organigramme", label: "Organigramme", icon: Network },
+  { href: "/admin/death-note", label: "Death Note", icon: Ban },
   { href: "/admin/bookings", label: "Bookings", icon: CalendarDays },
   { href: "/admin/campagnes", label: "Campagnes", icon: Handshake },
   { href: "/admin/contenus", label: "Contenus", icon: FileText },
@@ -33,20 +39,29 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="admin-shell">
       <aside className="admin-sidebar">
-        <Link href="/admin" className="admin-logo">ESTÉREL<span>BACK OFFICE</span></Link>
+        <Link href="/admin" className="admin-logo admin-logo-image" aria-label="SKORM Back Office">
+          <img src="/skorm-logo.svg" alt="SKORM" />
+          <span>BACK OFFICE</span>
+        </Link>
         <nav>
           {items.map(({ href, label, icon: Icon }) => (
             <Link className={pathname === href ? "active" : ""} href={href} key={href}>
-              <Icon size={17} /><span>{label}</span>
+              <Icon size={17} />
+              <span>{label}</span>
             </Link>
           ))}
         </nav>
-        <Link href="/" className="admin-site-link">Voir le site <ExternalLink size={14} /></Link>
+        <Link href="/" className="admin-site-link">
+          Voir le site <ExternalLink size={14} />
+        </Link>
       </aside>
       <div className="admin-content">
         <header className="admin-topbar">
-          <div><span>Agence</span><strong>Estérel Communication</strong></div>
-          <div className="admin-avatar">EC</div>
+          <div>
+            <span>Agence</span>
+            <strong>SKORM Agency</strong>
+          </div>
+          <div className="admin-avatar">SK</div>
         </header>
         {children}
       </div>

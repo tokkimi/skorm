@@ -1,3 +1,4 @@
+import { AdminCreateButton } from "@/components/admin-create-button";
 import { AdminPageHeading, AdminPanel, MetricCard, Status } from "@/components/admin-ui";
 import { getAdminData } from "@/lib/admin-data";
 
@@ -7,7 +8,7 @@ export default async function AdminPage() {
 
   return (
     <main className="admin-main">
-      <AdminPageHeading title="Vue d’ensemble" description="Tout ce qui demande votre attention aujourd’hui." action="+ Nouvelle action" />
+      <AdminPageHeading title="Vue d’ensemble" description="Tout ce qui demande votre attention aujourd’hui." action={<AdminCreateButton kind="event" artists={artists} />} />
       <section className="metrics-grid">
         <MetricCard label="Demandes ouvertes" value={inquiries.length} hint="Booking, marques, presse et artistes" />
         <MetricCard label="Dates à venir" value={events.length} hint="Tous artistes confondus" />
@@ -50,15 +51,6 @@ export default async function AdminPage() {
             {events.length ? events.map((event) => (
               <div key={event.id}><time>{new Date(event.starts_at).toLocaleDateString("fr-FR", { day: "2-digit", month: "short" })}</time><span><b>{event.title}</b><small>{event.city} · {event.artist_name}</small></span><Status tone="good">{event.status}</Status></div>
             )) : <Empty text="Ajoutez les dates confirmées au calendrier." />}
-          </div>
-        </AdminPanel>
-
-        <AdminPanel title="Suivi business">
-          <div className="pipeline-mini">
-            <p><span>Prospection</span><b>{bookings.filter((b) => b.status === "lead").length}</b></p>
-            <p><span>Négociation</span><b>{bookings.filter((b) => b.status === "negotiation").length}</b></p>
-            <p><span>Confirmé</span><b>{bookings.filter((b) => b.status === "confirmed").length}</b></p>
-            <p><span>À facturer</span><b>{bookings.filter((b) => b.payment_status === "pending").length}</b></p>
           </div>
         </AdminPanel>
       </section>

@@ -20,12 +20,26 @@ const eventSchema = z.object({
   category: z.string().trim().max(80),
   notes: z.string().trim().max(2000).optional(),
 });
+const updateEventSchema = z.object({
+  action: z.literal("update_event"),
+  id: z.string().uuid(),
+  title: z.string().trim().min(2).max(180),
+  starts_at: z.string().min(10),
+  ends_at: z.string().optional(),
+  location: z.string().trim().max(240).optional(),
+  category: z.string().trim().max(80),
+  notes: z.string().trim().max(2000).optional(),
+});
+const deleteEventSchema = z.object({
+  action: z.literal("delete_event"),
+  id: z.string().uuid(),
+});
 const noteSchema = z.object({
   action: z.literal("save_note"),
   artist_id: z.string().uuid(),
   content: z.string().max(20000),
 });
-const schema = z.discriminatedUnion("action", [artistSchema, eventSchema, noteSchema]);
+const schema = z.discriminatedUnion("action", [artistSchema, eventSchema, updateEventSchema, deleteEventSchema, noteSchema]);
 
 export async function POST(request: Request) {
   if (!(await hasAdminSession())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -47,6 +61,20 @@ export async function POST(request: Request) {
       p_secret: secret, p_artist_id: parsed.data.artist_id, p_title: parsed.data.title,
       p_starts_at: parsed.data.starts_at, p_ends_at: parsed.data.ends_at || null,
       p_location: parsed.data.location || null, p_category: parsed.data.category, p_notes: parsed.data.notes || null,
+    });
+    return error ? NextResponse.json({ error: error.message }, { status: 500 }) : NextResponse.json({ ok: true });
+  }
+  if (parsed.data.action === "update_event") {
+    const { error } = await supabase.rpc("admin_update_private_event", {
+      p_secret: secret, p_id: parsed.data.id, p_title: parsed.data.title,
+      p_starts_at: parsed.data.starts_at, p_ends_at: parsed.data.ends_at || null,
+      p_location: parsed.data.location || null, p_category: parsed.data.category, p_notes: parsed.data.notes || null,
+    });
+    return error ? NextResponse.json({ error: error.message }, { status: 500 }) : NextResponse.json({ ok: true });
+  }
+  if (parsed.data.action === "delete_event") {
+    const { error } = await supabase.rpc("admin_delete_private_event", {
+      p_secret: secret, p_id: parsed.data.id,
     });
     return error ? NextResponse.json({ error: error.message }, { status: 500 }) : NextResponse.json({ ok: true });
   }

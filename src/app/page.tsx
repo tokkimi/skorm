@@ -1,64 +1,89 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { artists, dates } from "@/lib/content";
+﻿import Link from "next/link";
+import { Bot, BriefcaseBusiness, CalendarDays, Mail, Sparkles } from "lucide-react";
+import { HorizontalRail } from "@/components/horizontal-rail";
+import { AgencyHero } from "@/components/agency-hero";
+import { HomeArtistCard } from "@/components/home-artist-card";
+import { artistMedia, artists } from "@/lib/content";
+
+const features = [
+  {
+    icon: Sparkles,
+    title: "Direction d?셢mage",
+    text: "Positionnement, identit챕, contenus et coh챕rence visuelle.",
+    href: "/contact",
+  },
+  {
+    icon: CalendarDays,
+    title: "Booking Europe",
+    text: "Dates, options, confirmations, relances et suivi terrain.",
+    href: "/agenda",
+  },
+  {
+    icon: Mail,
+    title: "Demandes pros",
+    text: "Bookers, m챕dias, marques et partenaires au m챗me endroit.",
+    href: "/contact",
+  },
+  {
+    icon: BriefcaseBusiness,
+    title: "Gestion de carri챔re",
+    text: "Priorit챕s, strat챕gie, arbitrages et d챕veloppement long terme.",
+    href: "/rejoindre-agence",
+  },
+];
 
 export default function Home() {
   return (
-    <main className="home">
-      <section className="home-hero">
-        <Image
-          src="/artists/paga.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="home-hero-image"
-        />
-        <div className="home-shade" />
-        <div className="home-copy">
-          <p className="eyebrow">Artist development · Europe</p>
-          <h1>Estérel<br />Communication</h1>
-          <p className="home-intro">
-            Communication, management et booking.<br />
-            Une seule direction, autour de chaque artiste.
-          </p>
-        </div>
+    <main className="home agency-home">
+      <AgencyHero />
 
-        <Link className="glass-orbit" href="/agence">
-          <span>Découvrir</span>
-          <ArrowUpRight size={17} />
-        </Link>
-
-        <div className="home-roster glass-panel">
+      <section className="home-profiles" id="roster">
+        <div className="section-kicker">
           <p className="eyebrow">Roster</p>
-          {artists.map((artist, index) => (
-            <Link href={`/artistes/${artist.slug}`} key={artist.slug}>
-              <span>0{index + 1}</span>
-              <strong>{artist.name}</strong>
-              <ArrowUpRight size={15} />
-            </Link>
-          ))}
+          <h2>Les profils suivis par SKORM.</h2>
         </div>
 
-        <Link className="home-date glass-panel" href="/agenda">
-          <div>
-            <p className="eyebrow">Next</p>
-            <strong>{dates[0].event}</strong>
-            <small>{dates[0].location}</small>
-          </div>
-          <time><b>{dates[0].day}</b>{dates[0].month}</time>
-        </Link>
+        <HorizontalRail className="profile-rail-wrap">
+          {artists.map((artist) => (
+            <HomeArtistCard
+              key={artist.slug}
+              artist={artist}
+              release={artistMedia[artist.slug as keyof typeof artistMedia].sounds[0]}
+            />
+          ))}
+        </HorizontalRail>
       </section>
 
-      <section className="home-statement">
-        <p>Estérel ne se place pas devant l’artiste.</p>
-        <h2>Elle construit<br />ce qui l’entoure.</h2>
-        <div className="statement-links">
-          <Link href="/agence">L’agence <ArrowUpRight /></Link>
-          <Link href="/contact">Un projet <ArrowUpRight /></Link>
+      <section className="ai-artist-block" id="artistes-ia">
+        <div className="ai-artist-inner">
+          <span><Bot size={18} /></span>
+          <div>
+            <p className="eyebrow">Artistes IA</p>
+            <h2>Management, cr챕ation et formation d?셙rtistes IA.</h2>
+            <p>
+              SKORM peut aussi accompagner des projets d?셙rtistes IA : direction artistique,
+              image, contenus, narration, lancement, calendrier de sorties et structuration
+              d?셵n univers cr챕dible avant exposition publique.
+            </p>
+          </div>
+          <Link href="/rejoindre-agence">Pr챕senter un projet IA</Link>
+        </div>
+      </section>
+
+      <section className="home-services dot-section" id="services">
+        <div className="dot-feature-panel">
+          {features.map(({ icon: Icon, title, text, href }) => (
+            <Link href={href} key={title} className="dot-feature-card">
+              <span><Icon size={21} /></span>
+              <div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
     </main>
   );
 }
+

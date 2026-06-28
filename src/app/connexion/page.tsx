@@ -35,7 +35,7 @@ export default function LoginPage() {
         <p>Calendriers, artistes, bookings et notes de l’agence.</p>
         <label>E-mail<input name="email" type="email" autoComplete="username" required /></label>
         <label>Mot de passe<input name="password" type="password" autoComplete="current-password" required /></label>
-        <button disabled={loading}>{loading ? "Connexion…" : "Accéder au back-office"}</button>
+        <button disabled={loading}>{loading ? "Connexion..." : "Accéder au back-office"}</button>
         {error && <small>{error}</small>}
       </form>
     </main>
