@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "SKORM Agency accompagne les artistes dans leur management, leur communication, leurs partenariats, l’IA, la formation et leurs bookings en Europe.",
   openGraph: {
     title: "SKORM Agency",
-    description: "Management · Communication · Partnerships · AI · Training",
+    description: "Management • Communication • Partnerships • AI • Training",
     type: "website",
     locale: "fr_FR",
   },

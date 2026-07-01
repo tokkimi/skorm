@@ -46,7 +46,7 @@ export function SiteChrome() {
         <button
           className="mobile-menu"
           type="button"
-          aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-label={menuOpen ? (isEn ? "Close menu" : "Fermer le menu") : (isEn ? "Open menu" : "Ouvrir le menu")}
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setMenuOpen((open) => !open)}
@@ -60,7 +60,7 @@ export function SiteChrome() {
         className={`mobile-navigation ${menuOpen ? "open" : ""}`}
         aria-hidden={!menuOpen}
       >
-        <nav aria-label="Menu mobile">
+        <nav aria-label={isEn ? "Mobile menu" : "Menu mobile"}>
           {mobileLinks.map((item) => (
             <Link
               href={item.href}
@@ -83,12 +83,12 @@ export function SiteChrome() {
         <button
           className="mobile-menu-backdrop"
           type="button"
-          aria-label="Fermer le menu"
+          aria-label={isEn ? "Close menu" : "Fermer le menu"}
           onClick={() => setMenuOpen(false)}
         />
       )}
 
-      <nav className="floating-dock" aria-label="Navigation rapide">
+      <nav className="floating-dock" aria-label={isEn ? "Quick navigation" : "Navigation rapide"}>
         <Link href={withBase(base, "/concours-dj")} aria-label="DJ Contest"><span>CONTEST</span></Link>
         <Link className="dock-center" href={withBase(base, "/contact")} aria-label="Contact"><span>CONTACT</span></Link>
         <Link href={withBase(base, "/formation-ia")} aria-label={isEn ? "AI training" : "Formation IA"}><span>FORMATION</span></Link>

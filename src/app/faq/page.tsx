@@ -18,7 +18,7 @@ export default function FaqPage() {
         },
         {
           title: "Comment fonctionne le DJ Contest ?",
-          text: "L’inscription se fait en ligne avec paiement sécurisé. Les 50 premiers profils retenus renverront une composition, puis 10 finalistes seront annoncés le 30 septembre.",
+          text: "L’inscription se fait en ligne avec paiement sécurisé. Les 50 premiers profils retenus renverront une composition, puis 10 finalistes seront annoncés le 30 septembre 2026.",
         },
         {
           title: "La formation IA est-elle accessible après paiement ?",

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Bot, BriefcaseBusiness, CalendarDays, Mail, Plane, Sparkles, Trophy } from "lucide-react";
+import { Bot, BriefcaseBusiness, CalendarDays, Mail, Sparkles } from "lucide-react";
 import { HorizontalRail } from "@/components/horizontal-rail";
 import { AgencyHero } from "@/components/agency-hero";
 import { HomeArtistCard } from "@/components/home-artist-card";
@@ -37,20 +37,13 @@ export default function Home() {
     <main className="home agency-home">
       <AgencyHero />
 
-      <section className="home-contest-callout">
-        <div>
+      <section className="home-contest-visual" aria-labelledby="dj-contest-home-title">
+        <img src="/dj-contest-skorm-2026.png" alt="SKORM DJ Contest — 29 €, inscriptions jusqu’au 1 septembre 2026, 10 finalistes à Séoul en octobre 2026" />
+        <div className="home-contest-overlay">
           <p className="eyebrow">DJ Contest · inscriptions ouvertes</p>
-          <h2>29 € pour tenter la sélection SKORM et viser la finale à Séoul.</h2>
-          <p>
-            Dépôt en ligne jusqu’au 1er septembre. Première sélection de 50 DJ,
-            nouvelle composition à envoyer, puis annonce des 10 finalistes le 30 septembre.
-          </p>
+          <h2 id="dj-contest-home-title">Sélection internationale, finale à Séoul en octobre 2026.</h2>
         </div>
-        <div className="home-contest-metrics">
-          <span><Trophy size={18} /> 50 sélectionnés</span>
-          <span><Plane size={18} /> 10 finalistes à Séoul</span>
-          <Link href="/concours-dj">Participer</Link>
-        </div>
+        <Link className="home-contest-register" href="/concours-dj">S’inscrire</Link>
       </section>
 
       <section className="home-profiles" id="roster">

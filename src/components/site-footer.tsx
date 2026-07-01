@@ -4,29 +4,46 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CalendarCheck, FileText, Mail, MessageCircle, ShieldCheck, Sparkles, UsersRound } from "lucide-react";
 
-const guideLinks = [
+const guideLinksFr = [
   { icon: UsersRound, title: "Artiste", text: "Dossier, sons, réseaux, dates", href: "/guide-artistes" },
   { icon: MessageCircle, title: "FAQ", text: "Demandes, booking, suivi", href: "/faq" },
   { icon: FileText, title: "Presse & marques", text: "Sponsors, médias, campagnes", href: "/presse-marques" },
 ];
 
-const trustItems = [
+const guideLinksEn = [
+  { icon: UsersRound, title: "Artist", text: "Profile, tracks, socials, dates", href: "/en/guide-artistes" },
+  { icon: MessageCircle, title: "FAQ", text: "Requests, booking, follow-up", href: "/en/faq" },
+  { icon: FileText, title: "Press & brands", text: "Sponsors, media, campaigns", href: "/en/presse-marques" },
+];
+
+const trustItemsFr = [
   { icon: Sparkles, title: "Direction artistique", text: "Univers, image, cohérence visuelle" },
   { icon: ShieldCheck, title: "Communication 360°", text: "Réseaux, contenus, sorties" },
   { icon: Mail, title: "Demandes pros", text: "Booking, médias, marques" },
   { icon: CalendarCheck, title: "Gestion de carrière", text: "Dates, priorités, développement" },
 ];
 
+const trustItemsEn = [
+  { icon: Sparkles, title: "Art direction", text: "Universe, image, visual consistency" },
+  { icon: ShieldCheck, title: "360° communication", text: "Socials, content, releases" },
+  { icon: Mail, title: "Professional requests", text: "Booking, media, brands" },
+  { icon: CalendarCheck, title: "Career management", text: "Dates, priorities, development" },
+];
+
 export function SiteFooter() {
   const pathname = usePathname();
   if (pathname.startsWith("/admin") || pathname === "/connexion") return null;
-  const isHome = pathname === "/";
+
+  const isEn = pathname.startsWith("/en");
+  const isHome = pathname === "/" || pathname === "/en";
+  const guideLinks = isEn ? guideLinksEn : guideLinksFr;
+  const trustItems = isEn ? trustItemsEn : trustItemsFr;
 
   return (
     <footer className={`site-footer ${isHome ? "footer-home" : "footer-inner"}`}>
       {isHome && (
-        <section className="footer-guide" aria-label="Accès utiles">
-          <h2>Comment avancer ?</h2>
+        <section className="footer-guide" aria-label={isEn ? "Useful links" : "Accès utiles"}>
+          <h2>{isEn ? "How to move forward?" : "Comment avancer ?"}</h2>
           <div>
             {guideLinks.map(({ icon: Icon, title, text, href }) => (
               <Link href={href} key={title}>
@@ -55,45 +72,42 @@ export function SiteFooter() {
 
         <div className="footer-newsletter">
           <p className="eyebrow">Contact</p>
-          <h2>Rester dans la boucle</h2>
-          <p>Dates, disponibilités, projets artistes et propositions partenaires.</p>
-          <form>
-            <input type="email" placeholder="Votre email" aria-label="Votre email" />
-            <button type="submit">Envoyer</button>
-          </form>
+          <h2>{isEn ? "Stay in the loop" : "Rester dans la boucle"}</h2>
+          <p>{isEn ? "Dates, artist projects and partner opportunities." : "Dates, disponibilités, projets artistes et propositions partenaires."}</p>
+          <a className="footer-mail" href="mailto:hello@skorm-agency.com">hello@skorm-agency.com</a>
         </div>
 
         <div className="footer-bottom">
           <div className="footer-intro">
-            <Link className="footer-brand footer-logo" href="/" aria-label="SKORM Agency">
+            <Link className="footer-brand footer-logo" href={isEn ? "/en" : "/"} aria-label="SKORM Agency">
               <img src="/skorm-logo.png" alt="SKORM Agency" />
             </Link>
-            <p>Management, communication, partnerships, AI & training pour artistes électroniques.</p>
+            <p>{isEn ? "Management, communication, partnerships, AI & training for electronic artists." : "Management, communication, partnerships, IA & formation pour artistes électroniques."}</p>
             <a href="https://www.instagram.com/skormagency/" target="_blank" rel="noreferrer">Instagram</a>
           </div>
 
           <div className="footer-columns">
             <nav>
-              <span>Agence</span>
-              <Link href="/comment-ca-marche">Comment ça marche</Link>
-              <Link href="/artistes">Artistes</Link>
-              <Link href="/agenda">Agenda</Link>
-              <Link href="/concours-dj">DJ Contest</Link>
-              <Link href="/formation-ia">Formation IA</Link>
-              <Link href="/contact">Contact</Link>
+              <span>{isEn ? "Agency" : "Agence"}</span>
+              <Link href={isEn ? "/en/comment-ca-marche" : "/comment-ca-marche"}>{isEn ? "How it works" : "Comment ça marche"}</Link>
+              <Link href={isEn ? "/en/artistes" : "/artistes"}>{isEn ? "Artists" : "Artistes"}</Link>
+              <Link href={isEn ? "/en/agenda" : "/agenda"}>Agenda</Link>
+              <Link href={isEn ? "/en/concours-dj" : "/concours-dj"}>DJ Contest</Link>
+              <Link href={isEn ? "/en/formation-ia" : "/formation-ia"}>{isEn ? "AI training" : "Formation IA"}</Link>
+              <Link href={isEn ? "/en/contact" : "/contact"}>Contact</Link>
             </nav>
             <nav>
-              <span>Entrées</span>
-              <Link href="/guide-artistes">Guide artistes</Link>
-              <Link href="/rejoindre-agence">Déposer un profil</Link>
-              <Link href="/devenir-sponsor">Sponsor</Link>
-              <Link href="/contact">Booking</Link>
+              <span>{isEn ? "Entry points" : "Entrées"}</span>
+              <Link href={isEn ? "/en/rejoindre-agence" : "/rejoindre-agence"}>{isEn ? "Submit a profile" : "Déposer un profil"}</Link>
+              <Link href={isEn ? "/en/devenir-sponsor" : "/devenir-sponsor"}>{isEn ? "Sponsor" : "Sponsor"}</Link>
+              <Link href={isEn ? "/en/contact" : "/contact"}>Booking</Link>
+              <a href="mailto:hello@skorm-agency.com">hello@skorm-agency.com</a>
             </nav>
             <nav>
-              <span>Informations</span>
-              <Link href="/faq">FAQ</Link>
-              <Link href="/presse-marques">Presse & marques</Link>
-              <Link href="/mentions-legales">Mentions légales</Link>
+              <span>{isEn ? "Information" : "Informations"}</span>
+              <Link href={isEn ? "/en/faq" : "/faq"}>FAQ</Link>
+              <Link href={isEn ? "/en/presse-marques" : "/presse-marques"}>{isEn ? "Press & brands" : "Presse & marques"}</Link>
+              <Link href="/mentions-legales">{isEn ? "Legal notice" : "Mentions légales"}</Link>
               <Link href="/cgv">CGV</Link>
               <Link href="/cookies">Cookies</Link>
             </nav>

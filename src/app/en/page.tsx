@@ -17,6 +17,15 @@ export default function EnglishHome() {
     <main className="home agency-home">
       <AgencyHero lang="en" />
 
+      <section className="home-contest-visual" aria-labelledby="dj-contest-home-title-en">
+        <img src="/dj-contest-skorm-2026.png" alt="SKORM DJ Contest — €29, registrations until September 1, 2026, 10 finalists in Seoul in October 2026" />
+        <div className="home-contest-overlay">
+          <p className="eyebrow">DJ Contest · registrations open</p>
+          <h2 id="dj-contest-home-title-en">International selection, final in Seoul in October 2026.</h2>
+        </div>
+        <Link className="home-contest-register" href="/en/concours-dj">Enter now</Link>
+      </section>
+
       <section className="home-profiles" id="roster">
         <div className="section-kicker">
           <p className="eyebrow">Roster</p>

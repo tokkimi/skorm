@@ -7,16 +7,20 @@ export default function DjContestPage() {
   return (
     <main className="contest-page">
       <Link href="/" className="lumen-back"><ArrowLeft size={14} /> Retour</Link>
-      <section className="contest-hero">
-        <p className="eyebrow">SKORM DJ Contest</p>
-        <h1>Une sélection internationale pour monter sur scène à Séoul.</h1>
-        <p>
-          Inscriptions en ligne ouvertes jusqu’au {commerce.djContest.deadline}. Participation : {commerce.djContest.displayPrice}.
-          Les 50 premiers profils retenus renverront ensuite une composition dédiée.
-        </p>
-        <div className="contest-hero-actions">
-          <a href="#participer">Participer</a>
-          <span><Plane size={16} /> Finale à Séoul en octobre</span>
+
+      <section className="contest-hero contest-hero-visual">
+        <img src="/dj-contest-skorm-2026.png" alt="SKORM DJ Contest — finale à Séoul en octobre 2026" />
+        <div className="contest-hero-copy">
+          <p className="eyebrow">SKORM DJ Contest</p>
+          <h1>Une sélection internationale pour monter sur scène à Séoul.</h1>
+          <p>
+            Inscriptions en ligne ouvertes jusqu’au {commerce.djContest.deadline}. Participation : {commerce.djContest.displayPrice}.
+            Les 50 premiers profils retenus renverront ensuite une composition dédiée.
+          </p>
+          <div className="contest-hero-actions">
+            <a href="#participer">Participer</a>
+            <span><Plane size={16} /> Finale à Séoul en octobre 2026</span>
+          </div>
         </div>
       </section>
 

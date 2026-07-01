@@ -7598,3 +7598,142 @@ body {
     justify-content: flex-start;
   }
 }
+
+/* DJ Contest visual lock */
+.home-contest-visual {
+  position: relative;
+  width: min(1180px, calc(100% - 32px));
+  margin: clamp(34px, 6vw, 86px) auto clamp(44px, 7vw, 96px);
+  overflow: hidden;
+  border: 1px solid rgba(132, 204, 255, 0.28);
+  border-radius: clamp(22px, 3vw, 42px);
+  background: #03060b;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.46), 0 0 55px rgba(92, 174, 255, 0.18);
+  isolation: isolate;
+}
+
+.home-contest-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.home-contest-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.03) 48%, rgba(0, 0, 0, 0.24));
+}
+
+.home-contest-overlay {
+  position: absolute;
+  left: clamp(18px, 4vw, 54px);
+  bottom: clamp(18px, 4vw, 52px);
+  z-index: 2;
+  max-width: 430px;
+  padding: clamp(14px, 2vw, 22px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  background: rgba(8, 12, 18, 0.34);
+  backdrop-filter: blur(18px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.home-contest-overlay h2 {
+  margin: 8px 0 0;
+  color: #fff;
+  font-size: clamp(1rem, 2.4vw, 1.7rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.home-contest-register {
+  position: absolute;
+  right: clamp(18px, 4vw, 58px);
+  bottom: clamp(18px, 4vw, 52px);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 22px;
+  border: 1px solid rgba(134, 210, 255, 0.55);
+  border-radius: 999px;
+  color: #eaf8ff;
+  background: rgba(15, 35, 50, 0.48);
+  backdrop-filter: blur(18px);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.76rem;
+  font-weight: 800;
+  box-shadow: 0 0 28px rgba(77, 181, 255, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.home-contest-register:hover {
+  transform: translateY(-2px);
+  border-color: rgba(205, 238, 255, 0.86);
+  box-shadow: 0 0 44px rgba(77, 181, 255, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+.footer-mail {
+  display: inline-flex;
+  margin-top: 12px;
+  color: #bfeaff;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+}
+
+.contest-hero-visual {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.92fr) minmax(300px, 0.8fr);
+  align-items: center;
+  gap: clamp(22px, 4vw, 54px);
+}
+
+.contest-hero-visual > img {
+  width: 100%;
+  border-radius: clamp(22px, 3vw, 34px);
+  border: 1px solid rgba(132, 204, 255, 0.26);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.36);
+}
+
+.contest-hero-copy {
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  .home-contest-visual {
+    width: min(100% - 18px, 520px);
+    border-radius: 24px;
+  }
+
+  .home-contest-overlay {
+    left: 12px;
+    right: 12px;
+    bottom: 72px;
+    max-width: none;
+    padding: 12px 14px;
+    border-radius: 18px;
+  }
+
+  .home-contest-overlay h2 {
+    font-size: 1rem;
+    line-height: 1.12;
+  }
+
+  .home-contest-register {
+    right: 14px;
+    bottom: 16px;
+    min-height: 42px;
+    padding: 0 17px;
+    font-size: 0.68rem;
+  }
+
+  .contest-hero-visual {
+    grid-template-columns: 1fr;
+  }
+}

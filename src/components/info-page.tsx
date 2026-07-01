@@ -7,16 +7,20 @@ export function InfoPage({
   intro,
   sections,
   cta,
+  lang = "fr",
 }: {
   label: string;
   title: string;
   intro: string;
   sections: { title: string; text: string; items?: string[] }[];
   cta?: { label: string; href: string };
+  lang?: "fr" | "en";
 }) {
+  const isEn = lang === "en";
+
   return (
     <main className="info-page">
-      <Link href="/" className="info-back"><ArrowLeft size={14} /> Retour</Link>
+      <Link href={isEn ? "/en" : "/"} className="info-back"><ArrowLeft size={14} /> {isEn ? "Back" : "Retour"}</Link>
       <section className="info-hero">
         <p className="eyebrow">{label}</p>
         <h1>{title}</h1>
