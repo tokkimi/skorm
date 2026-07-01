@@ -1,21 +1,35 @@
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import { TrainingCheckoutButton } from "@/components/checkout-form";
-import { commerce, sunoModules } from "@/lib/commerce";
+import { aiTrainingPrices, commerce, sunoModules } from "@/lib/commerce";
 
 export default function TrainingPage() {
   return (
     <main className="training-page">
       <Link href="/" className="lumen-back"><ArrowLeft size={14} /> Retour</Link>
       <section className="training-hero">
-        <p className="eyebrow">Formation IA musicale</p>
+        <p className="eyebrow">Formation artiste IA</p>
         <h1>Suno Essentiel V5 / V5.5</h1>
-        <p>Comprendre Suno sans jargon, écrire de meilleurs prompts, structurer ses paroles et sortir des morceaux propres.</p>
+        <p>
+          Niveau 1 uniquement. Comprendre Suno sans jargon, ecrire de meilleurs prompts,
+          structurer ses paroles et sortir des morceaux propres.
+        </p>
         <div className="training-price">
           <strong>{commerce.sunoEssential.displayPrice}</strong>
-          <span>Accès en ligne après paiement</span>
+          <span>Prix lancement - puis 89 EUR a partir de septembre 2026</span>
         </div>
         <TrainingCheckoutButton />
+      </section>
+
+      <section className="training-price-grid">
+        {aiTrainingPrices.map((item) => (
+          <article className={item.active ? "active" : ""} key={item.title}>
+            <small>{item.active ? "Disponible maintenant" : "A venir"}</small>
+            <h2>{item.title}</h2>
+            <strong>{item.price}</strong>
+            <p>{item.text}</p>
+          </article>
+        ))}
       </section>
 
       <section className="course-board preview">
