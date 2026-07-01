@@ -3057,7 +3057,7 @@ html, body, .agency-home { background:#fff; }
 }
 @media(max-width:560px){.profile-card{flex-basis:82vw}.profile-rail-wrap .media-rail{padding-inline:42px}}
 
-/* Point de scroll unique, identique 횪 Paga */
+/* Point de scroll unique, identique a Paga */
 .scroll-dot,
 .rail-dot {
   width: 12px !important;
@@ -8239,5 +8239,326 @@ body {
 
   .contest-metal-title span {
     font-size: clamp(4.2rem, 22vw, 7rem) !important;
+  }
+}
+
+/* SKORM final home pass: coded Seoul poster feel + controlled one-card roster */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden !important;
+}
+
+.home-contest-coded {
+  width: min(1280px, calc(100% - 36px)) !important;
+  margin: clamp(18px, 3vw, 34px) auto clamp(34px, 5vw, 72px) !important;
+  min-height: auto !important;
+  border-radius: clamp(28px, 3vw, 46px) !important;
+  border: 1px solid rgba(169, 219, 255, .24) !important;
+  background:
+    linear-gradient(90deg, rgba(2, 4, 8, .96) 0 38%, rgba(2, 4, 8, .70) 54%, rgba(2, 4, 8, .92) 100%),
+    radial-gradient(circle at 70% 48%, rgba(112, 201, 255, .20), transparent 34%),
+    url("/seoul-contest-bg.png") right bottom / 70% auto no-repeat,
+    #02050a !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.03),
+    0 38px 120px rgba(0,0,0,.62),
+    0 0 90px rgba(78, 178, 255, .10) !important;
+}
+
+.home-contest-coded::before,
+.home-contest-coded::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-contest-coded::before {
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(150, 205, 255, .07) 0 1px, transparent 1px 68px),
+    linear-gradient(118deg, transparent 0 14%, rgba(220, 240, 255, .20) 14.2%, transparent 15.1% 100%),
+    linear-gradient(146deg, transparent 0 72%, rgba(138, 213, 255, .16) 72.2%, transparent 73% 100%);
+  opacity: .52;
+  mask-image: linear-gradient(90deg, #000, rgba(0,0,0,.92), rgba(0,0,0,.38));
+}
+
+.home-contest-coded::after {
+  width: min(760px, 78vw);
+  height: min(320px, 32vw);
+  left: -150px;
+  top: 180px;
+  border: 2px solid rgba(225, 245, 255, .32);
+  border-left-color: transparent;
+  border-bottom-color: rgba(111, 198, 255, .28);
+  border-radius: 50%;
+  transform: rotate(-20deg);
+  filter: blur(.2px) drop-shadow(0 0 22px rgba(130,210,255,.16));
+  opacity: .76;
+}
+
+.contest-coded-bg {
+  inset: 0 !important;
+  opacity: 1 !important;
+  background:
+    radial-gradient(ellipse at 80% 62%, rgba(152, 220, 255, .17), transparent 36%),
+    linear-gradient(90deg, rgba(0,0,0,.88) 0 29%, transparent 47% 74%, rgba(0,0,0,.38) 100%) !important;
+}
+
+.contest-coded-topline {
+  z-index: 2 !important;
+  padding: clamp(20px, 3vw, 34px) clamp(24px, 4vw, 62px) 0 !important;
+  color: rgba(232, 247, 255, .70) !important;
+}
+
+.contest-coded-main {
+  z-index: 2 !important;
+  min-height: auto !important;
+  grid-template-columns: minmax(0, .92fr) minmax(390px, .72fr) !important;
+  gap: clamp(26px, 5vw, 72px) !important;
+  padding: clamp(42px, 6vw, 86px) clamp(24px, 5vw, 74px) clamp(34px, 4vw, 62px) !important;
+}
+
+.contest-coded-copy {
+  align-self: center;
+  max-width: 620px;
+}
+
+.contest-coded-copy .eyebrow {
+  color: #6ca8ff !important;
+  text-shadow: 0 0 18px rgba(92, 178, 255, .38);
+}
+
+.contest-coded-copy h2 {
+  max-width: 650px !important;
+  margin: 12px 0 18px !important;
+  font-size: clamp(2.25rem, 4.6vw, 5.15rem) !important;
+  line-height: .92 !important;
+  letter-spacing: -.082em !important;
+  text-wrap: balance;
+}
+
+.contest-coded-copy p:not(.eyebrow) {
+  max-width: 560px !important;
+  color: rgba(236, 244, 248, .66) !important;
+  font-size: clamp(.95rem, 1.35vw, 1.12rem) !important;
+}
+
+.contest-coded-actions {
+  margin-top: clamp(24px, 4vw, 44px) !important;
+  gap: 14px !important;
+}
+
+.contest-coded-actions a {
+  min-width: 178px !important;
+  min-height: 48px !important;
+  background: linear-gradient(180deg, #f7fcff, #b9dff5) !important;
+  color: #02070d !important;
+  border-color: rgba(255,255,255,.78) !important;
+  box-shadow: 0 0 34px rgba(112, 198, 255, .34), inset 0 1px 0 rgba(255,255,255,.72) !important;
+}
+
+.contest-coded-actions span {
+  min-height: 48px !important;
+  color: rgba(235, 248, 255, .82) !important;
+  background: rgba(10, 18, 28, .54) !important;
+  border-color: rgba(134, 207, 255, .30) !important;
+}
+
+.contest-coded-panel {
+  align-self: center;
+  min-height: clamp(500px, 44vw, 610px) !important;
+  padding: clamp(24px, 3vw, 42px) !important;
+  border-radius: 34px !important;
+  border: 1px solid rgba(190, 230, 255, .26) !important;
+  background:
+    linear-gradient(180deg, rgba(7, 12, 19, .30), rgba(7, 12, 19, .74)),
+    linear-gradient(90deg, rgba(4,7,12,.82), rgba(4,7,12,.24)),
+    url("/seoul-contest-bg.png") center bottom / cover no-repeat !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 0 0 1px rgba(255,255,255,.035),
+    0 0 52px rgba(90, 184, 255, .12) !important;
+  backdrop-filter: blur(20px) saturate(1.18) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.18) !important;
+}
+
+.contest-coded-panel::before {
+  inset: 0 !important;
+  z-index: 0 !important;
+  background:
+    linear-gradient(133deg, transparent 0 74%, rgba(220,244,255,.22) 74.3%, transparent 75.3%),
+    radial-gradient(circle at 80% 15%, rgba(255,255,255,.28), transparent 2.2%),
+    linear-gradient(180deg, rgba(255,255,255,.10), transparent 24%, rgba(255,255,255,.04)) !important;
+  animation: none !important;
+  opacity: .82 !important;
+}
+
+.contest-coded-panel::after {
+  background: linear-gradient(90deg, rgba(2,5,10,.88), rgba(2,5,10,.24) 62%, rgba(2,5,10,.10)) !important;
+}
+
+.contest-metal-title {
+  margin-top: 2px !important;
+}
+
+.contest-metal-title span {
+  font-size: clamp(6.8rem, 12vw, 11.5rem) !important;
+  line-height: .70 !important;
+  letter-spacing: -.105em !important;
+  background:
+    linear-gradient(180deg, #ffffff 0%, #d8e6f1 30%, #718a9d 47%, #ffffff 55%, #647b8e 78%, #f8fdff 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 0 18px rgba(210, 238, 255, .34)) drop-shadow(0 8px 22px rgba(0,0,0,.62)) !important;
+}
+
+.contest-metal-title strong {
+  font-size: clamp(2.45rem, 4.8vw, 5rem) !important;
+  letter-spacing: -.085em !important;
+  text-shadow: 0 0 18px rgba(150, 218, 255, .14) !important;
+}
+
+.contest-stat-grid {
+  gap: 13px !important;
+  margin-top: clamp(24px, 4vw, 46px) !important;
+}
+
+.contest-stat-grid article {
+  min-height: clamp(112px, 11vw, 146px) !important;
+  border-radius: 24px !important;
+  background: rgba(1, 6, 12, .42) !important;
+  border-color: rgba(164, 219, 255, .27) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+
+.contest-stat-grid strong {
+  font-size: clamp(2rem, 3.2vw, 3.1rem) !important;
+}
+
+.contest-seoul-card {
+  min-height: clamp(138px, 14vw, 178px) !important;
+  border-radius: 26px !important;
+  background: rgba(1, 6, 12, .38) !important;
+  border-color: rgba(164, 219, 255, .27) !important;
+}
+
+.contest-seoul-card strong {
+  font-size: clamp(4.2rem, 7.6vw, 7.4rem) !important;
+  letter-spacing: -.095em !important;
+}
+
+.home-profiles {
+  min-height: auto !important;
+  overflow: hidden !important;
+  padding-top: clamp(34px, 5vw, 58px) !important;
+  padding-bottom: clamp(26px, 4vw, 48px) !important;
+}
+
+.profile-rail-wrap {
+  width: min(560px, calc(100vw - 44px)) !important;
+  max-width: 560px !important;
+  margin: 16px auto 0 !important;
+  overflow: visible !important;
+}
+
+.profile-rail-wrap .media-rail {
+  width: 100% !important;
+  display: flex !important;
+  grid-auto-flow: unset !important;
+  grid-auto-columns: unset !important;
+  gap: 0 !important;
+  padding: 4px 0 10px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-snap-type: x mandatory !important;
+  scroll-padding-inline: 0 !important;
+  scrollbar-width: none !important;
+}
+
+.profile-rail-wrap .media-rail::-webkit-scrollbar {
+  display: none !important;
+}
+
+.profile-rail-wrap .profile-card {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  scroll-snap-align: center !important;
+  margin: 0 !important;
+}
+
+.profile-rail-wrap .rail-dot-left {
+  left: -34px !important;
+}
+
+.profile-rail-wrap .rail-dot-right {
+  right: -34px !important;
+}
+
+.ai-training-home {
+  margin-top: clamp(18px, 3vw, 34px) !important;
+  margin-bottom: 14px !important;
+}
+
+.ai-artist-block {
+  margin-top: 14px !important;
+}
+
+@media (max-width: 900px) {
+  .home-contest-coded {
+    width: min(720px, calc(100% - 24px)) !important;
+    min-height: auto !important;
+    background:
+      linear-gradient(180deg, rgba(2,4,8,.60), rgba(2,4,8,.95) 52%, rgba(2,4,8,.98)),
+      url("/seoul-contest-bg.png") center bottom / cover no-repeat,
+      #02050a !important;
+  }
+
+  .home-contest-coded::after {
+    width: 560px;
+    height: 190px;
+    left: -230px;
+    top: 180px;
+  }
+
+  .contest-coded-main {
+    min-height: auto !important;
+    grid-template-columns: 1fr !important;
+    padding: 34px 18px 20px !important;
+  }
+
+  .contest-coded-panel {
+    min-height: auto !important;
+  }
+
+  .contest-coded-copy h2 {
+    font-size: clamp(2.35rem, 12vw, 4.7rem) !important;
+  }
+
+  .contest-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .contest-stat-grid article {
+    min-height: 104px !important;
+  }
+
+  .contest-seoul-card strong {
+    font-size: clamp(3.6rem, 15vw, 6rem) !important;
+  }
+
+  .profile-rail-wrap {
+    width: min(430px, calc(100vw - 42px)) !important;
+  }
+
+  .profile-rail-wrap .rail-dot-left {
+    left: 10px !important;
+  }
+
+  .profile-rail-wrap .rail-dot-right {
+    right: 10px !important;
   }
 }

@@ -59,7 +59,7 @@ export default function Home() {
         <div className="contest-coded-topline">
           <span>SKORM Agency</span>
           <span>DJ Contest</span>
-          <span>Seoul · October 2026</span>
+          <span>Séoul · Octobre 2026</span>
         </div>
         <div className="contest-coded-main">
           <div className="contest-coded-copy">
