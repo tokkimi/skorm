@@ -22,6 +22,8 @@ export function SiteChrome() {
     { href: withBase(base, "/"), label: isEn ? "Home" : "Accueil" },
     { href: withBase(base, "/artistes"), label: isEn ? "Artists" : "Artistes" },
     { href: withBase(base, "/agenda"), label: "Agenda" },
+    { href: withBase(base, "/concours-dj"), label: "DJ Contest" },
+    { href: withBase(base, "/formation-ia"), label: isEn ? "AI training" : "Formation IA" },
     { href: withBase(base, "/rejoindre-agence"), label: isEn ? "Join the agency" : "Rejoindre l’agence" },
     { href: withBase(base, "/devenir-sponsor"), label: isEn ? "Become a sponsor" : "Devenir sponsor" },
     { href: withBase(base, "/contact"), label: "Contact" },
@@ -35,6 +37,8 @@ export function SiteChrome() {
         </Link>
         <nav>
           <Link href={withBase(base, "/artistes")}>{isEn ? "Artists" : "Artistes"}</Link>
+          <Link href={withBase(base, "/concours-dj")}>DJ Contest</Link>
+          <Link href={withBase(base, "/formation-ia")}>{isEn ? "Training" : "Formation"}</Link>
           <Link href={withBase(base, "/agenda")}>Agenda</Link>
           <Link className="header-contact" href={withBase(base, "/contact")}>Contact</Link>
           <Link href={isEn ? "/" : "/en"}>{isEn ? "FR" : "EN"}</Link>
@@ -85,9 +89,9 @@ export function SiteChrome() {
       )}
 
       <nav className="floating-dock" aria-label="Navigation rapide">
-        <Link href={withBase(base, "/rejoindre-agence")} aria-label={isEn ? "Artist, join the agency" : "Artiste, rejoindre l’agence"}><span>{isEn ? "ARTIST" : "ARTISTE"}</span></Link>
+        <Link href={withBase(base, "/concours-dj")} aria-label="DJ Contest"><span>CONTEST</span></Link>
         <Link className="dock-center" href={withBase(base, "/contact")} aria-label="Contact"><span>CONTACT</span></Link>
-        <Link href={withBase(base, "/devenir-sponsor")} aria-label={isEn ? "Become a sponsor" : "Devenir sponsor"}><span>SPONSOR</span></Link>
+        <Link href={withBase(base, "/formation-ia")} aria-label={isEn ? "AI training" : "Formation IA"}><span>FORMATION</span></Link>
       </nav>
     </>
   );

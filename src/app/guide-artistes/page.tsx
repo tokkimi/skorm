@@ -4,29 +4,24 @@ export default function ArtistGuidePage() {
   return (
     <InfoPage
       label="Artistes"
-      title="Pr?parer un dossier artiste complet."
-      intro="La page de d?p?t sert ? comprendre rapidement ton univers, ton niveau d?avancement et ce que tu attends r?ellement de SKORM."
-      cta={{ label: "D?poser un profil artiste", href: "/rejoindre-agence" }}
+      title="Préparer un dossier artiste complet."
+      intro="La page de dépôt sert à comprendre rapidement ton univers, ton niveau d’avancement et ce que tu attends réellement de SKORM."
+      cta={{ label: "Déposer un profil artiste", href: "/rejoindre-agence" }}
       sections={[
         {
-          title: "Identit? et univers",
-          text: "Nom d?artiste, ville, style musical, esth?tique, r?f?rences, direction sc?nique et tout ce qui rend le projet reconnaissable.",
-          items: ["nom d?artiste", "style", "bio courte", "ville / pays", "positionnement"],
+          title: "Identité et univers",
+          text: "Nom d’artiste, ville, style musical, esthétique, références, direction scénique et tout ce qui rend le projet reconnaissable.",
+          items: ["nom d’artiste", "style", "bio courte", "ville / pays", "positionnement"],
         },
         {
-          title: "R?seaux et pr?sence",
-          text: "Les liens permettent d??valuer l?image actuelle, la r?gularit? des contenus, la communaut? et les formats d?j? performants.",
+          title: "Réseaux et présence",
+          text: "Les liens permettent d’évaluer l’image actuelle, la régularité des contenus, la communauté et les formats déjà performants.",
           items: ["Instagram", "TikTok", "YouTube", "Spotify", "SoundCloud"],
         },
         {
           title: "Sons, vocaux et presskit",
-          text: "Le formulaire accepte des liens Drive, Dropbox, WeTransfer ou SoundCloud priv?s pour ?couter les d?mos, vocaux, edits et packs presse.",
-          items: ["d?mos priv?es", "vocaux", "photos HD", "logo", "EPK / presskit"],
-        },
-        {
-          title: "Dates et objectifs",
-          text: "Les derni?res dates, prochaines options et objectifs aident ? savoir s?il faut prioriser booking, image, contenus, marque ou organisation.",
-          items: ["dates jou?es", "dates ? venir", "zones vis?es", "besoin de management", "booking Europe"],
+          text: "Le formulaire accepte des liens Drive, Dropbox, WeTransfer ou SoundCloud privés pour écouter les démos, vocaux, edits et packs presse.",
+          items: ["démos privées", "vocaux", "photos HD", "logo", "EPK / presskit"],
         },
       ]}
     />

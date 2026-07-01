@@ -1,23 +1,23 @@
 export const services = [
   {
-    title: "Communication 360?",
+    title: "Communication 360°",
     description:
-      "Positionnement, direction ?ditoriale, r?seaux sociaux, presse, contenus, calendrier de sorties et coh?rence de marque.",
+      "Positionnement, direction éditoriale, réseaux sociaux, presse, contenus, calendrier de sorties et cohérence de marque.",
   },
   {
     title: "Management",
     description:
-      "Vision de carri?re, coordination des partenaires, suivi quotidien, opportunit?s et arbitrages strat?giques.",
+      "Vision de carrière, coordination des partenaires, suivi quotidien, opportunités et arbitrages stratégiques.",
   },
   {
     title: "Booking Europe",
     description:
-      "Prospection, n?gociation, contractualisation et coordination des dates en France, Belgique, Suisse et Europe.",
+      "Prospection, négociation, contractualisation et coordination des dates en France, Belgique, Suisse et Europe.",
   },
   {
     title: "Brand partnerships",
     description:
-      "Casting, strat?gie d?influence, campagnes, activations ?v?nementielles, sponsors et ambassadeurs.",
+      "Casting, stratégie d’influence, campagnes, activations événementielles, sponsors et ambassadeurs.",
   },
 ];
 
@@ -25,9 +25,9 @@ export const artists = [
   {
     slug: "cgl-rave-unit",
     name: "Cagoule Rave Unit",
-    genre: "Dark indus ? Dark raw",
-    bio: "DJ / producer dark indus et dark raw, construit autour d?une identit? cagoul?e, dure, live et industrielle.",
-    role: "Identit? visuelle, contenus live, booking hard techno et d?veloppement sc?ne.",
+    genre: "Dark indus · Dark raw",
+    bio: "DJ / producer dark indus et dark raw, construit autour d’une identité cagoulée, dure, live et industrielle.",
+    role: "Identité visuelle, contenus live, booking hard techno et développement scène.",
     instagram: "https://www.instagram.com/cgl.raveunit/",
     socials: [
       { label: "Instagram", href: "https://www.instagram.com/cgl.raveunit/" },
@@ -37,9 +37,9 @@ export const artists = [
   {
     slug: "paga",
     name: "Paga",
-    genre: "DJ ? Producer ? Performer",
-    bio: "Un univers solaire et nocturne port? par la sc?ne. SKORM orchestre sa communication globale et le management de ses bookings europ?ens.",
-    role: "Communication int?grale, management booking Europe et partenariats.",
+    genre: "DJ · Producer · Performer",
+    bio: "Un univers solaire et nocturne porté par la scène. SKORM orchestre sa communication globale et le management de ses bookings européens.",
+    role: "Communication intégrale, management booking Europe et partenariats.",
     instagram: "https://www.instagram.com/paga_lmsa/",
     socials: [
       { label: "Instagram", href: "https://www.instagram.com/paga_lmsa/" },
@@ -50,9 +50,9 @@ export const artists = [
 
 export const dates = [
   { iso: "2026-06-22", day: "22", month: "JUN", artist: "Paga", event: "Delta Festival", location: "Marseille, FR", status: "TBA" },
-  { iso: "2026-06-25", day: "25", month: "JUN", artist: "Paga", event: "Fos en P?tanque", location: "Fos-sur-Mer, FR", status: "Confirm?" },
-  { iso: "2026-07-12", day: "12", month: "JUL", artist: "Paga", event: "Holi Lakes Festival", location: "Cerfontaine, BE", status: "Confirm?" },
-  { iso: "2026-07-14", day: "14", month: "JUL", artist: "Paga", event: "Scandals Pool Party", location: "Lyon, FR", status: "Confirm?" },
+  { iso: "2026-06-25", day: "25", month: "JUN", artist: "Paga", event: "Fos en Pétanque", location: "Fos-sur-Mer, FR", status: "Confirmé" },
+  { iso: "2026-07-12", day: "12", month: "JUL", artist: "Paga", event: "Holi Lakes Festival", location: "Cerfontaine, BE", status: "Confirmé" },
+  { iso: "2026-07-14", day: "14", month: "JUL", artist: "Paga", event: "Scandals Pool Party", location: "Lyon, FR", status: "Confirmé" },
   { iso: "2026-08-02", day: "02", month: "AOU", artist: "Cagoule Rave Unit", event: "Rave Unit Session", location: "Europe, TBA", status: "En discussion" },
 ];
 
@@ -60,8 +60,8 @@ export const artistMedia = {
   "cgl-rave-unit": {
     sounds: [
       { title: "DON'T DO IT", meta: "Cagoule Rave Unit", cover: "/artists/cgl-latest-dont-do-it.jpg", href: "https://www.instagram.com/p/DZNdz2-jZCR/" },
-      { title: "Full set", meta: "Hard tekno ? industrial ? raw", cover: "/artists/video-cgl-fullset.jpg", href: "https://www.instagram.com/p/DYST6dmiKEB/" },
-      { title: "Space 92 ? Acid live", meta: "Cagoule Rave Unit", cover: "/artists/video-cgl-space.jpg", href: "https://www.instagram.com/p/DVvdxmgjLl2/" },
+      { title: "Full set", meta: "Hard tekno · industrial · raw", cover: "/artists/video-cgl-fullset.jpg", href: "https://www.instagram.com/p/DYST6dmiKEB/" },
+      { title: "Space 92 · Acid live", meta: "Cagoule Rave Unit", cover: "/artists/video-cgl-space.jpg", href: "https://www.instagram.com/p/DVvdxmgjLl2/" },
     ],
     releases: [
       { title: "DON'T DO IT", meta: "Publication officielle", cover: "/artists/cgl-latest-dont-do-it.jpg", href: "https://www.instagram.com/p/DZNdz2-jZCR/" },
@@ -69,9 +69,9 @@ export const artistMedia = {
       { title: "Hard indus tools", meta: "Contenus live", cover: "/artists/video-cgl-space.jpg", href: "https://www.instagram.com/p/DVvdxmgjLl2/" },
     ],
     videos: [
-      { title: "Full set", meta: "Instagram ? contenu officiel", cover: "/artists/video-cgl-fullset.jpg", href: "https://www.instagram.com/p/DYST6dmiKEB/" },
-      { title: "Space 92 ? Acid live", meta: "Instagram ? contenu officiel", cover: "/artists/video-cgl-space.jpg", href: "https://www.instagram.com/p/DVvdxmgjLl2/" },
-      { title: "Hypnotic rave", meta: "Instagram ? contenu officiel", cover: "/artists/video-cgl-hypnotic.jpg", href: "https://www.instagram.com/p/DUTUUuziIie/" },
+      { title: "Full set", meta: "Instagram · contenu officiel", cover: "/artists/video-cgl-fullset.jpg", href: "https://www.instagram.com/p/DYST6dmiKEB/" },
+      { title: "Space 92 · Acid live", meta: "Instagram · contenu officiel", cover: "/artists/video-cgl-space.jpg", href: "https://www.instagram.com/p/DVvdxmgjLl2/" },
+      { title: "Hypnotic rave", meta: "Instagram · contenu officiel", cover: "/artists/video-cgl-hypnotic.jpg", href: "https://www.instagram.com/p/DUTUUuziIie/" },
     ],
   },
   paga: {
@@ -89,9 +89,9 @@ export const artistMedia = {
       { title: "Cochabamba", meta: "Paga", cover: "/artists/paga-cochabamba.jpg", href: "https://www.deezer.com/track/3293951151", deezerId: "3293951151" },
     ],
     videos: [
-      { title: "C?est la night", meta: "Clip officiel ? Bengous, Paga", cover: "/artists/video-paga-night.jpg", href: "https://www.youtube.com/watch?v=_3-LrpbWuwU" },
-      { title: "T? Le Twerk", meta: "Official audio", cover: "/artists/video-paga-twerk.jpg", href: "https://www.youtube.com/watch?v=_BUd3Xgszoc" },
-      { title: "C?est la night ? audio", meta: "YouTube ? miniature officielle", cover: "/artists/video-paga-night-audio.jpg", href: "https://www.youtube.com/watch?v=BC67MCgN__g" },
+      { title: "C’est la night", meta: "Clip officiel · Bengous, Paga", cover: "/artists/video-paga-night.jpg", href: "https://www.youtube.com/watch?v=_3-LrpbWuwU" },
+      { title: "Té Le Twerk", meta: "Official audio", cover: "/artists/video-paga-twerk.jpg", href: "https://www.youtube.com/watch?v=_BUd3Xgszoc" },
+      { title: "C’est la night · audio", meta: "YouTube · miniature officielle", cover: "/artists/video-paga-night-audio.jpg", href: "https://www.youtube.com/watch?v=BC67MCgN__g" },
     ],
   },
 } as const;

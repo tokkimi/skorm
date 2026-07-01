@@ -7291,3 +7291,310 @@ body {
 @media (max-width: 720px) {
   .agency-hero-logo { width: min(250px, 72vw) !important; max-height: 88px !important; }
 }
+
+/* DJ Contest + Formation launch */
+.home-contest-callout,
+.contest-hero,
+.training-hero {
+  position: relative;
+  width: min(1180px, calc(100% - 34px));
+  margin: 72px auto;
+  border: 1px solid rgba(136, 202, 236, .22);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(108, 151, 255, .22), transparent 34%),
+    linear-gradient(135deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .025));
+  box-shadow: 0 26px 90px rgba(0, 0, 0, .42);
+  backdrop-filter: blur(22px) saturate(1.15);
+}
+
+.home-contest-callout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 28px;
+  align-items: end;
+  padding: clamp(24px, 5vw, 52px);
+}
+
+.home-contest-callout h2,
+.contest-hero h1,
+.training-hero h1 {
+  margin: 12px 0 16px;
+  max-width: 880px;
+  color: #fff;
+  font-size: clamp(2rem, 5vw, 4.9rem);
+  line-height: .95;
+  letter-spacing: -.065em;
+  font-weight: 650;
+}
+
+.home-contest-callout h2 {
+  font-size: clamp(1.65rem, 3.6vw, 3.4rem);
+}
+
+.home-contest-callout p,
+.contest-hero p,
+.training-hero p {
+  max-width: 690px;
+  color: rgba(236, 244, 248, .68);
+  line-height: 1.65;
+  font-size: .98rem;
+}
+
+.home-contest-metrics {
+  display: grid;
+  gap: 10px;
+}
+
+.home-contest-metrics span,
+.home-contest-metrics a,
+.contest-hero-actions span,
+.contest-hero-actions a,
+.training-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(136, 202, 236, .28);
+  background: rgba(9, 18, 27, .42);
+  color: #e9f8ff;
+  padding: 0 18px;
+  font-size: .78rem;
+  font-weight: 760;
+  letter-spacing: .02em;
+}
+
+.home-contest-metrics a,
+.contest-hero-actions a,
+.training-link {
+  background: rgba(135, 205, 244, .92);
+  color: #051017;
+  border-color: rgba(255,255,255,.4);
+}
+
+.contest-page,
+.training-page {
+  min-height: 100svh;
+  padding: 110px 0 80px;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(86, 133, 255, .22), transparent 32%),
+    radial-gradient(circle at 88% 0%, rgba(120, 215, 255, .13), transparent 28%),
+    #05070a;
+  color: #f2f4f6;
+}
+
+.contest-hero,
+.training-hero {
+  padding: clamp(32px, 6vw, 76px);
+  overflow: hidden;
+}
+
+.contest-hero::after,
+.training-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -40% auto;
+  width: 52%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(115, 205, 255, .18), transparent 58%);
+  pointer-events: none;
+}
+
+.contest-hero-actions,
+.training-price {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 28px;
+}
+
+.contest-grid,
+.course-board,
+.quiz-board {
+  width: min(1180px, calc(100% - 34px));
+  margin: 26px auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.contest-grid article,
+.contest-prizes,
+.contest-form,
+.course-module,
+.quiz-card {
+  border-radius: 26px;
+  background: rgba(22, 25, 31, .76);
+}
+
+.contest-grid article {
+  min-height: 230px;
+  padding: 26px;
+}
+
+.contest-grid small {
+  color: #7fd3ff;
+  font: 700 .64rem/1.4 var(--font-geist-mono);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.contest-grid h2,
+.contest-prizes h2,
+.contest-register h2,
+.course-module h2,
+.quiz-card h2 {
+  margin: 18px 0 12px;
+  color: #fff;
+  font-size: clamp(1.15rem, 2vw, 1.65rem);
+  line-height: 1.05;
+  letter-spacing: -.04em;
+}
+
+.contest-grid p,
+.contest-prizes li,
+.course-module li,
+.quiz-card li,
+.course-module strong {
+  color: rgba(235, 242, 246, .68);
+  line-height: 1.55;
+}
+
+.contest-prizes,
+.contest-register {
+  width: min(1180px, calc(100% - 34px));
+  margin: 20px auto;
+  padding: clamp(24px, 4vw, 44px);
+}
+
+.contest-prizes {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 30px;
+}
+
+.contest-prizes ul,
+.course-module ul,
+.quiz-card ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contest-prizes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.contest-register {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 30px;
+  align-items: start;
+}
+
+.contest-form {
+  padding: clamp(22px, 4vw, 36px);
+}
+
+.training-price strong {
+  color: #fff;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1;
+}
+
+.training-price span {
+  color: #7fd3ff;
+  font: 700 .72rem var(--font-geist-mono);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+}
+
+.course-board {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.course-module,
+.quiz-card {
+  padding: clamp(22px, 4vw, 36px);
+}
+
+.course-module li {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.course-module strong {
+  display: block;
+  margin-top: 18px;
+  color: #dff5ff;
+}
+
+.quiz-board {
+  grid-template-columns: 1fr;
+}
+
+.quiz-card ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 26px;
+  counter-reset: quiz;
+}
+
+.quiz-card li {
+  position: relative;
+  padding-left: 30px;
+  list-style: none;
+}
+
+.quiz-card li::before {
+  counter-increment: quiz;
+  content: counter(quiz);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  color: #7fd3ff;
+  font: 700 .7rem var(--font-geist-mono);
+}
+
+@media (max-width: 920px) {
+  .home-contest-callout,
+  .contest-register,
+  .contest-prizes {
+    grid-template-columns: 1fr;
+  }
+
+  .contest-grid,
+  .course-board {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .home-contest-callout,
+  .contest-hero,
+  .training-hero,
+  .contest-prizes,
+  .contest-register {
+    width: min(100% - 22px, 1180px);
+    border-radius: 22px;
+  }
+
+  .contest-grid,
+  .course-board,
+  .quiz-card ol {
+    grid-template-columns: 1fr;
+  }
+
+  .home-contest-metrics span,
+  .home-contest-metrics a {
+    justify-content: flex-start;
+  }
+}

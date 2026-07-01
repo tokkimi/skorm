@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Bot, BriefcaseBusiness, CalendarDays, Mail, Sparkles } from "lucide-react";
+import { Bot, BriefcaseBusiness, CalendarDays, Mail, Plane, Sparkles, Trophy } from "lucide-react";
 import { HorizontalRail } from "@/components/horizontal-rail";
 import { AgencyHero } from "@/components/agency-hero";
 import { HomeArtistCard } from "@/components/home-artist-card";
@@ -8,8 +8,8 @@ import { artistMedia, artists } from "@/lib/content";
 const features = [
   {
     icon: Sparkles,
-    title: "Direction d?image",
-    text: "Positionnement, identit?, contenus et coh?rence visuelle.",
+    title: "Direction d’image",
+    text: "Positionnement, identité, contenus et cohérence visuelle.",
     href: "/contact",
   },
   {
@@ -21,13 +21,13 @@ const features = [
   {
     icon: Mail,
     title: "Demandes pros",
-    text: "Bookers, m?dias, marques et partenaires au m?me endroit.",
+    text: "Bookers, médias, marques et partenaires au même endroit.",
     href: "/contact",
   },
   {
     icon: BriefcaseBusiness,
-    title: "Gestion de carri?re",
-    text: "Priorit?s, strat?gie, arbitrages et d?veloppement long terme.",
+    title: "Gestion de carrière",
+    text: "Priorités, stratégie, arbitrages et développement long terme.",
     href: "/rejoindre-agence",
   },
 ];
@@ -36,6 +36,22 @@ export default function Home() {
   return (
     <main className="home agency-home">
       <AgencyHero />
+
+      <section className="home-contest-callout">
+        <div>
+          <p className="eyebrow">DJ Contest · inscriptions ouvertes</p>
+          <h2>29 € pour tenter la sélection SKORM et viser la finale à Séoul.</h2>
+          <p>
+            Dépôt en ligne jusqu’au 1er septembre. Première sélection de 50 DJ,
+            nouvelle composition à envoyer, puis annonce des 10 finalistes le 30 septembre.
+          </p>
+        </div>
+        <div className="home-contest-metrics">
+          <span><Trophy size={18} /> 50 sélectionnés</span>
+          <span><Plane size={18} /> 10 finalistes à Séoul</span>
+          <Link href="/concours-dj">Participer</Link>
+        </div>
+      </section>
 
       <section className="home-profiles" id="roster">
         <div className="section-kicker">
@@ -59,14 +75,14 @@ export default function Home() {
           <span><Bot size={18} /></span>
           <div>
             <p className="eyebrow">Artistes IA</p>
-            <h2>Management, cr?ation et formation d?artistes IA.</h2>
+            <h2>Management, création et formation d’artistes IA.</h2>
             <p>
-              SKORM peut aussi accompagner des projets d?artistes IA : direction artistique,
+              SKORM peut aussi accompagner des projets d’artistes IA : direction artistique,
               image, contenus, narration, lancement, calendrier de sorties et structuration
-              d?un univers cr?dible avant exposition publique.
+              d’un univers crédible avant exposition publique.
             </p>
           </div>
-          <Link href="/rejoindre-agence">Pr?senter un projet IA</Link>
+          <Link href="/rejoindre-agence">Présenter un projet IA</Link>
         </div>
       </section>
 

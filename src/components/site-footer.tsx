@@ -78,6 +78,8 @@ export function SiteFooter() {
               <Link href="/comment-ca-marche">Comment ça marche</Link>
               <Link href="/artistes">Artistes</Link>
               <Link href="/agenda">Agenda</Link>
+              <Link href="/concours-dj">DJ Contest</Link>
+              <Link href="/formation-ia">Formation IA</Link>
               <Link href="/contact">Contact</Link>
             </nav>
             <nav>
