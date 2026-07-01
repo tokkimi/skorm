@@ -1,14 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   Bot,
   BriefcaseBusiness,
   CalendarDays,
-  Euro,
   Mail,
   Plane,
   Sparkles,
-  Trophy,
-  UsersRound,
 } from "lucide-react";
 import { HorizontalRail } from "@/components/horizontal-rail";
 import { AgencyHero } from "@/components/agency-hero";
@@ -22,56 +20,36 @@ const features = [
   { icon: BriefcaseBusiness, title: "Career management", text: "Priorities, strategy, decisions and long-term development.", href: "/en/rejoindre-agence" },
 ];
 
-const contestStats = [
-  { icon: Euro, value: "€29", label: "Participation" },
-  { icon: CalendarDays, value: "Sept. 1", label: "Deadline" },
-  { icon: UsersRound, value: "50", label: "Selected" },
-  { icon: Trophy, value: "10", label: "Finalists" },
-];
-
 export default function EnglishHome() {
   return (
     <main className="home agency-home">
       <AgencyHero lang="en" />
 
-      <section className="home-contest-coded" aria-labelledby="dj-contest-home-title-en">
-        <div className="contest-coded-bg" aria-hidden="true" />
-        <div className="contest-coded-topline">
-          <span>SKORM Agency</span>
-          <span>DJ Contest</span>
-          <span>Seoul · October 2026</span>
-        </div>
-        <div className="contest-coded-main">
-          <div className="contest-coded-copy">
-            <p className="eyebrow">DJ Contest · registrations open</p>
-            <h2 id="dj-contest-home-title-en">An international selection to play the final in Seoul.</h2>
-            <p>
-              Online registration for €29. First selection of 50 DJs, a new composition to submit,
-              then the 10 finalists are announced on September 30, 2026.
-            </p>
-            <div className="contest-coded-actions">
-              <Link href="/en/concours-dj">Enter now</Link>
-              <span><Plane size={16} /> Seoul trip offered to finalists</span>
-            </div>
+      <section className="home-contest-feature" aria-labelledby="dj-contest-home-title-en">
+        <div className="contest-feature-card">
+          <div className="contest-feature-visual">
+            <Image
+              src="/dj-contest-skorm-2026.png"
+              alt="SKORM DJ Contest 2026"
+              fill
+              sizes="(max-width: 900px) 88vw, 520px"
+              priority
+            />
           </div>
-          <div className="contest-coded-panel" aria-label="Contest information">
-            <div className="contest-metal-title">
-              <span>DJ</span>
-              <strong>CONTEST</strong>
-            </div>
-            <div className="contest-stat-grid">
-              {contestStats.map(({ icon: Icon, value, label }) => (
-                <article key={label}>
-                  <Icon size={18} />
-                  <strong>{value}</strong>
-                  <span>{label}</span>
-                </article>
-              ))}
-            </div>
-            <div className="contest-seoul-card">
-              <small>Final</small>
-              <strong>Seoul</strong>
-              <span>October 2026</span>
+
+          <div className="contest-feature-copy">
+            <p className="eyebrow">SKORM DJ Contest</p>
+            <h2 id="dj-contest-home-title-en">
+              An international selection to perform on stage in Seoul.
+            </h2>
+            <p>
+              Online registrations are open until September 1, 2026.
+              Entry fee: €29. The first 50 selected profiles will then submit
+              a dedicated composition.
+            </p>
+            <div className="contest-feature-actions">
+              <Link href="/en/concours-dj">Enter now</Link>
+              <span><Plane size={17} /> Seoul final in October 2026</span>
             </div>
           </div>
         </div>
@@ -101,8 +79,9 @@ export default function EnglishHome() {
             <p className="eyebrow">AI artist training</p>
             <h2>Create, launch and structure a credible AI artist.</h2>
             <p>
-              An essential training program to use Suno V5/V5.5, write real music prompts,
-              build an artistic direction and prepare cleaner tracks without sounding generic.
+              An essential training program to use Suno V5/V5.5, write real music
+              prompts, build an artistic direction and prepare cleaner tracks without
+              sounding generic.
             </p>
           </div>
           <Link href="/en/formation-ia">Discover the training</Link>

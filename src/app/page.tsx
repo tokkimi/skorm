@@ -1,14 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   Bot,
   BriefcaseBusiness,
   CalendarDays,
-  Euro,
   Mail,
   Plane,
   Sparkles,
-  Trophy,
-  UsersRound,
 } from "lucide-react";
 import { HorizontalRail } from "@/components/horizontal-rail";
 import { AgencyHero } from "@/components/agency-hero";
@@ -42,56 +40,36 @@ const features = [
   },
 ];
 
-const contestStats = [
-  { icon: Euro, value: "29€", label: "Participation" },
-  { icon: CalendarDays, value: "1 sept.", label: "Fin inscriptions" },
-  { icon: UsersRound, value: "50", label: "Sélectionnés" },
-  { icon: Trophy, value: "10", label: "Finalistes" },
-];
-
 export default function Home() {
   return (
     <main className="home agency-home">
       <AgencyHero />
 
-      <section className="home-contest-coded" aria-labelledby="dj-contest-home-title">
-        <div className="contest-coded-bg" aria-hidden="true" />
-        <div className="contest-coded-topline">
-          <span>SKORM Agency</span>
-          <span>DJ Contest</span>
-          <span>Séoul · Octobre 2026</span>
-        </div>
-        <div className="contest-coded-main">
-          <div className="contest-coded-copy">
-            <p className="eyebrow">DJ Contest · inscriptions ouvertes</p>
-            <h2 id="dj-contest-home-title">Une sélection internationale pour jouer la finale à Séoul.</h2>
-            <p>
-              Inscription en ligne à 29 €. Première sélection de 50 DJ, nouvelle composition à envoyer,
-              puis annonce des 10 finalistes le 30 septembre 2026.
-            </p>
-            <div className="contest-coded-actions">
-              <Link href="/concours-dj">S’inscrire</Link>
-              <span><Plane size={16} /> Voyage à Séoul offert aux finalistes</span>
-            </div>
+      <section className="home-contest-feature" aria-labelledby="dj-contest-home-title">
+        <div className="contest-feature-card">
+          <div className="contest-feature-visual">
+            <Image
+              src="/dj-contest-skorm-2026.png"
+              alt="SKORM DJ Contest 2026"
+              fill
+              sizes="(max-width: 900px) 88vw, 520px"
+              priority
+            />
           </div>
-          <div className="contest-coded-panel" aria-label="Informations concours">
-            <div className="contest-metal-title">
-              <span>DJ</span>
-              <strong>CONTEST</strong>
-            </div>
-            <div className="contest-stat-grid">
-              {contestStats.map(({ icon: Icon, value, label }) => (
-                <article key={label}>
-                  <Icon size={18} />
-                  <strong>{value}</strong>
-                  <span>{label}</span>
-                </article>
-              ))}
-            </div>
-            <div className="contest-seoul-card">
-              <small>Finale</small>
-              <strong>Séoul</strong>
-              <span>Octobre 2026</span>
+
+          <div className="contest-feature-copy">
+            <p className="eyebrow">SKORM DJ Contest</p>
+            <h2 id="dj-contest-home-title">
+              Une sélection internationale pour monter sur scène à Séoul.
+            </h2>
+            <p>
+              Inscriptions en ligne ouvertes jusqu’au 1er septembre 2026.
+              Participation : 29 €. Les 50 premiers profils retenus renverront
+              ensuite une composition dédiée.
+            </p>
+            <div className="contest-feature-actions">
+              <Link href="/concours-dj">Participer</Link>
+              <span><Plane size={17} /> Finale à Séoul en octobre 2026</span>
             </div>
           </div>
         </div>
@@ -121,8 +99,9 @@ export default function Home() {
             <p className="eyebrow">Formation artiste IA</p>
             <h2>Créer, lancer et structurer un artiste IA crédible.</h2>
             <p>
-              Une formation essentielle pour apprendre à utiliser Suno V5/V5.5, écrire de vrais prompts musicaux,
-              construire une direction artistique et préparer des morceaux propres sans tomber dans le rendu générique.
+              Une formation essentielle pour apprendre à utiliser Suno V5/V5.5,
+              écrire de vrais prompts musicaux, construire une direction artistique
+              et préparer des morceaux propres sans tomber dans le rendu générique.
             </p>
           </div>
           <Link href="/formation-ia">Découvrir la formation</Link>
@@ -136,9 +115,9 @@ export default function Home() {
             <p className="eyebrow">Artistes IA</p>
             <h2>Management, création et formation d’artistes IA.</h2>
             <p>
-              SKORM peut aussi accompagner des projets d’artistes IA : direction artistique,
-              image, contenus, narration, lancement, calendrier de sorties et structuration
-              d’un univers crédible avant exposition publique.
+              SKORM peut aussi accompagner des projets d’artistes IA : direction
+              artistique, image, contenus, narration, lancement, calendrier de sorties
+              et structuration d’un univers crédible avant exposition publique.
             </p>
           </div>
           <Link href="/rejoindre-agence">Présenter un projet IA</Link>
