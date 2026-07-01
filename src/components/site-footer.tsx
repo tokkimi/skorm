@@ -71,9 +71,23 @@ export function SiteFooter() {
         </div>
 
         <div className="footer-newsletter">
-          <p className="eyebrow">Contact</p>
+          <p className="eyebrow">{isEn ? "Newsletter" : "Newsletter"}</p>
           <h2>{isEn ? "Stay in the loop" : "Rester dans la boucle"}</h2>
-          <p>{isEn ? "Dates, artist projects and partner opportunities." : "Dates, disponibilités, projets artistes et propositions partenaires."}</p>
+          <p>
+            {isEn
+              ? "Dates, availability, artist projects and partner opportunities — straight to your inbox."
+              : "Dates, disponibilités, projets artistes et propositions partenaires — directement dans ta boîte mail."}
+          </p>
+          <form action={isEn ? "/en/contact" : "/contact"} method="get">
+            <input
+              type="email"
+              name="email"
+              placeholder={isEn ? "your@email.com" : "votre@email.com"}
+              aria-label={isEn ? "Email address" : "Adresse email"}
+              required
+            />
+            <button type="submit">{isEn ? "Subscribe" : "S’inscrire"}</button>
+          </form>
           <a className="footer-mail" href="mailto:hello@skorm-agency.com">hello@skorm-agency.com</a>
         </div>
 
@@ -99,7 +113,7 @@ export function SiteFooter() {
             <nav>
               <span>{isEn ? "Entry points" : "Entrées"}</span>
               <Link href={isEn ? "/en/rejoindre-agence" : "/rejoindre-agence"}>{isEn ? "Submit a profile" : "Déposer un profil"}</Link>
-              <Link href={isEn ? "/en/devenir-sponsor" : "/devenir-sponsor"}>{isEn ? "Sponsor" : "Sponsor"}</Link>
+              <Link href={isEn ? "/en/devenir-sponsor" : "/devenir-sponsor"}>Sponsor</Link>
               <Link href={isEn ? "/en/contact" : "/contact"}>Booking</Link>
               <a href="mailto:hello@skorm-agency.com">hello@skorm-agency.com</a>
             </nav>
