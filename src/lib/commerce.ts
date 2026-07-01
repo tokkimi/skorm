@@ -100,16 +100,16 @@ export const djContestTimelineEn = [
 
 export const djContestPrizes = [
   "10 finalistes : voyage a Seoul offert pour se produire sur scene et passer la finale.",
-  "1er prix : 3 000 000 KRW + contrat Paga Production + residence Paris.",
-  "2e prix : 1 500 000 KRW + date garantie dans un club a Seoul.",
-  "3e prix : 750 000 KRW + dotation materiel DJ sponsorisee.",
+  "1er prix : 2 000 € + contrat SKORM + residence Paris.",
+  "2e prix : 1 000 € + date garantie dans un club a Seoul.",
+  "3e prix : 500 € + dotation materiel DJ sponsorisee.",
 ];
 
 export const djContestPrizesEn = [
   "10 finalists: trip to Seoul offered to perform on stage and compete in the final.",
-  "1st prize: 3,000,000 KRW + Paga Production contract + Paris residency.",
-  "2nd prize: 1,500,000 KRW + guaranteed club date in Seoul.",
-  "3rd prize: 750,000 KRW + sponsored DJ gear package.",
+  "1st prize: €2,000 + SKORM contract + Paris residency.",
+  "2nd prize: €1,000 + guaranteed club date in Seoul.",
+  "3rd prize: €500 + sponsored DJ gear package.",
 ];
 
 export const sunoModules = [
