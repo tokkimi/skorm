@@ -5,7 +5,7 @@ import { commerce } from "@/lib/commerce";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 const schema = z.object({
-  product: z.enum(["dj-contest", "suno-essential"]),
+  product: z.enum(["dj-contest", "suno-essential", "suno-expert"]),
   email: z.string().email().optional().or(z.literal("")),
   name: z.string().max(120).optional().or(z.literal("")),
   details: z.record(z.string(), z.string()).optional(),
@@ -26,7 +26,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Paiement Stripe non configuré." }, { status: 503 });
   }
 
-  const product = parsed.data.product === "dj-contest" ? commerce.djContest : commerce.sunoEssential;
+  const product = parsed.data.product === "dj-contest"
+    ? commerce.djContest
+    : parsed.data.product === "suno-expert"
+      ? commerce.sunoExpert
+      : commerce.sunoEssential;
   const origin = siteUrl(request);
   const successPath = parsed.data.product === "dj-contest" ? "/concours-dj/merci" : "/formation-ia/acces";
   const cancelPath = parsed.data.product === "dj-contest" ? "/concours-dj" : "/formation-ia";
@@ -34,9 +38,9 @@ export async function POST(request: Request) {
   const supabase = await getSupabaseServerClient();
   if (supabase && parsed.data.email) {
     await supabase.from("inquiries").insert({
-      inquiry_type: parsed.data.product === "dj-contest" ? "artist" : "other",
+      inquiry_type: parsed.data.product === "dj-contest" ? "artist" : "formation",
       contact_name: parsed.data.name || parsed.data.email,
-      company: parsed.data.details?.artist_name || product.name,
+      company: product.name,
       email: parsed.data.email,
       artist_slug: null,
       message: Object.entries(parsed.data.details || {})
@@ -61,7 +65,9 @@ export async function POST(request: Request) {
             description:
               parsed.data.product === "dj-contest"
                 ? "Participation officielle au SKORM DJ Contest."
-                : "Accès à la formation Suno Essentiel.",
+                : parsed.data.product === "suno-expert"
+                  ? "Accès à la formation Suno Expert."
+                  : "Accès à la formation Suno Essentiel.",
           },
         },
         quantity: 1,

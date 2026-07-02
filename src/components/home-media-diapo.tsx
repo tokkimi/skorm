@@ -1,6 +1,16 @@
-import { ExternalLink, Play } from "lucide-react";
+"use client";
 
-const mediaItems = [
+import { useState } from "react";
+import { ImageIcon, Play, X } from "lucide-react";
+
+type MediaItem = {
+  id: string;
+  title: string;
+  meta: string;
+  type: "Photo" | "Vidéo";
+};
+
+const mediaItems: MediaItem[] = [
   {
     id: "1tKDCsoq3GAI6NrqecZ4RFXHPoiu6U5dQ",
     title: "Cagoule Rave Unit",
@@ -55,11 +65,13 @@ function driveThumb(id: string) {
   return `https://drive.google.com/thumbnail?id=${id}&sz=w1400`;
 }
 
-function driveView(id: string) {
-  return `https://drive.google.com/file/d/${id}/view`;
+function drivePreview(id: string) {
+  return `https://drive.google.com/file/d/${id}/preview`;
 }
 
 export function HomeMediaDiapo() {
+  const [selected, setSelected] = useState<MediaItem | null>(null);
+
   return (
     <section className="home-media-diapo" aria-labelledby="home-media-title">
       <div className="home-media-head">
@@ -70,25 +82,48 @@ export function HomeMediaDiapo() {
 
       <div className="home-media-rail" aria-label="Diaporama médias artistes">
         {mediaItems.map((item) => (
-          <a
+          <button
             className="home-media-card"
-            href={driveView(item.id)}
-            target="_blank"
-            rel="noreferrer"
+            type="button"
+            onClick={() => setSelected(item)}
             key={`${item.id}-${item.title}`}
           >
             <img src={driveThumb(item.id)} alt={`${item.title} — ${item.meta}`} loading="lazy" />
             <span className="home-media-badge">
-              {item.type === "Vidéo" ? <Play size={13} fill="currentColor" /> : <ExternalLink size={13} />}
+              {item.type === "Vidéo" ? <Play size={13} fill="currentColor" /> : <ImageIcon size={13} />}
               {item.type}
             </span>
             <span className="home-media-caption">
               <strong>{item.title}</strong>
               <small>{item.meta}</small>
             </span>
-          </a>
+          </button>
         ))}
       </div>
+
+      {selected && (
+        <div className="home-media-modal" role="dialog" aria-modal="true" aria-label={`${selected.title} ${selected.meta}`}>
+          <button className="home-media-modal-close" type="button" onClick={() => setSelected(null)} aria-label="Fermer">
+            <X size={18} />
+          </button>
+          <div className="home-media-modal-frame">
+            {selected.type === "Vidéo" ? (
+              <iframe
+                src={drivePreview(selected.id)}
+                title={`${selected.title} — ${selected.meta}`}
+                allow="autoplay; fullscreen"
+                allowFullScreen
+              />
+            ) : (
+              <img src={driveThumb(selected.id)} alt={`${selected.title} — ${selected.meta}`} />
+            )}
+          </div>
+          <div className="home-media-modal-caption">
+            <strong>{selected.title}</strong>
+            <span>{selected.meta}</span>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

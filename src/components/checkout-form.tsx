@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 
-type Product = "dj-contest" | "suno-essential";
+type Product = "dj-contest" | "suno-essential" | "suno-expert";
 type Lang = "fr" | "en";
 
 export function ContestCheckoutForm({ lang = "fr" }: { lang?: Lang }) {
@@ -88,24 +88,46 @@ export function ContestCheckoutForm({ lang = "fr" }: { lang?: Lang }) {
       </label>
 
       <button className="submit-button" type="submit">
-        {isEn ? "Pay €29 and enter" : "Payer 29 € et participer"}
+        {isEn ? "Pay 29 € and enter" : "Payer 29 € et participer"}
       </button>
       {status && <p className="form-message">{status}</p>}
     </form>
   );
 }
 
-export function TrainingCheckoutButton({ lang = "fr" }: { lang?: Lang }) {
+export function TrainingCheckoutButton({
+  lang = "fr",
+  product = "suno-essential",
+}: {
+  lang?: Lang;
+  product?: Extract<Product, "suno-essential" | "suno-expert">;
+}) {
   const [status, setStatus] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const isEn = lang === "en";
+  const isExpert = product === "suno-expert";
 
   async function checkout() {
+    if (!email) {
+      setStatus(isEn ? "Enter an email first." : "Entre un email avant de payer.");
+      return;
+    }
     setStatus(isEn ? "Opening secure payment..." : "Ouverture du paiement...");
 
     const response = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ product: "suno-essential" satisfies Product, details: { source: "formation-page", lang } }),
+      body: JSON.stringify({
+        product,
+        email,
+        name,
+        details: {
+          source: "formation-page",
+          lang,
+          training_level: isExpert ? "expert" : "beginner",
+        },
+      }),
     });
 
     const result = await response.json();
@@ -114,7 +136,9 @@ export function TrainingCheckoutButton({ lang = "fr" }: { lang?: Lang }) {
   }
 
   return (
-    <div className="training-buy">
+    <div className="training-buy training-buy-form">
+      <input value={name} onChange={(event) => setName(event.target.value)} placeholder={isEn ? "Name" : "Nom"} />
+      <input value={email} onChange={(event) => setEmail(event.target.value)} type="email" placeholder="email@..." />
       <button className="submit-button" type="button" onClick={checkout}>
         {isEn ? "Enroll and pay" : "S’inscrire et payer"}
       </button>
