@@ -11,6 +11,7 @@ import {
 import { HorizontalRail } from "@/components/horizontal-rail";
 import { AgencyHero } from "@/components/agency-hero";
 import { HomeArtistCard } from "@/components/home-artist-card";
+import { HomeMediaDiapo } from "@/components/home-media-diapo";
 import { artistMedia, artists } from "@/lib/content";
 
 const features = [
@@ -52,7 +53,7 @@ export default function Home() {
               src="/dj-contest-skorm-2026.png"
               alt="SKORM DJ Contest 2026"
               fill
-              sizes="(max-width: 900px) 88vw, 520px"
+              sizes="(max-width: 900px) 92vw, 560px"
               priority
             />
           </div>
@@ -123,6 +124,8 @@ export default function Home() {
           <Link href="/rejoindre-agence">Présenter un projet IA</Link>
         </div>
       </section>
+
+      <HomeMediaDiapo />
 
       <section className="home-services dot-section" id="services">
         <div className="dot-feature-panel">

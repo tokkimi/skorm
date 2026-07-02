@@ -10,6 +10,7 @@ import {
   ExternalLink,
   FileText,
   Handshake,
+  Headphones,
   Inbox,
   LayoutDashboard,
   ListChecks,
@@ -21,6 +22,7 @@ import {
 const items = [
   { href: "/admin", label: "Vue d’ensemble", icon: LayoutDashboard },
   { href: "/admin/demandes", label: "Demandes", icon: Inbox },
+  { href: "/admin/concours-dj", label: "Concours DJ", icon: Headphones },
   { href: "/admin/artistes", label: "Artistes", icon: Music2 },
   { href: "/admin/calendriers", label: "Agendas privés", icon: CalendarDays },
   { href: "/admin/prestations-tarifs", label: "Prestations & tarifs", icon: ReceiptText },
@@ -36,6 +38,7 @@ const items = [
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+
   return (
     <div className="admin-shell">
       <aside className="admin-sidebar">
