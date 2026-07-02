@@ -9,12 +9,10 @@ export function HomeArtistCard({
   artist,
   release,
 }: {
-  artist: { slug: string; name: string; genre: string; instagram: string };
+  artist: { slug: string; name: string; genre: string; instagram: string; homeImage?: string };
   release: { title: string; meta?: string; cover?: string; href?: string; deezerId?: string };
 }) {
-  const homeImage = artist.slug === "paga"
-    ? "/artists/home-paga-real-blue.png"
-    : "/artists/home-cgl-real-blue.png";
+  const homeImage = artist.homeImage || "/artists/home-cgl-real-blue.png";
 
   return (
     <article className="profile-card">
@@ -46,7 +44,6 @@ export function HomeArtistCard({
           <div className="profile-socials">
             <a href={artist.instagram} target="_blank" rel="noreferrer" aria-label={`Instagram ${artist.name}`}>
               <Camera size={15} />
-              <span>Instagram</span>
             </a>
           </div>
 

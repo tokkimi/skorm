@@ -86,7 +86,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
 
   const artistDates = getUpcomingArtistDates(artist.name);
   const media = artistMedia[artist.slug as keyof typeof artistMedia];
-  const heroImage = artist.slug === "paga" ? "/artists/paga.png" : "/artists/cgl-banner.png";
+  const heroImage = artist.heroImage || (artist.slug === "paga" ? "/artists/paga.png" : "/artists/cgl-banner.png");
 
   return (
     <main className="artist-page paga-like-page">
