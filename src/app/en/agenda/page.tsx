@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { dates } from "@/lib/content";
+import { getUpcomingDates } from "@/lib/content";
 
 export default function EnglishAgendaPage() {
+  const dates = getUpcomingDates();
+
   return (
     <main className="inner-page">
       <section className="page-heading">

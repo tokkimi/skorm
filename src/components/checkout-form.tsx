@@ -12,9 +12,11 @@ export function ContestCheckoutForm({ lang = "fr" }: { lang?: Lang }) {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus(isEn ? "Preparing secure payment..." : "Préparation du paiement...");
+
     const form = event.currentTarget;
     const data = new FormData(form);
     const details = Object.fromEntries(Array.from(data.entries()).map(([key, value]) => [key, String(value)]));
+
     const response = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -25,6 +27,7 @@ export function ContestCheckoutForm({ lang = "fr" }: { lang?: Lang }) {
         details: { ...details, lang },
       }),
     });
+
     const result = await response.json();
     if (result.url) window.location.href = result.url;
     else setStatus(result.error || (isEn ? "Payment could not be opened." : "Impossible d’ouvrir le paiement."));
@@ -33,25 +36,48 @@ export function ContestCheckoutForm({ lang = "fr" }: { lang?: Lang }) {
   return (
     <form className="contest-form glass-panel" onSubmit={submit}>
       <div className="form-row">
-        <label className="field"><span>{isEn ? "Full name" : "Nom / prénom"}</span><input name="name" required /></label>
-        <label className="field"><span>E-mail</span><input name="email" type="email" required /></label>
+        <label className="field">
+          <span>{isEn ? "Full name" : "Nom / prénom"}</span>
+          <input name="name" required />
+        </label>
+        <label className="field">
+          <span>E-mail</span>
+          <input name="email" type="email" required />
+        </label>
       </div>
+
       <div className="form-row">
-        <label className="field"><span>{isEn ? "Artist name" : "Nom d’artiste"}</span><input name="artist_name" required /></label>
-        <label className="field"><span>{isEn ? "City / country" : "Ville / pays"}</span><input name="location" required /></label>
+        <label className="field">
+          <span>{isEn ? "Artist name" : "Nom d’artiste"}</span>
+          <input name="artist_name" required />
+        </label>
+        <label className="field">
+          <span>{isEn ? "City / country" : "Ville / pays"}</span>
+          <input name="location" required />
+        </label>
       </div>
+
       <div className="form-row">
-        <label className="field"><span>{isEn ? "Music style" : "Style musical"}</span><input name="style" placeholder="Techno, hard techno, house..." required /></label>
-        <label className="field"><span>Instagram / TikTok</span><input name="socials" placeholder="https://..." required /></label>
+        <label className="field">
+          <span>{isEn ? "Music style" : "Style musical"}</span>
+          <input name="style" placeholder="Techno, hard techno, house..." required />
+        </label>
+        <label className="field">
+          <span>Instagram / TikTok</span>
+          <input name="socials" placeholder="https://..." required />
+        </label>
       </div>
+
       <label className="field field-wide">
         <span>{isEn ? "Track to submit" : "Son à présenter"}</span>
         <input name="track_link" placeholder="SoundCloud, Spotify, Drive, Dropbox, WeTransfer..." required />
       </label>
+
       <label className="field field-wide">
         <span>{isEn ? "Video / set / creation links" : "Liens vidéo / sets / créations"}</span>
         <textarea name="video_links" placeholder="YouTube, Instagram, TikTok, live set, presskit..." />
       </label>
+
       <label className="field field-wide">
         <span>{isEn ? "Why do you want to participate?" : "Pourquoi participer ?"}</span>
         <textarea
@@ -60,7 +86,10 @@ export function ContestCheckoutForm({ lang = "fr" }: { lang?: Lang }) {
           required
         />
       </label>
-      <button className="submit-button" type="submit">{isEn ? "Pay €29 and enter" : "Payer 29 € et participer"}</button>
+
+      <button className="submit-button" type="submit">
+        {isEn ? "Pay €29 and enter" : "Payer 29 € et participer"}
+      </button>
       {status && <p className="form-message">{status}</p>}
     </form>
   );
@@ -72,11 +101,13 @@ export function TrainingCheckoutButton({ lang = "fr" }: { lang?: Lang }) {
 
   async function checkout() {
     setStatus(isEn ? "Opening secure payment..." : "Ouverture du paiement...");
+
     const response = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ product: "suno-essential" satisfies Product, details: { source: "formation-page", lang } }),
     });
+
     const result = await response.json();
     if (result.url) window.location.href = result.url;
     else setStatus(result.error || (isEn ? "Payment unavailable." : "Paiement indisponible."));

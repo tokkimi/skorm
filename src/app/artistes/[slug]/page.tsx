@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowUpRight, Camera, ExternalLink, MapPin } from "lucide-re
 import { notFound } from "next/navigation";
 import { HorizontalRail } from "@/components/horizontal-rail";
 import { MediaPlayButton } from "@/components/media-play-button";
-import { artistMedia, artists, getArtistDates } from "@/lib/content";
+import { artistMedia, artists, getUpcomingArtistDates } from "@/lib/content";
 
 export function generateStaticParams() {
   return artists.map(({ slug }) => ({ slug }));
@@ -84,7 +84,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   const artist = artists.find((item) => item.slug === slug);
   if (!artist) notFound();
 
-  const artistDates = getArtistDates(artist.name);
+  const artistDates = getUpcomingArtistDates(artist.name);
   const media = artistMedia[artist.slug as keyof typeof artistMedia];
   const heroImage = artist.slug === "paga" ? "/artists/paga.png" : "/artists/cgl-banner.png";
 

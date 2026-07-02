@@ -99,3 +99,18 @@ export const artistMedia = {
 export function getArtistDates(artistName: string) {
   return dates.filter((date) => date.artist === artistName);
 }
+
+function isUpcomingDate(iso: string) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const eventDate = new Date(`${iso}T00:00:00`);
+  return eventDate >= today;
+}
+
+export function getUpcomingDates() {
+  return dates.filter((date) => isUpcomingDate(date.iso));
+}
+
+export function getUpcomingArtistDates(artistName: string) {
+  return getArtistDates(artistName).filter((date) => isUpcomingDate(date.iso));
+}

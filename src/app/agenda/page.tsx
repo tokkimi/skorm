@@ -1,7 +1,9 @@
 import { PageShell } from "@/components/page-shell";
-import { dates } from "@/lib/content";
+import { getUpcomingDates } from "@/lib/content";
 
 export default function AgendaPage() {
+  const dates = getUpcomingDates();
+
   return (
     <PageShell label="Live" title="Agenda" intro="France, Europe et ailleurs.">
       <section className="agenda-list">

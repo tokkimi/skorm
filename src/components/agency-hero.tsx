@@ -4,13 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
 import { HorizontalRail } from "@/components/horizontal-rail";
-import { dates } from "@/lib/content";
+import { getUpcomingDates } from "@/lib/content";
 
 type Lang = "fr" | "en";
 
 export function AgencyHero({ lang = "fr" }: { lang?: Lang }) {
   const isEn = lang === "en";
   const base = isEn ? "/en" : "";
+  const upcomingDates = getUpcomingDates();
 
   return (
     <section className="agency-paga-hero agency-centered-hero">
@@ -35,10 +36,10 @@ export function AgencyHero({ lang = "fr" }: { lang?: Lang }) {
         <div className="agency-hero-date-strip">
           <div className="agency-paga-date-head">
             <p className="eyebrow">{isEn ? "Upcoming dates" : "Prochaines dates"}</p>
-            <span>{String(dates.length).padStart(2, "0")} events</span>
+            <span>{String(upcomingDates.length).padStart(2, "0")} events</span>
           </div>
           <HorizontalRail className="agency-date-rail">
-            {dates.map((date) => (
+            {upcomingDates.map((date) => (
               <Link href={`${base}/agenda`} className="agency-active-date" key={`${date.iso}-${date.event}`}>
                 <div><time><b>{date.day}</b>{date.month}</time><span>{date.status}</span></div>
                 <strong>{date.event}</strong>

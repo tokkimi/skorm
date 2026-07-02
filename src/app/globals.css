@@ -152,7 +152,8 @@ button, input, textarea, select { font: inherit; }
 .contact-form { border-top: 1px solid var(--line); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
 .field { padding: 20px 0 10px; border-bottom: 1px solid var(--line); }
-.field label { display: block; margin-bottom: 7px; color: #849097; font: .59rem var(--font-geist-mono); text-transform: uppercase; letter-spacing: .11em; }
+.field label,
+.field > span { display: block; margin-bottom: 7px; color: #849097; font: .59rem var(--font-geist-mono); text-transform: uppercase; letter-spacing: .11em; }
 .field input, .field textarea, .field select { width: 100%; border: 0; outline: 0; padding: 8px 0; background: transparent; color: white; font-size: .84rem; }
 .field select option { color: white; background: #0b0f13; }
 .field textarea { min-height: 90px; resize: vertical; }
@@ -7501,6 +7502,52 @@ body {
 
 .contest-form {
   padding: clamp(22px, 4vw, 36px);
+}
+
+.contest-form .field {
+  padding: 0;
+  border: 0;
+}
+
+.contest-form .field > span {
+  margin: 0 0 8px;
+  color: rgba(166, 218, 255, .82);
+  font-size: .62rem;
+}
+
+.contest-form input,
+.contest-form textarea {
+  width: 100%;
+  border: 1px solid rgba(170, 220, 255, .22);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .055);
+  color: #f5fbff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.contest-form input {
+  min-height: 54px;
+  padding: 0 18px;
+}
+
+.contest-form textarea {
+  min-height: 128px;
+  padding: 16px 18px;
+}
+
+.contest-form input::placeholder,
+.contest-form textarea::placeholder {
+  color: rgba(230, 242, 248, .46);
+}
+
+.contest-form .form-row {
+  gap: 18px 22px;
+  margin-bottom: 18px;
+}
+
+.contest-form .field-wide {
+  display: block;
+  margin-bottom: 18px;
 }
 
 .training-price strong {
