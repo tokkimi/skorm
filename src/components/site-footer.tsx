@@ -71,7 +71,7 @@ export function SiteFooter() {
         </div>
 
         <div className="footer-newsletter">
-          <p className="eyebrow">{isEn ? "Newsletter" : "Newsletter"}</p>
+          <p className="eyebrow">Newsletter</p>
           <h2>{isEn ? "Stay in the loop" : "Rester dans la boucle"}</h2>
           <p>
             {isEn
@@ -96,7 +96,7 @@ export function SiteFooter() {
             <Link className="footer-brand footer-logo" href={isEn ? "/en" : "/"} aria-label="SKORM Agency">
               <img src="/skorm-logo.png" alt="SKORM Agency" />
             </Link>
-            <p>{isEn ? "Management, communication, partnerships, AI & training for electronic artists." : "Management, communication, partnerships, IA & formation pour artistes électroniques."}</p>
+            <p>{isEn ? "Management, communication, partnerships, AI & training for electronic artists." : "Management, communication, partenariats, IA & formation pour artistes électroniques."}</p>
             <a href="https://www.instagram.com/skormagency/" target="_blank" rel="noreferrer">Instagram</a>
           </div>
 

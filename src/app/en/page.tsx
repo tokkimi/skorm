@@ -32,20 +32,17 @@ export default function EnglishHome() {
               src="/dj-contest-skorm-2026.png"
               alt="SKORM DJ Contest 2026"
               fill
-              sizes="(max-width: 900px) 88vw, 520px"
+              sizes="(max-width: 900px) 96vw, 620px"
               priority
             />
           </div>
 
           <div className="contest-feature-copy">
             <p className="eyebrow">SKORM DJ Contest</p>
-            <h2 id="dj-contest-home-title-en">
-              An international selection to perform on stage in Seoul.
-            </h2>
+            <h2 id="dj-contest-home-title-en">An international selection to perform on stage in Seoul.</h2>
             <p>
-              Online registrations are open until September 1, 2026.
-              Entry fee: €29. The first 50 selected profiles will then submit
-              a dedicated composition.
+              Online registrations are open until September 1, 2026. Entry fee: €29.
+              The first 50 selected profiles will then submit a dedicated composition.
             </p>
             <div className="contest-feature-actions">
               <Link href="/en/concours-dj">Enter now</Link>
@@ -74,17 +71,16 @@ export default function EnglishHome() {
 
       <section className="ai-training-home" id="ai-artist-training">
         <div className="ai-training-card">
-          <div className="ai-training-orb" aria-hidden="true">AI</div>
+          <div className="ai-training-orb" aria-hidden="true">SK</div>
           <div>
-            <p className="eyebrow">AI artist training</p>
-            <h2>Create, launch and structure a credible AI artist.</h2>
+            <p className="eyebrow">AI music lab</p>
+            <h2>Turn an idea into a real sonic identity.</h2>
             <p>
-              An essential training program to use Suno V5/V5.5, write real music
-              prompts, build an artistic direction and prepare cleaner tracks without
-              sounding generic.
+              Two tracks to frame a direction, write useful prompts, produce cleaner
+              music and build a universe that does not feel like a generic AI test.
             </p>
           </div>
-          <Link href="/en/formation-ia">Discover the training</Link>
+          <Link href="/en/formation-ia">View training</Link>
         </div>
       </section>
 
@@ -92,14 +88,14 @@ export default function EnglishHome() {
         <div className="ai-artist-inner">
           <span><Bot size={18} /></span>
           <div>
-            <p className="eyebrow">AI artists</p>
-            <h2>Management, creation and training for AI artists.</h2>
+            <p className="eyebrow">Hybrid projects</p>
+            <h2>Direction, launch and follow-up for AI universes.</h2>
             <p>
-              SKORM also supports AI artist projects: art direction, image, content,
-              storytelling, launch strategy, release planning and a credible creative universe.
+              SKORM supports projects combining music, image, storytelling and AI tools:
+              identity, release planning, content and launch strategy before public exposure.
             </p>
           </div>
-          <Link href="/en/rejoindre-agence">Submit an AI project</Link>
+          <Link href="/en/rejoindre-agence">Submit a project</Link>
         </div>
       </section>
 
