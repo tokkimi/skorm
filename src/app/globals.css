@@ -5661,6 +5661,12 @@ body {
   background: var(--ec-ink) !important;
 }
 
+.media-modal iframe.media-modal-compact-frame {
+  width: min(520px, 92vw) !important;
+  height: 176px !important;
+  border-radius: 18px !important;
+}
+
 /* Admin + private user area */
 .admin-shell {
   color: var(--ec-ink) !important;

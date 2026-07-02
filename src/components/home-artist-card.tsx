@@ -10,7 +10,7 @@ export function HomeArtistCard({
   release,
 }: {
   artist: { slug: string; name: string; genre: string; instagram: string; homeImage?: string };
-  release: { title: string; meta?: string; cover?: string; href?: string; deezerId?: string };
+  release?: { title: string; meta?: string; cover?: string; href?: string; deezerId?: string };
 }) {
   const homeImage = artist.homeImage || "/artists/home-cgl-real-blue.png";
 
@@ -27,7 +27,7 @@ export function HomeArtistCard({
         </div>
 
         <div className="profile-bottom-strip">
-          <div className="profile-latest-release">
+          {release ? <div className="profile-latest-release">
             {release.cover && (
               <span className="profile-release-cover">
                 <Image src={release.cover} alt={`Miniature officielle ${release.title}`} fill sizes="64px" />
@@ -39,7 +39,13 @@ export function HomeArtistCard({
               {release.meta && <em>{release.meta}</em>}
             </div>
             <MediaPlayButton href={release.href} deezerId={release.deezerId} title={release.title} label="Lire" />
-          </div>
+          </div> : <div className="profile-latest-release profile-latest-release-empty">
+            <div>
+              <span>Médias</span>
+              <strong>À venir</strong>
+              <em>Liens officiels en préparation</em>
+            </div>
+          </div>}
 
           <div className="profile-socials">
             <a href={artist.instagram} target="_blank" rel="noreferrer" aria-label={`Instagram ${artist.name}`}>

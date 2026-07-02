@@ -159,9 +159,15 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
       </section>
 
       <section className="artist-section-shell artist-media-area">
-        <MediaRail title="Derniers sons" label="Sounds" variant="sound" image={artist.slug === "paga" ? "/artists/paga-cover-night.png" : heroImage} items={media.sounds} />
-        <MediaRail title="Écoute directe" label="Streaming" variant="spotify" image={artist.slug === "paga" ? "/artists/paga-cover-blue.png" : heroImage} items={media.releases} />
-        <MediaRail title="Dernières vidéos" label="Videos" variant="video" image={heroImage} items={media.videos} />
+        {media.sounds.length > 0 && (
+          <MediaRail title="Derniers sons" label="Sounds" variant="sound" image={artist.slug === "paga" ? "/artists/paga-cover-night.png" : heroImage} items={media.sounds} />
+        )}
+        {media.releases.length > 0 && (
+          <MediaRail title="Écoute directe" label="Streaming" variant="spotify" image={artist.slug === "paga" ? "/artists/paga-cover-blue.png" : heroImage} items={media.releases} />
+        )}
+        {media.videos.length > 0 && (
+          <MediaRail title="Dernières vidéos" label="Videos" variant="video" image={heroImage} items={media.videos} />
+        )}
       </section>
     </main>
   );

@@ -24,6 +24,9 @@ function getEmbedUrl(href?: string) {
     if (url.hostname.includes("open.spotify.com")) {
       return href.replace("open.spotify.com/", "open.spotify.com/embed/");
     }
+    if (url.hostname.includes("soundcloud.com")) {
+      return `https://w.soundcloud.com/player/?url=${encodeURIComponent(href)}&auto_play=true&visual=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false`;
+    }
   } catch {
     return null;
   }
@@ -45,6 +48,7 @@ export function MediaPlayButton({
   const [playing, setPlaying] = useState(false);
   const [open, setOpen] = useState(false);
   const embedUrl = useMemo(() => getEmbedUrl(href), [href]);
+  const compactEmbed = embedUrl?.includes("w.soundcloud.com") || embedUrl?.includes("open.spotify.com/embed/");
 
   async function play() {
     if (deezerId) {
@@ -76,6 +80,7 @@ export function MediaPlayButton({
           </button>
           <iframe
             src={embedUrl}
+            className={compactEmbed ? "media-modal-compact-frame" : undefined}
             title={title}
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
             allowFullScreen

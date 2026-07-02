@@ -58,7 +58,7 @@ export const artists = [
     role: "Structuration presskit, image, contenus, plateformes et opportunités live.",
     instagram: "https://www.instagram.com/enkor.music/",
     homeImage: "/artists/home-enkor-blue.png",
-    heroImage: "/artists/enkor-instagram.jpg",
+    heroImage: "/artists/enkor-photo.png",
     socials: [
       { label: "Instagram", href: "https://www.instagram.com/enkor.music/" },
       { label: "Spotify", href: "https://open.spotify.com/artist/7qKUegxEovvAn4c1xqxbi3" },
@@ -75,7 +75,7 @@ export const artists = [
     role: "Développement image, contenus, réseaux et préparation des demandes pros.",
     instagram: "https://www.instagram.com/nova.hardlab/",
     homeImage: "/artists/home-nova-hardlab-blue.png",
-    heroImage: "/artists/nova-hardlab-instagram.jpg",
+    heroImage: "/artists/nova-hardlab-photo.png",
     socials: [
       { label: "Instagram", href: "https://www.instagram.com/nova.hardlab/" },
       { label: "Booking", href: "/contact" },
@@ -131,37 +131,23 @@ export const artistMedia = {
   },
   enkor: {
     sounds: [
-      { title: "ENKOR", meta: "Spotify artist profile", cover: "/artists/enkor-instagram.jpg", href: "https://open.spotify.com/artist/7qKUegxEovvAn4c1xqxbi3" },
-      { title: "SoundCloud", meta: "ENKOR AV1K", cover: "/artists/enkor-instagram.jpg", href: "https://soundcloud.com/enkor-av1k" },
-      { title: "YouTube", meta: "ENKOR official channel", cover: "/artists/enkor-instagram.jpg", href: "https://www.youtube.com/@enkor-av1k" },
+      { title: "ENKOR", meta: "SoundCloud officiel", cover: "/artists/enkor-soundcloud.jpg", href: "https://soundcloud.com/enkor-av1k" },
     ],
     releases: [
-      { title: "ENKOR", meta: "Spotify", cover: "/artists/enkor-instagram.jpg", href: "https://open.spotify.com/artist/7qKUegxEovvAn4c1xqxbi3" },
-      { title: "Hard music feed", meta: "SoundCloud", cover: "/artists/enkor-instagram.jpg", href: "https://soundcloud.com/enkor-av1k" },
-      { title: "Presskit officiel", meta: "MyPressKit", cover: "/artists/enkor-instagram.jpg", href: "https://www.mypresskit.info/artist/enkor" },
+      { title: "ENKOR", meta: "Spotify officiel", cover: "/artists/enkor-soundcloud.jpg", href: "https://open.spotify.com/artist/7qKUegxEovvAn4c1xqxbi3" },
+      { title: "SoundCloud", meta: "Hard or nothing", cover: "/artists/enkor-soundcloud.jpg", href: "https://soundcloud.com/enkor-av1k" },
     ],
     videos: [
-      { title: "ENKOR channel", meta: "YouTube officiel", cover: "/artists/enkor-instagram.jpg", href: "https://www.youtube.com/@enkor-av1k" },
-      { title: "Presskit videos", meta: "MyPressKit officiel", cover: "/artists/enkor-instagram.jpg", href: "https://www.mypresskit.info/artist/enkor" },
-      { title: "Instagram feed", meta: "@enkor.music", cover: "/artists/enkor-instagram.jpg", href: "https://www.instagram.com/enkor.music/" },
+      { title: "Tapage Nocturne", meta: "Instagram officiel · 6MIC", cover: "/artists/enkor-photo.png", href: "https://www.instagram.com/p/DTyFWkmjY0b/" },
+      { title: "Closing Tormento", meta: "Instagram officiel · Cabaret Aléatoire", cover: "/artists/enkor-photo.png", href: "https://www.instagram.com/p/DV9D_Zujab1/" },
+      { title: "Closing Baby Club", meta: "Instagram officiel", cover: "/artists/enkor-photo.png", href: "https://www.instagram.com/p/DXXH7EiDZoZ/" },
+      { title: "Closing Requiem", meta: "Instagram officiel · South Connexion", cover: "/artists/enkor-photo.png", href: "https://www.instagram.com/p/DYAWzjYjf6I/" },
     ],
   },
   "nova-hardlab": {
-    sounds: [
-      { title: "Nova Hardlab", meta: "Instagram official", cover: "/artists/nova-hardlab-instagram.jpg", href: "https://www.instagram.com/nova.hardlab/" },
-      { title: "Hardlab feed", meta: "Rave visuals & posts", cover: "/artists/nova-hardlab-instagram.jpg", href: "https://www.instagram.com/nova.hardlab/" },
-      { title: "Booking material", meta: "SKORM follow-up", cover: "/artists/nova-hardlab-instagram.jpg", href: "/contact" },
-    ],
-    releases: [
-      { title: "Nova Hardlab", meta: "Official profile", cover: "/artists/nova-hardlab-instagram.jpg", href: "https://www.instagram.com/nova.hardlab/" },
-      { title: "Hard techno lab", meta: "Content feed", cover: "/artists/nova-hardlab-instagram.jpg", href: "https://www.instagram.com/nova.hardlab/" },
-      { title: "Rave direction", meta: "SKORM", cover: "/artists/nova-hardlab-instagram.jpg", href: "/contact" },
-    ],
-    videos: [
-      { title: "Instagram videos", meta: "@nova.hardlab", cover: "/artists/nova-hardlab-instagram.jpg", href: "https://www.instagram.com/nova.hardlab/" },
-      { title: "Live content", meta: "Official feed", cover: "/artists/nova-hardlab-instagram.jpg", href: "https://www.instagram.com/nova.hardlab/" },
-      { title: "Rave lab", meta: "Profile", cover: "/artists/nova-hardlab-instagram.jpg", href: "https://www.instagram.com/nova.hardlab/" },
-    ],
+    sounds: [],
+    releases: [],
+    videos: [],
   },
 } as const;
 
