@@ -43,6 +43,8 @@ export function TrainingAccess({
   const [finalAnswers, setFinalAnswers] = useState<number[]>(emptyAnswers(exam.length));
   const [finalScore, setFinalScore] = useState<number | null>(null);
   const [compositionSent, setCompositionSent] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+  const storageKey = email ? `skorm-training:${email}:${course}` : "";
 
   useEffect(() => {
     if (testAccess || !sessionId) return;
@@ -57,9 +59,51 @@ export function TrainingAccess({
       .finally(() => setChecking(false));
   }, [sessionId, testAccess]);
 
+  useEffect(() => {
+    if (!paid || !storageKey) return;
+    setHydrated(false);
+    const saved = window.localStorage.getItem(storageKey);
+    if (!saved) {
+      setHydrated(true);
+      return;
+    }
+    try {
+      const data = JSON.parse(saved) as {
+        stage?: Stage;
+        levelIndex?: number;
+        validatedLevels?: number[];
+        finalScore?: number | null;
+        compositionSent?: boolean;
+      };
+      if (data.stage) setStage(data.stage);
+      if (typeof data.levelIndex === "number") setLevelIndex(Math.min(data.levelIndex, levels.length - 1));
+      if (Array.isArray(data.validatedLevels)) setValidatedLevels(data.validatedLevels);
+      if (typeof data.finalScore === "number") setFinalScore(data.finalScore);
+      if (typeof data.compositionSent === "boolean") setCompositionSent(data.compositionSent);
+    } catch {}
+    setHydrated(true);
+  }, [paid, storageKey, levels.length]);
+
+  useEffect(() => {
+    setQuizAnswers(emptyAnswers(levels[levelIndex]?.quiz.length || levels[0].quiz.length));
+    setQuizScore(null);
+    setFinalAnswers(emptyAnswers(exam.length));
+  }, [course, levelIndex, levels, exam.length]);
+
+  useEffect(() => {
+    if (!paid || !storageKey || !hydrated) return;
+    window.localStorage.setItem(storageKey, JSON.stringify({
+      stage,
+      levelIndex,
+      validatedLevels,
+      finalScore,
+      compositionSent,
+    }));
+  }, [paid, storageKey, hydrated, stage, levelIndex, validatedLevels, finalScore, compositionSent]);
+
   const currentLevel = levels[levelIndex];
   const progress = useMemo(() => {
-    if (stage === "intro") return 0;
+    if (stage === "intro") return Math.round((validatedLevels.length / levels.length) * 84);
     if (stage === "final") return 92;
     if (stage === "practical") return 96;
     if (stage === "done") return 100;
@@ -83,7 +127,7 @@ export function TrainingAccess({
     }).catch(() => {});
   }
 
-  function startLevel(index = 0) {
+  function startLevel(index = levelIndex) {
     setLevelIndex(index);
     setQuizAnswers(emptyAnswers(levels[index].quiz.length));
     setQuizScore(null);
@@ -121,9 +165,7 @@ export function TrainingAccess({
   if (checking) {
     return (
       <main className="training-page">
-        <section className="training-hero">
-          <p>Vérification du paiement...</p>
-        </section>
+        <section className="training-hero"><p>Vérification du paiement...</p></section>
       </main>
     );
   }
@@ -153,22 +195,21 @@ export function TrainingAccess({
 
       {stage === "intro" && (
         <section className="training-hero training-start">
-          <p className="eyebrow">Suno Essentiel V5 / V5.5</p>
-          <h1>{course === "expert" ? "Suno Expert V5 / V5.5" : "Un parcours guidé, niveau par niveau."}</h1>
+          <p className="eyebrow">{course === "expert" ? "Production musicale IA — Expert" : "Création musicale IA — Fondations"}</p>
+          <h1>{course === "expert" ? "Parcours expert, examen et composition finale." : "Un parcours guidé, niveau par niveau."}</h1>
           <p>
-            La formation se débloque dans l’ordre : lecture du niveau, QCM sur 10,
-            validation à 8/10 minimum, puis niveau suivant. Après tous les niveaux :
-            examen final de 100 questions avec 76 bonnes réponses minimum.
-            {course === "expert" ? " Le parcours expert se termine ensuite par une composition finale à soumettre." : ""}
+            La formation se débloque dans l’ordre : cours du niveau, exercice, QCM sur 10,
+            validation à 8/10 minimum, puis niveau suivant. La progression est sauvegardée :
+            tu peux quitter et reprendre ici quand tu veux.
           </p>
           {testAccess && (
             <div className="training-course-switch">
-              <button type="button" className={course === "beginner" ? "active" : ""} onClick={() => { setCourse("beginner"); setValidatedLevels([]); setLevelIndex(0); }}>Débutant</button>
-              <button type="button" className={course === "expert" ? "active" : ""} onClick={() => { setCourse("expert"); setValidatedLevels([]); setLevelIndex(0); }}>Expert</button>
+              <button type="button" className={course === "beginner" ? "active" : ""} onClick={() => { setCourse("beginner"); setStage("intro"); setValidatedLevels([]); setLevelIndex(0); }}>Niveau 1</button>
+              <button type="button" className={course === "expert" ? "active" : ""} onClick={() => { setCourse("expert"); setStage("intro"); setValidatedLevels([]); setLevelIndex(0); }}>Expert</button>
             </div>
           )}
           <button className="training-primary-action" type="button" onClick={() => startLevel(0)}>
-            Démarrer la formation
+            {validatedLevels.length ? "Reprendre la formation" : "Démarrer la formation"}
           </button>
         </section>
       )}
@@ -203,17 +244,13 @@ export function TrainingAccess({
           <p className="training-step-intro">Il faut obtenir au moins {MODULE_PASS_SCORE}/10 pour passer au niveau suivant.</p>
           <QuizForm questions={currentLevel.quiz} answers={quizAnswers} onChange={setQuizAnswers} />
           <div className="training-result-bar">
-            <button className="training-primary-action" type="button" onClick={submitLevelQuiz}>
-              Corriger le questionnaire
-            </button>
+            <button className="training-primary-action" type="button" onClick={submitLevelQuiz}>Corriger le questionnaire</button>
             {quizScore !== null && (
-              <strong className={quizScore >= MODULE_PASS_SCORE ? "passed" : "failed"}>
-                Résultat : {quizScore}/10
-              </strong>
+              <strong className={quizScore >= MODULE_PASS_SCORE ? "passed" : "failed"}>Résultat : {quizScore}/10</strong>
             )}
           </div>
           {quizScore !== null && quizScore < MODULE_PASS_SCORE && (
-            <p className="training-warning">Score insuffisant : relis le niveau puis retente le QCM.</p>
+            <p className="training-warning">Score insuffisant : relis le cours du niveau puis retente le QCM.</p>
           )}
           {quizScore !== null && quizScore >= MODULE_PASS_SCORE && (
             <button className="training-secondary-action" type="button" onClick={nextLevel}>
@@ -229,17 +266,13 @@ export function TrainingAccess({
           <h1>Questionnaire final de 100 questions</h1>
           <p className="training-step-intro">
             Validation à partir de {FINAL_PASS_SCORE}/100.
-            {course === "expert" ? " Ensuite, tu passes l’épreuve pratique : composition finale + explication complète de méthode." : " Une fois validé, l’option certificat + analyse d’un son peut être demandée."}
+            {course === "expert" ? " Ensuite, tu passes l’épreuve pratique : composition finale + explication complète de méthode." : " Une fois validé, tu peux continuer vers le niveau Expert si tu veux aller plus loin."}
           </p>
           <QuizForm questions={exam} answers={finalAnswers} onChange={setFinalAnswers} compact />
           <div className="training-result-bar">
-            <button className="training-primary-action" type="button" onClick={submitFinal}>
-              Corriger l’examen final
-            </button>
+            <button className="training-primary-action" type="button" onClick={submitFinal}>Corriger l’examen final</button>
             {finalScore !== null && (
-              <strong className={finalScore >= FINAL_PASS_SCORE ? "passed" : "failed"}>
-                Résultat : {finalScore}/100
-              </strong>
+              <strong className={finalScore >= FINAL_PASS_SCORE ? "passed" : "failed"}>Résultat : {finalScore}/100</strong>
             )}
           </div>
           {finalScore !== null && finalScore < FINAL_PASS_SCORE && (
@@ -258,7 +291,7 @@ export function TrainingAccess({
           <p className="eyebrow">Certification expert</p>
           <h1>Composition finale à soumettre</h1>
           <p className="training-step-intro">
-            Compose un morceau complet avec Suno V5/V5.5, puis explique précisément ta méthode :
+            Compose un morceau complet, puis explique précisément ta méthode :
             prompt, outils, structure, Extend, corrections, export, intention artistique et choix de rendu.
           </p>
           <form
@@ -293,14 +326,13 @@ export function TrainingAccess({
       {stage === "done" && (
         <section className="training-hero training-complete">
           <p className="eyebrow">Formation validée</p>
-          <h1>Parcours Suno Essentiel terminé.</h1>
+          <h1>{course === "expert" ? "Parcours expert terminé." : "Niveau 1 terminé."}</h1>
           <p>
-            Tu peux demander le certificat et l’analyse d’un son par un professionnel.
-            Cette option ajoute un retour personnalisé sur ton univers, ton prompt et le rendu musical.
+            {course === "expert"
+              ? "Ton parcours expert est complet. L’équipe SKORM peut maintenant vérifier ta composition finale et préparer la validation."
+              : "Tu as validé les bases. Si tu veux passer au niveau production, tu peux continuer avec le parcours Expert."}
           </p>
-          <a className="training-link" href="mailto:hello@skorm-agency.com?subject=Certificat%20%2B%20analyse%20Suno%20Essentiel">
-            Demander certificat + analyse
-          </a>
+          {course === "beginner" && <a className="training-link" href="/formation-ia">Découvrir le niveau Expert</a>}
         </section>
       )}
     </main>
@@ -322,7 +354,7 @@ function QuizForm({
     <div className={compact ? "training-qcm compact" : "training-qcm"}>
       {questions.map((question, questionIndex) => (
         <article className="training-question" key={`${question.prompt}-${questionIndex}`}>
-          <h2>{question.prompt.replace(/^\d+\. /, "")}</h2>
+          <h2><span>{String(questionIndex + 1).padStart(2, "0")}</span>{question.prompt.replace(/^\d+\. /, "")}</h2>
           <div>
             {question.options.map((option, optionIndex) => (
               <label key={option}>
