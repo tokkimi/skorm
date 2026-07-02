@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Camera, ExternalLink, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, ExternalLink, MapPin } from "lucide-react";
 import { notFound } from "next/navigation";
 import { HorizontalRail } from "@/components/horizontal-rail";
 import { MediaPlayButton } from "@/components/media-play-button";
@@ -17,6 +17,16 @@ type MediaItem = {
   href?: string;
   deezerId?: string;
 };
+
+function InstagramIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="instagram-glyph">
+      <rect x="3" y="3" width="18" height="18" rx="5.2" />
+      <circle cx="12" cy="12" r="4.1" />
+      <circle cx="17.3" cy="6.7" r="1.15" />
+    </svg>
+  );
+}
 
 function MediaRail({
   title,
@@ -106,7 +116,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
             <div className="artist-socials">
               {artist.socials.map((social) => (
                 <Link href={social.href} key={social.label} target={social.href.startsWith("http") ? "_blank" : undefined}>
-                  {social.label === "Instagram" && <Camera size={15} />}
+                  {social.label === "Instagram" && <InstagramIcon />}
                   <span>{social.label}</span>
                   <ArrowUpRight size={14} />
                 </Link>

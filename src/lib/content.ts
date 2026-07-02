@@ -57,7 +57,7 @@ export const artists = [
     bio: "Artiste marseillais hard music, entre énergie industrielle, hard techno et uptempo.",
     role: "Structuration presskit, image, contenus, plateformes et opportunités live.",
     instagram: "https://www.instagram.com/enkor.music/",
-    homeImage: "/artists/home-enkor-blue.png",
+    homeImage: "/artists/enkor-photo.png",
     heroImage: "/artists/enkor-photo.png",
     socials: [
       { label: "Instagram", href: "https://www.instagram.com/enkor.music/" },
@@ -74,10 +74,13 @@ export const artists = [
     bio: "Projet hardlab orienté rave, identité sombre et énergie club.",
     role: "Développement image, contenus, réseaux et préparation des demandes pros.",
     instagram: "https://www.instagram.com/nova.hardlab/",
-    homeImage: "/artists/home-nova-hardlab-blue.png",
+    homeImage: "/artists/nova-hardlab-photo.png",
     heroImage: "/artists/nova-hardlab-photo.png",
     socials: [
       { label: "Instagram", href: "https://www.instagram.com/nova.hardlab/" },
+      { label: "SoundCloud", href: "https://soundcloud.com/nova-hardtechno" },
+      { label: "Spotify", href: "https://open.spotify.com/intl-es/artist/2Wbk9pSYcdtsQ7xulYapTU" },
+      { label: "TikTok", href: "https://www.tiktok.com/@nova.hardtechno" },
       { label: "Booking", href: "/contact" },
     ],
   },
@@ -131,22 +134,31 @@ export const artistMedia = {
   },
   enkor: {
     sounds: [
-      { title: "ENKOR", meta: "SoundCloud officiel", cover: "/artists/enkor-soundcloud.jpg", href: "https://soundcloud.com/enkor-av1k" },
+      { title: "DOPAMINE CRASH", meta: "ENKOR · SoundCloud", cover: "/artists/enkor-dopamine-crash.jpg", href: "https://soundcloud.com/enkor-av1k/enkor-dopamine-crash" },
+      { title: "Hard Or Nothing 002", meta: "ENKOR · SoundCloud", cover: "/artists/enkor-hard-or-nothing-002.jpg", href: "https://soundcloud.com/enkor-av1k/enkor-hard-or-nothing-002" },
+      { title: "Tormento 003", meta: "Closing set · SoundCloud", cover: "/artists/enkor-tormento.jpg", href: "https://soundcloud.com/enkor-av1k/tormento-closing-set" },
+      { title: "South Connexion Requiem", meta: "Closing set · SoundCloud", cover: "/artists/enkor-requiem.jpg", href: "https://soundcloud.com/enkor-av1k/enkor-south-connexion-requiem" },
+      { title: "BPM Mars", meta: "Acidcore · SoundCloud", cover: "/artists/enkor-bpm-mars.jpg", href: "https://soundcloud.com/enkor-av1k/acid-or-nothing" },
+      { title: "ENKOR", meta: "Spotify officiel", cover: "/artists/enkor-spotify.jpg", href: "https://open.spotify.com/artist/7qKUegxEovvAn4c1xqxbi3" },
     ],
     releases: [
-      { title: "ENKOR", meta: "Spotify officiel", cover: "/artists/enkor-soundcloud.jpg", href: "https://open.spotify.com/artist/7qKUegxEovvAn4c1xqxbi3" },
-      { title: "SoundCloud", meta: "Hard or nothing", cover: "/artists/enkor-soundcloud.jpg", href: "https://soundcloud.com/enkor-av1k" },
+      { title: "DOPAMINE CRASH", meta: "Dernière sortie · SoundCloud", cover: "/artists/enkor-dopamine-crash.jpg", href: "https://soundcloud.com/enkor-av1k/enkor-dopamine-crash" },
+      { title: "Hard Or Nothing 002", meta: "Mix officiel", cover: "/artists/enkor-hard-or-nothing-002.jpg", href: "https://soundcloud.com/enkor-av1k/enkor-hard-or-nothing-002" },
+      { title: "ENKOR", meta: "Spotify officiel", cover: "/artists/enkor-spotify.jpg", href: "https://open.spotify.com/artist/7qKUegxEovvAn4c1xqxbi3" },
     ],
-    videos: [
-      { title: "Tapage Nocturne", meta: "Instagram officiel · 6MIC", cover: "/artists/enkor-photo.png", href: "https://www.instagram.com/p/DTyFWkmjY0b/" },
-      { title: "Closing Tormento", meta: "Instagram officiel · Cabaret Aléatoire", cover: "/artists/enkor-photo.png", href: "https://www.instagram.com/p/DV9D_Zujab1/" },
-      { title: "Closing Baby Club", meta: "Instagram officiel", cover: "/artists/enkor-photo.png", href: "https://www.instagram.com/p/DXXH7EiDZoZ/" },
-      { title: "Closing Requiem", meta: "Instagram officiel · South Connexion", cover: "/artists/enkor-photo.png", href: "https://www.instagram.com/p/DYAWzjYjf6I/" },
-    ],
+    videos: [],
   },
   "nova-hardlab": {
-    sounds: [],
-    releases: [],
+    sounds: [
+      { title: "REBORN SESSION", meta: "N.O.V.A. · SoundCloud", cover: "/artists/nova-reborn-session.jpg", href: "https://soundcloud.com/nova-hardtechno/sesion-reborn-n-o-v-a-mp3" },
+      { title: ".N.O.V.A.", meta: "SoundCloud officiel", cover: "/artists/nova-soundcloud.jpg", href: "https://soundcloud.com/nova-hardtechno" },
+      { title: ".N.O.V.A.", meta: "Spotify officiel", cover: "/artists/nova-spotify.jpg", href: "https://open.spotify.com/intl-es/artist/2Wbk9pSYcdtsQ7xulYapTU" },
+    ],
+    releases: [
+      { title: "REBORN SESSION", meta: "Dernière sortie · SoundCloud", cover: "/artists/nova-reborn-session.jpg", href: "https://soundcloud.com/nova-hardtechno/sesion-reborn-n-o-v-a-mp3" },
+      { title: ".N.O.V.A.", meta: "Spotify officiel", cover: "/artists/nova-spotify.jpg", href: "https://open.spotify.com/intl-es/artist/2Wbk9pSYcdtsQ7xulYapTU" },
+      { title: "NOVA Hardtechno", meta: "SoundCloud officiel", cover: "/artists/nova-soundcloud.jpg", href: "https://soundcloud.com/nova-hardtechno" },
+    ],
     videos: [],
   },
 } as const;

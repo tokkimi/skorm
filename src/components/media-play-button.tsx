@@ -73,7 +73,19 @@ export function MediaPlayButton({
         {playing ? <Pause size={14} fill="currentColor" /> : <Play size={14} fill="currentColor" />}
         <span>{playing ? "Pause" : label}</span>
       </button>
-      {open && embedUrl && (
+      {open && embedUrl && compactEmbed && (
+        <div className="media-inline-player" role="dialog" aria-label={title}>
+          <button type="button" className="media-inline-close" onClick={() => setOpen(false)} aria-label="Fermer">
+            <X size={13} />
+          </button>
+          <iframe
+            src={embedUrl}
+            title={title}
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          />
+        </div>
+      )}
+      {open && embedUrl && !compactEmbed && (
         <div className="media-modal" role="dialog" aria-modal="true" aria-label={title}>
           <button type="button" className="media-modal-close" onClick={() => setOpen(false)} aria-label="Fermer">
             <X size={18} />
