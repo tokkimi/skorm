@@ -1,4 +1,5 @@
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { artists as publicArtists } from "@/lib/content";
 
 type ArtistRow = {
   id: string; name: string; slug: string; tagline: string | null; bio: string | null;
@@ -53,9 +54,26 @@ const empty: AdminData = {
   content_items: [], contacts: [], tasks: [], financial_transactions: [],
 };
 
+export async function syncPublicArtistsToAdmin() {
+  const supabase = await getSupabaseServerClient();
+  if (!supabase || !process.env.ADMIN_DB_SECRET) return;
+
+  await Promise.all(publicArtists.map((artist, index) => supabase.rpc("admin_upsert_public_artist", {
+    p_secret: process.env.ADMIN_DB_SECRET,
+    p_slug: artist.slug,
+    p_name: artist.name,
+    p_tagline: artist.genre,
+    p_bio: artist.bio,
+    p_instagram_url: artist.instagram,
+    p_image_url: artist.heroImage || artist.homeImage || null,
+    p_display_order: index + 1,
+  })));
+}
+
 export async function getAdminData(): Promise<AdminData> {
   const supabase = await getSupabaseServerClient();
   if (!supabase || !process.env.ADMIN_DB_SECRET) return empty;
+  await syncPublicArtistsToAdmin();
   const { data, error } = await supabase.rpc("admin_get_backoffice", { p_secret: process.env.ADMIN_DB_SECRET });
   return error || !data ? empty : (data as AdminData);
 }

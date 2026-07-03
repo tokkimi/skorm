@@ -4,7 +4,7 @@ import { hasAdminSession } from "@/lib/admin-auth";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 const schema = z.object({
-  kind: z.enum(["event", "booking", "campaign", "content", "contact", "task", "finance"]),
+  kind: z.enum(["artist", "event", "booking", "campaign", "content", "contact", "task", "finance"]),
   payload: z.record(z.string(), z.unknown()),
 });
 

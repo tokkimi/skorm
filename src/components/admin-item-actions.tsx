@@ -15,6 +15,7 @@ const fieldsByKind: Record<Kind, Field[]> = {
     { name: "bio", label: "Bio" },
     { name: "instagram_url", label: "Instagram" },
     { name: "image_url", label: "Image" },
+    { name: "display_order", label: "Ordre", type: "number" },
   ],
   event: [
     { name: "title", label: "Titre" },
@@ -95,7 +96,7 @@ export function AdminItemActions({ kind, item }: { kind: Kind; item: { id: strin
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setMessage("Enregistrement…");
+    setMessage("Enregistrement...");
     const payload = Object.fromEntries(new FormData(event.currentTarget).entries());
     const response = await fetch("/api/admin/item", {
       method: "POST",
@@ -123,15 +124,21 @@ export function AdminItemActions({ kind, item }: { kind: Kind; item: { id: strin
   return (
     <>
       <div className="admin-row-actions">
-        <button type="button" onClick={() => setOpen(true)}><Pencil size={14} /> Modifier</button>
-        <button type="button" onClick={remove}><Trash2 size={14} /> Supprimer</button>
+        <button type="button" onClick={() => setOpen(true)}>
+          <Pencil size={14} /> Modifier
+        </button>
+        <button type="button" onClick={remove}>
+          <Trash2 size={14} /> Supprimer
+        </button>
       </div>
       {open && (
         <div className="admin-modal-backdrop">
           <form className="admin-create-modal admin-edit-modal" onSubmit={submit}>
             <header>
               <h2>Modifier</h2>
-              <button type="button" onClick={() => setOpen(false)}><X size={16} /></button>
+              <button type="button" onClick={() => setOpen(false)}>
+                <X size={16} />
+              </button>
             </header>
             <div className="admin-edit-grid">
               {fields.map((field) => (
@@ -139,10 +146,18 @@ export function AdminItemActions({ kind, item }: { kind: Kind; item: { id: strin
                   {field.label}
                   {field.options ? (
                     <select name={field.name} defaultValue={inputValue(values[field.name], field.type)}>
-                      {field.options.map((option) => <option key={option} value={option}>{option}</option>)}
+                      {field.options.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
                     </select>
                   ) : (
-                    <input name={field.name} type={field.type || "text"} defaultValue={inputValue(values[field.name], field.type)} />
+                    <input
+                      name={field.name}
+                      type={field.type || "text"}
+                      defaultValue={inputValue(values[field.name], field.type)}
+                    />
                   )}
                 </label>
               ))}
