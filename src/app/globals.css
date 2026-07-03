@@ -7,6 +7,46 @@
   --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
 }
 
+.task-page-list article {
+  grid-template-columns: 28px minmax(0, 1fr) 120px auto auto auto !important;
+}
+
+.task-page-list input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--ec-blue);
+}
+
+.task-page-list article.task-done b,
+.task-page-list article.task-done small {
+  opacity: .55;
+}
+
+.task-page-list article.task-done b {
+  text-decoration: line-through;
+}
+
+.task-page-list .admin-row-actions {
+  margin-top: 0 !important;
+  justify-content: flex-end;
+}
+
+@media (max-width: 760px) {
+  .task-page-list article {
+    grid-template-columns: 24px minmax(0, 1fr) !important;
+  }
+
+  .task-page-list article > time,
+  .task-page-list article > .admin-status,
+  .task-page-list article > .admin-row-actions {
+    grid-column: 2 !important;
+  }
+
+  .task-page-list .admin-row-actions {
+    justify-content: flex-start;
+  }
+}
+
 /* Artist cards: real Instagram glyph + compact inline players */
 .instagram-glyph {
   width: 18px;

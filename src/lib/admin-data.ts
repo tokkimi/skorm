@@ -30,7 +30,7 @@ type ContactRow = {
 };
 type TaskRow = {
   id: string; priority: string; title: string; category: string; due_at: string | null;
-  artist_name: string | null;
+  artist_name: string | null; status: string;
 };
 type FinanceRow = {
   id: string; type: string; amount: number; label: string; transaction_date: string;
