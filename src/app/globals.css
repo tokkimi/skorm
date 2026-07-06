@@ -3638,7 +3638,7 @@ html, body, .agency-home { background:#fff; }
 }
 .rail-dot::before { display: none !important; }
 
-/* Comment 챌a marche ??image E et glassmorphism */
+/* Comment ca marche - image E et glassmorphism */
 .agency-how {
   padding: 70px max(4vw,24px);
   background: #fff !important;
