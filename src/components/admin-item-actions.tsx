@@ -16,6 +16,9 @@ const fieldsByKind: Record<Kind, Field[]> = {
     { name: "instagram_url", label: "Instagram" },
     { name: "image_url", label: "Image" },
     { name: "display_order", label: "Ordre", type: "number" },
+    { name: "media_sounds", label: "Sons / tracks (JSON)", type: "json" },
+    { name: "media_releases", label: "Sorties / plateformes (JSON)", type: "json" },
+    { name: "media_videos", label: "Vidéos (JSON)", type: "json" },
   ],
   event: [
     { name: "title", label: "Titre" },
@@ -78,6 +81,13 @@ const fieldsByKind: Record<Kind, Field[]> = {
 
 function inputValue(value: unknown, type?: string) {
   if (!value) return "";
+  if (type === "json") {
+    try {
+      return JSON.stringify(value, null, 2);
+    } catch {
+      return String(value);
+    }
+  }
   if (type === "datetime-local") {
     const date = new Date(String(value));
     if (Number.isNaN(date.getTime())) return "";
@@ -97,7 +107,21 @@ export function AdminItemActions({ kind, item }: { kind: Kind; item: { id: strin
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setMessage("Enregistrement...");
-    const payload = Object.fromEntries(new FormData(event.currentTarget).entries());
+    const payload: Record<string, unknown> = Object.fromEntries(new FormData(event.currentTarget).entries());
+    for (const field of fields) {
+      if (field.type !== "json") continue;
+      const raw = payload[field.name];
+      if (typeof raw !== "string" || !raw.trim()) {
+        payload[field.name] = [];
+        continue;
+      }
+      try {
+        payload[field.name] = JSON.parse(raw);
+      } catch {
+        setMessage(`JSON invalide : ${field.label}`);
+        return;
+      }
+    }
     const response = await fetch("/api/admin/item", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -152,6 +176,12 @@ export function AdminItemActions({ kind, item }: { kind: Kind; item: { id: strin
                         </option>
                       ))}
                     </select>
+                  ) : field.type === "json" ? (
+                    <textarea
+                      name={field.name}
+                      defaultValue={inputValue(values[field.name], field.type)}
+                      rows={8}
+                    />
                   ) : (
                     <input
                       name={field.name}

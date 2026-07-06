@@ -13,25 +13,25 @@ type MediaItem = {
 const mediaItems: MediaItem[] = [
   {
     id: "1tKDCsoq3GAI6NrqecZ4RFXHPoiu6U5dQ",
-    title: "Cagoule Rave Unit",
+    title: "CGL",
     meta: "Shooting District",
     type: "Photo",
   },
   {
     id: "1Yp58NRpkQC5-wfMYIrKpJID4zs6hK5Jd",
-    title: "Cagoule Rave Unit",
+    title: "CGL",
     meta: "Portrait scène",
     type: "Photo",
   },
   {
     id: "1hjc15USH8ccmAO_UKazMDWpaJwsHdPgb",
-    title: "Cagoule Rave Unit",
+    title: "CGL",
     meta: "Backstage",
     type: "Photo",
   },
   {
     id: "1n9dBNt9IEuCe3WGeiDeo-bm0jqHww_XI",
-    title: "Cagoule Rave Unit",
+    title: "CGL",
     meta: "Vidéo shooting",
     type: "Vidéo",
   },

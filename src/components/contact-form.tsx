@@ -275,7 +275,10 @@ export function ContactForm({ variant = "contact", lang = "fr" }: { variant?: Fo
               <select name="artist" defaultValue="general">
                 <option value="general">{isEn ? "Full agency / no specific artist" : "Agence complète / aucun artiste précis"}</option>
                 <option value="paga">Paga</option>
-                <option value="cgl-rave-unit">Cagoule Rave Unit</option>
+                <option value="cgl-rave-unit">CGL</option>
+                <option value="enkor">ENKOR</option>
+                <option value="nova-hardlab">Nova Hardlab</option>
+                <option value="oskana">Oskana</option>
               </select>
             </label>
           </div>

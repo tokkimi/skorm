@@ -24,7 +24,7 @@ export function HomeArtistCard({
   const homeImage = artist.homeImage || "/artists/home-cgl-real-blue.png";
 
   return (
-    <article className="profile-card">
+    <article className={`profile-card profile-card-${artist.slug}`}>
       <div className="home-profile-photo">
         <Image src={homeImage} alt={`Visuel de ${artist.name}`} fill sizes="min(760px, 86vw)" priority />
       </div>

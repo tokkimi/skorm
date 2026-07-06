@@ -26,7 +26,22 @@ export function AdminCreateButton({ kind, artists = [] }: { kind: Kind; artists?
     event.preventDefault();
     setStatus("Enregistrement...");
     const form = event.currentTarget;
-    const payload = Object.fromEntries(new FormData(form).entries());
+    const payload: Record<string, unknown> = Object.fromEntries(new FormData(form).entries());
+    if (kind === "artist") {
+      for (const field of ["media_sounds", "media_releases", "media_videos"]) {
+        const raw = payload[field];
+        if (typeof raw !== "string" || !raw.trim()) {
+          payload[field] = [];
+          continue;
+        }
+        try {
+          payload[field] = JSON.parse(raw);
+        } catch {
+          setStatus(`JSON invalide : ${field}`);
+          return;
+        }
+      }
+    }
     const response = await fetch("/api/admin/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -116,6 +131,18 @@ function Fields({ kind, artists }: { kind: Kind; artists: Artist[] }) {
         <label className="wide">
           Bio
           <textarea name="bio" />
+        </label>
+        <label className="wide">
+          Sons / tracks (JSON)
+          <textarea name="media_sounds" rows={7} placeholder='[{"title":"Titre","meta":"Artiste • plateforme","cover":"/artists/cover.jpg","href":"https://..."}]' />
+        </label>
+        <label className="wide">
+          Sorties / plateformes (JSON)
+          <textarea name="media_releases" rows={7} placeholder='[{"title":"Sortie","meta":"Spotify officiel","cover":"/artists/cover.jpg","href":"https://..."}]' />
+        </label>
+        <label className="wide">
+          Vidéos (JSON)
+          <textarea name="media_videos" rows={7} placeholder='[{"title":"Live set","meta":"YouTube officiel","cover":"/artists/thumb.jpg","href":"https://..."}]' />
         </label>
       </>
     );

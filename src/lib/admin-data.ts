@@ -1,9 +1,10 @@
 import { getSupabaseServerClient } from "@/lib/supabase/server";
-import { artists as publicArtists } from "@/lib/content";
+import { artistMedia, artists as publicArtists } from "@/lib/content";
 
 type ArtistRow = {
   id: string; name: string; slug: string; tagline: string | null; bio: string | null;
   image_url: string | null; instagram_url: string | null;
+  media_sounds?: unknown[] | null; media_releases?: unknown[] | null; media_videos?: unknown[] | null;
 };
 type EventRow = { id: string; starts_at: string; title: string; city: string; status: string; artist_name: string | null };
 type InquiryRow = {
@@ -58,16 +59,34 @@ export async function syncPublicArtistsToAdmin() {
   const supabase = await getSupabaseServerClient();
   if (!supabase || !process.env.ADMIN_DB_SECRET) return;
 
-  await Promise.all(publicArtists.map((artist, index) => supabase.rpc("admin_upsert_public_artist", {
-    p_secret: process.env.ADMIN_DB_SECRET,
-    p_slug: artist.slug,
-    p_name: artist.name,
-    p_tagline: artist.genre,
-    p_bio: artist.bio,
-    p_instagram_url: artist.instagram,
-    p_image_url: artist.heroImage || artist.homeImage || null,
-    p_display_order: index + 1,
-  })));
+  await Promise.all(publicArtists.map(async (artist, index) => {
+    const media = artistMedia[artist.slug as keyof typeof artistMedia];
+    const payload = {
+      p_secret: process.env.ADMIN_DB_SECRET,
+      p_slug: artist.slug,
+      p_name: artist.name,
+      p_tagline: artist.genre,
+      p_bio: artist.bio,
+      p_instagram_url: artist.instagram,
+      p_image_url: artist.heroImage || artist.homeImage || null,
+      p_display_order: index + 1,
+      p_media_sounds: media?.sounds || [],
+      p_media_releases: media?.releases || [],
+      p_media_videos: media?.videos || [],
+    };
+    const { error } = await supabase.rpc("admin_upsert_public_artist", payload);
+    if (!error) return;
+    await supabase.rpc("admin_upsert_public_artist", {
+      p_secret: payload.p_secret,
+      p_slug: payload.p_slug,
+      p_name: payload.p_name,
+      p_tagline: payload.p_tagline,
+      p_bio: payload.p_bio,
+      p_instagram_url: payload.p_instagram_url,
+      p_image_url: payload.p_image_url,
+      p_display_order: payload.p_display_order,
+    });
+  }));
 }
 
 export async function getAdminData(): Promise<AdminData> {
