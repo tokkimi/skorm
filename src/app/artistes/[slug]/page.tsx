@@ -16,14 +16,13 @@ type MediaItem = {
   cover?: string;
   href?: string;
   deezerId?: string;
+  previewUrl?: string;
 };
 
 function InstagramIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="instagram-glyph">
-      <rect x="3" y="3" width="18" height="18" rx="5.2" />
-      <circle cx="12" cy="12" r="4.1" />
-      <circle cx="17.3" cy="6.7" r="1.15" />
+      <path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm4.2 3.2a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6Zm0 2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6Zm5.05-2.35a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z" />
     </svg>
   );
 }
@@ -53,13 +52,13 @@ function MediaRail({
             <div className={`artist-mini-thumb thumb-${index % 3}`}>
               <Image src={item.cover || image} alt={`Miniature officielle ${item.title}`} fill sizes="260px" />
             </div>
-            <small>{label} · 0{index + 1}</small>
+            <small>{label} · {String(index + 1).padStart(2, "0")}</small>
             <strong>{item.title}</strong>
             <p>{item.meta}</p>
 
             {variant === "sound" && (
               <div className="artist-card-actions">
-                <MediaPlayButton href={item.href} deezerId={item.deezerId} title={item.title} label="Écouter" />
+                <MediaPlayButton href={item.href} deezerId={item.deezerId} previewUrl={item.previewUrl} title={item.title} label="Écouter" />
                 <a href={item.href || "#"} target="_blank" rel="noreferrer" aria-label="Ouvrir la source officielle">
                   <ExternalLink size={14} />
                 </a>
@@ -68,7 +67,7 @@ function MediaRail({
 
             {variant === "spotify" && (
               <div className="spotify-preview">
-                <MediaPlayButton href={item.href} deezerId={item.deezerId} title={item.title} label="Lire" />
+                <MediaPlayButton href={item.href} deezerId={item.deezerId} previewUrl={item.previewUrl} title={item.title} label="Lire" />
                 <b>{item.title}</b>
                 <small>{item.meta}</small>
               </div>

@@ -7,9 +7,7 @@ import { MediaPlayButton } from "@/components/media-play-button";
 function InstagramIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="instagram-glyph">
-      <rect x="3" y="3" width="18" height="18" rx="5.2" />
-      <circle cx="12" cy="12" r="4.1" />
-      <circle cx="17.3" cy="6.7" r="1.15" />
+      <path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm4.2 3.2a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6Zm0 2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6Zm5.05-2.35a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z" />
     </svg>
   );
 }
@@ -19,7 +17,7 @@ export function HomeArtistCard({
   release,
 }: {
   artist: { slug: string; name: string; genre: string; instagram: string; homeImage?: string };
-  release?: { title: string; meta?: string; cover?: string; href?: string; deezerId?: string };
+  release?: { title: string; meta?: string; cover?: string; href?: string; deezerId?: string; previewUrl?: string };
 }) {
   const homeImage = artist.homeImage || "/artists/home-cgl-real-blue.png";
 
@@ -48,13 +46,13 @@ export function HomeArtistCard({
                 <strong>{release.title}</strong>
                 {release.meta && <em>{release.meta}</em>}
               </div>
-              <MediaPlayButton href={release.href} deezerId={release.deezerId} title={release.title} label="Lire" />
+              <MediaPlayButton href={release.href} deezerId={release.deezerId} previewUrl={release.previewUrl} title={release.title} label="Lire" />
             </div>
           ) : (
             <div className="profile-latest-release profile-latest-release-empty">
               <div>
                 <span>Médias</span>
-                <strong>? venir</strong>
+                <strong>À venir</strong>
                 <em>Liens officiels en préparation</em>
               </div>
             </div>

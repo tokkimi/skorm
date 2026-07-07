@@ -40,11 +40,13 @@ function getEmbedUrl(href?: string) {
 export function MediaPlayButton({
   href,
   deezerId,
+  previewUrl,
   label = "Lire",
   title,
 }: {
   href?: string;
   deezerId?: string;
+  previewUrl?: string;
   label?: string;
   title: string;
 }) {
@@ -55,7 +57,7 @@ export function MediaPlayButton({
   const compactEmbed = embedUrl?.includes("w.soundcloud.com") || embedUrl?.includes("open.spotify.com/embed/");
 
   async function play() {
-    if (deezerId) {
+    if (deezerId || previewUrl) {
       if (!audio.current) return;
       if (playing) {
         audio.current.pause();
@@ -72,7 +74,9 @@ export function MediaPlayButton({
 
   return (
     <>
-      {deezerId && <audio ref={audio} src={`/api/audio-preview/${deezerId}`} onEnded={() => setPlaying(false)} />}
+      {(deezerId || previewUrl) && (
+        <audio ref={audio} src={previewUrl || `/api/audio-preview/${deezerId}`} onEnded={() => setPlaying(false)} />
+      )}
       <button type="button" className="media-play-button" onClick={play} aria-label={`${label} ${title}`}>
         {playing ? <Pause size={14} fill="currentColor" /> : <Play size={14} fill="currentColor" />}
         <span>{playing ? "Pause" : label}</span>
