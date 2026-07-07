@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -54,7 +54,7 @@ export function HomeArtistCard({
             <div className="profile-latest-release profile-latest-release-empty">
               <div>
                 <span>Médias</span>
-                <strong>À venir</strong>
+                <strong>? venir</strong>
                 <em>Liens officiels en préparation</em>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import { HomeArtistCard } from "@/components/home-artist-card";
+﻿import { HomeArtistCard } from "@/components/home-artist-card";
 import { artistMedia, artists } from "@/lib/content";
 
 export default function ArtistsPage() {
@@ -10,13 +10,17 @@ export default function ArtistsPage() {
         <p>Des univers hard, club et performatifs, avec la même exigence : image, dates, contenus et suivi professionnel.</p>
       </section>
       <section className="roster-gallery">
-        {artists.map((artist) => (
-          <HomeArtistCard
-            key={artist.slug}
-            artist={artist}
-            release={artistMedia[artist.slug as keyof typeof artistMedia].sounds[0]}
-          />
-        ))}
+        {artists.map((artist) => {
+          const media = artistMedia[artist.slug as keyof typeof artistMedia];
+          const release = "featuredSound" in artist ? artist.featuredSound : media.sounds[0];
+          return (
+            <HomeArtistCard
+              key={artist.slug}
+              artist={artist}
+              release={release}
+            />
+          );
+        })}
       </section>
     </main>
   );

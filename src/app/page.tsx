@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import {
   Bot,
@@ -17,7 +17,7 @@ import { artistMedia, artists } from "@/lib/content";
 const features = [
   {
     icon: Sparkles,
-    title: "Direction d’image",
+    title: "Direction d?image",
     text: "Positionnement, identité, contenus et cohérence visuelle.",
     href: "/contact",
   },
@@ -62,7 +62,7 @@ export default function Home() {
             <p className="eyebrow">SKORM DJ Contest</p>
             <h2 id="dj-contest-home-title">Une sélection internationale pour monter sur scène à Séoul.</h2>
             <p>
-              Inscriptions ouvertes jusqu’au 1er septembre 2026. Participation : 29 €.
+              Inscriptions ouvertes jusqu?'u 1er septembre 2026. Participation : 29 €
               Les 50 premiers profils retenus renverront ensuite une composition dédiée.
             </p>
             <div className="contest-feature-actions">
@@ -80,13 +80,17 @@ export default function Home() {
         </div>
 
         <HorizontalRail className="profile-rail-wrap">
-          {artists.map((artist) => (
-            <HomeArtistCard
-              key={artist.slug}
-              artist={artist}
-              release={artistMedia[artist.slug as keyof typeof artistMedia].sounds[0]}
-            />
-          ))}
+          {artists.map((artist) => {
+            const media = artistMedia[artist.slug as keyof typeof artistMedia];
+            const release = "featuredSound" in artist ? artist.featuredSound : media.sounds[0];
+            return (
+              <HomeArtistCard
+                key={artist.slug}
+                artist={artist}
+                release={release}
+              />
+            );
+          })}
         </HorizontalRail>
       </section>
 
@@ -111,7 +115,7 @@ export default function Home() {
           <span><Bot size={18} /></span>
           <div>
             <p className="eyebrow">Projets hybrides</p>
-            <h2>Direction, lancement et suivi d’univers IA.</h2>
+            <h2>Direction, lancement et suivi d?univers IA.</h2>
             <p>
               SKORM accompagne les projets qui mêlent musique, image, narration
               et outils IA : identité, calendrier de sorties, contenus et stratégie

@@ -1,4 +1,4 @@
-export const services = [
+﻿export const services = [
   {
     title: "Communication 360°",
     description:
@@ -99,6 +99,27 @@ export const artists = [
       { label: "YouTube", href: "https://www.youtube.com/channel/UCFDa5sCBb31kJ-ru2GZIH6g" },
       { label: "TikTok", href: "https://www.tiktok.com/@oskanamusic" },
       { label: "Site", href: "https://djoskana.com/" },
+    ],
+  },
+  {
+    slug: "andrea-tutti",
+    name: "Andrea Tutti",
+    genre: "DJ · Producer · Dark oriental techno",
+    bio: "Projet dark oriental techno, construit autour d'une identité scénique forte, entre énergie club, imagerie pharaonique et performance masquée.",
+    role: "Booking, management, image, presskit, contenus vidéo et développement scène.",
+    instagram: "https://www.instagram.com/",
+    homeImage: "/artists/andrea-tutti-profile.png",
+    heroImage: "/artists/andrea-tutti-banner.png",
+    featuredSound: {
+      title: "Dark oriental techno",
+      meta: "Andrea Tutti",
+      cover: "/artists/andrea-tutti-logo.png",
+      href: "https://drive.google.com/file/d/1L_pU7KlBsiu69wFg-3wdEtCnHN4EZMWU/preview",
+    },
+    socials: [
+      { label: "Instagram", href: "https://drive.google.com/file/d/1m-q1AMM7u2sa5Rn2wYgmhOQmbmYUogyF/view" },
+      { label: "Presskit", href: "https://drive.google.com/file/d/1D7HGPodRSldwBXc6D7SLmG-7-qkRQbbB/view" },
+      { label: "Booking", href: "/contact" },
     ],
   },
 ];
@@ -210,6 +231,24 @@ export const artistMedia = {
     videos: [
       { title: "Oskana Promo", meta: "Vidéo officielle · site artiste", cover: "/artists/oskana-photo.jpg", href: "https://djoskana.com/wp-content/uploads/2024/04/Oskana-promo1.mp4" },
       { title: "Chaîne YouTube", meta: "Oskana · YouTube officiel", cover: "/artists/oskana-photo.jpg", href: "https://www.youtube.com/channel/UCFDa5sCBb31kJ-ru2GZIH6g" },
+    ],
+  },
+  "andrea-tutti": {
+    sounds: [
+      { title: "Dark oriental techno", meta: "Andrea Tutti · extrait officiel", cover: "/artists/andrea-tutti-logo.png", href: "https://drive.google.com/file/d/1L_pU7KlBsiu69wFg-3wdEtCnHN4EZMWU/preview" },
+    ],
+    releases: [
+      { title: "Press kit & rider", meta: "Andrea Tutti · document officiel", cover: "/artists/andrea-tutti-banner.png", href: "https://drive.google.com/file/d/1D7HGPodRSldwBXc6D7SLmG-7-qkRQbbB/view" },
+      { title: "Bannière officielle", meta: "Andrea Tutti", cover: "/artists/andrea-tutti-banner.png", href: "https://drive.google.com/file/d/1_EzeQNyv0aAysblqgAA2lP-sh-it5K02/view" },
+    ],
+    videos: [
+      { title: "Extrait HARD TECHNO", meta: "Andrea Tutti · Drive officiel", cover: "/artists/andrea-tutti-banner.png", href: "https://drive.google.com/file/d/1L_pU7KlBsiu69wFg-3wdEtCnHN4EZMWU/preview" },
+      { title: "Interview MAGM 2026", meta: "Andrea Tutti · Drive officiel", cover: "/artists/andrea-tutti-banner.png", href: "https://drive.google.com/file/d/16kLZ3YVr0EdrjnwSqcyZkrCabozuBjTK/preview" },
+      { title: "Video Andrea Tutti 1", meta: "Drive officiel", cover: "/artists/andrea-tutti-profile.png", href: "https://drive.google.com/file/d/1HPLPOmrQkMoXkRJUJTboyVLjb6Hu4mH_/preview" },
+      { title: "Video Andrea Tutti 2", meta: "Drive officiel", cover: "/artists/andrea-tutti-profile.png", href: "https://drive.google.com/file/d/17mG93s9-TzcIJwmZqNme-FiNlAb1bATb/preview" },
+      { title: "Video Andrea Tutti 3", meta: "Drive officiel", cover: "/artists/andrea-tutti-profile.png", href: "https://drive.google.com/file/d/17o_QXo24n9Ntzby-GUdhVxqpl7c-m5QD/preview" },
+      { title: "Video Andrea Tutti 4", meta: "Drive officiel", cover: "/artists/andrea-tutti-profile.png", href: "https://drive.google.com/file/d/1RyPO39GQhX_3lFLMixwV970RIOTQxIKC/preview" },
+      { title: "Video Andrea Tutti 5", meta: "Drive officiel", cover: "/artists/andrea-tutti-profile.png", href: "https://drive.google.com/file/d/1CjI0jMghFoPD5avgjBHqtTVLcMLyf-qL/preview" },
     ],
   },
 } as const;

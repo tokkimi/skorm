@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -14,8 +14,10 @@ const fieldsByKind: Record<Kind, Field[]> = {
     { name: "tagline", label: "Positionnement" },
     { name: "bio", label: "Bio" },
     { name: "instagram_url", label: "Instagram" },
-    { name: "image_url", label: "Image" },
+    { name: "image_url", label: "Image profil / bannière" },
+    { name: "home_image_url", label: "Image affichée sur la home" },
     { name: "display_order", label: "Ordre", type: "number" },
+    { name: "featured_sound", label: "Son mis en avant sur la home (JSON)", type: "json" },
     { name: "media_sounds", label: "Sons / tracks (JSON)", type: "json" },
     { name: "media_releases", label: "Sorties / plateformes (JSON)", type: "json" },
     { name: "media_videos", label: "Vidéos (JSON)", type: "json" },

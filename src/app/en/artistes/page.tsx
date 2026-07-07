@@ -10,13 +10,17 @@ export default function EnglishArtistsPage() {
         <p>Two universes, one standard: image, dates, content and professional follow-up.</p>
       </section>
       <section className="roster-gallery">
-        {artists.map((artist) => (
-          <HomeArtistCard
-            key={artist.slug}
-            artist={artist}
-            release={artistMedia[artist.slug as keyof typeof artistMedia].sounds[0]}
-          />
-        ))}
+        {artists.map((artist) => {
+          const media = artistMedia[artist.slug as keyof typeof artistMedia];
+          const release = "featuredSound" in artist ? artist.featuredSound : media.sounds[0];
+          return (
+            <HomeArtistCard
+              key={artist.slug}
+              artist={artist}
+              release={release}
+            />
+          );
+        })}
       </section>
     </main>
   );

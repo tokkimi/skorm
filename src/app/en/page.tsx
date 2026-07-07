@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import {
   Bot,
@@ -41,7 +41,7 @@ export default function EnglishHome() {
             <p className="eyebrow">SKORM DJ Contest</p>
             <h2 id="dj-contest-home-title-en">An international selection to perform on stage in Seoul.</h2>
             <p>
-              Online registrations are open until September 1, 2026. Entry fee: €29.
+              Online registrations are open until September 1, 2026. Entry fee: 29.
               The first 50 selected profiles will then submit a dedicated composition.
             </p>
             <div className="contest-feature-actions">
@@ -59,13 +59,17 @@ export default function EnglishHome() {
         </div>
 
         <HorizontalRail className="profile-rail-wrap">
-          {artists.map((artist) => (
-            <HomeArtistCard
-              key={artist.slug}
-              artist={artist}
-              release={artistMedia[artist.slug as keyof typeof artistMedia].sounds[0]}
-            />
-          ))}
+          {artists.map((artist) => {
+            const media = artistMedia[artist.slug as keyof typeof artistMedia];
+            const release = "featuredSound" in artist ? artist.featuredSound : media.sounds[0];
+            return (
+              <HomeArtistCard
+                key={artist.slug}
+                artist={artist}
+                release={release}
+              />
+            );
+          })}
         </HorizontalRail>
       </section>
 

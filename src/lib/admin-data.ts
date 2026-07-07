@@ -4,6 +4,7 @@ import { artistMedia, artists as publicArtists } from "@/lib/content";
 type ArtistRow = {
   id: string; name: string; slug: string; tagline: string | null; bio: string | null;
   image_url: string | null; instagram_url: string | null;
+  home_image_url?: string | null; featured_sound?: unknown | null;
   media_sounds?: unknown[] | null; media_releases?: unknown[] | null; media_videos?: unknown[] | null;
 };
 type EventRow = { id: string; starts_at: string; title: string; city: string; status: string; artist_name: string | null };
@@ -61,6 +62,7 @@ export async function syncPublicArtistsToAdmin() {
 
   await Promise.all(publicArtists.map(async (artist, index) => {
     const media = artistMedia[artist.slug as keyof typeof artistMedia];
+    const featuredSound = "featuredSound" in artist ? artist.featuredSound : media?.sounds?.[0] || null;
     const payload = {
       p_secret: process.env.ADMIN_DB_SECRET,
       p_slug: artist.slug,
@@ -69,6 +71,8 @@ export async function syncPublicArtistsToAdmin() {
       p_bio: artist.bio,
       p_instagram_url: artist.instagram,
       p_image_url: artist.heroImage || artist.homeImage || null,
+      p_home_image_url: artist.homeImage || null,
+      p_featured_sound: featuredSound,
       p_display_order: index + 1,
       p_media_sounds: media?.sounds || [],
       p_media_releases: media?.releases || [],

@@ -279,6 +279,7 @@ export function ContactForm({ variant = "contact", lang = "fr" }: { variant?: Fo
                 <option value="enkor">ENKOR</option>
                 <option value="nova-hardlab">Nova Hardlab</option>
                 <option value="oskana">Oskana</option>
+                <option value="andrea-tutti">Andrea Tutti</option>
               </select>
             </label>
           </div>

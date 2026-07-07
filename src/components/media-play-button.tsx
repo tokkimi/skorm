@@ -27,6 +27,10 @@ function getEmbedUrl(href?: string) {
     if (url.hostname.includes("soundcloud.com")) {
       return `https://w.soundcloud.com/player/?url=${encodeURIComponent(href)}&auto_play=true&visual=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false`;
     }
+    if (url.hostname.includes("drive.google.com")) {
+      const directId = url.pathname.match(/\/file\/d\/([^/]+)/)?.[1] || url.searchParams.get("id");
+      return directId ? `https://drive.google.com/file/d/${directId}/preview` : null;
+    }
   } catch {
     return null;
   }

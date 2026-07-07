@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -27,11 +27,12 @@ export function AdminCreateButton({ kind, artists = [] }: { kind: Kind; artists?
     setStatus("Enregistrement...");
     const form = event.currentTarget;
     const payload: Record<string, unknown> = Object.fromEntries(new FormData(form).entries());
+
     if (kind === "artist") {
-      for (const field of ["media_sounds", "media_releases", "media_videos"]) {
+      for (const field of ["featured_sound", "media_sounds", "media_releases", "media_videos"]) {
         const raw = payload[field];
         if (typeof raw !== "string" || !raw.trim()) {
-          payload[field] = [];
+          payload[field] = field === "featured_sound" ? null : [];
           continue;
         }
         try {
@@ -42,11 +43,13 @@ export function AdminCreateButton({ kind, artists = [] }: { kind: Kind; artists?
         }
       }
     }
+
     const response = await fetch("/api/admin/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ kind, payload }),
     });
+
     if (response.ok) {
       setStatus("Ajouté.");
       form.reset();
@@ -121,8 +124,12 @@ function Fields({ kind, artists }: { kind: Kind; artists: Artist[] }) {
           <input name="instagram_url" placeholder="https://instagram.com/..." />
         </label>
         <label>
-          Image
+          Image profil / bannière
           <input name="image_url" placeholder="/artists/photo.png ou URL" />
+        </label>
+        <label>
+          Image affichée sur la home
+          <input name="home_image_url" placeholder="/artists/photo-home.png ou URL" />
         </label>
         <label>
           Ordre
@@ -133,8 +140,12 @@ function Fields({ kind, artists }: { kind: Kind; artists: Artist[] }) {
           <textarea name="bio" />
         </label>
         <label className="wide">
+          Son mis en avant sur la home (JSON)
+          <textarea name="featured_sound" rows={5} placeholder='{"title":"Titre","meta":"Artiste","cover":"/artists/cover.jpg","href":"https://..."}' />
+        </label>
+        <label className="wide">
           Sons / tracks (JSON)
-          <textarea name="media_sounds" rows={7} placeholder='[{"title":"Titre","meta":"Artiste • plateforme","cover":"/artists/cover.jpg","href":"https://..."}]' />
+          <textarea name="media_sounds" rows={7} placeholder='[{"title":"Titre","meta":"Artiste · plateforme","cover":"/artists/cover.jpg","href":"https://..."}]' />
         </label>
         <label className="wide">
           Sorties / plateformes (JSON)
@@ -189,7 +200,7 @@ function Fields({ kind, artists }: { kind: Kind; artists: Artist[] }) {
       <>
         <ArtistSelect artists={artists} />
         <label>
-          Événement
+          Évènement
           <input name="event_name" required />
         </label>
         <label>
@@ -399,7 +410,7 @@ function Fields({ kind, artists }: { kind: Kind; artists: Artist[] }) {
       <label>
         Statut
         <select name="status" defaultValue="pending">
-          <option value="pending">À faire</option>
+          <option value="pending">? faire</option>
           <option value="invoiced">Facturé</option>
           <option value="paid">Payé</option>
           <option value="late">Retard</option>

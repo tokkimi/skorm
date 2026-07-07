@@ -10475,5 +10475,6 @@ body {
 .profile-card-cgl-rave-unit .home-profile-photo img,.profile-card-paga .home-profile-photo img,.profile-card-enkor .home-profile-photo img { object-position:center center !important; }
 .profile-card-nova-hardlab .home-profile-photo img { object-position:54% center !important; }
 .profile-card-oskana .home-profile-photo img { object-position:50% 38% !important; }
+.profile-card-andrea-tutti .home-profile-photo img { object-position:center center !important; }
 .roster-gallery .profile-card { flex:initial !important; width:100% !important; min-width:0 !important; max-width:none !important; }
 @media (max-width:720px){.profile-rail-wrap .media-rail{padding-inline:18px !important;gap:16px !important}.profile-rail-wrap .profile-card{flex-basis:min(82vw,360px) !important;width:min(82vw,360px) !important;min-width:min(82vw,360px) !important;max-width:min(82vw,360px) !important;min-height:560px !important}.profile-rail-wrap .rail-dot-left{left:10px !important}.profile-rail-wrap .rail-dot-right{right:10px !important}}
