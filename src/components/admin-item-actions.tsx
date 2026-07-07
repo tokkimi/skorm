@@ -54,6 +54,7 @@ const fieldsByKind: Record<Kind, Field[]> = {
     { name: "content_type", label: "Type" },
     { name: "status", label: "Statut", options: ["idea", "production", "review", "scheduled", "published", "cancelled"] },
     { name: "publish_at", label: "Publication", type: "datetime-local" },
+    { name: "caption", label: "Légende" },
     { name: "asset_url", label: "Asset" },
   ],
   contact: [

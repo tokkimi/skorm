@@ -3,62 +3,23 @@
 import { useState } from "react";
 import { ImageIcon, Play, X } from "lucide-react";
 
-type MediaItem = {
+export type HomeDiapoItem = {
   id: string;
   title: string;
   meta: string;
   type: "Photo" | "Vidéo";
+  src?: string;
 };
 
-const mediaItems: MediaItem[] = [
-  {
-    id: "1tKDCsoq3GAI6NrqecZ4RFXHPoiu6U5dQ",
-    title: "CGL",
-    meta: "Shooting District",
-    type: "Photo",
-  },
-  {
-    id: "1Yp58NRpkQC5-wfMYIrKpJID4zs6hK5Jd",
-    title: "CGL",
-    meta: "Portrait scène",
-    type: "Photo",
-  },
-  {
-    id: "1hjc15USH8ccmAO_UKazMDWpaJwsHdPgb",
-    title: "CGL",
-    meta: "Backstage",
-    type: "Photo",
-  },
-  {
-    id: "1n9dBNt9IEuCe3WGeiDeo-bm0jqHww_XI",
-    title: "CGL",
-    meta: "Vidéo shooting",
-    type: "Vidéo",
-  },
-  {
-    id: "1A3Wkjh0_8bVs8y4k3GgoyHxy3d5OVhnx",
-    title: "Paga",
-    meta: "Club photos",
-    type: "Photo",
-  },
-  {
-    id: "1SGHyuqdj-lJsZSO2iHyVzJptF8l4nkNZ",
-    title: "Paga",
-    meta: "Live club",
-    type: "Photo",
-  },
-  {
-    id: "1vUQ1K-7yvbfpIrNinOCWLjKXlAPEfvH5",
-    title: "Paga",
-    meta: "Crowd & booth",
-    type: "Photo",
-  },
-  {
-    id: "1VZvRdzMSTHa5SvxjedtWLlLTkSAKwLeA",
-    title: "Paga",
-    meta: "Timeline club",
-    type: "Vidéo",
-  },
+const fallbackMediaItems: HomeDiapoItem[] = [
+  { id: "1tKDCsoq3GAI6NrqecZ4RFXHPoiu6U5dQ", title: "CGL", meta: "Shooting District", type: "Photo" },
+  { id: "1Yp58NRpkQC5-wfMYIrKpJID4zs6hK5Jd", title: "CGL", meta: "Portrait scène", type: "Photo" },
+  { id: "1hjc15USH8ccmAO_UKazMDWpaJwsHdPgb", title: "CGL", meta: "Backstage", type: "Photo" },
+  { id: "1n9dBNt9IEuCe3WGeiDeo-bm0jqHww_XI", title: "CGL", meta: "Vidéo shooting", type: "Vidéo" },
+  { id: "1A3Wkjh0_8bVs8y4k3GgoyHxy3d5OVhnx", title: "Paga", meta: "Club photos", type: "Photo" },
+  { id: "1SGHyuqdj-lJsZSO2iHyVzJptF8l4nkNZ", title: "Paga", meta: "Live club", type: "Photo" },
+  { id: "1vUQ1K-7yvbfpIrNinOCWLjKXlAPEfvH5", title: "Paga", meta: "Crowd & booth", type: "Photo" },
+  { id: "1VZvRdzMSTHa5SvxjedtWLlLTkSAKwLeA", title: "Paga", meta: "Timeline club", type: "Vidéo" },
 ];
 
 function driveThumb(id: string) {
@@ -69,8 +30,9 @@ function drivePreview(id: string) {
   return `https://drive.google.com/file/d/${id}/preview`;
 }
 
-export function HomeMediaDiapo() {
-  const [selected, setSelected] = useState<MediaItem | null>(null);
+export function HomeMediaDiapo({ items = [] }: { items?: HomeDiapoItem[] }) {
+  const [selected, setSelected] = useState<HomeDiapoItem | null>(null);
+  const mediaItems = items.length ? items : fallbackMediaItems;
 
   return (
     <section className="home-media-diapo" aria-labelledby="home-media-title">
@@ -88,7 +50,7 @@ export function HomeMediaDiapo() {
             onClick={() => setSelected(item)}
             key={`${item.id}-${item.title}`}
           >
-            <img src={driveThumb(item.id)} alt={`${item.title} — ${item.meta}`} loading="lazy" />
+            <img src={item.src || driveThumb(item.id)} alt={`${item.title} · ${item.meta}`} loading="lazy" />
             <span className="home-media-badge">
               {item.type === "Vidéo" ? <Play size={13} fill="currentColor" /> : <ImageIcon size={13} />}
               {item.type}
@@ -109,13 +71,13 @@ export function HomeMediaDiapo() {
           <div className="home-media-modal-frame">
             {selected.type === "Vidéo" ? (
               <iframe
-                src={drivePreview(selected.id)}
-                title={`${selected.title} — ${selected.meta}`}
+                src={selected.src || drivePreview(selected.id)}
+                title={`${selected.title} · ${selected.meta}`}
                 allow="autoplay; fullscreen"
                 allowFullScreen
               />
             ) : (
-              <img src={driveThumb(selected.id)} alt={`${selected.title} — ${selected.meta}`} />
+              <img src={selected.src || driveThumb(selected.id)} alt={`${selected.title} · ${selected.meta}`} />
             )}
           </div>
           <div className="home-media-modal-caption">

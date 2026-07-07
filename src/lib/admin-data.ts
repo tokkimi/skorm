@@ -24,7 +24,7 @@ type CampaignRow = {
 };
 type ContentRow = {
   id: string; status: string; platform: string; title: string; publish_at: string | null;
-  content_type: string; artist_name: string | null;
+  content_type: string; artist_name: string | null; caption?: string | null; asset_url?: string | null;
 };
 type ContactRow = {
   id: string; full_name: string; email: string | null; company: string | null;
@@ -98,5 +98,20 @@ export async function getAdminData(): Promise<AdminData> {
   if (!supabase || !process.env.ADMIN_DB_SECRET) return empty;
   await syncPublicArtistsToAdmin();
   const { data, error } = await supabase.rpc("admin_get_backoffice", { p_secret: process.env.ADMIN_DB_SECRET });
-  return error || !data ? empty : (data as AdminData);
+  if (error || !data) return empty;
+  const backoffice = data as AdminData;
+  backoffice.artists = backoffice.artists.map((artist) => {
+    const publicArtist = publicArtists.find((item) => item.slug === artist.slug);
+    const media = artistMedia[artist.slug as keyof typeof artistMedia];
+    const featuredSound = (publicArtist as { featuredSound?: unknown } | undefined)?.featuredSound || media?.sounds?.[0] || null;
+    return {
+      ...artist,
+      home_image_url: artist.home_image_url || publicArtist?.homeImage || artist.image_url,
+      featured_sound: artist.featured_sound || featuredSound || null,
+      media_sounds: artist.media_sounds?.length ? artist.media_sounds : [...(media?.sounds || [])],
+      media_releases: artist.media_releases?.length ? artist.media_releases : [...(media?.releases || [])],
+      media_videos: artist.media_videos?.length ? artist.media_videos : [...(media?.videos || [])],
+    };
+  });
+  return backoffice;
 }

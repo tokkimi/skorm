@@ -12,6 +12,8 @@ import { HorizontalRail } from "@/components/horizontal-rail";
 import { AgencyHero } from "@/components/agency-hero";
 import { HomeArtistCard } from "@/components/home-artist-card";
 import { HomeMediaDiapo } from "@/components/home-media-diapo";
+import type { HomeDiapoItem } from "@/components/home-media-diapo";
+import { getAdminData } from "@/lib/admin-data";
 import { artistMedia, artists } from "@/lib/content";
 
 const features = [
@@ -41,7 +43,18 @@ const features = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const { content_items } = await getAdminData();
+  const diapoItems: HomeDiapoItem[] = content_items
+    .filter((item) => item.platform === "diapo" && item.status === "published" && item.asset_url)
+    .map((item) => ({
+      id: item.id,
+      title: item.title,
+      meta: item.caption || "SKORM Agency",
+      type: item.content_type === "video" ? "Vidéo" : "Photo",
+      src: item.asset_url || undefined,
+    }));
+
   return (
     <main className="home agency-home">
       <AgencyHero />
@@ -126,7 +139,7 @@ export default function Home() {
         </div>
       </section>
 
-      <HomeMediaDiapo />
+      <HomeMediaDiapo items={diapoItems} />
 
       <section className="home-services dot-section" id="services">
         <div className="dot-feature-panel">

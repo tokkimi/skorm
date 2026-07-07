@@ -1,5 +1,4 @@
-import { AdminCreateButton } from "@/components/admin-create-button";
-import { AdminItemActions } from "@/components/admin-item-actions";
+import { AdminArtistActions, AdminArtistCreateButton } from "@/components/admin-artist-actions";
 import { AdminPageHeading, MetricCard, Status } from "@/components/admin-ui";
 import { getAdminData } from "@/lib/admin-data";
 
@@ -11,7 +10,7 @@ export default async function AdminArtistsPage() {
       <AdminPageHeading
         title="Artistes"
         description="Profils, informations professionnelles, médias, tarifs et disponibilités."
-        action={<AdminCreateButton kind="artist" />}
+        action={<AdminArtistCreateButton />}
       />
       <section className="metrics-grid three admin-artists-metrics">
         <MetricCard label="Artistes actifs" value={data.length} hint="Roster SKORM" />
@@ -37,7 +36,7 @@ export default async function AdminArtistsPage() {
             <footer>
               <span>Instagram</span>
               <b>{artist.instagram_url ? "Connecté" : "À connecter"}</b>
-              <AdminItemActions kind="artist" item={artist} />
+              <AdminArtistActions item={artist} />
             </footer>
           </article>
         ))}
