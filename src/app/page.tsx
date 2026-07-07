@@ -13,8 +13,9 @@ import { AgencyHero } from "@/components/agency-hero";
 import { HomeArtistCard } from "@/components/home-artist-card";
 import { HomeMediaDiapo } from "@/components/home-media-diapo";
 import type { HomeDiapoItem } from "@/components/home-media-diapo";
-import { getAdminData } from "@/lib/admin-data";
-import { artists, getFeaturedAudioForArtist } from "@/lib/content";
+import { getPublicSiteData } from "@/lib/public-site-data";
+
+export const dynamic = "force-dynamic";
 
 const features = [
   {
@@ -44,7 +45,8 @@ const features = [
 ];
 
 export default async function Home() {
-  const { content_items } = await getAdminData();
+  const { adminData, artists, dates } = await getPublicSiteData();
+  const { content_items } = adminData;
   const diapoItems: HomeDiapoItem[] = content_items
     .filter((item) => item.platform === "diapo" && item.status === "published" && item.asset_url)
     .map((item) => ({
@@ -59,7 +61,7 @@ export default async function Home() {
 
   return (
     <main className="home agency-home">
-      <AgencyHero />
+      <AgencyHero dates={dates} />
 
       <section className="home-contest-feature" aria-labelledby="dj-contest-home-title">
         <div className="contest-feature-card">
@@ -96,7 +98,7 @@ export default async function Home() {
 
         <HorizontalRail className="profile-rail-wrap">
           {artists.map((artist) => {
-            const release = getFeaturedAudioForArtist(artist);
+            const release = artist.featuredSound || undefined;
             return (
               <HomeArtistCard
                 key={artist.slug}

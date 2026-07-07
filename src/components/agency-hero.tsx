@@ -4,14 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
 import { HorizontalRail } from "@/components/horizontal-rail";
-import { getUpcomingDates } from "@/lib/content";
+import type { PublicDate } from "@/lib/public-site-data";
 
 type Lang = "fr" | "en";
 
-export function AgencyHero({ lang = "fr" }: { lang?: Lang }) {
+export function AgencyHero({ lang = "fr", dates = [] }: { lang?: Lang; dates?: PublicDate[] }) {
   const isEn = lang === "en";
   const base = isEn ? "/en" : "";
-  const upcomingDates = getUpcomingDates();
 
   return (
     <section className="agency-paga-hero agency-centered-hero">
@@ -20,7 +19,11 @@ export function AgencyHero({ lang = "fr" }: { lang?: Lang }) {
 
       <div className="agency-paga-shell">
         <div className="agency-paga-copy">
-          <p className="eyebrow">{isEn ? "Management · Communication · Partnerships · AI · Training" : "Management · Communication · Partenariats · IA · Formation"}</p>
+          <p className="eyebrow">
+            {isEn
+              ? "Management · Communication · Partnerships · AI · Training"
+              : "Management · Communication · Partenariats · IA · Formation"}
+          </p>
           <img className="agency-hero-logo" src="/skorm-logo.png" alt="SKORM Agency" />
           <p>
             {isEn
@@ -36,16 +39,28 @@ export function AgencyHero({ lang = "fr" }: { lang?: Lang }) {
         <div className="agency-hero-date-strip">
           <div className="agency-paga-date-head">
             <p className="eyebrow">{isEn ? "Upcoming dates" : "Prochaines dates"}</p>
-            <span>{String(upcomingDates.length).padStart(2, "0")} events</span>
+            <span>{String(dates.length).padStart(2, "0")} events</span>
           </div>
           <HorizontalRail className="agency-date-rail">
-            {upcomingDates.map((date) => (
+            {dates.length ? dates.map((date) => (
               <Link href={`${base}/agenda`} className="agency-active-date" key={`${date.iso}-${date.event}`}>
-                <div><time><b>{date.day}</b>{date.month}</time><span>{date.status}</span></div>
+                <div>
+                  <time><b>{date.day}</b>{date.month}</time>
+                  <span>{date.status}</span>
+                </div>
                 <strong>{date.event}</strong>
                 <small><MapPin size={12} /> {date.location} · {date.artist}</small>
               </Link>
-            ))}
+            )) : (
+              <Link href={`${base}/agenda`} className="agency-active-date">
+                <div>
+                  <time><b>--</b>TBA</time>
+                  <span>À venir</span>
+                </div>
+                <strong>Dates en préparation</strong>
+                <small><MapPin size={12} /> SKORM · roster</small>
+              </Link>
+            )}
           </HorizontalRail>
         </div>
       </div>

@@ -11,7 +11,9 @@ import {
 import { HorizontalRail } from "@/components/horizontal-rail";
 import { AgencyHero } from "@/components/agency-hero";
 import { HomeArtistCard } from "@/components/home-artist-card";
-import { artists, getFeaturedAudioForArtist } from "@/lib/content";
+import { getPublicSiteData } from "@/lib/public-site-data";
+
+export const dynamic = "force-dynamic";
 
 const features = [
   { icon: Sparkles, title: "Image direction", text: "Positioning, identity, content and visual consistency.", href: "/en/contact" },
@@ -20,10 +22,12 @@ const features = [
   { icon: BriefcaseBusiness, title: "Career management", text: "Priorities, strategy, decisions and long-term development.", href: "/en/rejoindre-agence" },
 ];
 
-export default function EnglishHome() {
+export default async function EnglishHome() {
+  const { artists, dates } = await getPublicSiteData();
+
   return (
     <main className="home agency-home">
-      <AgencyHero lang="en" />
+      <AgencyHero lang="en" dates={dates} />
 
       <section className="home-contest-feature" aria-labelledby="dj-contest-home-title-en">
         <div className="contest-feature-card">
@@ -60,7 +64,7 @@ export default function EnglishHome() {
 
         <HorizontalRail className="profile-rail-wrap">
           {artists.map((artist) => {
-            const release = getFeaturedAudioForArtist(artist);
+            const release = artist.featuredSound || undefined;
             return (
               <HomeArtistCard
                 key={artist.slug}

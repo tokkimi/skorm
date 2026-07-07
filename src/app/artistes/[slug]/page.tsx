@@ -1,23 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, ExternalLink, MapPin, WandSparkles } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, ExternalLink, MapPin } from "lucide-react";
 import { notFound } from "next/navigation";
 import { HorizontalRail } from "@/components/horizontal-rail";
 import { MediaPlayButton } from "@/components/media-play-button";
-import { artistMedia, artists, getUpcomingArtistDates, isPlayableAudioItem } from "@/lib/content";
+import { artists as fallbackArtists, isPlayableAudioItem } from "@/lib/content";
+import { getPublicSiteData, type PublicArtist, type PublicDate, type PublicMediaItem } from "@/lib/public-site-data";
+
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
 
 export function generateStaticParams() {
-  return artists.map(({ slug }) => ({ slug }));
+  return fallbackArtists.map(({ slug }) => ({ slug }));
 }
 
-type MediaItem = {
-  title: string;
-  meta: string;
-  cover?: string;
-  href?: string;
-  deezerId?: string;
-  previewUrl?: string;
-};
+function normalize(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 
 function InstagramGlyph() {
   return (
@@ -27,6 +31,15 @@ function InstagramGlyph() {
       <circle cx="17.5" cy="6.5" r="1.1" />
     </svg>
   );
+}
+
+function datesForArtist(artist: PublicArtist, dates: PublicDate[]) {
+  const artistName = normalize(artist.name);
+  const artistSlug = normalize(artist.slug);
+  return dates.filter((date) => {
+    const value = normalize(date.artist);
+    return value === artistName || value === artistSlug || value.includes(artistName) || artistName.includes(value);
+  });
 }
 
 function MediaRail({
@@ -40,10 +53,10 @@ function MediaRail({
   label: string;
   image: string;
   variant: "sound" | "spotify" | "video";
-  items: readonly MediaItem[];
+  items: PublicMediaItem[];
 }) {
   const publicItems = items.filter((item) => {
-    const value = `${item.title} ${item.meta} ${item.href || ""}`.toLowerCase();
+    const value = `${item.title} ${item.meta || ""} ${item.href || ""}`.toLowerCase();
     if (value.includes("press kit") || value.includes("presskit") || value.includes("bannière officielle")) return false;
     if ((variant === "sound" || variant === "spotify") && !isPlayableAudioItem(item)) return false;
     return true;
@@ -59,7 +72,7 @@ function MediaRail({
       </div>
       <HorizontalRail className="artist-mini-rail">
         {publicItems.map((item, index) => (
-          <article className={`artist-mini-card ${variant}`} key={`${title}-${item.title}`}>
+          <article className={`artist-mini-card ${variant}`} key={`${title}-${item.title}-${index}`}>
             <div className={`artist-mini-thumb thumb-${index % 3}`}>
               <Image src={item.cover || image} alt={`Miniature officielle ${item.title}`} fill sizes="260px" />
             </div>
@@ -76,8 +89,8 @@ function MediaRail({
                   title={item.title}
                   label={variant === "sound" ? "Écouter" : "Lire"}
                 />
-                {variant === "sound" && (
-                  <a href={item.href || "#"} target="_blank" rel="noreferrer" aria-label="Ouvrir la source officielle">
+                {variant === "sound" && item.href && (
+                  <a href={item.href} target="_blank" rel="noreferrer" aria-label="Ouvrir la source officielle">
                     <ExternalLink size={14} />
                   </a>
                 )}
@@ -93,9 +106,11 @@ function MediaRail({
             {variant === "video" && (
               <div className="artist-card-actions">
                 <MediaPlayButton href={item.href} title={item.title} label="Voir" />
-                <a href={item.href || "#"} target="_blank" rel="noreferrer" aria-label="Ouvrir la source officielle">
-                  <ExternalLink size={14} />
-                </a>
+                {item.href && (
+                  <a href={item.href} target="_blank" rel="noreferrer" aria-label="Ouvrir la source officielle">
+                    <ExternalLink size={14} />
+                  </a>
+                )}
               </div>
             )}
           </article>
@@ -107,12 +122,12 @@ function MediaRail({
 
 export default async function ArtistPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  const { artists, dates } = await getPublicSiteData();
   const artist = artists.find((item) => item.slug === slug);
   if (!artist) notFound();
 
-  const artistDates = getUpcomingArtistDates(artist.name);
-  const media = artistMedia[artist.slug as keyof typeof artistMedia];
-  const heroImage = artist.heroImage || (artist.slug === "paga" ? "/artists/paga.png" : "/artists/cgl-banner.png");
+  const artistDates = datesForArtist(artist, dates);
+  const heroImage = artist.heroImage || artist.homeImage || "/artists/cgl-banner.png";
 
   return (
     <main className="artist-page paga-like-page">
@@ -131,17 +146,12 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
             <p>{artist.bio}</p>
             <div className="artist-socials">
               {artist.socials.map((social) => (
-                <Link href={social.href} key={social.label} target={social.href.startsWith("http") ? "_blank" : undefined}>
+                <Link href={social.href} key={`${social.label}-${social.href}`} target={social.href.startsWith("http") ? "_blank" : undefined}>
                   {social.label === "Instagram" && <InstagramGlyph />}
                   <span>{social.label}</span>
                   <ArrowUpRight size={14} />
                 </Link>
               ))}
-              <Link href={`/api/press-kit/${artist.slug}?lang=fr`} target="_blank">
-                <WandSparkles size={16} />
-                <span>Press kit</span>
-                <ArrowUpRight size={14} />
-              </Link>
             </div>
           </div>
 
@@ -190,9 +200,9 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
       </section>
 
       <section className="artist-section-shell artist-media-area">
-        <MediaRail title="Derniers sons" label="Sounds" variant="sound" image={artist.slug === "paga" ? "/artists/paga-cover-night.png" : heroImage} items={media.sounds} />
-        <MediaRail title="Écoute directe" label="Streaming" variant="spotify" image={artist.slug === "paga" ? "/artists/paga-cover-blue.png" : heroImage} items={media.releases} />
-        <MediaRail title="Dernières vidéos" label="Videos" variant="video" image={heroImage} items={media.videos} />
+        <MediaRail title="Derniers sons" label="Sounds" variant="sound" image={artist.homeImage || heroImage} items={artist.media.sounds} />
+        <MediaRail title="Écoute directe" label="Streaming" variant="spotify" image={artist.homeImage || heroImage} items={artist.media.releases} />
+        <MediaRail title="Dernières vidéos" label="Videos" variant="video" image={heroImage} items={artist.media.videos} />
       </section>
     </main>
   );

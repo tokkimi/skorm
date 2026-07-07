@@ -1,7 +1,11 @@
 import { HomeArtistCard } from "@/components/home-artist-card";
-import { artists, getFeaturedAudioForArtist } from "@/lib/content";
+import { getPublicSiteData } from "@/lib/public-site-data";
 
-export default function ArtistsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ArtistsPage() {
+  const { artists } = await getPublicSiteData();
+
   return (
     <main className="roster-page">
       <section className="roster-page-head">
@@ -14,7 +18,7 @@ export default function ArtistsPage() {
           <HomeArtistCard
             key={artist.slug}
             artist={artist}
-            release={getFeaturedAudioForArtist(artist)}
+            release={artist.featuredSound || undefined}
           />
         ))}
       </section>

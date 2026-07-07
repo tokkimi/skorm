@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { getUpcomingDates } from "@/lib/content";
+import { getPublicSiteData } from "@/lib/public-site-data";
 
-export default function EnglishAgendaPage() {
-  const dates = getUpcomingDates();
+export const dynamic = "force-dynamic";
+
+export default async function EnglishAgendaPage() {
+  const { dates } = await getPublicSiteData();
 
   return (
     <main className="inner-page">
@@ -22,6 +24,14 @@ export default function EnglishAgendaPage() {
             <span className="status-pill">{date.status}</span>
           </article>
         ))}
+        {!dates.length && (
+          <article>
+            <time><b>--</b><span>TBA</span></time>
+            <div><small>SKORM</small><h2>Dates in preparation</h2></div>
+            <p>Upcoming announcements will be added from the admin.</p>
+            <span className="status-pill">Soon</span>
+          </article>
+        )}
       </section>
     </main>
   );

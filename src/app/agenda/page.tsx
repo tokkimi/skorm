@@ -1,8 +1,10 @@
 import { PageShell } from "@/components/page-shell";
-import { getUpcomingDates } from "@/lib/content";
+import { getPublicSiteData } from "@/lib/public-site-data";
 
-export default function AgendaPage() {
-  const dates = getUpcomingDates();
+export const dynamic = "force-dynamic";
+
+export default async function AgendaPage() {
+  const { dates } = await getPublicSiteData();
 
   return (
     <PageShell label="Live" title="Agenda" intro="France, Europe et ailleurs.">
@@ -15,6 +17,14 @@ export default function AgendaPage() {
             <span className="status-pill">{date.status}</span>
           </article>
         ))}
+        {!dates.length && (
+          <article>
+            <time><b>--</b><span>TBA</span></time>
+            <div><small>SKORM</small><h2>Dates en préparation</h2></div>
+            <p>Les prochaines annonces seront ajoutées ici depuis l’admin.</p>
+            <span className="status-pill">À venir</span>
+          </article>
+        )}
       </section>
     </PageShell>
   );
