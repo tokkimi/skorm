@@ -52,8 +52,9 @@
   width: 18px;
   height: 18px;
   display: block;
-  fill: currentColor;
-  stroke: none;
+  fill: none;
+  stroke: currentColor;
+  flex: 0 0 auto;
 }
 
 .profile-latest-release,
@@ -10964,4 +10965,21 @@ body > .media-modal .media-modal-close {
     grid-template-columns: 1fr !important;
     width: 100% !important;
   }
+}
+
+/* Final audio lock: SoundCloud/Spotify embeds used for playback must never open as a visual block. */
+iframe.media-hidden-player {
+  position: fixed !important;
+  inset: auto auto 0 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  border: 0 !important;
+  overflow: hidden !important;
 }

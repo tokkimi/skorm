@@ -263,20 +263,12 @@ export const dates = [
 export const artistMedia = {
   "cgl-rave-unit": {
     sounds: [
-      { title: "DON'T DO IT", meta: "CGL", cover: "/artists/cgl-latest-dont-do-it.jpg", href: "https://www.instagram.com/p/DZNdz2-jZCR/" },
-      { title: "Full set", meta: "Hard tekno · industrial · raw", cover: "/artists/video-cgl-fullset.jpg", href: "https://www.instagram.com/p/DYST6dmiKEB/" },
-      { title: "Space 92 · Acid live", meta: "CGL", cover: "/artists/video-cgl-space.jpg", href: "https://www.instagram.com/p/DVvdxmgjLl2/" },
+      { title: "RAW", meta: "CGL · SoundCloud officiel", cover: "/artists/cgl-latest-dont-do-it.jpg", href: "https://soundcloud.com/rave-unit-918023394/sets/raw" },
     ],
     releases: [
-      { title: "DON'T DO IT", meta: "Publication officielle", cover: "/artists/cgl-latest-dont-do-it.jpg", href: "https://www.instagram.com/p/DZNdz2-jZCR/" },
-      { title: "Dark RAW direction", meta: "Campagne artiste", cover: "/artists/video-cgl-hypnotic.jpg", href: "https://www.instagram.com/p/DUTUUuziIie/" },
-      { title: "Hard indus tools", meta: "Contenus live", cover: "/artists/video-cgl-space.jpg", href: "https://www.instagram.com/p/DVvdxmgjLl2/" },
+      { title: "RAW", meta: "Playlist officielle · SoundCloud", cover: "/artists/cgl-latest-dont-do-it.jpg", href: "https://soundcloud.com/rave-unit-918023394/sets/raw" },
     ],
-    videos: [
-      { title: "Full set", meta: "Instagram · contenu officiel", cover: "/artists/video-cgl-fullset.jpg", href: "https://www.instagram.com/p/DYST6dmiKEB/" },
-      { title: "Space 92 · Acid live", meta: "Instagram · contenu officiel", cover: "/artists/video-cgl-space.jpg", href: "https://www.instagram.com/p/DVvdxmgjLl2/" },
-      { title: "Hypnotic rave", meta: "Instagram · contenu officiel", cover: "/artists/video-cgl-hypnotic.jpg", href: "https://www.instagram.com/p/DUTUUuziIie/" },
-    ],
+    videos: [],
   },
   paga: {
     sounds: [
@@ -375,6 +367,38 @@ export const artistMedia = {
     ],
   },
 } as const;
+
+type ArtistMediaItem = {
+  title: string;
+  meta?: string;
+  cover?: string;
+  href?: string;
+  deezerId?: string;
+  previewUrl?: string;
+};
+
+export function isPlayableAudioItem(item?: ArtistMediaItem | null) {
+  if (!item) return false;
+  if (item.deezerId || item.previewUrl) return true;
+  if (!item.href) return false;
+  try {
+    const hostname = new URL(item.href).hostname.toLowerCase();
+    return (
+      hostname.includes("soundcloud.com") ||
+      hostname.includes("open.spotify.com") ||
+      hostname.includes("deezer.com") ||
+      hostname.includes("music.apple.com")
+    );
+  } catch {
+    return false;
+  }
+}
+
+export function getFeaturedAudioForArtist(artist: (typeof artists)[number]) {
+  const media = artistMedia[artist.slug as keyof typeof artistMedia];
+  const explicit = "featuredSound" in artist ? artist.featuredSound : null;
+  return [explicit, ...(media?.sounds || []), ...(media?.releases || [])].find(isPlayableAudioItem) || undefined;
+}
 
 export function getArtistDates(artistName: string) {
   return dates.filter((date) => date.artist === artistName);

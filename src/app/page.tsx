@@ -14,7 +14,7 @@ import { HomeArtistCard } from "@/components/home-artist-card";
 import { HomeMediaDiapo } from "@/components/home-media-diapo";
 import type { HomeDiapoItem } from "@/components/home-media-diapo";
 import { getAdminData } from "@/lib/admin-data";
-import { artistMedia, artists } from "@/lib/content";
+import { artists, getFeaturedAudioForArtist } from "@/lib/content";
 
 const features = [
   {
@@ -96,8 +96,7 @@ export default async function Home() {
 
         <HorizontalRail className="profile-rail-wrap">
           {artists.map((artist) => {
-            const media = artistMedia[artist.slug as keyof typeof artistMedia];
-            const release = "featuredSound" in artist ? artist.featuredSound : media.sounds[0];
+            const release = getFeaturedAudioForArtist(artist);
             return (
               <HomeArtistCard
                 key={artist.slug}

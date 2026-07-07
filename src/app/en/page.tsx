@@ -11,7 +11,7 @@ import {
 import { HorizontalRail } from "@/components/horizontal-rail";
 import { AgencyHero } from "@/components/agency-hero";
 import { HomeArtistCard } from "@/components/home-artist-card";
-import { artistMedia, artists } from "@/lib/content";
+import { artists, getFeaturedAudioForArtist } from "@/lib/content";
 
 const features = [
   { icon: Sparkles, title: "Image direction", text: "Positioning, identity, content and visual consistency.", href: "/en/contact" },
@@ -41,7 +41,7 @@ export default function EnglishHome() {
             <p className="eyebrow">SKORM DJ Contest</p>
             <h2 id="dj-contest-home-title-en">An international selection to perform on stage in Seoul.</h2>
             <p>
-              Online registrations are open until September 1, 2026. Entry fee: 29.
+              Online registrations are open until September 1, 2026. Entry fee: 29 €.
               The first 50 selected profiles will then submit a dedicated composition.
             </p>
             <div className="contest-feature-actions">
@@ -60,8 +60,7 @@ export default function EnglishHome() {
 
         <HorizontalRail className="profile-rail-wrap">
           {artists.map((artist) => {
-            const media = artistMedia[artist.slug as keyof typeof artistMedia];
-            const release = "featuredSound" in artist ? artist.featuredSound : media.sounds[0];
+            const release = getFeaturedAudioForArtist(artist);
             return (
               <HomeArtistCard
                 key={artist.slug}

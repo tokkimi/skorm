@@ -1,5 +1,5 @@
 import { HomeArtistCard } from "@/components/home-artist-card";
-import { artistMedia, artists } from "@/lib/content";
+import { artists, getFeaturedAudioForArtist } from "@/lib/content";
 
 export default function EnglishArtistsPage() {
   return (
@@ -10,17 +10,13 @@ export default function EnglishArtistsPage() {
         <p>Two universes, one standard: image, dates, content and professional follow-up.</p>
       </section>
       <section className="roster-gallery">
-        {artists.map((artist) => {
-          const media = artistMedia[artist.slug as keyof typeof artistMedia];
-          const release = "featuredSound" in artist ? artist.featuredSound : media.sounds[0];
-          return (
-            <HomeArtistCard
-              key={artist.slug}
-              artist={artist}
-              release={release}
-            />
-          );
-        })}
+        {artists.map((artist) => (
+          <HomeArtistCard
+            key={artist.slug}
+            artist={artist}
+            release={getFeaturedAudioForArtist(artist)}
+          />
+        ))}
       </section>
     </main>
   );
