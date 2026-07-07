@@ -9,9 +9,10 @@ export type HomeDiapoItem = {
   meta: string;
   type: "Photo" | "Vidéo";
   src?: string;
+  previewSrc?: string;
 };
 
-const fallbackMediaItems: HomeDiapoItem[] = [
+export const fallbackMediaItems: HomeDiapoItem[] = [
   { id: "1tKDCsoq3GAI6NrqecZ4RFXHPoiu6U5dQ", title: "CGL", meta: "Shooting District", type: "Photo" },
   { id: "1Yp58NRpkQC5-wfMYIrKpJID4zs6hK5Jd", title: "CGL", meta: "Portrait scène", type: "Photo" },
   { id: "1hjc15USH8ccmAO_UKazMDWpaJwsHdPgb", title: "CGL", meta: "Backstage", type: "Photo" },
@@ -28,6 +29,27 @@ function driveThumb(id: string) {
 
 function drivePreview(id: string) {
   return `https://drive.google.com/file/d/${id}/preview`;
+}
+
+function driveIdFromPreview(src?: string) {
+  if (!src) return null;
+  return src.match(/drive\.google\.com\/file\/d\/([^/]+)/)?.[1] || src.match(/[?&]id=([^&]+)/)?.[1] || null;
+}
+
+function mediaPreview(item: HomeDiapoItem) {
+  if (item.previewSrc) return item.previewSrc;
+  if (item.src) return item.src;
+  return item.type === "Vidéo" ? drivePreview(item.id) : driveThumb(item.id);
+}
+
+function mediaThumb(item: HomeDiapoItem) {
+  if (item.src && item.type === "Photo") return item.src;
+  if (item.src && item.type === "Vidéo") {
+    const id = driveIdFromPreview(item.src);
+    return id ? driveThumb(id) : item.src;
+  }
+  if (!item.src) return driveThumb(item.id);
+  return item.src;
 }
 
 export function HomeMediaDiapo({ items = [] }: { items?: HomeDiapoItem[] }) {
@@ -50,7 +72,7 @@ export function HomeMediaDiapo({ items = [] }: { items?: HomeDiapoItem[] }) {
             onClick={() => setSelected(item)}
             key={`${item.id}-${item.title}`}
           >
-            <img src={item.src || driveThumb(item.id)} alt={`${item.title} · ${item.meta}`} loading="lazy" />
+            <img src={mediaThumb(item)} alt={`${item.title} · ${item.meta}`} loading="lazy" />
             <span className="home-media-badge">
               {item.type === "Vidéo" ? <Play size={13} fill="currentColor" /> : <ImageIcon size={13} />}
               {item.type}
@@ -71,13 +93,13 @@ export function HomeMediaDiapo({ items = [] }: { items?: HomeDiapoItem[] }) {
           <div className="home-media-modal-frame">
             {selected.type === "Vidéo" ? (
               <iframe
-                src={selected.src || drivePreview(selected.id)}
+                src={mediaPreview(selected)}
                 title={`${selected.title} · ${selected.meta}`}
                 allow="autoplay; fullscreen"
                 allowFullScreen
               />
             ) : (
-              <img src={selected.src || driveThumb(selected.id)} alt={`${selected.title} · ${selected.meta}`} />
+              <img src={mediaPreview(selected)} alt={`${selected.title} · ${selected.meta}`} />
             )}
           </div>
           <div className="home-media-modal-caption">

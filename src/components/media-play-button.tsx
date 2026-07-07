@@ -57,6 +57,7 @@ export function MediaPlayButton({
   const [mounted, setMounted] = useState(false);
   const embedUrl = useMemo(() => getEmbedUrl(href), [href]);
   const compactEmbed = embedUrl?.includes("w.soundcloud.com") || embedUrl?.includes("open.spotify.com/embed/");
+  const isActive = playing || Boolean(open && compactEmbed);
 
   useEffect(() => {
     setMounted(true);
@@ -83,6 +84,10 @@ export function MediaPlayButton({
       }
       return;
     }
+    if (embedUrl && compactEmbed) {
+      setOpen((current) => !current);
+      return;
+    }
     if (embedUrl) setOpen(true);
     else if (href) window.open(href, "_blank", "noopener,noreferrer");
   }
@@ -93,20 +98,18 @@ export function MediaPlayButton({
         <audio ref={audio} src={previewUrl || `/api/audio-preview/${deezerId}`} onEnded={() => setPlaying(false)} />
       )}
       <button type="button" className="media-play-button" onClick={play} aria-label={`${label} ${title}`}>
-        {playing ? <Pause size={14} fill="currentColor" /> : <Play size={14} fill="currentColor" />}
-        <span>{playing ? "Pause" : label}</span>
+        {isActive ? <Pause size={14} fill="currentColor" /> : <Play size={14} fill="currentColor" />}
+        <span>{isActive ? "Pause" : label}</span>
       </button>
       {open && embedUrl && compactEmbed && (
-        <div className="media-inline-player" role="dialog" aria-label={title}>
-          <button type="button" className="media-inline-close" onClick={() => setOpen(false)} aria-label="Fermer">
-            <X size={13} />
-          </button>
-          <iframe
-            src={embedUrl}
-            title={title}
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          />
-        </div>
+        <iframe
+          className="media-hidden-player"
+          src={embedUrl}
+          title={title}
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          aria-hidden="true"
+          tabIndex={-1}
+        />
       )}
       {mounted && open && embedUrl && !compactEmbed && createPortal(
         <div className="media-modal" role="dialog" aria-modal="true" aria-label={title}>
