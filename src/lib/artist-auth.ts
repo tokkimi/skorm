@@ -22,6 +22,34 @@ function normalize(value: string) {
     .replace(/^-+|-+$/g, "");
 }
 
+function aliasesFor(slug: string, name: string) {
+  const normalizedSlug = normalize(slug);
+  const normalizedName = normalize(name);
+  const parts = normalizedName.split("-").filter(Boolean);
+  const compactName = parts.join("");
+  const initials = parts.map((part) => part[0]).join("");
+
+  const aliases = new Set([
+    normalizedSlug,
+    normalizedName,
+    compactName,
+    initials,
+    normalizedSlug.replace(/-rave-unit$/, ""),
+    normalizedSlug.replace(/-hardlab$/, ""),
+    normalizedSlug.replace(/-tutti$/, ""),
+    normalizedName.replace(/-rave-unit$/, ""),
+    normalizedName.replace(/-hardlab$/, ""),
+    normalizedName.replace(/-tutti$/, ""),
+  ]);
+
+  if (normalizedSlug === "cgl-rave-unit") aliases.add("cgl");
+  if (normalizedSlug === "nova-hardlab") aliases.add("nova");
+  if (normalizedSlug === "andrea-tutti") aliases.add("andrea");
+
+  aliases.delete("");
+  return aliases;
+}
+
 function tokenFor(slug: string) {
   const secret = process.env.ADMIN_SESSION_SECRET || process.env.ADMIN_DB_SECRET || "";
   if (!secret) return "";
@@ -45,17 +73,13 @@ export async function findArtistLogin(identifier: string): Promise<ArtistLogin |
       .select("slug,name,is_active")
       .eq("is_active", true);
     const match = data?.find((artist) => {
-      const slug = normalize(artist.slug);
-      const name = normalize(artist.name);
-      return normalized === slug || normalized === name;
+      return aliasesFor(artist.slug, artist.name).has(normalized);
     });
     if (match) return { slug: match.slug, name: match.name };
   }
 
   const fallback = publicArtists.find((artist) => {
-    const slug = normalize(artist.slug);
-    const name = normalize(artist.name);
-    return normalized === slug || normalized === name;
+    return aliasesFor(artist.slug, artist.name).has(normalized);
   });
   return fallback ? { slug: fallback.slug, name: fallback.name } : null;
 }
