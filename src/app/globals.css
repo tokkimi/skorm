@@ -10476,6 +10476,206 @@ body {
 .roster-gallery .profile-card { flex:initial !important; width:100% !important; min-width:0 !important; max-width:none !important; }
 @media (max-width:720px){.profile-rail-wrap .media-rail{padding-inline:18px !important;gap:16px !important}.profile-rail-wrap .profile-card{flex-basis:min(82vw,360px) !important;width:min(82vw,360px) !important;min-width:min(82vw,360px) !important;max-width:min(82vw,360px) !important;min-height:560px !important}.profile-rail-wrap .rail-dot-left{left:10px !important}.profile-rail-wrap .rail-dot-right{right:10px !important}}
 
+/* Final mobile admin artist pass: usable creation/editing from a phone */
+@media (max-width: 760px) {
+  .admin-artists-page {
+    padding-inline: 10px !important;
+  }
+
+  .admin-artists-page .admin-page-heading {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  .admin-artists-metrics {
+    gap: 10px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .admin-artists-metrics .metric-card,
+  .metrics-grid .metric-card {
+    min-height: auto !important;
+    padding: 18px !important;
+    border-radius: 20px !important;
+  }
+
+  .admin-artists-metrics .metric-card strong,
+  .metrics-grid .metric-card strong {
+    font-size: clamp(1.8rem, 12vw, 2.5rem) !important;
+  }
+
+  .admin-modal-backdrop {
+    align-items: start !important;
+    place-items: start center !important;
+    padding: 10px !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+  }
+
+  .admin-create-modal {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    min-height: auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 11px !important;
+    margin: 8px 0 24px !important;
+    padding: 15px !important;
+    border-radius: 22px !important;
+    overflow: visible !important;
+  }
+
+  .admin-create-modal header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 3 !important;
+    margin: -15px -15px 2px !important;
+    padding: 14px 15px !important;
+    border-bottom: 1px solid rgba(217,248,255,.1) !important;
+    border-radius: 22px 22px 0 0 !important;
+    background: rgba(18,20,26,.98) !important;
+    backdrop-filter: blur(12px) !important;
+  }
+
+  .admin-create-modal h2 {
+    font-size: 1rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .admin-create-modal label {
+    width: 100% !important;
+    gap: 7px !important;
+    font-size: .66rem !important;
+    letter-spacing: .1em !important;
+    color: rgba(234,248,255,.72) !important;
+  }
+
+  .admin-create-modal input,
+  .admin-create-modal select,
+  .admin-create-modal textarea {
+    min-height: 46px !important;
+    width: 100% !important;
+    padding: 12px 13px !important;
+    border-radius: 16px !important;
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+  }
+
+  .admin-create-modal textarea {
+    min-height: 86px !important;
+    max-height: 170px !important;
+  }
+
+  .admin-create-modal textarea[name="featured_sound"],
+  .admin-create-modal textarea[name="media_sounds"],
+  .admin-create-modal textarea[name="media_releases"],
+  .admin-create-modal textarea[name="media_videos"] {
+    min-height: 92px !important;
+    max-height: 150px !important;
+    font-family: var(--font-mono) !important;
+    font-size: 12px !important;
+    white-space: pre-wrap !important;
+  }
+
+  .admin-create-modal footer {
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 3 !important;
+    margin: 2px -15px -15px !important;
+    padding: 12px 15px 15px !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    border-top: 1px solid rgba(217,248,255,.1) !important;
+    border-radius: 0 0 22px 22px !important;
+    background: rgba(18,20,26,.98) !important;
+  }
+
+  .admin-create-modal footer span {
+    grid-column: 1 / -1 !important;
+    font-size: .72rem !important;
+  }
+
+  .admin-create-modal footer button {
+    min-height: 46px !important;
+    width: 100% !important;
+    border-radius: 16px !important;
+    font-size: .78rem !important;
+  }
+
+  .artist-admin-grid {
+    gap: 14px !important;
+  }
+
+  .artist-admin-card {
+    border-radius: 22px !important;
+  }
+
+  .artist-admin-cover {
+    min-height: 120px !important;
+    padding: 18px !important;
+  }
+
+  .artist-admin-cover > span:first-child {
+    max-width: calc(100% - 92px) !important;
+    overflow: hidden !important;
+    font-size: clamp(2.7rem, 17vw, 4.2rem) !important;
+    line-height: .86 !important;
+    letter-spacing: -.08em !important;
+    white-space: nowrap !important;
+  }
+
+  .artist-admin-card > div:nth-child(2) {
+    padding: 18px !important;
+  }
+
+  .artist-admin-card h2 {
+    font-size: clamp(1.35rem, 8vw, 2rem) !important;
+    line-height: 1 !important;
+  }
+
+  .artist-admin-card p {
+    min-height: 0 !important;
+    font-size: .88rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .artist-admin-card footer {
+    display: grid !important;
+    grid-template-columns: 72px minmax(0, 1fr) !important;
+    gap: 10px !important;
+    padding: 14px !important;
+    align-items: center !important;
+  }
+
+  .artist-admin-card footer span,
+  .artist-admin-card footer b {
+    min-width: 0 !important;
+    overflow-wrap: anywhere !important;
+    font-size: .82rem !important;
+  }
+
+  .artist-admin-card footer .admin-row-actions,
+  .artist-admin-card footer form,
+  .artist-admin-card footer > div {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+  }
+
+  .artist-admin-card footer .admin-row-actions {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .artist-admin-card footer button {
+    min-height: 44px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 16px !important;
+    font-size: .9rem !important;
+  }
+}
+
 /* Final media modal safety: videos must never render inside the horizontal rails */
 body > .media-modal {
   position: fixed !important;

@@ -7,13 +7,13 @@ export default async function AdminArtistsPage() {
   const { artists: data } = await getAdminData();
 
   return (
-    <main className="admin-main">
+    <main className="admin-main admin-artists-page">
       <AdminPageHeading
         title="Artistes"
         description="Profils, informations professionnelles, médias, tarifs et disponibilités."
         action={<AdminCreateButton kind="artist" />}
       />
-      <section className="metrics-grid three">
+      <section className="metrics-grid three admin-artists-metrics">
         <MetricCard label="Artistes actifs" value={data.length} hint="Roster SKORM" />
         <MetricCard
           label="Profils complets"
