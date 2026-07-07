@@ -1,5 +1,7 @@
 import { NextRequest } from "next/server";
 import { artistMedia, artists } from "@/lib/content";
+import { hasAdminSession } from "@/lib/admin-auth";
+import { hasArtistSession } from "@/lib/artist-auth";
 
 function pdfEscape(value: string) {
   return value.replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)");
@@ -44,6 +46,9 @@ function buildPdf(lines: string[]) {
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  const allowed = (await hasAdminSession()) || (await hasArtistSession(slug));
+  if (!allowed) return new Response("Unauthorized", { status: 401 });
+
   const artist = artists.find((item) => item.slug === slug);
   if (!artist) return new Response("Artist not found", { status: 404 });
 
