@@ -27,6 +27,7 @@ export function SiteChrome() {
     { href: withBase(base, "/rejoindre-agence"), label: isEn ? "Join the agency" : "Rejoindre l'agence" },
     { href: withBase(base, "/devenir-sponsor"), label: isEn ? "Become a sponsor" : "Devenir sponsor" },
     { href: withBase(base, "/contact"), label: "Contact" },
+    { href: "/connexion", label: isEn ? "Login" : "Connexion" },
   ];
 
   return (
@@ -41,6 +42,7 @@ export function SiteChrome() {
           <Link href={withBase(base, "/formation-ia")}>{isEn ? "Training" : "Formation"}</Link>
           <Link href={withBase(base, "/agenda")}>Agenda</Link>
           <Link className="header-contact" href={withBase(base, "/contact")}>Contact</Link>
+          <Link href="/connexion">{isEn ? "Login" : "Connexion"}</Link>
           <Link href={isEn ? "/" : "/en"}>{isEn ? "FR" : "EN"}</Link>
         </nav>
         <button
@@ -55,11 +57,7 @@ export function SiteChrome() {
         </button>
       </header>
 
-      <div
-        id="mobile-navigation"
-        className={`mobile-navigation ${menuOpen ? "open" : ""}`}
-        aria-hidden={!menuOpen}
-      >
+      <div id="mobile-navigation" className={`mobile-navigation ${menuOpen ? "open" : ""}`} aria-hidden={!menuOpen}>
         <nav aria-label={isEn ? "Mobile menu" : "Menu mobile"}>
           {mobileLinks.map((item) => (
             <Link

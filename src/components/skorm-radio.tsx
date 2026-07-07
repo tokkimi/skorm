@@ -1,6 +1,5 @@
-"use client";
+﻿"use client";
 
-import Image from "next/image";
 import { Pause, Play, Radio } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { RadioTrack } from "@/lib/radio";
@@ -14,6 +13,20 @@ function shuffleTracks(tracks: RadioTrack[]) {
   return copy;
 }
 
+function absoluteAssetUrl(src: string) {
+  if (!src) return "/skorm-logo.png";
+  if (src.startsWith("http")) return src;
+  if (typeof window === "undefined") return src;
+  return new URL(src, window.location.origin).toString();
+}
+
+function artworkType(src: string) {
+  const clean = src.split("?")[0]?.toLowerCase() || "";
+  if (clean.endsWith(".jpg") || clean.endsWith(".jpeg")) return "image/jpeg";
+  if (clean.endsWith(".webp")) return "image/webp";
+  return "image/png";
+}
+
 export function SkormRadio({ tracks }: { tracks: RadioTrack[] }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [queue, setQueue] = useState<RadioTrack[]>(() => shuffleTracks(tracks));
@@ -22,17 +35,21 @@ export function SkormRadio({ tracks }: { tracks: RadioTrack[] }) {
   const current = queue[index] || tracks[0];
 
   const artwork = useMemo(() => {
-    if (!current?.cover) return [{ src: "/skorm-logo.png", sizes: "512x512", type: "image/png" }];
+    if (!current?.cover) return [{ src: absoluteAssetUrl("/skorm-logo.png"), sizes: "512x512", type: "image/png" }];
+    const cover = absoluteAssetUrl(current.cover);
     return [
-      { src: current.cover, sizes: "512x512", type: current.cover.endsWith(".jpg") ? "image/jpeg" : "image/png" },
-      { src: "/skorm-logo.png", sizes: "512x512", type: "image/png" },
+      { src: cover, sizes: "512x512", type: artworkType(cover) },
+      { src: absoluteAssetUrl("/skorm-logo.png"), sizes: "512x512", type: "image/png" },
     ];
   }, [current?.cover]);
 
-  useEffect(() => {
-    setQueue(shuffleTracks(tracks));
-    setIndex(0);
-  }, [tracks]);
+  function nextTrack() {
+    setIndex((value) => {
+      if (value + 1 < queue.length) return value + 1;
+      setQueue(shuffleTracks(tracks));
+      return 0;
+    });
+  }
 
   useEffect(() => {
     if (!current || typeof navigator === "undefined" || !("mediaSession" in navigator)) return;
@@ -65,14 +82,6 @@ export function SkormRadio({ tracks }: { tracks: RadioTrack[] }) {
     setPlaying(true);
   }
 
-  function nextTrack() {
-    setIndex((value) => {
-      if (value + 1 < queue.length) return value + 1;
-      setQueue(shuffleTracks(tracks));
-      return 0;
-    });
-  }
-
   useEffect(() => {
     if (!playing || !audioRef.current) return;
     audioRef.current.play().catch(() => setPlaying(false));
@@ -82,12 +91,20 @@ export function SkormRadio({ tracks }: { tracks: RadioTrack[] }) {
 
   return (
     <aside className={`skorm-radio ${playing ? "is-playing" : ""}`} aria-label="Radio SKORM">
-      <audio ref={audioRef} src={current.src} preload="none" onEnded={nextTrack} onPause={() => setPlaying(false)} onPlay={() => setPlaying(true)} />
+      <audio
+        ref={audioRef}
+        src={current.src}
+        preload="none"
+        onEnded={nextTrack}
+        onError={nextTrack}
+        onPause={() => setPlaying(false)}
+        onPlay={() => setPlaying(true)}
+      />
       <button type="button" className="skorm-radio-play" onClick={toggle} aria-label={playing ? "Mettre Radio SKORM en pause" : "Lancer Radio SKORM"}>
         {playing ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}
       </button>
       <div className="skorm-radio-cover">
-        <Image src={current.cover || "/skorm-logo.png"} alt={`Miniature ${current.title}`} fill sizes="44px" />
+        <img src={current.cover || "/skorm-logo.png"} alt={`Miniature officielle ${current.title}`} onError={(event) => { event.currentTarget.src = "/skorm-logo.png"; }} />
       </div>
       <div className="skorm-radio-copy">
         <span><Radio size={12} /> Radio SKORM</span>

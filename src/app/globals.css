@@ -11034,6 +11034,38 @@ iframe.media-hidden-player {
 }
 
 .skorm-radio-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* final alignment guard — desktop cards/buttons must stay centered and readable */
+.ai-training-home,
+.ai-artist-block {
+  align-items: center !important;
+}
+
+.ai-training-home > a,
+.ai-artist-block > a,
+.home-contest-feature a,
+.home-contest-feature button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: max-content;
+  line-height: 1 !important;
+  white-space: nowrap;
+}
+
+.profile-latest-release {
+  align-items: center !important;
+}
+
+.profile-latest-release .profile-release-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 

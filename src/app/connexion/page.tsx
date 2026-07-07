@@ -12,17 +12,20 @@ export default function LoginPage() {
     event.preventDefault();
     setLoading(true);
     setError("");
+
     const payload = Object.fromEntries(new FormData(event.currentTarget).entries());
     const response = await fetch("/api/admin/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
+
     if (!response.ok) {
       setError("Identifiants incorrects.");
       setLoading(false);
       return;
     }
+
     router.push("/admin");
     router.refresh();
   }
@@ -32,10 +35,10 @@ export default function LoginPage() {
       <form onSubmit={login}>
         <div className="admin-login-logo">SKORM<span>ESPACE PRIVÉ</span></div>
         <h1>Connexion</h1>
-        <p>Calendriers, artistes, bookings et notes de l’agence.</p>
+        <p>Connexion sécurisée pour l’administration SKORM et les futurs espaces artistes.</p>
         <label>E-mail<input name="email" type="email" autoComplete="username" required /></label>
         <label>Mot de passe<input name="password" type="password" autoComplete="current-password" required /></label>
-        <button disabled={loading}>{loading ? "Connexion..." : "Accéder au back-office"}</button>
+        <button disabled={loading}>{loading ? "Connexion..." : "Accéder à l’espace"}</button>
         {error && <small>{error}</small>}
       </form>
     </main>
