@@ -9,7 +9,7 @@ export default async function AdminArtistsPage() {
     <main className="admin-main admin-artists-page">
       <AdminPageHeading
         title="Artistes"
-        description="Profils, informations professionnelles, médias, tarifs et disponibilités."
+        description="Profils, informations professionnelles, médias, tarifs, accès et disponibilités."
         action={<AdminArtistCreateButton />}
       />
       <section className="metrics-grid three admin-artists-metrics">
@@ -32,10 +32,16 @@ export default async function AdminArtistsPage() {
               <small>{artist.tagline}</small>
               <h2>{artist.name}</h2>
               <p>{artist.bio || "Bio et positionnement à compléter."}</p>
+              <p className="artist-login-hint">
+                Accès artiste : <b>{artist.slug}</b> / <b>SKORM26!</b>
+              </p>
             </div>
             <footer>
               <span>Instagram</span>
               <b>{artist.instagram_url ? "Connecté" : "À connecter"}</b>
+              <a className="admin-magic-link" href={`/api/press-kit/${artist.slug}?lang=fr`}>
+                ✦ Press kit
+              </a>
               <AdminArtistActions item={artist} />
             </footer>
           </article>

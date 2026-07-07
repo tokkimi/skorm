@@ -11069,6 +11069,227 @@ iframe.media-hidden-player {
   object-fit: cover;
 }
 
+/* Private artist portal */
+.artist-private-shell {
+  min-height: 100vh;
+  padding: 140px clamp(18px, 4vw, 72px) 120px;
+  color: #f8fbff;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(125, 211, 252, .13), transparent 34%),
+    linear-gradient(180deg, #05070a 0%, #080b10 100%);
+}
+
+.artist-private-hero,
+.artist-private-card {
+  border: 1px solid rgba(186, 230, 253, .18);
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
+  box-shadow: 0 24px 80px rgba(0,0,0,.38);
+  backdrop-filter: blur(22px);
+}
+
+.artist-private-hero {
+  max-width: 1180px;
+  margin: 0 auto 26px;
+  padding: clamp(24px, 5vw, 56px);
+}
+
+.artist-private-hero small,
+.artist-private-card > span,
+.artist-private-form header span,
+.artist-private-featured h2 {
+  color: #7dd3fc;
+  font-family: var(--font-geist-mono);
+  font-size: .75rem;
+  font-weight: 850;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.artist-private-hero h1 {
+  margin: 10px 0;
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  letter-spacing: -.08em;
+}
+
+.artist-private-hero p {
+  max-width: 720px;
+  color: rgba(255,255,255,.62);
+  font-size: clamp(.95rem, 1.5vw, 1.12rem);
+  line-height: 1.65;
+}
+
+.artist-private-hero div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.artist-private-hero a,
+.artist-private-form button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 18px;
+  border: 1px solid rgba(186, 230, 253, .24);
+  border-radius: 999px;
+  background: rgba(186, 230, 253, .1);
+  color: #e0f2fe;
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.artist-private-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 22px;
+  align-items: start;
+}
+
+.artist-private-card {
+  padding: clamp(18px, 3vw, 30px);
+}
+
+.artist-private-form header {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.artist-private-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.artist-private-fields label,
+.artist-private-image-field {
+  display: grid;
+  gap: 8px;
+  color: rgba(255,255,255,.55);
+  font-size: .78rem;
+  font-weight: 750;
+}
+
+.artist-private-fields .wide {
+  grid-column: 1 / -1;
+}
+
+.artist-private-fields input,
+.artist-private-fields textarea,
+.artist-private-image-field input:not([type="file"]) {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 16px;
+  background: rgba(255,255,255,.055);
+  color: #fff;
+  padding: 13px 14px;
+  font: inherit;
+}
+
+.artist-private-image-field div {
+  height: 150px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px;
+  background: rgba(0,0,0,.22);
+  color: rgba(255,255,255,.52);
+}
+
+.artist-private-image-field img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artist-private-image-field input[type="file"] {
+  font-size: .72rem;
+  color: rgba(255,255,255,.58);
+}
+
+.artist-private-featured {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.artist-private-featured h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+
+.artist-private-message {
+  margin: 18px 0 0;
+  color: #bae6fd;
+  font-weight: 800;
+}
+
+.artist-login-hint {
+  margin-top: 12px !important;
+  color: rgba(186, 230, 253, .72) !important;
+  font-size: .82rem !important;
+}
+
+.admin-magic-link {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border: 1px solid rgba(125, 211, 252, .28);
+  border-radius: 999px;
+  background: rgba(125, 211, 252, .08);
+  color: #e0f2fe;
+  font-size: .75rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.artist-private-side {
+  display: grid;
+  gap: 14px;
+}
+
+.artist-private-side p {
+  margin: 14px 0 0;
+  color: rgba(255,255,255,.56);
+  line-height: 1.55;
+}
+
+@media (max-width: 860px) {
+  .artist-private-shell {
+    padding: 100px 14px 110px;
+  }
+
+  .artist-private-grid,
+  .artist-private-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .artist-private-form header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .artist-private-form button {
+    width: 100%;
+  }
+}
+
 .skorm-radio-copy {
   min-width: 0;
   display: grid;
