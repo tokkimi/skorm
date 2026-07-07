@@ -24,7 +24,7 @@ export function SiteChrome() {
     { href: withBase(base, "/agenda"), label: "Agenda" },
     { href: withBase(base, "/concours-dj"), label: "DJ Contest" },
     { href: withBase(base, "/formation-ia"), label: isEn ? "AI training" : "Formation IA" },
-    { href: withBase(base, "/rejoindre-agence"), label: isEn ? "Join the agency" : "Rejoindre l’agence" },
+    { href: withBase(base, "/rejoindre-agence"), label: isEn ? "Join the agency" : "Rejoindre l'agence" },
     { href: withBase(base, "/devenir-sponsor"), label: isEn ? "Become a sponsor" : "Devenir sponsor" },
     { href: withBase(base, "/contact"), label: "Contact" },
   ];
@@ -69,12 +69,12 @@ export function SiteChrome() {
               onClick={() => setMenuOpen(false)}
             >
               <span>{item.label}</span>
-              <small>→</small>
+              <small>{isEn ? "Open" : "Ouvrir"}</small>
             </Link>
           ))}
           <Link href={isEn ? "/" : "/en"} onClick={() => setMenuOpen(false)}>
             <span>{isEn ? "Version française" : "English version"}</span>
-            <small>→</small>
+            <small>{isEn ? "Switch" : "Changer"}</small>
           </Link>
         </nav>
       </div>

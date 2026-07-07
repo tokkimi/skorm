@@ -10983,3 +10983,107 @@ iframe.media-hidden-player {
   border: 0 !important;
   overflow: hidden !important;
 }
+
+/* Radio SKORM — global compact glass player */
+.skorm-radio {
+  position: fixed;
+  z-index: 1200;
+  right: clamp(14px, 2vw, 28px);
+  bottom: calc(96px + env(safe-area-inset-bottom));
+  width: min(360px, calc(100vw - 28px));
+  min-height: 70px;
+  display: grid;
+  grid-template-columns: 44px 48px minmax(0, 1fr);
+  align-items: center;
+  gap: 11px;
+  padding: 11px 13px;
+  color: rgba(242, 250, 255, .96);
+  border: 1px solid rgba(137, 215, 255, .26);
+  border-radius: 23px;
+  background:
+    linear-gradient(135deg, rgba(205, 238, 255, .14), rgba(255, 255, 255, .045)),
+    rgba(11, 14, 21, .78);
+  box-shadow: 0 22px 70px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.13);
+  backdrop-filter: blur(22px) saturate(132%);
+}
+
+.skorm-radio.is-playing {
+  border-color: rgba(123, 214, 255, .56);
+  box-shadow: 0 22px 78px rgba(72, 190, 255, .16), 0 22px 70px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.17);
+}
+
+.skorm-radio-play {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: #e8fbff;
+  border: 1px solid rgba(137, 215, 255, .34);
+  border-radius: 16px;
+  background: rgba(85, 174, 222, .18);
+}
+
+.skorm-radio-cover {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 14px;
+  background: rgba(255,255,255,.06);
+}
+
+.skorm-radio-cover img {
+  object-fit: cover;
+}
+
+.skorm-radio-copy {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.skorm-radio-copy span,
+.skorm-radio-copy small {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(190, 226, 245, .72);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.skorm-radio-copy strong {
+  overflow: hidden;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.08;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .skorm-radio {
+    right: 10px;
+    left: 10px;
+    bottom: calc(94px + env(safe-area-inset-bottom));
+    width: auto;
+    grid-template-columns: 42px 44px minmax(0, 1fr);
+    min-height: 64px;
+    padding: 10px;
+    border-radius: 20px;
+  }
+
+  .skorm-radio-play {
+    width: 42px;
+    height: 42px;
+    border-radius: 15px;
+  }
+
+  .skorm-radio-cover {
+    width: 44px;
+    height: 44px;
+  }
+}
