@@ -10475,3 +10475,50 @@ body {
 .profile-card-andrea-tutti .home-profile-photo img { object-position:center center !important; }
 .roster-gallery .profile-card { flex:initial !important; width:100% !important; min-width:0 !important; max-width:none !important; }
 @media (max-width:720px){.profile-rail-wrap .media-rail{padding-inline:18px !important;gap:16px !important}.profile-rail-wrap .profile-card{flex-basis:min(82vw,360px) !important;width:min(82vw,360px) !important;min-width:min(82vw,360px) !important;max-width:min(82vw,360px) !important;min-height:560px !important}.profile-rail-wrap .rail-dot-left{left:10px !important}.profile-rail-wrap .rail-dot-right{right:10px !important}}
+
+/* Final media modal safety: videos must never render inside the horizontal rails */
+body > .media-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 99999 !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: clamp(14px, 3vw, 34px) !important;
+  background: rgba(0, 0, 0, .88) !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+body > .media-modal .media-modal-frame {
+  width: min(1120px, 94vw) !important;
+  max-height: 86vh !important;
+  aspect-ratio: 16 / 9 !important;
+  border: 1px solid rgba(142, 220, 255, .28) !important;
+  border-radius: 24px !important;
+  overflow: hidden !important;
+  background: #05070b !important;
+  box-shadow: 0 34px 120px rgba(0, 0, 0, .7), 0 0 50px rgba(114, 210, 255, .12) !important;
+}
+
+body > .media-modal iframe {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #05070b !important;
+}
+
+body > .media-modal .media-modal-close {
+  position: fixed !important;
+  top: clamp(14px, 3vw, 28px) !important;
+  right: clamp(14px, 3vw, 28px) !important;
+  z-index: 100000 !important;
+}
+
+@media (max-width: 720px) {
+  body > .media-modal .media-modal-frame {
+    width: 96vw !important;
+    max-height: 72vh !important;
+    border-radius: 18px !important;
+  }
+}

@@ -40,6 +40,13 @@ function MediaRail({
   variant: "sound" | "spotify" | "video";
   items: readonly MediaItem[];
 }) {
+  const publicItems = items.filter((item) => {
+    const value = `${item.title} ${item.meta} ${item.href || ""}`.toLowerCase();
+    return !value.includes("press kit") && !value.includes("presskit") && !value.includes("bannière officielle");
+  });
+
+  if (!publicItems.length) return null;
+
   return (
     <section className="paga-rail-section">
       <div className="artist-section-heading">
@@ -47,7 +54,7 @@ function MediaRail({
         <h2>{title}</h2>
       </div>
       <HorizontalRail className="artist-mini-rail">
-        {items.map((item, index) => (
+        {publicItems.map((item, index) => (
           <article className={`artist-mini-card ${variant}`} key={`${title}-${item.title}`}>
             <div className={`artist-mini-thumb thumb-${index % 3}`}>
               <Image src={item.cover || image} alt={`Miniature officielle ${item.title}`} fill sizes="260px" />

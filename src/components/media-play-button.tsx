@@ -1,7 +1,8 @@
 "use client";
 
 import { Pause, Play, X } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 function getEmbedUrl(href?: string) {
   if (!href) return null;
@@ -53,8 +54,22 @@ export function MediaPlayButton({
   const audio = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const embedUrl = useMemo(() => getEmbedUrl(href), [href]);
   const compactEmbed = embedUrl?.includes("w.soundcloud.com") || embedUrl?.includes("open.spotify.com/embed/");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!open || compactEmbed) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open, compactEmbed]);
 
   async function play() {
     if (deezerId || previewUrl) {
@@ -93,19 +108,21 @@ export function MediaPlayButton({
           />
         </div>
       )}
-      {open && embedUrl && !compactEmbed && (
+      {mounted && open && embedUrl && !compactEmbed && createPortal(
         <div className="media-modal" role="dialog" aria-modal="true" aria-label={title}>
           <button type="button" className="media-modal-close" onClick={() => setOpen(false)} aria-label="Fermer">
             <X size={18} />
           </button>
-          <iframe
-            src={embedUrl}
-            className={compactEmbed ? "media-modal-compact-frame" : undefined}
-            title={title}
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-            allowFullScreen
-          />
-        </div>
+          <div className="media-modal-frame">
+            <iframe
+              src={embedUrl}
+              title={title}
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </div>,
+        document.body
       )}
     </>
   );
