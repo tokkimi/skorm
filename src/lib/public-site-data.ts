@@ -12,8 +12,13 @@ export type PublicMediaItem = {
   meta?: string;
   cover?: string;
   href?: string;
+  audioUrl?: string;
+  fullAudioUrl?: string;
+  src?: string;
   deezerId?: string;
   previewUrl?: string;
+  durationSec?: number;
+  duration?: number;
 };
 
 export type PublicArtist = {
@@ -55,8 +60,13 @@ function mediaItemFromUnknown(value: unknown): PublicMediaItem | null {
     meta: typeof value.meta === "string" ? value.meta : undefined,
     cover: typeof value.cover === "string" ? value.cover : undefined,
     href: typeof value.href === "string" ? value.href : undefined,
+    audioUrl: typeof value.audioUrl === "string" ? value.audioUrl : undefined,
+    fullAudioUrl: typeof value.fullAudioUrl === "string" ? value.fullAudioUrl : undefined,
+    src: typeof value.src === "string" ? value.src : undefined,
     deezerId: typeof value.deezerId === "string" ? value.deezerId : undefined,
     previewUrl: typeof value.previewUrl === "string" ? value.previewUrl : undefined,
+    durationSec: typeof value.durationSec === "number" ? value.durationSec : undefined,
+    duration: typeof value.duration === "number" ? value.duration : undefined,
   };
 }
 

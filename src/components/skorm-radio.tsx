@@ -1,17 +1,8 @@
-﻿"use client";
+"use client";
 
 import { Pause, Play, Radio } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
-import type { RadioTrack } from "@/lib/radio";
-
-function shuffleTracks(tracks: RadioTrack[]) {
-  const copy = [...tracks];
-  for (let index = copy.length - 1; index > 0; index -= 1) {
-    const random = Math.floor(Math.random() * (index + 1));
-    [copy[index], copy[random]] = [copy[random], copy[index]];
-  }
-  return copy;
-}
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { RadioSchedule, RadioTrack } from "@/lib/radio";
 
 function absoluteAssetUrl(src: string) {
   if (!src) return "/skorm-logo.png";
@@ -27,12 +18,28 @@ function artworkType(src: string) {
   return "image/png";
 }
 
+function fallbackSchedule(tracks: RadioTrack[]): RadioSchedule | null {
+  const track = tracks[0];
+  if (!track) return null;
+  return {
+    serverTime: Date.now(),
+    epoch: Date.now(),
+    totalDurationSec: tracks.reduce((sum, item) => sum + item.durationSec, 0) || track.durationSec,
+    index: 0,
+    offsetSec: 0,
+    nextInSec: track.durationSec,
+    track,
+    tracks,
+  };
+}
+
 export function SkormRadio({ tracks }: { tracks: RadioTrack[] }) {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [queue, setQueue] = useState<RadioTrack[]>(() => shuffleTracks(tracks));
-  const [index, setIndex] = useState(0);
+  const pendingOffsetRef = useRef(0);
+  const [schedule, setSchedule] = useState<RadioSchedule | null>(() => fallbackSchedule(tracks));
   const [playing, setPlaying] = useState(false);
-  const current = queue[index] || tracks[0];
+  const [loading, setLoading] = useState(false);
+  const current = schedule?.track || tracks[0];
 
   const artwork = useMemo(() => {
     if (!current?.cover) return [{ src: absoluteAssetUrl("/skorm-logo.png"), sizes: "512x512", type: "image/png" }];
@@ -43,16 +50,67 @@ export function SkormRadio({ tracks }: { tracks: RadioTrack[] }) {
     ];
   }, [current?.cover]);
 
-  function nextTrack() {
-    setIndex((value) => {
-      if (value + 1 < queue.length) return value + 1;
-      setQueue(shuffleTracks(tracks));
-      return 0;
-    });
-  }
+  const loadLiveSchedule = useCallback(async () => {
+    const response = await fetch("/api/radio", { cache: "no-store" });
+    if (!response.ok) throw new Error("Radio unavailable");
+    const nextSchedule = (await response.json()) as RadioSchedule;
+    pendingOffsetRef.current = nextSchedule.offsetSec || 0;
+    setSchedule(nextSchedule);
+    return nextSchedule;
+  }, []);
+
+  const syncAudioToSchedule = useCallback((nextSchedule: RadioSchedule) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    pendingOffsetRef.current = nextSchedule.offsetSec || 0;
+    const liveSrc = absoluteAssetUrl(nextSchedule.track.src);
+    if (audio.src !== liveSrc) {
+      audio.src = nextSchedule.track.src;
+      audio.load();
+      return;
+    }
+
+    const offset = pendingOffsetRef.current;
+    const canSeek = Number.isFinite(audio.duration) && audio.duration > offset + 1;
+    if (canSeek && Math.abs(audio.currentTime - offset) > 2) {
+      audio.currentTime = offset;
+    }
+  }, []);
+
+  const startLiveRadio = useCallback(async () => {
+    if (!audioRef.current || loading) return;
+    setLoading(true);
+    try {
+      const nextSchedule = await loadLiveSchedule();
+      syncAudioToSchedule(nextSchedule);
+      await audioRef.current.play();
+      setPlaying(true);
+    } catch {
+      const fallback = fallbackSchedule(tracks);
+      if (fallback) {
+        setSchedule(fallback);
+        await audioRef.current.play();
+        setPlaying(true);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [loadLiveSchedule, loading, syncAudioToSchedule, tracks]);
+
+  const jumpToLiveTrack = useCallback(async () => {
+    try {
+      const nextSchedule = await loadLiveSchedule();
+      syncAudioToSchedule(nextSchedule);
+      if (playing) await audioRef.current?.play();
+    } catch {
+      // Keep the current sound alive if the live endpoint is briefly unavailable.
+    }
+  }, [loadLiveSchedule, playing, syncAudioToSchedule]);
 
   useEffect(() => {
     if (!current || typeof navigator === "undefined" || !("mediaSession" in navigator)) return;
+
     navigator.mediaSession.metadata = new MediaMetadata({
       title: current.title,
       artist: `Radio SKORM · ${current.artist}`,
@@ -60,16 +118,23 @@ export function SkormRadio({ tracks }: { tracks: RadioTrack[] }) {
       artwork,
     });
     navigator.mediaSession.setActionHandler("play", () => {
-      audioRef.current?.play();
-      setPlaying(true);
+      void startLiveRadio();
     });
     navigator.mediaSession.setActionHandler("pause", () => {
       audioRef.current?.pause();
       setPlaying(false);
     });
-    navigator.mediaSession.setActionHandler("nexttrack", nextTrack);
-    navigator.mediaSession.setActionHandler("previoustrack", nextTrack);
-  }, [current, artwork]);
+    navigator.mediaSession.setActionHandler("nexttrack", jumpToLiveTrack);
+    navigator.mediaSession.setActionHandler("previoustrack", jumpToLiveTrack);
+  }, [artwork, current, jumpToLiveTrack, startLiveRadio]);
+
+  useEffect(() => {
+    if (!playing) return;
+    const interval = window.setInterval(() => {
+      void jumpToLiveTrack();
+    }, 60_000);
+    return () => window.clearInterval(interval);
+  }, [jumpToLiveTrack, playing]);
 
   async function toggle() {
     if (!audioRef.current || !current) return;
@@ -78,14 +143,8 @@ export function SkormRadio({ tracks }: { tracks: RadioTrack[] }) {
       setPlaying(false);
       return;
     }
-    await audioRef.current.play();
-    setPlaying(true);
+    await startLiveRadio();
   }
-
-  useEffect(() => {
-    if (!playing || !audioRef.current) return;
-    audioRef.current.play().catch(() => setPlaying(false));
-  }, [index, queue, playing]);
 
   if (!current) return null;
 
@@ -95,8 +154,15 @@ export function SkormRadio({ tracks }: { tracks: RadioTrack[] }) {
         ref={audioRef}
         src={current.src}
         preload="none"
-        onEnded={nextTrack}
-        onError={nextTrack}
+        onEnded={jumpToLiveTrack}
+        onError={jumpToLiveTrack}
+        onLoadedMetadata={() => {
+          const audio = audioRef.current;
+          const offset = pendingOffsetRef.current;
+          if (!audio || !Number.isFinite(audio.duration) || audio.duration <= offset + 1) return;
+          if (Math.abs(audio.currentTime - offset) > 2) audio.currentTime = offset;
+          if (playing) audio.play().catch(() => setPlaying(false));
+        }}
         onPause={() => setPlaying(false)}
         onPlay={() => setPlaying(true)}
       />
