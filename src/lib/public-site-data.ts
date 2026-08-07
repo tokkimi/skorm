@@ -221,7 +221,7 @@ function canonicalArtistKey(artist: { slug?: string | null; name?: string | null
   if (compactKey.includes("cgl") || compactKey.includes("cagoule")) return "cgl";
   if (compactKey.includes("nova")) return "nova";
   if (compactKey.includes("enkor")) return "enkor";
-  if (key === "vs-techno" || key === "vs" || key.endsWith("-vs")) return "vs-techno";
+  // « vs » et « vs-techno » sont deux profils DISTINCTS (on ne les fusionne plus).
   if (key.includes("impact")) return "impact-dj-raw";
   if (key.includes("dante")) return "dante-techno";
   if (key.includes("vielusos")) return "vielusos";
@@ -356,12 +356,10 @@ export function publicArtistsFromAdmin(data: AdminData): PublicArtist[] {
     };
   });
 
-  const adminKeys = new Set(adminArtists.map(canonicalArtistKey));
-  const missingFallbackArtists = fallbackArtists
-    .filter((artist) => !adminKeys.has(canonicalArtistKey(artist)))
-    .map(fallbackArtistToPublic);
-
-  return uniqueArtists([...adminArtists, ...missingFallbackArtists]);
+  // Le roster public reflète exactement l'admin : on ne ré-ajoute plus les
+  // artistes statiques manquants, sinon un artiste supprimé dans l'admin
+  // réapparaîtrait ici (bug « impossible à supprimer »).
+  return uniqueArtists(adminArtists);
 }
 
 export function publicDatesFromAdmin(data: AdminData): PublicDate[] {

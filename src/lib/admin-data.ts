@@ -68,6 +68,11 @@ export async function syncPublicArtistsToAdmin() {
     if (artist.slug) existingSlugs.add(artist.slug);
   });
 
+  // Le roster est désormais géré depuis l'admin : dès qu'au moins un artiste
+  // existe en base, on ne ré-injecte plus jamais la liste statique. Sinon un
+  // artiste supprimé (ou renommé) réapparaîtrait au rechargement suivant.
+  if (existingSlugs.size > 0) return;
+
   await Promise.all(publicArtists.filter((artist) => !existingSlugs.has(artist.slug)).map(async (artist, index) => {
     const media = artistMedia[artist.slug as keyof typeof artistMedia];
     const featuredSound = "featuredSound" in artist ? artist.featuredSound : media?.sounds?.[0] || null;
