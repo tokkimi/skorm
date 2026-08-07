@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
 import { HorizontalRail } from "@/components/horizontal-rail";
@@ -13,8 +12,7 @@ export function AgencyHero({ lang = "fr", dates = [] }: { lang?: Lang; dates?: P
   const base = isEn ? "/en" : "";
 
   return (
-    <section className="agency-paga-hero agency-centered-hero">
-      <Image src="/skorm-hero-banner.png" alt="" fill priority sizes="100vw" className="agency-paga-hero-image" />
+    <section className="agency-paga-hero agency-centered-hero agency-hero-clean">
       <div className="agency-paga-overlay" />
 
       <div className="agency-paga-shell">

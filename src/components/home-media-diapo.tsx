@@ -75,7 +75,7 @@ function instagramHandle(item?: HomeDiapoItem) {
   } catch { return item.instagram.startsWith("@") ? item.instagram : `@${item.instagram}`; }
 }
 
-const categories = ["Photo", "Vidéo", "Story", "Music"] as const;
+const categories = ["Photo", "Vidéo", "Music"] as const;
 function InstagramGlyph() { return <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>; }
 
 export function HomeMediaDiapo({ items = [], stories = [] }: { items?: HomeDiapoItem[]; stories?: HomeDiapoItem[] }) {
@@ -87,7 +87,13 @@ export function HomeMediaDiapo({ items = [], stories = [] }: { items?: HomeDiapo
   const railRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const storyVideoRef = useRef<HTMLVideoElement>(null);
-  const allItems = useMemo(() => unique([...items, ...stories, ...fallbackMediaItems]), [items, stories]);
+  const allItems = useMemo(() => {
+    // L'admin reprend la main : les médias statiques de secours ne servent
+    // que si aucun média n'a été ajouté depuis l'admin (sinon on ne pourrait
+    // jamais supprimer les photos de démonstration comme « VS TECHNO »).
+    const provided = unique([...items, ...stories]);
+    return provided.length ? provided : unique([...fallbackMediaItems]);
+  }, [items, stories]);
   const visible = useMemo(() => allItems.filter((item) => mediaCategory(item) === category), [allItems, category]);
   const active = awake ? visible[Math.min(activeIndex, Math.max(0, visible.length - 1))] : undefined;
   const activeCategory = active ? mediaCategory(active) : category;
@@ -138,7 +144,7 @@ export function HomeMediaDiapo({ items = [], stories = [] }: { items?: HomeDiapo
       <div className="skorm-tv-console">
         <nav className="skorm-tv-categories" aria-label="Catégories médias">
           <img src="/skorm-header-logo.png" alt="SKORM" />
-          {categories.map((item) => <button key={item} className={category === item ? "active" : ""} onClick={() => choose(item)}>{item === "Story" ? "Stories" : item === "Music" ? "Musique" : `${item}s`}</button>)}
+          {categories.map((item) => <button key={item} className={category === item ? "active" : ""} onClick={() => choose(item)}>{item === "Music" ? "Musique" : `${item}s`}</button>)}
         </nav>
 
         <div className="skorm-tv-center">
@@ -173,7 +179,7 @@ export function HomeMediaDiapo({ items = [], stories = [] }: { items?: HomeDiapo
       <div className="skorm-tv-preview-shell">
         <button className="skorm-tv-blue-dot" onClick={() => move(-1)} aria-label="Précédent" />
         <div className="skorm-tv-previews" ref={railRef}>
-          {visible.map((item, index) => <button key={item.id} className={awake && index === activeIndex ? "active" : ""} onClick={() => { setActiveIndex(index); setAwake(true); setPlaying(category === "Story" && !item.storyChannel && isStoryVideo(item)); }}><img src={thumb(item)} alt="" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = item.previewSrc || "/skorm-header-logo.png"; }}/><span><strong>{item.artist || item.title}</strong><small>{item.storyChannel ? "Aucune story en ligne" : item.meta}</small></span></button>)}
+          {visible.map((item, index) => <button key={item.id} className={awake && index === activeIndex ? "active" : ""} onClick={() => { setActiveIndex(index); setAwake(true); setPlaying(false); }}><img src={thumb(item)} alt="" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = item.previewSrc || "/skorm-header-logo.png"; }}/><span><strong>{item.artist || item.title}</strong><small>{item.storyChannel ? "Aucune story en ligne" : item.meta}</small></span></button>)}
         </div>
         <button className="skorm-tv-blue-dot" onClick={() => move(1)} aria-label="Suivant" />
       </div>

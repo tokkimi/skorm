@@ -16437,3 +16437,68 @@ iframe.media-hidden-player,
   .skorm-tv-remote-pad button:nth-child(3){border-radius:50% !important;background:rgba(23,152,224,.22) !important;box-shadow:0 0 16px rgba(33,181,255,.25) !important}
 }
 @media(max-width:520px){.skorm-tv-remote{top:230px !important;right:7px !important;width:104px !important;height:104px !important;min-height:104px !important}.skorm-tv-remote-pad{inset:4px !important;left:4px !important;top:4px !important;width:96px !important;height:96px !important;padding:5px !important;grid-template-columns:repeat(3,28px) !important;grid-template-rows:repeat(3,28px) !important}.skorm-tv-remote-pad button,.skorm-tv-remote-pad button:first-child,.skorm-tv-remote-pad button:last-child{width:28px !important;height:28px !important}}
+
+/* ============================================================
+   MAJ SKORM — hero épuré, grille artistes compacte, upload multiple
+   ============================================================ */
+
+/* Hero : fond noir épuré (sans photo de couverture) */
+.agency-paga-hero.agency-hero-clean {
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(30, 90, 140, 0.18), transparent 55%),
+    radial-gradient(90% 60% at 50% 100%, rgba(10, 30, 50, 0.35), transparent 60%),
+    #04070b !important;
+}
+.agency-paga-hero.agency-hero-clean .agency-paga-overlay {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(120, 190, 255, 0.10), transparent 45%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.55) 70%, #04070b 100%) !important;
+}
+
+/* Aperçu artistes plus compact sur le web (on en voit plus) */
+@media (min-width: 721px) {
+  .profile-rail-wrap .media-rail > .profile-card.skorm-artist-card {
+    flex: 0 0 clamp(200px, 15.5vw, 236px) !important;
+    width: clamp(200px, 15.5vw, 236px) !important;
+    min-width: clamp(200px, 15.5vw, 236px) !important;
+    height: clamp(288px, 22vw, 330px) !important;
+    min-height: 288px !important;
+    max-height: 330px !important;
+  }
+  .roster-gallery {
+    width: min(1180px, calc(100% - 40px)) !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+  .roster-gallery .profile-card.skorm-artist-card {
+    height: clamp(300px, 23vw, 350px) !important;
+    min-height: 300px !important;
+    max-height: 350px !important;
+  }
+}
+@media (min-width: 1180px) {
+  .roster-gallery {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Galerie admin : zone d'upload multiple (glisser-déposer) */
+.admin-diapo-bulk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  padding: 26px 20px;
+  border: 2px dashed rgba(87, 197, 255, 0.4);
+  border-radius: 18px;
+  background: rgba(6, 14, 22, 0.5);
+  color: #dff2ff;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.admin-diapo-bulk.is-dragging {
+  border-color: rgba(87, 197, 255, 0.9);
+  background: rgba(12, 32, 48, 0.7);
+}
+.admin-diapo-bulk strong { font-size: 1.02rem; }
+.admin-diapo-bulk p { margin: 0; font-size: 0.82rem; color: #9bcce6; }

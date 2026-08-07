@@ -189,7 +189,6 @@ function AdminDiapoForm({
             >
               <option value="photo">Photo</option>
               <option value="video">Vidéo</option>
-              <option value="story">Story Instagram</option>
             </select>
           </label>
           {draft.asset_url ? (
@@ -225,6 +224,68 @@ function AdminDiapoForm({
         <button type="submit">{mode === "create" ? "Ajouter au diapo" : "Sauvegarder"}</button>
       </footer>
     </form>
+  );
+}
+
+function AdminDiapoBulkUpload() {
+  const router = useRouter();
+  const [message, setMessage] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [dragging, setDragging] = useState(false);
+
+  async function handleFiles(fileList: FileList | null) {
+    const files = Array.from(fileList || []).filter((file) => file.type.startsWith("image/") || file.type.startsWith("video/"));
+    if (!files.length) return;
+    setBusy(true);
+    let done = 0;
+    let failed = 0;
+    for (const file of files) {
+      setMessage(`Envoi ${done + failed + 1}/${files.length}…`);
+      try {
+        const assetUrl = await fileToDataUrl(file);
+        const isVideo = file.type.startsWith("video/");
+        const payload = {
+          title: file.name.replace(/\.[^.]+$/, "") || "Média",
+          artist_name: null,
+          caption: JSON.stringify({ location: "", description: "", duration: "", thumbnail: "" }),
+          publish_at: null,
+          asset_url: assetUrl,
+          content_type: isVideo ? "video" : "photo",
+          platform: "diapo",
+          status: "published",
+        };
+        const response = await fetch("/api/admin/create", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ kind: "content", payload }),
+        });
+        if (response.ok) done += 1;
+        else failed += 1;
+      } catch {
+        failed += 1;
+      }
+    }
+    setBusy(false);
+    setMessage(`${done} média(s) ajouté(s)${failed ? `, ${failed} échec(s)` : ""}.`);
+    router.refresh();
+  }
+
+  return (
+    <div
+      className={`admin-diapo-bulk${dragging ? " is-dragging" : ""}`}
+      onDragOver={(event) => { event.preventDefault(); setDragging(true); }}
+      onDragLeave={() => setDragging(false)}
+      onDrop={(event) => { event.preventDefault(); setDragging(false); void handleFiles(event.dataTransfer.files); }}
+    >
+      <ImagePlus size={20} />
+      <strong>Ajouter plusieurs médias d’un coup</strong>
+      <p>Glisse-dépose tes photos / vidéos ici, ou sélectionne-les toutes en une fois.</p>
+      <label className="admin-upload-pill">
+        {busy ? "Envoi en cours…" : "Choisir plusieurs fichiers"}
+        <input type="file" accept="image/*,video/*" multiple disabled={busy} onChange={(event) => void handleFiles(event.currentTarget.files)} />
+      </label>
+      {message && <span className="admin-inline-message">{message}</span>}
+    </div>
   );
 }
 
@@ -270,6 +331,7 @@ function DiapoActions({ item }: { item: DiapoItem }) {
 export function AdminDiapoMediaClient({ items }: { items: DiapoItem[] }) {
   return (
     <div className="admin-diapo-layout">
+      <AdminDiapoBulkUpload />
       <AdminDiapoForm mode="create" />
 
       <section className="admin-diapo-list">

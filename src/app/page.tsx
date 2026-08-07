@@ -40,15 +40,6 @@ const features = [
   },
 ];
 
-function instagramStoryUrl(value: string) {
-  try {
-    const url = new URL(value.startsWith("http") ? value : `https://instagram.com/${value.replace(/^@/, "")}`);
-    const parts = url.pathname.split("/").filter(Boolean);
-    const username = parts[0] === "stories" ? parts[1] : parts[0];
-    return username ? `https://www.instagram.com/stories/${username}/` : "";
-  } catch { return ""; }
-}
-
 export default async function Home() {
   const { adminData, artists, dates } = await getPublicSiteData();
   const diapoItems: HomeDiapoItem[] = adminData.content_items
@@ -94,11 +85,6 @@ export default async function Home() {
       .map((item, index) => ({ id: `music-${artist.slug}-${index}`, title: item.title, meta: item.meta || artist.name, type: "Music", src: item.cover || artist.homeImage || artist.heroImage, thumbSrc: item.cover || artist.homeImage || artist.heroImage, previewSrc: artist.homeImage || artist.heroImage, artist: artist.name, audioSrc: item.audioUrl || item.fullAudioUrl || item.src || item.previewUrl || (item.deezerId ? `/api/audio-preview/${item.deezerId}` : undefined) })),
   );
 
-  const storyChannels: HomeDiapoItem[] = artists
-    .map((artist) => ({ artist, storyUrl: instagramStoryUrl(artist.instagram || "") }))
-    .filter(({ storyUrl }) => Boolean(storyUrl))
-    .map(({ artist, storyUrl }) => ({ id: `story-channel-${artist.slug}`, title: `Stories ${artist.name}`, meta: "Compte Instagram du roster", type: "Story", src: artist.homeImage || artist.heroImage, thumbSrc: artist.homeImage || artist.heroImage, artist: artist.name, instagram: storyUrl, storyChannel: true }));
-
   return (
     <main className="home agency-home">
       <AgencyHero dates={dates} />
@@ -120,7 +106,7 @@ export default async function Home() {
         </HorizontalRail>
       </section>
 
-      <HomeMediaDiapo items={[...diapoItems, ...artistDiapoItems, ...musicItems]} stories={storyChannels} />
+      <HomeMediaDiapo items={[...diapoItems, ...artistDiapoItems, ...musicItems]} />
 
       <section className="home-services dot-section" id="services">
         <div className="dot-feature-panel">
