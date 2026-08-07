@@ -14,7 +14,7 @@ export function AgencyHero({ lang = "fr", dates = [] }: { lang?: Lang; dates?: P
 
   return (
     <section className="agency-paga-hero agency-centered-hero">
-      <Image src="/agency/agency-dj-hero.png" alt="" fill priority sizes="100vw" className="agency-paga-hero-image" />
+      <Image src="/skorm-hero-banner.png" alt="" fill priority sizes="100vw" className="agency-paga-hero-image" />
       <div className="agency-paga-overlay" />
 
       <div className="agency-paga-shell">
@@ -55,9 +55,9 @@ export function AgencyHero({ lang = "fr", dates = [] }: { lang?: Lang; dates?: P
               <Link href={`${base}/agenda`} className="agency-active-date">
                 <div>
                   <time><b>--</b>TBA</time>
-                  <span>À venir</span>
+                  <span>{isEn ? "Soon" : "À venir"}</span>
                 </div>
-                <strong>Dates en préparation</strong>
+                <strong>{isEn ? "Dates in preparation" : "Dates en préparation"}</strong>
                 <small><MapPin size={12} /> SKORM · roster</small>
               </Link>
             )}

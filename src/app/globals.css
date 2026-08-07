@@ -7,6 +7,1732 @@
   --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
 }
 
+/* Final header and roster sizing pass — compact, readable and consistent. */
+.floating-header .brand.brand-logo {
+  width: 88px !important;
+  min-width: 88px !important;
+  max-width: 88px !important;
+  height: 56px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.floating-header .brand.brand-logo img {
+  display: block !important;
+  width: 68px !important;
+  height: 48px !important;
+  max-width: none !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+.profile-rail-wrap .media-rail > .profile-card.skorm-artist-card {
+  flex: 0 0 clamp(235px, 20vw, 285px) !important;
+  width: clamp(235px, 20vw, 285px) !important;
+  min-width: clamp(235px, 20vw, 285px) !important;
+  height: clamp(340px, 29vw, 400px) !important;
+  min-height: 340px !important;
+  max-height: 400px !important;
+}
+
+.roster-gallery {
+  width: min(1120px, calc(100% - 40px)) !important;
+  margin-inline: auto !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+}
+
+.roster-gallery .profile-card.skorm-artist-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: clamp(360px, 32vw, 430px) !important;
+  min-height: 360px !important;
+  max-height: 430px !important;
+}
+
+.profile-card.skorm-artist-card .profile-card-name {
+  max-width: 84% !important;
+  font-size: clamp(1.05rem, 1.65vw, 1.55rem) !important;
+  line-height: 0.96 !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-controls {
+  right: 10px !important;
+  bottom: 10px !important;
+  left: 10px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 40px !important;
+  grid-template-rows: 40px 40px !important;
+  grid-template-areas: "audio instagram" "audio plus" !important;
+  gap: 6px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio {
+  grid-area: audio !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 86px !important;
+  min-height: 86px !important;
+  padding: 8px !important;
+  grid-template-columns: 48px minmax(0, 1fr) 38px !important;
+  gap: 8px !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-release-cover {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio > div {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio span,
+.profile-card.skorm-artist-card .skorm-artist-audio strong,
+.profile-card.skorm-artist-card .skorm-artist-audio em {
+  display: block !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio span { font-size: 0.52rem !important; }
+.profile-card.skorm-artist-card .skorm-artist-audio strong { font-size: 0.82rem !important; line-height: 1.1 !important; }
+.profile-card.skorm-artist-card .skorm-artist-audio em { font-size: 0.62rem !important; }
+
+.profile-card.skorm-artist-card .skorm-artist-audio .media-play-button,
+.profile-card.skorm-artist-card .skorm-artist-socials a,
+.profile-card.skorm-artist-card .skorm-artist-more {
+  width: 40px !important;
+  min-width: 40px !important;
+  height: 40px !important;
+  min-height: 40px !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-socials {
+  grid-area: instagram !important;
+  display: block !important;
+  width: 40px !important;
+  height: 40px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-more {
+  grid-area: plus !important;
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+@media (max-width: 720px) {
+  .floating-header .brand.brand-logo {
+    width: 72px !important;
+    min-width: 72px !important;
+    max-width: 72px !important;
+    height: 50px !important;
+  }
+
+  .floating-header .brand.brand-logo img {
+    width: 56px !important;
+    height: 42px !important;
+  }
+
+  .profile-rail-wrap .media-rail > .profile-card.skorm-artist-card {
+    flex: 0 0 min(76vw, 305px) !important;
+    width: min(76vw, 305px) !important;
+    min-width: min(76vw, 305px) !important;
+    height: min(104vw, 410px) !important;
+    min-height: 370px !important;
+    max-height: 410px !important;
+  }
+
+  .roster-gallery {
+    width: calc(100% - 24px) !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .roster-gallery .profile-card.skorm-artist-card {
+    height: min(112vw, 430px) !important;
+    min-height: 380px !important;
+    max-height: 430px !important;
+  }
+
+  .profile-card.skorm-artist-card .profile-card-name {
+    font-size: clamp(1rem, 5.2vw, 1.35rem) !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-controls {
+    display: grid !important;
+    right: 8px !important;
+    bottom: 8px !important;
+    left: 8px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}
+
+/* === SKORM FINAL UI LOCK — 2026-07-18 === */
+.floating-header {
+  display: grid !important;
+  grid-template-columns: 64px minmax(0, 1fr) 48px !important;
+  align-items: center !important;
+  width: min(1180px, calc(100vw - 28px)) !important;
+  min-height: 62px !important;
+  padding: 8px 12px !important;
+  gap: 10px !important;
+  overflow: visible !important;
+}
+
+.floating-header .brand-logo,
+.floating-header .brand {
+  width: 54px !important;
+  min-width: 54px !important;
+  max-width: 54px !important;
+  height: 44px !important;
+  flex: 0 0 54px !important;
+}
+
+.floating-header .brand-logo img,
+.floating-header .brand img {
+  width: 50px !important;
+  max-width: 50px !important;
+  height: 40px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+.floating-header > nav {
+  justify-self: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+}
+
+.floating-header > nav a {
+  font-size: 0.72rem !important;
+  padding: 9px 11px !important;
+  border-radius: 12px !important;
+}
+
+.floating-header .mobile-menu {
+  grid-column: 3 !important;
+  justify-self: end !important;
+  margin-left: 0 !important;
+  width: 44px !important;
+  min-width: 44px !important;
+  height: 44px !important;
+  flex: 0 0 44px !important;
+  border-radius: 12px !important;
+}
+
+.agency-paga-hero {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  background: #030507 !important;
+}
+
+.agency-paga-hero::before,
+.agency-paga-hero::after {
+  display: none !important;
+}
+
+.agency-paga-hero-image {
+  opacity: 1 !important;
+  filter: brightness(1.04) contrast(1.08) !important;
+  object-fit: cover !important;
+}
+
+.profile-rail-wrap .media-rail > .profile-card.skorm-artist-card {
+  flex: 0 0 clamp(280px, 23vw, 350px) !important;
+  width: clamp(280px, 23vw, 350px) !important;
+  min-width: clamp(280px, 23vw, 350px) !important;
+}
+
+.profile-card.skorm-artist-card,
+.roster-gallery .profile-card.skorm-artist-card {
+  aspect-ratio: auto !important;
+  min-height: 0 !important;
+  height: clamp(430px, 38vw, 520px) !important;
+  max-height: 520px !important;
+  border-radius: 22px !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-copy h3 {
+  font-size: clamp(1.55rem, 2vw, 2.35rem) !important;
+  line-height: 0.92 !important;
+  max-width: 90% !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-controls,
+.profile-card.skorm-artist-card:hover .skorm-artist-controls,
+.profile-card.skorm-artist-card:focus-within .skorm-artist-controls {
+  position: absolute !important;
+  left: 12px !important;
+  right: 12px !important;
+  bottom: 12px !important;
+  width: auto !important;
+  margin: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 48px !important;
+  grid-template-rows: 48px 48px !important;
+  grid-template-areas: "audio instagram" "audio plus" !important;
+  gap: 8px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: none !important;
+  z-index: 6 !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio {
+  grid-area: audio !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 104px !important;
+  grid-template-columns: 58px minmax(0, 1fr) 46px !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-release-cover {
+  width: 58px !important;
+  height: 58px !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio > div {
+  min-width: 0 !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio span {
+  font-size: 0.5rem !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio strong {
+  font-size: 0.82rem !important;
+  line-height: 1.1 !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio em {
+  font-size: 0.6rem !important;
+  line-height: 1.1 !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-socials {
+  grid-area: instagram !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-more {
+  grid-area: plus !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-socials,
+.profile-card.skorm-artist-card .skorm-artist-more {
+  width: 48px !important;
+  min-width: 48px !important;
+  height: 48px !important;
+}
+
+.site-footer .footer-newsletter.footer-newsletter-compact {
+  width: min(760px, calc(100% - 32px)) !important;
+  min-height: 0 !important;
+  margin: 14px auto 10px !important;
+  padding: 8px 0 !important;
+  display: grid !important;
+  grid-template-columns: auto minmax(280px, 520px) !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  text-align: left !important;
+}
+
+.footer-newsletter.footer-newsletter-compact .eyebrow {
+  margin: 0 !important;
+  font-size: 0.62rem !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.footer-newsletter.footer-newsletter-compact form {
+  width: 100% !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  gap: 4px !important;
+  padding: 4px !important;
+  margin: 0 !important;
+  border: 1px solid rgba(185, 222, 242, 0.2) !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+}
+
+.footer-newsletter.footer-newsletter-compact input {
+  height: 30px !important;
+  min-height: 30px !important;
+  padding: 0 10px !important;
+  font-size: 0.75rem !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.footer-newsletter.footer-newsletter-compact button {
+  height: 30px !important;
+  min-height: 30px !important;
+  padding: 0 12px !important;
+  font-size: 0.58rem !important;
+  border-radius: 8px !important;
+}
+
+.footer-newsletter.footer-newsletter-compact .footer-mail {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .floating-header {
+    grid-template-columns: 58px minmax(0, 1fr) 44px !important;
+    width: calc(100vw - 18px) !important;
+    min-height: 60px !important;
+    padding: 8px 10px !important;
+  }
+
+  .floating-header > nav {
+    display: none !important;
+  }
+
+  .floating-header .brand-logo,
+  .floating-header .brand {
+    width: 50px !important;
+    min-width: 50px !important;
+    max-width: 50px !important;
+    height: 42px !important;
+  }
+
+  .floating-header .brand-logo img,
+  .floating-header .brand img {
+    width: 46px !important;
+    max-width: 46px !important;
+    height: 38px !important;
+  }
+
+  .floating-header .mobile-menu {
+    grid-column: 3 !important;
+    justify-self: end !important;
+    margin: 0 !important;
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    flex-basis: 44px !important;
+    border-radius: 12px !important;
+  }
+
+  .mobile-navigation {
+    position: fixed !important;
+    top: 76px !important;
+    right: 10px !important;
+    left: auto !important;
+    width: min(330px, calc(100vw - 20px)) !important;
+    transform: translateY(-8px) scale(0.98) !important;
+    transform-origin: top right !important;
+    padding: 10px !important;
+    border-radius: 18px !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .mobile-navigation.open {
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .mobile-navigation nav {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 4px !important;
+  }
+
+  .mobile-navigation nav a {
+    border-radius: 10px !important;
+    padding: 12px 14px !important;
+    min-height: 44px !important;
+  }
+
+  .mobile-navigation nav a small {
+    display: none !important;
+  }
+
+  .agency-paga-hero-image {
+    filter: brightness(1.12) contrast(1.06) !important;
+  }
+
+  .profile-rail-wrap .media-rail > .profile-card.skorm-artist-card {
+    flex: 0 0 min(82vw, 330px) !important;
+    width: min(82vw, 330px) !important;
+    min-width: min(82vw, 330px) !important;
+  }
+
+  .profile-card.skorm-artist-card,
+  .roster-gallery .profile-card.skorm-artist-card {
+    height: min(118vw, 470px) !important;
+    max-height: 470px !important;
+    min-height: 420px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-copy h3 {
+    font-size: clamp(1.45rem, 8vw, 2.05rem) !important;
+    line-height: 0.94 !important;
+    max-width: 90% !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-controls {
+    left: 9px !important;
+    right: 9px !important;
+    bottom: 9px !important;
+    grid-template-columns: minmax(0, 1fr) 42px !important;
+    grid-template-rows: 42px 42px !important;
+    gap: 6px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio {
+    height: 90px !important;
+    grid-template-columns: 46px minmax(0, 1fr) 40px !important;
+    padding: 8px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-release-cover {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-socials,
+  .profile-card.skorm-artist-card .skorm-artist-more {
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 42px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio strong {
+    font-size: 0.72rem !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio em {
+    font-size: 0.52rem !important;
+  }
+
+  .site-footer .footer-newsletter.footer-newsletter-compact {
+    width: calc(100% - 24px) !important;
+    margin: 10px auto 8px !important;
+    padding: 4px 0 !important;
+    grid-template-columns: 1fr !important;
+    gap: 7px !important;
+    text-align: center !important;
+  }
+
+  .footer-newsletter.footer-newsletter-compact .eyebrow {
+    text-align: center !important;
+  }
+
+  .footer-newsletter.footer-newsletter-compact form {
+    height: 40px !important;
+    min-height: 40px !important;
+  }
+}
+
+/* === SKORM FINAL HOTFIX — header mobile, banner, roster controls, footer newsletter === */
+.agency-paga-hero {
+  position: relative !important;
+  min-height: clamp(560px, 72vh, 850px) !important;
+  overflow: hidden !important;
+  background: #030507 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+.agency-paga-hero::before,
+.agency-paga-hero::after {
+  display: none !important;
+}
+
+.agency-paga-hero-image {
+  object-fit: cover !important;
+  object-position: center !important;
+  opacity: 1 !important;
+  filter: brightness(1.14) contrast(1.1) saturate(.92) !important;
+  mix-blend-mode: normal !important;
+}
+
+.agency-paga-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  background: radial-gradient(circle at 50% 38%, rgba(170,220,255,.10), transparent 34%),
+              linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.16) 56%, #05070a 100%) !important;
+}
+
+.agency-paga-shell {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.agency-hero-logo {
+  width: clamp(190px, 23vw, 360px) !important;
+  max-width: 82vw !important;
+  height: auto !important;
+}
+
+.floating-header {
+  display: grid !important;
+  grid-template-columns: minmax(170px, 240px) minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 18px !important;
+}
+
+.floating-header .brand-logo,
+.floating-header .brand,
+.brand-logo {
+  width: clamp(170px, 13vw, 245px) !important;
+  min-width: clamp(170px, 13vw, 245px) !important;
+  max-width: 245px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.floating-header .brand-logo img,
+.floating-header .brand img,
+.brand-logo img,
+.site-logo img,
+.header-logo img {
+  width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+.floating-header nav {
+  justify-self: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+.floating-header nav a {
+  font-size: .76rem !important;
+  padding: 10px 14px !important;
+}
+
+.mobile-navigation {
+  left: auto !important;
+  right: 18px !important;
+  transform: none !important;
+  width: min(340px, calc(100vw - 28px)) !important;
+}
+
+.footer-newsletter,
+.footer-newsletter.footer-newsletter-compact {
+  width: min(840px, calc(100% - 32px)) !important;
+  min-height: 0 !important;
+  margin: 18px auto 12px !important;
+  padding: 12px 16px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 390px) !important;
+  gap: 10px 16px !important;
+  align-items: center !important;
+  text-align: left !important;
+  border-radius: 20px !important;
+  background: rgba(18,20,25,.58) !important;
+}
+
+.footer-newsletter .eyebrow {
+  font-size: .5rem !important;
+  line-height: 1 !important;
+  margin: 0 0 3px !important;
+  letter-spacing: .24em !important;
+}
+
+.footer-newsletter h2 {
+  font-size: .92rem !important;
+  line-height: 1.05 !important;
+  margin: 0 !important;
+  letter-spacing: -.03em !important;
+}
+
+.footer-newsletter p:not(.eyebrow) {
+  font-size: .58rem !important;
+  line-height: 1.25 !important;
+  margin: 2px 0 0 !important;
+  max-width: 31rem !important;
+}
+
+.footer-newsletter form {
+  height: 38px !important;
+  margin: 0 !important;
+  display: flex !important;
+  gap: 6px !important;
+}
+
+.footer-newsletter input,
+.footer-newsletter button {
+  height: 38px !important;
+  min-height: 38px !important;
+  font-size: .58rem !important;
+  border-radius: 13px !important;
+}
+
+.footer-newsletter input {
+  padding: 0 12px !important;
+}
+
+.footer-newsletter button {
+  padding: 0 14px !important;
+  white-space: nowrap !important;
+}
+
+.footer-newsletter .footer-mail {
+  display: none !important;
+}
+
+.profile-card.skorm-artist-card {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  min-height: clamp(350px, 34vw, 500px) !important;
+  aspect-ratio: 4 / 5 !important;
+  border-radius: 24px !important;
+}
+
+.profile-card.skorm-artist-card .home-profile-photo {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+}
+
+.profile-card.skorm-artist-card .home-profile-photo img,
+.profile-card.skorm-artist-card .fill-native-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding: clamp(14px, 1.5vw, 22px) !important;
+  background: linear-gradient(180deg, rgba(2,4,8,.06), rgba(2,4,8,.12) 42%, rgba(2,4,8,.70)) !important;
+  border: 0 !important;
+  pointer-events: none !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-copy {
+  width: min(76%, 320px) !important;
+  pointer-events: none !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-copy .eyebrow {
+  font-size: clamp(.45rem, .58vw, .58rem) !important;
+  letter-spacing: .2em !important;
+  line-height: 1.15 !important;
+  max-width: 14rem !important;
+  color: #80d9ff !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-copy h3 {
+  font-size: clamp(1.4rem, 2vw, 2.15rem) !important;
+  line-height: .95 !important;
+  letter-spacing: -.055em !important;
+  max-width: 10ch !important;
+  text-wrap: balance !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-controls {
+  position: relative !important;
+  z-index: 4 !important;
+  width: min(94%, 480px) !important;
+  margin: auto auto 0 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 48px !important;
+  grid-template-rows: 48px 48px !important;
+  grid-template-areas: "audio instagram" "audio plus" !important;
+  gap: 8px !important;
+  align-items: stretch !important;
+  pointer-events: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio {
+  grid-area: audio !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 104px !important;
+  min-height: 104px !important;
+  display: grid !important;
+  grid-template-columns: 58px minmax(0, 1fr) 46px !important;
+  align-items: center !important;
+  gap: 9px !important;
+  padding: 8px !important;
+  border-radius: 20px !important;
+  background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.07)) !important;
+  border: 1px solid rgba(220,245,255,.27) !important;
+  box-shadow: 0 16px 42px rgba(0,0,0,.36), inset 0 1px 0 rgba(255,255,255,.16) !important;
+  backdrop-filter: blur(18px) saturate(1.18) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.18) !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-release-cover {
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-release-cover img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio > div {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio span:not(.profile-release-cover),
+.profile-card.skorm-artist-card .skorm-artist-audio strong,
+.profile-card.skorm-artist-card .skorm-artist-audio em {
+  display: block !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio span:not(.profile-release-cover) {
+  font-size: .34rem !important;
+  line-height: 1 !important;
+  letter-spacing: .11em !important;
+  color: rgba(234,248,255,.6) !important;
+  text-transform: uppercase !important;
+  margin: 0 0 5px !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio strong {
+  font-size: .72rem !important;
+  line-height: 1.05 !important;
+  letter-spacing: -.03em !important;
+  color: #fff !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio em {
+  font-size: .52rem !important;
+  line-height: 1.1 !important;
+  margin-top: 4px !important;
+  color: rgba(255,255,255,.68) !important;
+  font-style: normal !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio button,
+.profile-card.skorm-artist-card .skorm-artist-audio .media-play-button {
+  width: 46px !important;
+  min-width: 46px !important;
+  height: 46px !important;
+  border-radius: 15px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio button span,
+.profile-card.skorm-artist-card .skorm-artist-audio .media-play-button span {
+  display: none !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-socials {
+  grid-area: instagram !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-more {
+  grid-area: plus !important;
+  text-decoration: none !important;
+  font-size: 1.45rem !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-socials a,
+.profile-card.skorm-artist-card .skorm-artist-more {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  border-radius: 15px !important;
+  background: rgba(34,37,43,.66) !important;
+  border: 1px solid rgba(220,245,255,.24) !important;
+  color: #eaf8ff !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.14) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-socials a span {
+  display: none !important;
+}
+
+.profile-card.skorm-artist-card .instagram-glyph {
+  width: 21px !important;
+  height: 21px !important;
+  stroke: #eaf8ff !important;
+  fill: none !important;
+  display: block !important;
+}
+
+@media (max-width: 760px) {
+  .floating-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+  }
+
+  .floating-header .brand-logo,
+  .floating-header .brand,
+  .brand-logo {
+    width: 178px !important;
+    min-width: 178px !important;
+    max-width: 62vw !important;
+  }
+
+  .floating-header .brand-logo img,
+  .floating-header .brand img,
+  .brand-logo img,
+  .site-logo img,
+  .header-logo img {
+    width: 178px !important;
+    max-width: 62vw !important;
+    height: auto !important;
+  }
+
+  .floating-header button[aria-controls="mobile-navigation"],
+  .menu-toggle,
+  .hamburger-button,
+  .mobile-menu {
+    margin-left: auto !important;
+    width: 52px !important;
+    min-width: 52px !important;
+    height: 52px !important;
+    border-radius: 16px !important;
+  }
+
+  .mobile-navigation {
+    left: auto !important;
+    right: 12px !important;
+    top: calc(100% + 10px) !important;
+    transform: none !important;
+    width: min(318px, calc(100vw - 24px)) !important;
+  }
+
+  .agency-paga-hero {
+    min-height: 650px !important;
+  }
+
+  .agency-paga-hero-image {
+    object-position: center !important;
+    filter: brightness(1.22) contrast(1.12) saturate(.9) !important;
+  }
+
+  .agency-hero-logo {
+    width: min(74vw, 275px) !important;
+  }
+
+  .profile-card.skorm-artist-card {
+    min-height: min(116vw, 560px) !important;
+    aspect-ratio: 4 / 5 !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-overlay {
+    padding: 14px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-copy h3 {
+    font-size: clamp(1.28rem, 5.3vw, 1.9rem) !important;
+    max-width: 9ch !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-copy .eyebrow {
+    font-size: .42rem !important;
+    letter-spacing: .17em !important;
+    max-width: 13rem !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-controls {
+    width: calc(100% - 8px) !important;
+    grid-template-columns: minmax(0, 1fr) 44px !important;
+    grid-template-rows: 44px 44px !important;
+    gap: 7px !important;
+    margin-left: 0 !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio {
+    height: 96px !important;
+    min-height: 96px !important;
+    grid-template-columns: 50px minmax(0, 1fr) 42px !important;
+    gap: 7px !important;
+    padding: 7px !important;
+    border-radius: 18px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-release-cover {
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    border-radius: 12px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio strong {
+    font-size: .6rem !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio em {
+    font-size: .46rem !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio span:not(.profile-release-cover) {
+    font-size: .28rem !important;
+    letter-spacing: .08em !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio button,
+  .profile-card.skorm-artist-card .skorm-artist-audio .media-play-button,
+  .profile-card.skorm-artist-card .skorm-artist-socials a,
+  .profile-card.skorm-artist-card .skorm-artist-more {
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    border-radius: 13px !important;
+  }
+
+  .footer-newsletter,
+  .footer-newsletter.footer-newsletter-compact {
+    width: calc(100% - 24px) !important;
+    grid-template-columns: 1fr !important;
+    margin: 16px auto 10px !important;
+    padding: 12px !important;
+    text-align: left !important;
+  }
+
+  .footer-newsletter h2 {
+    font-size: .86rem !important;
+  }
+
+  .footer-newsletter p:not(.eyebrow) {
+    font-size: .58rem !important;
+  }
+
+  .footer-newsletter form {
+    width: 100% !important;
+    height: 38px !important;
+  }
+
+  .footer-newsletter input,
+  .footer-newsletter button {
+    height: 38px !important;
+    min-height: 38px !important;
+  }
+}
+
+/* === SKORM emergency visual lock — banner, mobile header, readable artist cards === */
+.agency-paga-hero,
+.agency-centered-hero {
+  border: 0 !important;
+  box-shadow: none !important;
+  background: #020407 !important;
+  overflow: hidden !important;
+}
+
+.agency-paga-hero::before,
+.agency-paga-hero::after,
+.agency-centered-hero::before,
+.agency-centered-hero::after {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.agency-paga-shell,
+.agency-centered-hero .agency-paga-shell {
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.agency-paga-hero-image {
+  opacity: .92 !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  transform: scale(1.01) !important;
+  filter: brightness(1.12) contrast(1.14) saturate(.95) drop-shadow(0 0 68px rgba(185, 225, 255, .18)) !important;
+}
+
+.agency-paga-overlay {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(180, 220, 255, .08), transparent 40%),
+    linear-gradient(90deg, #020407 0%, rgba(2, 4, 7, .34) 20%, rgba(2, 4, 7, .06) 50%, rgba(2, 4, 7, .36) 80%, #020407 100%),
+    linear-gradient(180deg, rgba(2, 4, 7, .30), rgba(2, 4, 7, .12) 42%, #05070a 100%) !important;
+}
+
+.profile-card.skorm-artist-card {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  min-height: clamp(390px, 41vw, 590px) !important;
+}
+
+.profile-card.skorm-artist-card .home-profile-photo {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+}
+
+.profile-card.skorm-artist-card .home-profile-photo img,
+.profile-card.skorm-artist-card .fill-native-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding: clamp(16px, 2vw, 26px) !important;
+  border: 0 !important;
+  background: linear-gradient(180deg, rgba(2, 4, 8, .08) 0%, rgba(2, 4, 8, .13) 42%, rgba(2, 4, 8, .72) 100%) !important;
+  pointer-events: none !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-copy {
+  width: min(78%, 360px) !important;
+  pointer-events: none !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-copy .eyebrow {
+  font-size: clamp(.5rem, .68vw, .64rem) !important;
+  letter-spacing: .24em !important;
+  line-height: 1.22 !important;
+  max-width: 17rem !important;
+  color: #80d9ff !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-copy h3 {
+  font-size: clamp(1.62rem, 2.65vw, 2.82rem) !important;
+  line-height: .94 !important;
+  letter-spacing: -.06em !important;
+  max-width: 10ch !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  text-wrap: balance !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-controls {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  z-index: 4 !important;
+  width: min(96%, 520px) !important;
+  margin: auto auto 0 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 50px !important;
+  grid-template-rows: 50px 50px !important;
+  grid-template-areas: "audio instagram" "audio plus" !important;
+  gap: 9px !important;
+  align-items: stretch !important;
+  pointer-events: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio {
+  grid-area: audio !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 109px !important;
+  min-height: 109px !important;
+  display: grid !important;
+  grid-template-columns: 64px minmax(0, 1fr) 50px !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px !important;
+  border-radius: 21px !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .18), rgba(255, 255, 255, .07)) !important;
+  border: 1px solid rgba(220, 245, 255, .28) !important;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, .38), inset 0 1px 0 rgba(255, 255, 255, .18) !important;
+  backdrop-filter: blur(18px) saturate(1.18) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.18) !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-release-cover {
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  border-radius: 15px !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio > div {
+  min-width: 0 !important;
+  display: block !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio span:not(.profile-release-cover) {
+  display: block !important;
+  margin: 0 0 5px !important;
+  color: rgba(234, 248, 255, .68) !important;
+  font-size: .42rem !important;
+  line-height: 1 !important;
+  letter-spacing: .16em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio strong,
+.profile-card.skorm-artist-card .skorm-artist-audio em {
+  display: block !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio strong {
+  font-size: clamp(.76rem, .95vw, .92rem) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.03em !important;
+  color: white !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio em {
+  margin-top: 5px !important;
+  font-size: .58rem !important;
+  line-height: 1.1 !important;
+  color: rgba(255, 255, 255, .68) !important;
+  font-style: normal !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio .media-play-button,
+.profile-card.skorm-artist-card .skorm-artist-audio button {
+  width: 50px !important;
+  min-width: 50px !important;
+  height: 50px !important;
+  border-radius: 16px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio .media-play-button span,
+.profile-card.skorm-artist-card .skorm-artist-audio button span {
+  display: none !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-socials {
+  grid-area: instagram !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-more {
+  grid-area: plus !important;
+  text-decoration: none !important;
+  font-size: 1.55rem !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-socials a,
+.profile-card.skorm-artist-card .skorm-artist-more {
+  position: relative !important;
+  inset: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px !important;
+  border-radius: 16px !important;
+  background: rgba(34, 37, 43, .66) !important;
+  border: 1px solid rgba(220, 245, 255, .24) !important;
+  color: #eaf8ff !important;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .34), inset 0 1px 0 rgba(255, 255, 255, .14) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.profile-card.skorm-artist-card .instagram-glyph {
+  width: 22px !important;
+  height: 22px !important;
+  stroke: #eaf8ff !important;
+  fill: none !important;
+  display: block !important;
+}
+
+.footer-newsletter {
+  width: min(860px, calc(100% - 32px)) !important;
+  min-height: 0 !important;
+  padding: 14px 18px !important;
+  margin: 28px auto 18px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 420px) !important;
+  gap: 12px 18px !important;
+  align-items: center !important;
+  border-radius: 24px !important;
+}
+
+.footer-newsletter .eyebrow {
+  font-size: .55rem !important;
+  margin: 0 0 4px !important;
+}
+
+.footer-newsletter h2 {
+  font-size: 1rem !important;
+  line-height: 1.1 !important;
+  margin: 0 !important;
+}
+
+.footer-newsletter p:not(.eyebrow) {
+  font-size: .66rem !important;
+  line-height: 1.35 !important;
+  margin: 3px 0 0 !important;
+}
+
+.footer-newsletter form {
+  margin: 0 !important;
+  height: 42px !important;
+}
+
+.footer-newsletter input,
+.footer-newsletter button {
+  height: 42px !important;
+  font-size: .66rem !important;
+}
+
+.footer-newsletter .footer-mail {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .floating-header .brand-logo img,
+  .floating-header .site-logo img,
+  .site-logo img,
+  .brand-logo img {
+    width: 138px !important;
+    max-width: 138px !important;
+    height: auto !important;
+  }
+
+  .mobile-menu {
+    margin-left: auto !important;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 16px !important;
+    place-self: center end !important;
+  }
+
+  .mobile-navigation {
+    left: auto !important;
+    right: 12px !important;
+    transform: none !important;
+    width: min(320px, calc(100vw - 24px)) !important;
+  }
+
+  .profile-card.skorm-artist-card {
+    min-height: min(112vw, 580px) !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-overlay {
+    padding: 16px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-copy h3 {
+    font-size: clamp(1.72rem, 7.8vw, 2.82rem) !important;
+    max-width: 8.5ch !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-copy .eyebrow {
+    font-size: .48rem !important;
+    letter-spacing: .20em !important;
+    max-width: 15rem !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-controls {
+    width: calc(100% - 20px) !important;
+    grid-template-columns: minmax(0, 1fr) 46px !important;
+    grid-template-rows: 46px 46px !important;
+    gap: 8px !important;
+    margin-left: 0 !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio {
+    height: 100px !important;
+    min-height: 100px !important;
+    grid-template-columns: 54px minmax(0, 1fr) 44px !important;
+    gap: 8px !important;
+    padding: 8px !important;
+    border-radius: 19px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-release-cover {
+    width: 54px !important;
+    height: 54px !important;
+    min-width: 54px !important;
+    border-radius: 13px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio strong {
+    font-size: .72rem !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio em {
+    font-size: .54rem !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio span:not(.profile-release-cover) {
+    font-size: .36rem !important;
+    letter-spacing: .12em !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio .media-play-button,
+  .profile-card.skorm-artist-card .skorm-artist-audio button,
+  .profile-card.skorm-artist-card .skorm-artist-socials a,
+  .profile-card.skorm-artist-card .skorm-artist-more {
+    width: 46px !important;
+    min-width: 46px !important;
+    height: 46px !important;
+    border-radius: 14px !important;
+  }
+
+  .agency-paga-hero-image {
+    opacity: .98 !important;
+    transform: scale(1.10) !important;
+    object-position: center !important;
+    filter: brightness(1.08) contrast(1.1) saturate(.96) !important;
+  }
+
+  .footer-newsletter {
+    width: calc(100% - 24px) !important;
+    grid-template-columns: 1fr !important;
+    padding: 13px !important;
+    text-align: left !important;
+  }
+
+  .footer-newsletter form {
+    width: 100% !important;
+  }
+}
+
+/* SKORM production fixes — hero, mobile menu, artist cards, compact footer */
+.agency-paga-hero {
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 680px !important;
+  background: #020306 !important;
+}
+
+.agency-paga-hero-image {
+  object-fit: contain !important;
+  object-position: center 42% !important;
+  opacity: 0.16 !important;
+  filter:
+    grayscale(1)
+    brightness(0.55)
+    contrast(1.35)
+    drop-shadow(0 0 55px rgba(130, 215, 255, 0.25))
+    drop-shadow(0 28px 80px rgba(0, 0, 0, 0.95)) !important;
+  transform: scale(0.92) !important;
+}
+
+.agency-paga-overlay {
+  background:
+    radial-gradient(circle at 50% 35%, rgba(120, 195, 255, 0.14), transparent 34%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.94)) !important;
+}
+
+.agency-paga-shell {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.profile-card {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.profile-bottom-strip {
+  position: absolute !important;
+  left: clamp(14px, 2vw, 28px) !important;
+  right: clamp(14px, 2vw, 28px) !important;
+  bottom: clamp(14px, 2vw, 28px) !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 56px 56px !important;
+  gap: 10px !important;
+  align-items: end !important;
+  z-index: 20 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.profile-latest-release {
+  min-width: 0 !important;
+  max-width: none !important;
+  height: 72px !important;
+  margin: 0 !important;
+  display: grid !important;
+  grid-template-columns: 58px minmax(0, 1fr) 54px !important;
+  align-items: center !important;
+  gap: 10px !important;
+  overflow: hidden !important;
+}
+
+.profile-release-cover,
+.profile-release-cover img {
+  width: 58px !important;
+  height: 58px !important;
+  border-radius: 14px !important;
+  object-fit: cover !important;
+}
+
+.profile-latest-release strong,
+.profile-latest-release em,
+.profile-latest-release span {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.profile-socials {
+  display: grid !important;
+  place-items: center !important;
+  position: static !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  margin: 0 !important;
+  z-index: 21 !important;
+}
+
+.profile-socials a,
+.profile-card-button {
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px !important;
+  border-radius: 16px !important;
+  display: grid !important;
+  place-items: center !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.profile-socials a span {
+  display: none !important;
+}
+
+.instagram-glyph {
+  width: 22px !important;
+  height: 22px !important;
+  display: block !important;
+  fill: none !important;
+  stroke: #e9f8ff !important;
+  stroke-width: 1.8 !important;
+}
+
+.profile-card-cgl-rave-unit .home-profile-photo img,
+.profile-card-cgl-rave-unit .home-profile-photo .fill-native-image,
+.profile-card-cgl .home-profile-photo img {
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+.profile-card-cgl-rave-unit .profile-main-copy h3,
+.profile-card-cgl .profile-main-copy h3 {
+  font-size: clamp(3rem, 7.2vw, 7rem) !important;
+  line-height: 0.84 !important;
+  max-width: 85% !important;
+}
+
+.footer-newsletter,
+.footer-newsletter-compact {
+  max-width: 520px !important;
+  margin: 18px auto !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: grid !important;
+  gap: 8px !important;
+  place-items: center !important;
+}
+
+.footer-newsletter h2,
+.footer-newsletter p:not(.eyebrow) {
+  display: none !important;
+}
+
+.footer-newsletter .eyebrow {
+  display: block !important;
+  margin: 0 !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.22em !important;
+  color: #7ed8ff !important;
+}
+
+.footer-newsletter form {
+  width: min(430px, 100%) !important;
+  padding: 5px !important;
+  border-radius: 14px !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+}
+
+.footer-newsletter input,
+.footer-newsletter button {
+  min-height: 36px !important;
+  height: 36px !important;
+  font-size: 0.72rem !important;
+  border-radius: 11px !important;
+}
+
+.footer-newsletter .footer-mail {
+  margin-top: 0 !important;
+  font-size: 0.78rem !important;
+}
+
+@media (max-width: 850px) {
+  .floating-header {
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    align-items: center !important;
+  }
+
+  .floating-header .brand-logo {
+    justify-self: start !important;
+  }
+
+  .floating-header .mobile-menu {
+    justify-self: end !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  #mobile-navigation.mobile-navigation,
+  .mobile-navigation {
+    position: fixed !important;
+    top: 78px !important;
+    left: auto !important;
+    right: 10px !important;
+    width: min(320px, calc(100vw - 20px)) !important;
+    margin: 0 !important;
+    transform: translateY(-8px) !important;
+    transform-origin: top right !important;
+  }
+
+  #mobile-navigation.mobile-navigation.open,
+  .mobile-navigation.open {
+    transform: translateY(0) !important;
+  }
+
+  .profile-card {
+    min-height: 70vh !important;
+  }
+
+  .profile-bottom-strip {
+    left: 14px !important;
+    right: 14px !important;
+    bottom: 18px !important;
+    grid-template-columns: minmax(0, 1fr) 52px 52px !important;
+    gap: 8px !important;
+  }
+
+  .profile-latest-release {
+    height: 68px !important;
+    grid-template-columns: 50px minmax(0, 1fr) 48px !important;
+    border-radius: 18px !important;
+    padding: 8px !important;
+  }
+
+  .profile-release-cover,
+  .profile-release-cover img {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .profile-socials a,
+  .profile-card-button {
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px !important;
+    border-radius: 15px !important;
+  }
+
+  .profile-main-copy h3 {
+    font-size: clamp(2.2rem, 11vw, 4.4rem) !important;
+    line-height: 0.88 !important;
+  }
+}
+
 .task-page-list article {
   grid-template-columns: 28px minmax(0, 1fr) 120px auto auto auto !important;
 }
@@ -44,6 +1770,144 @@
 
   .task-page-list .admin-row-actions {
     justify-content: flex-start;
+  }
+}
+
+/* Home media diapo: keep the horizontal gallery usable on desktop and mobile */
+.home-media-diapo {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.home-media-shell {
+  position: relative !important;
+  width: min(1180px, calc(100% - 28px)) !important;
+  margin: 0 auto !important;
+}
+
+.home-media-rail {
+  display: flex !important;
+  gap: clamp(12px, 2vw, 22px) !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-snap-type: x mandatory !important;
+  scroll-behavior: smooth !important;
+  scrollbar-width: none !important;
+  padding: 4px 12px 18px !important;
+}
+
+.home-media-rail::-webkit-scrollbar {
+  display: none !important;
+}
+
+.home-media-card {
+  flex: 0 0 min(360px, 78vw) !important;
+  scroll-snap-align: center !important;
+}
+
+.home-media-nav {
+  position: absolute !important;
+  z-index: 5 !important;
+  top: 45% !important;
+  transform: translateY(-50%) !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(125, 215, 255, .48) !important;
+  background: rgba(123, 215, 255, .14) !important;
+  color: #e8f8ff !important;
+  box-shadow: 0 0 20px rgba(123, 215, 255, .25) !important;
+  display: grid !important;
+  place-items: center !important;
+  cursor: pointer !important;
+  font-size: 1.45rem !important;
+  line-height: 1 !important;
+}
+
+.home-media-nav-left {
+  left: 2px !important;
+}
+
+.home-media-nav-right {
+  right: 2px !important;
+}
+
+.home-media-dots {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  margin: 8px auto 0 !important;
+  padding-bottom: 4px !important;
+}
+
+.home-media-dot {
+  width: 9px !important;
+  height: 9px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: #7bd7ff !important;
+  opacity: .38 !important;
+  box-shadow: 0 0 16px rgba(123, 215, 255, .8) !important;
+  cursor: pointer !important;
+  transition: opacity .2s ease, transform .2s ease !important;
+}
+
+.home-media-dot.is-active {
+  opacity: 1 !important;
+  transform: scale(1.35) !important;
+}
+
+/* Footer newsletter compact version */
+.footer-newsletter,
+.newsletter-card,
+.newsletter-section .glass-panel {
+  max-width: min(780px, calc(100% - 32px)) !important;
+  min-height: 0 !important;
+  margin: clamp(18px, 3vw, 34px) auto !important;
+  padding: clamp(16px, 2.4vw, 26px) !important;
+  border-radius: 26px !important;
+}
+
+.footer-newsletter h2,
+.newsletter-card h2,
+.newsletter-section h2 {
+  font-size: clamp(1.25rem, 2vw, 1.75rem) !important;
+  line-height: 1.05 !important;
+}
+
+.footer-newsletter p,
+.newsletter-card p,
+.newsletter-section p {
+  font-size: clamp(.78rem, 1vw, .95rem) !important;
+}
+
+@media (max-width: 760px) {
+  .home-media-shell {
+    width: 100% !important;
+  }
+
+  .home-media-rail {
+    padding-inline: 18px !important;
+  }
+
+  .home-media-card {
+    flex-basis: min(82vw, 320px) !important;
+  }
+
+  .home-media-nav {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 1.25rem !important;
+  }
+
+  .home-media-nav-left {
+    left: 8px !important;
+  }
+
+  .home-media-nav-right {
+    right: 8px !important;
   }
 }
 
@@ -362,6 +2226,76 @@
   .training-question label {
     font-size: .86rem;
   }
+}
+
+/* Compact, unified roster search and filters. */
+.roster-browser-tools {
+  grid-template-columns: minmax(190px, 1.3fr) minmax(0, 4fr) !important;
+  align-items: end !important;
+  gap: 8px !important;
+  width: min(1180px, 100%) !important;
+  padding: 8px !important;
+  border: 1px solid rgba(149, 220, 255, .14) !important;
+  border-radius: 16px !important;
+  background: rgba(12, 17, 23, .72) !important;
+  box-shadow: 0 14px 38px rgba(0, 0, 0, .16) !important;
+}
+.roster-filter-heading { display: none !important; }
+.roster-filter-selects {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 4px !important;
+}
+.roster-browser-tools label { gap: 3px !important; font-size: .59rem !important; letter-spacing: .08em !important; }
+.roster-browser-tools input,
+.roster-filter-selects select {
+  min-height: 38px !important;
+  height: 38px !important;
+  border-radius: 9px !important;
+  padding: 0 10px !important;
+  border-color: rgba(255,255,255,.1) !important;
+  background: rgba(255,255,255,.045) !important;
+}
+@media (max-width: 900px) {
+  .roster-browser-tools { grid-template-columns: 1fr !important; width: calc(100% - 8px) !important; }
+  .roster-filter-selects { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .roster-filter-selects label:last-child { grid-column: 1 / -1; }
+}
+
+/* Navigation dots sit in dedicated side gutters, outside gallery content. */
+.profile-rail-wrap,
+.artist-mini-rail,
+.agency-date-rail {
+  box-sizing: border-box !important;
+  padding-inline: 30px !important;
+}
+.profile-rail-wrap .media-rail,
+.artist-mini-rail .media-rail,
+.agency-date-rail .media-rail {
+  padding-inline: 4px !important;
+}
+.profile-rail-wrap .rail-dot-left,
+.artist-mini-rail .rail-dot-left,
+.agency-date-rail .rail-dot-left { left: 9px !important; }
+.profile-rail-wrap .rail-dot-right,
+.artist-mini-rail .rail-dot-right,
+.agency-date-rail .rail-dot-right { right: 9px !important; }
+.profile-rail-wrap .rail-dot,
+.artist-mini-rail .rail-dot,
+.agency-date-rail .rail-dot {
+  z-index: 60 !important;
+  box-shadow: 0 0 0 6px rgba(4,10,18,.88), 0 0 24px rgba(66,216,255,1) !important;
+}
+@media (max-width: 720px) {
+  .profile-rail-wrap,
+  .artist-mini-rail,
+  .agency-date-rail { padding-inline: 24px !important; }
+  .profile-rail-wrap .rail-dot-left,
+  .artist-mini-rail .rail-dot-left,
+  .agency-date-rail .rail-dot-left { left: 6px !important; }
+  .profile-rail-wrap .rail-dot-right,
+  .artist-mini-rail .rail-dot-right,
+  .agency-date-rail .rail-dot-right { right: 6px !important; }
 }
 
 /* Home refinement - thinner newsletter, compact DJ contest, subtler AI cards */
@@ -10700,6 +12634,200 @@ body > .media-modal {
   backdrop-filter: blur(14px) !important;
 }
 
+/* FINAL admin artist editor UX: mobile must behave like an app screen, not a tiny modal */
+.admin-artist-editor-modal {
+  isolation: isolate !important;
+}
+
+.artist-admin-card footer .admin-row-actions button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+@media (max-width: 760px) {
+  .admin-modal-backdrop.admin-app-backdrop,
+  .admin-app-backdrop {
+    inset: 0 !important;
+    z-index: 2147483000 !important;
+    display: block !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+    background: rgba(3, 6, 10, .96) !important;
+    backdrop-filter: blur(18px) !important;
+  }
+
+  .admin-artist-editor-modal {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    background:
+      radial-gradient(circle at 8% 0%, rgba(121, 207, 255, .14), transparent 34%),
+      linear-gradient(180deg, rgba(17, 20, 27, .99), rgba(7, 9, 13, .99)) !important;
+    box-shadow: none !important;
+  }
+
+  .admin-artist-editor-modal > header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 20 !important;
+    padding: calc(14px + env(safe-area-inset-top)) 14px 14px !important;
+    border-radius: 0 !important;
+    background: rgba(9, 12, 17, .94) !important;
+    backdrop-filter: blur(16px) !important;
+  }
+
+  .admin-artist-editor-modal > header h2 {
+    max-width: 72vw !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 1.28rem !important;
+    line-height: 1 !important;
+  }
+
+  .admin-artist-editor-modal > header button {
+    width: 46px !important;
+    min-width: 46px !important;
+    height: 46px !important;
+    padding: 0 !important;
+    border-radius: 16px !important;
+  }
+
+  .admin-artist-editor-modal > footer {
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 20 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    padding: 12px 14px calc(14px + env(safe-area-inset-bottom)) !important;
+    border-radius: 0 !important;
+    background: rgba(9, 12, 17, .95) !important;
+    backdrop-filter: blur(16px) !important;
+  }
+
+  .admin-artist-editor-modal > footer span {
+    min-height: 18px !important;
+    font-size: .78rem !important;
+  }
+
+  .admin-artist-editor-modal > footer button[type="submit"] {
+    width: 100% !important;
+    min-height: 52px !important;
+    border-radius: 18px !important;
+    font-size: .86rem !important;
+  }
+
+  .admin-artist-editor-modal .admin-app-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    width: 100% !important;
+    padding: 14px !important;
+    overflow: visible !important;
+  }
+
+  .admin-artist-editor-modal .admin-app-section,
+  .admin-artist-editor-modal .admin-media-editor-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 14px !important;
+    border-radius: 20px !important;
+    background: rgba(255, 255, 255, .045) !important;
+  }
+
+  .admin-artist-editor-modal .admin-app-section > header {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    align-items: stretch !important;
+  }
+
+  .admin-artist-editor-modal .admin-app-section > header button {
+    width: 100% !important;
+    min-height: 46px !important;
+  }
+
+  .admin-artist-editor-modal .admin-featured-sound-grid,
+  .admin-artist-editor-modal .admin-featured-fields,
+  .admin-artist-editor-modal .admin-media-editor-card {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .admin-artist-editor-modal .admin-media-editor-card .wide,
+  .admin-artist-editor-modal .admin-media-editor-card label.wide,
+  .admin-artist-editor-modal .admin-app-section.wide {
+    grid-column: auto !important;
+  }
+
+  .admin-artist-editor-modal label,
+  .admin-artist-editor-modal .admin-app-field {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: .74rem !important;
+    letter-spacing: .05em !important;
+  }
+
+  .admin-artist-editor-modal input,
+  .admin-artist-editor-modal textarea,
+  .admin-artist-editor-modal select {
+    width: 100% !important;
+    min-height: 48px !important;
+    border-radius: 16px !important;
+    font-size: 16px !important;
+  }
+
+  .admin-artist-editor-modal textarea {
+    min-height: 110px !important;
+    max-height: none !important;
+  }
+
+  .admin-artist-editor-modal .admin-image-field img,
+  .admin-artist-editor-modal .admin-image-empty {
+    min-height: 170px !important;
+    max-height: none !important;
+  }
+
+  .admin-artist-editor-modal .admin-upload-pill,
+  .admin-artist-editor-modal .admin-small-danger {
+    width: 100% !important;
+    min-height: 46px !important;
+    border-radius: 16px !important;
+  }
+
+  .admin-artists-page .artist-admin-card footer {
+    grid-template-columns: 1fr !important;
+  }
+
+  .admin-artists-page .artist-admin-card footer .admin-row-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+
+  .admin-artists-page .artist-admin-card footer .admin-row-actions button {
+    min-height: 48px !important;
+    margin: 0 !important;
+    padding: 0 12px !important;
+    border-radius: 17px !important;
+    font-size: .9rem !important;
+    white-space: nowrap !important;
+  }
+}
+
 body > .media-modal .media-modal-frame {
   width: min(1120px, 94vw) !important;
   max-height: 86vh !important;
@@ -11340,3 +13468,2972 @@ iframe.media-hidden-player {
     height: 44px;
   }
 }
+
+.home-profile-photo-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 28% 22%, rgba(125, 210, 255, .22), transparent 30%),
+    linear-gradient(135deg, rgba(18, 31, 42, .92), rgba(8, 9, 13, .98));
+  color: rgba(235, 248, 255, .88);
+  font: 800 clamp(1rem, 3vw, 1.6rem) var(--font-geist-mono);
+  letter-spacing: .28em;
+  text-transform: uppercase;
+}
+
+/* Emergency lock — home roster bottom controls must never overlap on desktop/mobile */
+.profile-rail-wrap .profile-card .profile-bottom-strip,
+.roster-gallery .profile-card .profile-bottom-strip {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 52px 52px !important;
+  gap: 10px !important;
+  align-items: end !important;
+}
+
+.profile-rail-wrap .profile-card .profile-latest-release,
+.roster-gallery .profile-card .profile-latest-release {
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  grid-template-columns: 56px minmax(0, 1fr) 44px !important;
+  gap: 10px !important;
+  padding: 10px !important;
+  overflow: hidden !important;
+}
+
+.profile-rail-wrap .profile-card .profile-release-cover,
+.roster-gallery .profile-card .profile-release-cover {
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px !important;
+}
+
+.profile-rail-wrap .profile-card .profile-latest-release strong,
+.profile-rail-wrap .profile-card .profile-latest-release em,
+.roster-gallery .profile-card .profile-latest-release strong,
+.roster-gallery .profile-card .profile-latest-release em {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.profile-rail-wrap .profile-card .profile-latest-release .media-play-button,
+.profile-rail-wrap .profile-card .profile-latest-release button,
+.roster-gallery .profile-card .profile-latest-release .media-play-button,
+.roster-gallery .profile-card .profile-latest-release button {
+  width: 44px !important;
+  min-width: 44px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  padding: 0 !important;
+}
+
+.profile-rail-wrap .profile-card .profile-latest-release .media-play-button span,
+.roster-gallery .profile-card .profile-latest-release .media-play-button span {
+  display: none !important;
+}
+
+.profile-rail-wrap .profile-card .profile-socials,
+.roster-gallery .profile-card .profile-socials {
+  width: 52px !important;
+  margin: 0 !important;
+  display: grid !important;
+  place-items: end center !important;
+}
+
+.profile-rail-wrap .profile-card .profile-socials a,
+.roster-gallery .profile-card .profile-socials a,
+.profile-rail-wrap .profile-card .profile-card-button,
+.roster-gallery .profile-card .profile-card-button {
+  width: 52px !important;
+  min-width: 52px !important;
+  height: 52px !important;
+  min-height: 52px !important;
+  padding: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 16px !important;
+}
+
+.profile-rail-wrap .profile-card .instagram-glyph,
+.roster-gallery .profile-card .instagram-glyph {
+  width: 20px !important;
+  height: 20px !important;
+  stroke-width: 1.8 !important;
+}
+
+@media (max-width: 720px) {
+  .profile-rail-wrap .profile-card .profile-bottom-strip,
+  .roster-gallery .profile-card .profile-bottom-strip {
+    grid-template-columns: minmax(0, 1fr) 48px !important;
+    grid-template-rows: 48px 48px !important;
+    grid-template-areas:
+      "sound insta"
+      "sound plus" !important;
+    gap: 8px !important;
+  }
+
+  .profile-rail-wrap .profile-card .profile-latest-release,
+  .roster-gallery .profile-card .profile-latest-release {
+    grid-area: sound !important;
+    height: 104px !important;
+    grid-template-columns: 52px minmax(0, 1fr) 42px !important;
+  }
+
+  .profile-rail-wrap .profile-card .profile-release-cover,
+  .roster-gallery .profile-card .profile-release-cover {
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px !important;
+  }
+
+  .profile-rail-wrap .profile-card .profile-socials,
+  .roster-gallery .profile-card .profile-socials {
+    grid-area: insta !important;
+    width: 48px !important;
+  }
+
+  .profile-rail-wrap .profile-card .profile-socials a,
+  .roster-gallery .profile-card .profile-socials a,
+  .profile-rail-wrap .profile-card .profile-card-button,
+  .roster-gallery .profile-card .profile-card-button {
+    width: 48px !important;
+    min-width: 48px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+  }
+
+  .profile-rail-wrap .profile-card .profile-card-button,
+  .roster-gallery .profile-card .profile-card-button {
+    grid-area: plus !important;
+  }
+}
+/* Roster final layout: visible multi-card rail + clean searchable artist page */
+.profile-rail-wrap {
+  width: 100%;
+  max-width: min(1560px, 100vw);
+  margin-inline: auto;
+  overflow: hidden;
+}
+
+.profile-rail-wrap .media-rail {
+  gap: clamp(14px, 1.4vw, 22px) !important;
+  padding-inline: clamp(18px, 3vw, 42px) !important;
+  scroll-padding-inline: clamp(18px, 3vw, 42px);
+}
+
+.profile-rail-wrap .profile-card {
+  flex: 0 0 calc((100% - (clamp(14px, 1.4vw, 22px) * 3)) / 4) !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  min-height: clamp(520px, 42vw, 680px) !important;
+}
+
+.roster-browser {
+  width: min(1680px, calc(100vw - 48px));
+  margin: 0 auto;
+}
+
+.roster-browser-tools {
+  display: grid;
+  gap: 18px;
+  margin: 0 auto 28px;
+}
+
+.roster-browser-tools label {
+  display: grid;
+  gap: 8px;
+  color: rgba(236, 248, 255, 0.72);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.roster-browser-tools input {
+  width: 100%;
+  border: 1px solid rgba(149, 220, 255, 0.2);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.045);
+  color: #fff;
+  padding: 16px 18px;
+  outline: none;
+  font: inherit;
+}
+
+.roster-browser-tools input:focus {
+  border-color: rgba(133, 215, 255, 0.72);
+  box-shadow: 0 0 24px rgba(86, 194, 255, 0.16);
+}
+
+.roster-style-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.roster-style-filter button {
+  border: 1px solid rgba(149, 220, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(236, 248, 255, 0.74);
+  padding: 10px 14px;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+}
+
+.roster-style-filter button.active,
+.roster-style-filter button:hover {
+  color: #061017;
+  background: #bfe9ff;
+  border-color: #bfe9ff;
+}
+
+.roster-gallery {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(16px, 1.6vw, 26px) !important;
+  align-items: stretch;
+}
+
+.roster-gallery .profile-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  min-height: clamp(500px, 38vw, 640px) !important;
+}
+
+.roster-empty {
+  color: rgba(236, 248, 255, 0.66);
+  text-align: center;
+  padding: 48px 0;
+}
+
+.roster-join-form {
+  width: min(1180px, calc(100vw - 48px));
+  margin: clamp(54px, 8vw, 110px) auto 0;
+  display: grid;
+  gap: 24px;
+  padding: clamp(22px, 4vw, 48px);
+  border: 1px solid rgba(149, 220, 255, 0.2);
+  border-radius: 34px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025));
+  box-shadow: 0 28px 90px rgba(0,0,0,0.34);
+}
+
+.roster-join-form > div:first-child {
+  display: grid;
+  gap: 10px;
+}
+
+.roster-join-form h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.65rem, 3vw, 2.8rem);
+}
+
+.roster-join-form p {
+  color: rgba(236, 248, 255, 0.66);
+  max-width: 720px;
+}
+
+@media (max-width: 1180px) {
+  .roster-gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .profile-rail-wrap .media-rail {
+    gap: 12px !important;
+    padding-inline: 12px !important;
+  }
+
+  .profile-rail-wrap .profile-card {
+    flex-basis: calc((100% - 12px) / 2) !important;
+    min-height: 430px !important;
+  }
+
+  .profile-rail-wrap .profile-main-copy h3,
+  .roster-gallery .profile-main-copy h3 {
+    font-size: clamp(1.45rem, 8vw, 2.6rem) !important;
+  }
+
+  .profile-rail-wrap .profile-bottom-strip,
+  .roster-gallery .profile-bottom-strip {
+    gap: 8px !important;
+  }
+
+  .profile-rail-wrap .profile-latest-release,
+  .roster-gallery .profile-latest-release {
+    min-width: 0;
+  }
+
+  .roster-browser,
+  .roster-join-form {
+    width: min(100% - 20px, 680px);
+  }
+
+  .roster-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .roster-gallery .profile-card {
+    min-height: 430px !important;
+  }
+}
+
+/* Final public roster correction: proportion, text scale, direct hidden players */
+.media-hidden-player,
+iframe.media-hidden-player,
+.media-play-portal,
+.soundcloud-embed,
+.spotify-embed {
+  position: fixed !important;
+  left: -9999px !important;
+  top: auto !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+.home-profiles .section-kicker {
+  margin-bottom: clamp(12px, 2vw, 24px) !important;
+}
+
+.home-profiles .section-kicker h2 {
+  font-size: clamp(1.25rem, 1.75vw, 1.85rem) !important;
+  line-height: 1.05 !important;
+  text-align: center !important;
+  letter-spacing: -0.035em !important;
+}
+
+.profile-rail-wrap {
+  max-width: min(1620px, 100vw) !important;
+}
+
+.profile-rail-wrap .media-rail {
+  gap: clamp(14px, 1.3vw, 22px) !important;
+  padding-inline: clamp(18px, 3vw, 46px) !important;
+  align-items: stretch !important;
+}
+
+.profile-rail-wrap .profile-card {
+  flex: 0 0 calc((100% - (clamp(14px, 1.3vw, 22px) * 3)) / 4) !important;
+  width: calc((100% - (clamp(14px, 1.3vw, 22px) * 3)) / 4) !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  min-height: clamp(390px, 31vw, 520px) !important;
+  aspect-ratio: 3 / 4 !important;
+  overflow: hidden !important;
+}
+
+.roster-gallery .profile-card {
+  min-height: clamp(390px, 31vw, 520px) !important;
+  aspect-ratio: 3 / 4 !important;
+  overflow: hidden !important;
+}
+
+.profile-main-copy h3 {
+  font-size: clamp(1.7rem, 2.75vw, 3.2rem) !important;
+  line-height: 0.92 !important;
+  letter-spacing: -0.065em !important;
+  max-width: 92% !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+}
+
+.profile-card-cgl-rave-unit .profile-main-copy h3,
+.profile-card-cgl .profile-main-copy h3,
+.profile-card-nova-hardlab .profile-main-copy h3 {
+  font-size: clamp(1.95rem, 3.05vw, 3.35rem) !important;
+}
+
+.profile-main-copy .eyebrow {
+  font-size: clamp(0.52rem, 0.66vw, 0.68rem) !important;
+  line-height: 1.22 !important;
+  letter-spacing: 0.22em !important;
+}
+
+.profile-bottom-strip {
+  left: clamp(10px, 1vw, 18px) !important;
+  right: clamp(10px, 1vw, 18px) !important;
+  bottom: clamp(10px, 1.1vw, 18px) !important;
+  max-width: calc(100% - clamp(20px, 2vw, 36px)) !important;
+  align-items: stretch !important;
+  overflow: visible !important;
+}
+
+.profile-latest-release,
+.profile-latest-release > div {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.profile-latest-release strong,
+.profile-latest-release em {
+  max-width: 100% !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.profile-card .profile-socials a svg.instagram-glyph,
+.roster-gallery .profile-socials a svg.instagram-glyph {
+  width: 21px !important;
+  height: 21px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 1.9 !important;
+}
+
+@media (max-width: 760px) {
+  .profile-rail-wrap .media-rail {
+    gap: 12px !important;
+    padding-inline: 12px !important;
+  }
+
+  .profile-rail-wrap .profile-card {
+    flex: 0 0 calc((100% - 12px) / 2) !important;
+    width: calc((100% - 12px) / 2) !important;
+    min-height: 360px !important;
+    aspect-ratio: 3 / 4 !important;
+  }
+
+  .roster-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .roster-gallery .profile-card {
+    min-height: 360px !important;
+    aspect-ratio: 3 / 4 !important;
+  }
+
+  .profile-main-copy h3,
+  .profile-card-cgl-rave-unit .profile-main-copy h3,
+  .profile-card-cgl .profile-main-copy h3,
+  .profile-card-nova-hardlab .profile-main-copy h3 {
+    font-size: clamp(1.18rem, 6vw, 1.75rem) !important;
+    letter-spacing: -0.055em !important;
+  }
+
+  .profile-main-copy .eyebrow {
+    font-size: 0.5rem !important;
+    letter-spacing: 0.16em !important;
+  }
+
+  .profile-bottom-strip {
+    left: 8px !important;
+    right: 8px !important;
+    bottom: 8px !important;
+    max-width: calc(100% - 16px) !important;
+  }
+}
+
+/* SKORM interaction lock — keep artist cards and admin usable on desktop/mobile */
+.home-profile-photo-link {
+  display: block !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+}
+
+.profile-card .home-profile-photo,
+.profile-card .home-profile-photo-link,
+.profile-card .home-profile-glass {
+  pointer-events: auto !important;
+}
+
+.profile-card .profile-bottom-strip,
+.profile-card .profile-latest-release,
+.profile-card .profile-socials,
+.profile-card .profile-socials a,
+.profile-card .profile-card-button,
+.profile-card .media-play-button,
+.profile-card button {
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 12 !important;
+}
+
+.profile-card .profile-socials a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: clamp(44px, 3vw, 58px) !important;
+  height: clamp(44px, 3vw, 58px) !important;
+  min-width: clamp(44px, 3vw, 58px) !important;
+  border-radius: 16px !important;
+  color: #e6f7ff !important;
+}
+
+.profile-card .profile-socials a svg.instagram-glyph {
+  display: block !important;
+  width: 22px !important;
+  height: 22px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 1.9 !important;
+}
+
+.profile-card .profile-card-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+}
+
+.admin-modal-backdrop.admin-app-backdrop,
+.admin-app-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 99999 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  width: 100vw !important;
+  min-height: 100vh !important;
+  padding: clamp(10px, 3vw, 28px) !important;
+  overflow: auto !important;
+  background: rgba(2, 5, 9, 0.78) !important;
+  backdrop-filter: blur(18px) !important;
+  pointer-events: auto !important;
+}
+
+.admin-app-modal {
+  width: min(1120px, calc(100vw - 20px)) !important;
+  max-height: calc(100vh - 20px) !important;
+  overflow: auto !important;
+  pointer-events: auto !important;
+}
+
+.admin-app-modal,
+.admin-app-modal * {
+  box-sizing: border-box !important;
+}
+
+.admin-app-modal button,
+.admin-add-button,
+.admin-row-actions button,
+.admin-small-danger,
+.admin-upload-pill {
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+  cursor: pointer !important;
+}
+
+.admin-upload-pill {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.admin-upload-pill input[type="file"],
+.admin-upload-pill input {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0 !important;
+  cursor: pointer !important;
+}
+
+.admin-app-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+  padding: clamp(14px, 2vw, 24px) !important;
+}
+
+.admin-app-section,
+.admin-media-editor-card,
+.admin-featured-sound-grid {
+  min-width: 0 !important;
+}
+
+.admin-app-section.wide,
+.admin-media-editor-card .wide {
+  grid-column: 1 / -1 !important;
+}
+
+.admin-image-field img {
+  display: block !important;
+  width: 100% !important;
+  max-height: 220px !important;
+  object-fit: cover !important;
+  border-radius: 18px !important;
+}
+
+@media (max-width: 760px) {
+  .admin-modal-backdrop.admin-app-backdrop,
+  .admin-app-backdrop {
+    padding: 8px !important;
+  }
+
+  .admin-app-modal {
+    width: calc(100vw - 16px) !important;
+    max-height: calc(100vh - 16px) !important;
+    border-radius: 22px !important;
+  }
+
+  .admin-app-grid,
+  .admin-featured-sound-grid,
+  .admin-media-editor-card {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .admin-app-modal > header,
+  .admin-app-modal > footer {
+    padding: 14px !important;
+  }
+
+  .admin-app-modal h2 {
+    font-size: clamp(1.25rem, 8vw, 2rem) !important;
+  }
+
+  .admin-row-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .admin-row-actions button,
+  .admin-add-button {
+    min-height: 48px !important;
+    white-space: normal !important;
+  }
+}
+
+/* FINAL artist card audio layout: wide playable sound bar + compact stacked actions */
+.profile-card .profile-bottom-strip,
+.profile-rail-wrap .profile-card .profile-bottom-strip,
+.roster-gallery .profile-card .profile-bottom-strip {
+  position: absolute !important;
+  left: clamp(14px, 1.25vw, 22px) !important;
+  right: clamp(14px, 1.25vw, 22px) !important;
+  bottom: clamp(14px, 1.25vw, 22px) !important;
+  width: auto !important;
+  max-width: none !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) clamp(44px, 3.4vw, 56px) !important;
+  grid-template-rows: clamp(44px, 3.4vw, 56px) clamp(44px, 3.4vw, 56px) !important;
+  grid-template-areas:
+    "sound insta"
+    "sound plus" !important;
+  gap: clamp(7px, .72vw, 11px) !important;
+  align-items: stretch !important;
+  overflow: visible !important;
+  z-index: 20 !important;
+}
+
+.profile-card .profile-latest-release,
+.profile-rail-wrap .profile-card .profile-latest-release,
+.roster-gallery .profile-card .profile-latest-release {
+  grid-area: sound !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  display: grid !important;
+  grid-template-columns: clamp(54px, 4.8vw, 74px) minmax(0, 1fr) clamp(44px, 3.4vw, 56px) !important;
+  align-items: center !important;
+  gap: clamp(9px, .9vw, 14px) !important;
+  padding: clamp(8px, .9vw, 13px) !important;
+  border-radius: clamp(18px, 1.7vw, 26px) !important;
+  overflow: hidden !important;
+}
+
+.profile-card .profile-release-cover,
+.profile-rail-wrap .profile-card .profile-release-cover,
+.roster-gallery .profile-card .profile-release-cover {
+  width: clamp(54px, 4.8vw, 74px) !important;
+  height: clamp(54px, 4.8vw, 74px) !important;
+  min-width: clamp(54px, 4.8vw, 74px) !important;
+  border-radius: 15px !important;
+  overflow: hidden !important;
+}
+
+.profile-card .profile-latest-release > div,
+.profile-rail-wrap .profile-card .profile-latest-release > div,
+.roster-gallery .profile-card .profile-latest-release > div {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.profile-card .profile-latest-release span:not(.profile-release-cover),
+.profile-rail-wrap .profile-card .profile-latest-release span:not(.profile-release-cover),
+.roster-gallery .profile-card .profile-latest-release span:not(.profile-release-cover) {
+  display: block !important;
+  font-size: clamp(.46rem, .56vw, .62rem) !important;
+  letter-spacing: .24em !important;
+  white-space: nowrap !important;
+}
+
+.profile-card .profile-latest-release strong,
+.profile-card .profile-latest-release em,
+.profile-rail-wrap .profile-card .profile-latest-release strong,
+.profile-rail-wrap .profile-card .profile-latest-release em,
+.roster-gallery .profile-card .profile-latest-release strong,
+.roster-gallery .profile-card .profile-latest-release em {
+  display: block !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.profile-card .profile-latest-release strong,
+.profile-rail-wrap .profile-card .profile-latest-release strong,
+.roster-gallery .profile-card .profile-latest-release strong {
+  font-size: clamp(.86rem, 1.15vw, 1.22rem) !important;
+  line-height: 1.06 !important;
+}
+
+.profile-card .profile-latest-release em,
+.profile-rail-wrap .profile-card .profile-latest-release em,
+.roster-gallery .profile-card .profile-latest-release em {
+  font-size: clamp(.62rem, .82vw, .86rem) !important;
+  line-height: 1.1 !important;
+}
+
+.profile-card .profile-latest-release .media-play-button,
+.profile-card .profile-latest-release button,
+.profile-rail-wrap .profile-card .profile-latest-release .media-play-button,
+.profile-rail-wrap .profile-card .profile-latest-release button,
+.roster-gallery .profile-card .profile-latest-release .media-play-button,
+.roster-gallery .profile-card .profile-latest-release button {
+  width: clamp(44px, 3.4vw, 56px) !important;
+  min-width: clamp(44px, 3.4vw, 56px) !important;
+  height: clamp(44px, 3.4vw, 56px) !important;
+  min-height: clamp(44px, 3.4vw, 56px) !important;
+  padding: 0 !important;
+  border-radius: 16px !important;
+}
+
+.profile-card .profile-latest-release .media-play-button span,
+.profile-rail-wrap .profile-card .profile-latest-release .media-play-button span,
+.roster-gallery .profile-card .profile-latest-release .media-play-button span {
+  display: none !important;
+}
+
+.profile-card .profile-socials,
+.profile-rail-wrap .profile-card .profile-socials,
+.roster-gallery .profile-card .profile-socials {
+  grid-area: insta !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+.profile-card .profile-socials a,
+.profile-card .profile-card-button,
+.profile-rail-wrap .profile-card .profile-socials a,
+.profile-rail-wrap .profile-card .profile-card-button,
+.roster-gallery .profile-card .profile-socials a,
+.roster-gallery .profile-card .profile-card-button {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 0 !important;
+  border-radius: 16px !important;
+}
+
+.profile-card .profile-card-button,
+.profile-rail-wrap .profile-card .profile-card-button,
+.roster-gallery .profile-card .profile-card-button {
+  grid-area: plus !important;
+  font-size: clamp(1.25rem, 1.7vw, 1.7rem) !important;
+  line-height: 1 !important;
+}
+
+@media (max-width: 760px) {
+  .profile-card .profile-bottom-strip,
+  .profile-rail-wrap .profile-card .profile-bottom-strip,
+  .roster-gallery .profile-card .profile-bottom-strip {
+    left: 9px !important;
+    right: 9px !important;
+    bottom: 9px !important;
+    grid-template-columns: minmax(0, 1fr) 42px !important;
+    grid-template-rows: 42px 42px !important;
+    gap: 7px !important;
+  }
+
+  .profile-card .profile-latest-release,
+  .profile-rail-wrap .profile-card .profile-latest-release,
+  .roster-gallery .profile-card .profile-latest-release {
+    grid-template-columns: 44px minmax(0, 1fr) 40px !important;
+    padding: 7px !important;
+    gap: 7px !important;
+    border-radius: 17px !important;
+  }
+
+  .profile-card .profile-release-cover,
+  .profile-rail-wrap .profile-card .profile-release-cover,
+  .roster-gallery .profile-card .profile-release-cover {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    border-radius: 12px !important;
+  }
+
+  .profile-card .profile-latest-release strong,
+  .profile-rail-wrap .profile-card .profile-latest-release strong,
+  .roster-gallery .profile-card .profile-latest-release strong {
+    font-size: .72rem !important;
+  }
+
+  .profile-card .profile-latest-release em,
+  .profile-rail-wrap .profile-card .profile-latest-release em,
+  .roster-gallery .profile-card .profile-latest-release em {
+    font-size: .55rem !important;
+  }
+
+  .profile-card .profile-latest-release span:not(.profile-release-cover),
+  .profile-rail-wrap .profile-card .profile-latest-release span:not(.profile-release-cover),
+  .roster-gallery .profile-card .profile-latest-release span:not(.profile-release-cover) {
+    font-size: .42rem !important;
+    letter-spacing: .18em !important;
+  }
+
+  .profile-card .profile-latest-release .media-play-button,
+  .profile-card .profile-latest-release button,
+  .profile-rail-wrap .profile-card .profile-latest-release .media-play-button,
+  .profile-rail-wrap .profile-card .profile-latest-release button,
+  .roster-gallery .profile-card .profile-latest-release .media-play-button,
+  .roster-gallery .profile-card .profile-latest-release button {
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+  }
+}
+
+/* SKORM public polish + admin image refresh fixes */
+.fill-native-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.floating-header {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: min(1120px, calc(100vw - 28px)) !important;
+  display: grid !important;
+  grid-template-columns: 70px minmax(0, 1fr) 52px !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 9px 12px !important;
+}
+
+.brand-logo {
+  width: 54px !important;
+  max-width: 54px !important;
+  justify-content: center !important;
+}
+
+.brand-logo img {
+  width: 42px !important;
+  height: 42px !important;
+  object-fit: contain !important;
+}
+
+.floating-header nav {
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+.floating-header nav a {
+  font-size: .78rem !important;
+  padding: 10px 14px !important;
+  letter-spacing: .02em !important;
+}
+
+.agency-hero::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background-image: url("/agency/skorm-mountain-symbol.png") !important;
+  background-repeat: no-repeat !important;
+  background-position: center 42% !important;
+  background-size: min(42vw, 520px) !important;
+  opacity: .08 !important;
+  filter: blur(1px) drop-shadow(0 0 36px rgba(184, 226, 255, .25)) !important;
+  pointer-events: none !important;
+}
+
+.profile-main-copy h3,
+.profile-card h3 {
+  font-size: clamp(2rem, 3.05vw, 3.85rem) !important;
+  line-height: .92 !important;
+  max-width: 96% !important;
+  overflow-wrap: anywhere !important;
+  hyphens: none !important;
+}
+
+.profile-main-copy .eyebrow,
+.profile-card .eyebrow {
+  font-size: clamp(.62rem, .72vw, .78rem) !important;
+  letter-spacing: .22em !important;
+}
+
+.profile-rail-wrap .profile-card,
+.roster-gallery .profile-card {
+  aspect-ratio: 3 / 4 !important;
+  min-height: clamp(390px, 29vw, 520px) !important;
+  max-height: 580px !important;
+}
+
+.roster-gallery {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+.agency-active-date {
+  width: 178px !important;
+  min-height: 116px !important;
+  padding: 12px !important;
+}
+
+.agency-active-date time b {
+  font-size: 1.72rem !important;
+}
+
+.agency-active-date strong {
+  font-size: .8rem !important;
+}
+
+.footer-newsletter .eyebrow {
+  font-size: .82rem !important;
+  letter-spacing: .28em !important;
+}
+
+.footer-newsletter h2 {
+  font-size: clamp(1.9rem, 3.1vw, 2.8rem) !important;
+}
+
+@media (max-width: 900px) {
+  .roster-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .floating-header {
+    grid-template-columns: 58px 1fr 48px !important;
+    width: calc(100vw - 18px) !important;
+  }
+
+  .brand-logo {
+    width: 44px !important;
+    max-width: 44px !important;
+  }
+
+  .brand-logo img {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .profile-rail-wrap .profile-card,
+  .roster-gallery .profile-card {
+    min-height: 360px !important;
+    aspect-ratio: 3 / 4 !important;
+  }
+}
+
+/* Final roster balance pass: readable titles, non-stretched photos, clean bottom audio bar */
+.home-profiles h2,
+.roster-section h2,
+.section-heading h2 {
+  font-size: clamp(1.55rem, 2.05vw, 2.35rem) !important;
+  line-height: 1.05 !important;
+}
+
+.profile-main-copy h3,
+.profile-card h3 {
+  font-size: clamp(1.8rem, 2.28vw, 3.05rem) !important;
+  line-height: .94 !important;
+  letter-spacing: -.07em !important;
+  max-width: 88% !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+.profile-card-nova-hardlab .profile-main-copy h3,
+.profile-card-nova .profile-main-copy h3,
+.profile-card-vs-techno .profile-main-copy h3,
+.profile-card-wolvi-akela .profile-main-copy h3,
+.profile-card-vielusos .profile-main-copy h3 {
+  font-size: clamp(1.45rem, 1.8vw, 2.35rem) !important;
+  letter-spacing: -.05em !important;
+}
+
+.profile-rail-wrap .profile-card,
+.roster-gallery .profile-card {
+  aspect-ratio: 4 / 5 !important;
+  min-height: clamp(320px, 24vw, 460px) !important;
+  max-height: 500px !important;
+}
+
+.profile-card .home-profile-photo img,
+.profile-card .home-profile-photo .fill-native-image {
+  object-fit: cover !important;
+}
+
+.profile-card .profile-bottom-strip,
+.profile-rail-wrap .profile-card .profile-bottom-strip,
+.roster-gallery .profile-card .profile-bottom-strip {
+  left: clamp(.7rem, .85vw, 1rem) !important;
+  right: clamp(.7rem, .85vw, 1rem) !important;
+  bottom: clamp(.7rem, .85vw, 1rem) !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 44px !important;
+  grid-template-rows: 44px 44px !important;
+  grid-template-areas:
+    "sound insta"
+    "sound plus" !important;
+  gap: .45rem !important;
+  align-items: stretch !important;
+}
+
+.profile-card .profile-latest-release,
+.profile-rail-wrap .profile-card .profile-latest-release,
+.roster-gallery .profile-card .profile-latest-release {
+  grid-area: sound !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  align-self: stretch !important;
+}
+
+.profile-card .profile-socials,
+.profile-rail-wrap .profile-card .profile-socials,
+.roster-gallery .profile-card .profile-socials {
+  grid-area: insta !important;
+  display: block !important;
+  width: 44px !important;
+  height: 44px !important;
+}
+
+.profile-card .profile-socials a,
+.profile-card .profile-card-button,
+.profile-rail-wrap .profile-card .profile-socials a,
+.profile-rail-wrap .profile-card .profile-card-button,
+.roster-gallery .profile-card .profile-socials a,
+.roster-gallery .profile-card .profile-card-button {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 15px !important;
+}
+
+.profile-card .profile-card-button,
+.profile-rail-wrap .profile-card .profile-card-button,
+.roster-gallery .profile-card .profile-card-button {
+  grid-area: plus !important;
+}
+
+@media (max-width: 760px) {
+  .profile-main-copy h3,
+  .profile-card h3 {
+    font-size: clamp(2.05rem, 10.5vw, 3.55rem) !important;
+    max-width: 86% !important;
+  }
+
+  .profile-card-nova-hardlab .profile-main-copy h3,
+  .profile-card-nova .profile-main-copy h3,
+  .profile-card-vs-techno .profile-main-copy h3,
+  .profile-card-wolvi-akela .profile-main-copy h3,
+  .profile-card-vielusos .profile-main-copy h3 {
+    font-size: clamp(1.75rem, 8.8vw, 2.75rem) !important;
+  }
+
+  .profile-card .profile-bottom-strip,
+  .profile-rail-wrap .profile-card .profile-bottom-strip,
+  .roster-gallery .profile-card .profile-bottom-strip {
+    grid-template-columns: minmax(0, 1fr) 42px !important;
+    grid-template-rows: 42px 42px !important;
+  }
+}
+/* === SKORM urgent final overrides: mobile menu + compact footer newsletter === */
+@media (max-width: 850px) {
+  .floating-header {
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    align-items: center !important;
+  }
+
+  .floating-header .brand-logo {
+    justify-self: start !important;
+  }
+
+  .floating-header .mobile-menu {
+    justify-self: end !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  .mobile-navigation {
+    left: auto !important;
+    right: 10px !important;
+    width: min(320px, calc(100vw - 20px)) !important;
+    margin: 0 !important;
+    transform: translateY(-8px) !important;
+    transform-origin: top right !important;
+  }
+
+  .mobile-navigation.open {
+    transform: translateY(0) !important;
+  }
+}
+
+.footer-newsletter {
+  width: min(700px, calc(100vw - 32px)) !important;
+  min-height: 0 !important;
+  margin: 18px auto 8px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: grid !important;
+  place-items: center !important;
+  gap: 8px !important;
+  text-align: center !important;
+}
+
+.footer-newsletter h2 {
+  display: none !important;
+}
+
+.footer-newsletter .eyebrow {
+  margin: 0 !important;
+  font-size: .72rem !important;
+  letter-spacing: .28em !important;
+  color: var(--ec-blue, #84d8ff) !important;
+}
+
+.footer-newsletter p:not(.eyebrow) {
+  max-width: 520px !important;
+  margin: 0 auto !important;
+  color: rgba(232, 241, 246, .62) !important;
+  font-size: .82rem !important;
+  line-height: 1.45 !important;
+}
+
+.footer-newsletter form {
+  width: min(520px, 100%) !important;
+  margin: 4px auto 0 !important;
+  padding: 6px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  gap: 8px !important;
+  border: 1px solid rgba(217, 248, 255, .16) !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, .045) !important;
+}
+
+.footer-newsletter input,
+.footer-newsletter button {
+  min-height: 40px !important;
+  height: 40px !important;
+  border-radius: 12px !important;
+  font-size: .75rem !important;
+}
+
+.footer-newsletter input {
+  padding: 0 14px !important;
+}
+
+.footer-newsletter button {
+  padding: 0 16px !important;
+  white-space: nowrap !important;
+}
+
+.footer-newsletter .footer-mail {
+  display: none !important;
+}
+
+@media (max-width: 640px) {
+  .footer-newsletter {
+    width: calc(100vw - 24px) !important;
+  }
+
+  .footer-newsletter form {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* === SKORM emergency lock: artist cards controls + readable hero banner === */
+.agency-paga-hero-image {
+  opacity: .58 !important;
+  filter: grayscale(.05) brightness(1.22) contrast(1.2) drop-shadow(0 0 72px rgba(170, 220, 255, .48)) !important;
+  mix-blend-mode: screen !important;
+}
+
+.agency-paga-overlay {
+  background:
+    radial-gradient(circle at 50% 40%, rgba(160, 220, 255, .22), rgba(0, 0, 0, 0) 36%),
+    linear-gradient(180deg, rgba(0, 0, 0, .18), rgba(0, 0, 0, .5) 68%, #05070a 100%) !important;
+}
+
+.profile-card,
+.roster-card,
+.artist-card {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.profile-card .profile-bottom-strip,
+.roster-card .profile-bottom-strip,
+.artist-card .profile-bottom-strip {
+  position: absolute !important;
+  left: clamp(12px, 1.2vw, 18px) !important;
+  right: clamp(12px, 1.2vw, 18px) !important;
+  bottom: clamp(12px, 1.2vw, 18px) !important;
+  z-index: 90 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) clamp(44px, 3.1vw, 52px) !important;
+  grid-template-rows: clamp(44px, 3.1vw, 52px) clamp(44px, 3.1vw, 52px) !important;
+  grid-template-areas:
+    "sound insta"
+    "sound plus" !important;
+  gap: 8px !important;
+  align-items: stretch !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+
+.profile-card .profile-latest-release,
+.roster-card .profile-latest-release,
+.artist-card .profile-latest-release {
+  grid-area: sound !important;
+  display: grid !important;
+  grid-template-columns: clamp(52px, 4vw, 68px) minmax(0, 1fr) clamp(42px, 3vw, 50px) !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-width: 0 !important;
+  min-height: 112px !important;
+  height: auto !important;
+  padding: 8px !important;
+  border-radius: 18px !important;
+  background: rgba(28, 31, 36, .64) !important;
+  border: 1px solid rgba(210, 240, 255, .28) !important;
+  box-shadow: 0 14px 44px rgba(0, 0, 0, .38), inset 0 1px 0 rgba(255, 255, 255, .16) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.2) !important;
+  backdrop-filter: blur(18px) saturate(1.2) !important;
+}
+
+.profile-card .profile-latest-release-empty,
+.roster-card .profile-latest-release-empty,
+.artist-card .profile-latest-release-empty {
+  grid-template-columns: minmax(0, 1fr) !important;
+  min-height: 72px !important;
+}
+
+.profile-card .profile-release-cover,
+.roster-card .profile-release-cover,
+.artist-card .profile-release-cover {
+  width: clamp(52px, 4vw, 68px) !important;
+  height: clamp(52px, 4vw, 68px) !important;
+  border-radius: 13px !important;
+  overflow: hidden !important;
+  flex: 0 0 auto !important;
+}
+
+.profile-card .profile-release-cover img,
+.roster-card .profile-release-cover img,
+.artist-card .profile-release-cover img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.profile-card .profile-latest-release > div,
+.roster-card .profile-latest-release > div,
+.artist-card .profile-latest-release > div {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.profile-card .profile-latest-release strong,
+.profile-card .profile-latest-release em,
+.profile-card .profile-latest-release span:not(.profile-release-cover),
+.roster-card .profile-latest-release strong,
+.roster-card .profile-latest-release em,
+.roster-card .profile-latest-release span:not(.profile-release-cover),
+.artist-card .profile-latest-release strong,
+.artist-card .profile-latest-release em,
+.artist-card .profile-latest-release span:not(.profile-release-cover) {
+  display: block !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.profile-card .profile-latest-release strong,
+.roster-card .profile-latest-release strong,
+.artist-card .profile-latest-release strong {
+  font-size: clamp(.82rem, 1.05vw, 1rem) !important;
+  line-height: 1.05 !important;
+}
+
+.profile-card .profile-latest-release em,
+.roster-card .profile-latest-release em,
+.artist-card .profile-latest-release em {
+  font-size: clamp(.62rem, .78vw, .78rem) !important;
+  line-height: 1.1 !important;
+  opacity: .74 !important;
+}
+
+.profile-card .profile-latest-release span:not(.profile-release-cover),
+.roster-card .profile-latest-release span:not(.profile-release-cover),
+.artist-card .profile-latest-release span:not(.profile-release-cover) {
+  font-size: clamp(.48rem, .55vw, .58rem) !important;
+  letter-spacing: .2em !important;
+}
+
+.profile-card .profile-latest-release button,
+.roster-card .profile-latest-release button,
+.artist-card .profile-latest-release button {
+  width: clamp(42px, 3vw, 50px) !important;
+  min-width: clamp(42px, 3vw, 50px) !important;
+  height: clamp(42px, 3vw, 50px) !important;
+  border-radius: 15px !important;
+}
+
+.profile-card .profile-socials,
+.roster-card .profile-socials,
+.artist-card .profile-socials {
+  grid-area: insta !important;
+  display: block !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.profile-card .profile-socials a,
+.roster-card .profile-socials a,
+.artist-card .profile-socials a,
+.profile-card .profile-card-button,
+.roster-card .profile-card-button,
+.artist-card .profile-card-button {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 15px !important;
+  background: rgba(34, 37, 43, .64) !important;
+  border: 1px solid rgba(210, 240, 255, .28) !important;
+  color: #eaf8ff !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, .34), inset 0 1px 0 rgba(255, 255, 255, .14) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.18) !important;
+  backdrop-filter: blur(16px) saturate(1.18) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.profile-card .profile-card-button,
+.roster-card .profile-card-button,
+.artist-card .profile-card-button {
+  grid-area: plus !important;
+}
+
+.profile-card .profile-socials a span,
+.roster-card .profile-socials a span,
+.artist-card .profile-socials a span {
+  display: none !important;
+}
+
+.profile-card .instagram-glyph,
+.roster-card .instagram-glyph,
+.artist-card .instagram-glyph {
+  display: block !important;
+  width: 20px !important;
+  height: 20px !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 760px) {
+  .agency-paga-hero-image {
+    opacity: .7 !important;
+    width: 112vw !important;
+    max-width: none !important;
+    filter: grayscale(.04) brightness(1.28) contrast(1.18) drop-shadow(0 0 58px rgba(170, 220, 255, .52)) !important;
+  }
+
+  .agency-paga-overlay {
+    background:
+      radial-gradient(circle at 50% 38%, rgba(175, 225, 255, .28), rgba(0, 0, 0, 0) 42%),
+      linear-gradient(180deg, rgba(0, 0, 0, .14), rgba(0, 0, 0, .44) 72%, #05070a 100%) !important;
+  }
+
+  .profile-card .profile-bottom-strip,
+  .roster-card .profile-bottom-strip,
+  .artist-card .profile-bottom-strip {
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 12px !important;
+    grid-template-columns: minmax(0, 1fr) 46px !important;
+    grid-template-rows: 46px 46px !important;
+    gap: 7px !important;
+  }
+
+  .profile-card .profile-latest-release,
+  .roster-card .profile-latest-release,
+  .artist-card .profile-latest-release {
+    grid-template-columns: 46px minmax(0, 1fr) 42px !important;
+    min-height: 99px !important;
+    gap: 8px !important;
+    padding: 7px !important;
+    border-radius: 17px !important;
+  }
+
+  .profile-card .profile-release-cover,
+  .roster-card .profile-release-cover,
+  .artist-card .profile-release-cover {
+    width: 46px !important;
+    height: 46px !important;
+    border-radius: 12px !important;
+  }
+
+  .profile-card .profile-latest-release strong,
+  .roster-card .profile-latest-release strong,
+  .artist-card .profile-latest-release strong {
+    font-size: .74rem !important;
+  }
+
+  .profile-card .profile-latest-release em,
+  .roster-card .profile-latest-release em,
+  .artist-card .profile-latest-release em {
+    font-size: .58rem !important;
+  }
+
+  .profile-card .profile-latest-release span:not(.profile-release-cover),
+  .roster-card .profile-latest-release span:not(.profile-release-cover),
+  .artist-card .profile-latest-release span:not(.profile-release-cover) {
+    font-size: .42rem !important;
+    letter-spacing: .16em !important;
+  }
+
+  .profile-card .profile-latest-release button,
+  .roster-card .profile-latest-release button,
+  .artist-card .profile-latest-release button {
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 42px !important;
+    border-radius: 14px !important;
+  }
+
+  .profile-card .profile-socials a,
+  .roster-card .profile-socials a,
+  .artist-card .profile-socials a,
+  .profile-card .profile-card-button,
+  .roster-card .profile-card-button,
+  .artist-card .profile-card-button {
+    width: 46px !important;
+    height: 46px !important;
+    border-radius: 14px !important;
+  }
+}
+/* === SKORM FINAL MOBILE/HERO/FOOTER LOCK 2026-07-18 === */
+.agency-paga-hero {
+  position: relative !important;
+  min-height: clamp(560px, 72vh, 850px) !important;
+  overflow: hidden !important;
+  background: #030507 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+.agency-paga-hero::before,
+.agency-paga-hero::after {
+  display: none !important;
+}
+
+.agency-paga-hero-image {
+  object-fit: cover !important;
+  object-position: center !important;
+  opacity: 1 !important;
+  filter: brightness(1.02) contrast(1.1) saturate(.92) !important;
+  mix-blend-mode: normal !important;
+  max-width: none !important;
+}
+
+.agency-paga-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  background:
+    radial-gradient(circle at 50% 36%, rgba(150, 210, 255, .08), transparent 35%),
+    linear-gradient(180deg, rgba(0, 0, 0, .03), rgba(0, 0, 0, .23) 56%, #05070a 100%) !important;
+}
+
+.agency-paga-shell {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.agency-hero-logo {
+  width: clamp(190px, 23vw, 360px) !important;
+  max-width: 82vw !important;
+  height: auto !important;
+}
+
+.floating-header .brand-logo img,
+.floating-header .brand img,
+.brand-logo img,
+.site-logo img,
+.header-logo img {
+  width: clamp(170px, 12vw, 230px) !important;
+  max-width: 44vw !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+.mobile-navigation {
+  left: auto !important;
+  right: 18px !important;
+  transform: none !important;
+  width: min(340px, calc(100vw - 28px)) !important;
+}
+
+.footer-newsletter.footer-newsletter-compact,
+.footer-newsletter {
+  width: min(880px, calc(100% - 32px)) !important;
+  min-height: 0 !important;
+  margin: 24px auto 16px !important;
+  padding: 14px 18px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 390px) !important;
+  gap: 12px 18px !important;
+  align-items: center !important;
+  text-align: left !important;
+  border-radius: 22px !important;
+  background: rgba(18, 20, 25, .62) !important;
+}
+
+.footer-newsletter .eyebrow {
+  font-size: .52rem !important;
+  line-height: 1 !important;
+  margin: 0 0 4px !important;
+  letter-spacing: .24em !important;
+}
+
+.footer-newsletter h2 {
+  font-size: 1rem !important;
+  line-height: 1.08 !important;
+  margin: 0 !important;
+  letter-spacing: -.03em !important;
+}
+
+.footer-newsletter p:not(.eyebrow) {
+  font-size: .66rem !important;
+  line-height: 1.3 !important;
+  margin: 3px 0 0 !important;
+  max-width: 32rem !important;
+}
+
+.footer-newsletter form {
+  height: 42px !important;
+  margin: 0 !important;
+  display: flex !important;
+  gap: 6px !important;
+}
+
+.footer-newsletter input,
+.footer-newsletter button {
+  height: 42px !important;
+  min-height: 42px !important;
+  font-size: .64rem !important;
+  border-radius: 14px !important;
+}
+
+.footer-newsletter input {
+  padding: 0 12px !important;
+}
+
+.footer-newsletter button {
+  padding: 0 16px !important;
+  white-space: nowrap !important;
+}
+
+.footer-newsletter .footer-mail {
+  display: none !important;
+}
+
+.profile-card.skorm-artist-card {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  min-height: clamp(360px, 36vw, 520px) !important;
+  aspect-ratio: 4 / 5 !important;
+  border-radius: 24px !important;
+}
+
+.profile-card.skorm-artist-card .home-profile-photo {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+}
+
+.profile-card.skorm-artist-card .home-profile-photo img,
+.profile-card.skorm-artist-card .fill-native-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding: clamp(15px, 1.7vw, 24px) !important;
+  background: linear-gradient(180deg, rgba(2, 4, 8, .06), rgba(2, 4, 8, .15) 45%, rgba(2, 4, 8, .70)) !important;
+  border: 0 !important;
+  pointer-events: none !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-copy {
+  width: min(76%, 330px) !important;
+  pointer-events: none !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-copy .eyebrow {
+  font-size: clamp(.48rem, .62vw, .6rem) !important;
+  letter-spacing: .22em !important;
+  line-height: 1.15 !important;
+  max-width: 15rem !important;
+  color: #80d9ff !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-copy h3 {
+  font-size: clamp(1.5rem, 2.2vw, 2.45rem) !important;
+  line-height: .94 !important;
+  letter-spacing: -.06em !important;
+  max-width: 10ch !important;
+  text-wrap: balance !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-controls {
+  position: relative !important;
+  z-index: 4 !important;
+  width: min(94%, 500px) !important;
+  margin: auto auto 0 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 48px !important;
+  grid-template-rows: 48px 48px !important;
+  grid-template-areas: "audio instagram" "audio plus" !important;
+  gap: 8px !important;
+  align-items: stretch !important;
+  pointer-events: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio {
+  grid-area: audio !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 104px !important;
+  min-height: 104px !important;
+  display: grid !important;
+  grid-template-columns: 58px minmax(0, 1fr) 46px !important;
+  align-items: center !important;
+  gap: 9px !important;
+  padding: 8px !important;
+  border-radius: 20px !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .18), rgba(255, 255, 255, .07)) !important;
+  border: 1px solid rgba(220, 245, 255, .27) !important;
+  box-shadow: 0 16px 42px rgba(0, 0, 0, .36), inset 0 1px 0 rgba(255, 255, 255, .16) !important;
+  backdrop-filter: blur(18px) saturate(1.18) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.18) !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-release-cover {
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-release-cover img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio > div {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio span:not(.profile-release-cover),
+.profile-card.skorm-artist-card .skorm-artist-audio strong,
+.profile-card.skorm-artist-card .skorm-artist-audio em {
+  display: block !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio span:not(.profile-release-cover) {
+  font-size: .38rem !important;
+  line-height: 1 !important;
+  letter-spacing: .13em !important;
+  color: rgba(234, 248, 255, .6) !important;
+  text-transform: uppercase !important;
+  margin: 0 0 5px !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio strong {
+  font-size: .78rem !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.03em !important;
+  color: #fff !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio em {
+  font-size: .56rem !important;
+  line-height: 1.1 !important;
+  margin-top: 4px !important;
+  color: rgba(255, 255, 255, .68) !important;
+  font-style: normal !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio button,
+.profile-card.skorm-artist-card .skorm-artist-audio .media-play-button {
+  width: 46px !important;
+  min-width: 46px !important;
+  height: 46px !important;
+  border-radius: 15px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio button span,
+.profile-card.skorm-artist-card .skorm-artist-audio .media-play-button span {
+  display: none !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-socials {
+  grid-area: instagram !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-more {
+  grid-area: plus !important;
+  text-decoration: none !important;
+  font-size: 1.45rem !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-socials a,
+.profile-card.skorm-artist-card .skorm-artist-more {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  border-radius: 15px !important;
+  background: rgba(34, 37, 43, .66) !important;
+  border: 1px solid rgba(220, 245, 255, .24) !important;
+  color: #eaf8ff !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .32), inset 0 1px 0 rgba(255, 255, 255, .14) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-socials a span {
+  display: none !important;
+}
+
+.profile-card.skorm-artist-card .instagram-glyph {
+  width: 21px !important;
+  height: 21px !important;
+  stroke: #eaf8ff !important;
+  fill: none !important;
+  display: block !important;
+}
+
+@media (max-width: 760px) {
+  .floating-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+  }
+
+  .floating-header .brand-logo,
+  .floating-header .brand {
+    flex: 0 0 auto !important;
+  }
+
+  .floating-header .brand-logo img,
+  .floating-header .brand img,
+  .brand-logo img,
+  .site-logo img,
+  .header-logo img {
+    width: 168px !important;
+    max-width: 60vw !important;
+    height: auto !important;
+  }
+
+  .floating-header button[aria-controls="mobile-navigation"],
+  .menu-toggle,
+  .hamburger-button {
+    margin-left: auto !important;
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 16px !important;
+  }
+
+  .mobile-navigation {
+    left: auto !important;
+    right: 12px !important;
+    top: calc(100% + 10px) !important;
+    transform: none !important;
+    width: min(318px, calc(100vw - 24px)) !important;
+  }
+
+  .agency-paga-hero {
+    min-height: 650px !important;
+  }
+
+  .agency-paga-hero-image {
+    object-position: center !important;
+    filter: brightness(1.18) contrast(1.12) saturate(.9) !important;
+  }
+
+  .agency-paga-overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, .02), rgba(0, 0, 0, .18) 54%, #05070a 100%) !important;
+  }
+
+  .agency-hero-logo {
+    width: min(74vw, 275px) !important;
+  }
+
+  .profile-card.skorm-artist-card {
+    min-height: min(116vw, 560px) !important;
+    aspect-ratio: 4 / 5 !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-overlay {
+    padding: 14px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-copy h3 {
+    font-size: clamp(1.42rem, 6vw, 2.12rem) !important;
+    max-width: 9ch !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-copy .eyebrow {
+    font-size: .45rem !important;
+    letter-spacing: .18em !important;
+    max-width: 13rem !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-controls {
+    width: calc(100% - 8px) !important;
+    grid-template-columns: minmax(0, 1fr) 44px !important;
+    grid-template-rows: 44px 44px !important;
+    gap: 7px !important;
+    margin-left: 0 !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio {
+    height: 96px !important;
+    min-height: 96px !important;
+    grid-template-columns: 50px minmax(0, 1fr) 42px !important;
+    gap: 7px !important;
+    padding: 7px !important;
+    border-radius: 18px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-release-cover {
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    border-radius: 12px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio strong {
+    font-size: .66rem !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio em {
+    font-size: .5rem !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio span:not(.profile-release-cover) {
+    font-size: .32rem !important;
+    letter-spacing: .1em !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio button,
+  .profile-card.skorm-artist-card .skorm-artist-audio .media-play-button,
+  .profile-card.skorm-artist-card .skorm-artist-socials a,
+  .profile-card.skorm-artist-card .skorm-artist-more {
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    border-radius: 13px !important;
+  }
+
+  .footer-newsletter.footer-newsletter-compact,
+  .footer-newsletter {
+    width: calc(100% - 24px) !important;
+    grid-template-columns: 1fr !important;
+    margin: 18px auto 10px !important;
+    padding: 12px !important;
+    text-align: left !important;
+  }
+
+  .footer-newsletter h2 {
+    font-size: .92rem !important;
+  }
+
+  .footer-newsletter p:not(.eyebrow) {
+    font-size: .62rem !important;
+  }
+
+  .footer-newsletter form {
+    width: 100% !important;
+    height: 40px !important;
+  }
+
+  .footer-newsletter input,
+  .footer-newsletter button {
+    height: 40px !important;
+    min-height: 40px !important;
+  }
+}
+
+/* === SKORM FINAL STABLE OVERRIDE — header, hero, roster and footer === */
+.floating-header {
+  display: grid !important;
+  grid-template-columns: 56px minmax(0, 1fr) 46px !important;
+  align-items: center !important;
+  width: min(1180px, calc(100vw - 28px)) !important;
+  min-height: 60px !important;
+  padding: 7px 10px !important;
+  gap: 10px !important;
+  overflow: visible !important;
+}
+
+.floating-header .brand-logo,
+.floating-header .brand {
+  width: 52px !important;
+  min-width: 52px !important;
+  max-width: 52px !important;
+  height: 44px !important;
+  flex: 0 0 52px !important;
+}
+
+.floating-header .brand-logo img,
+.floating-header .brand img {
+  display: block !important;
+  width: 48px !important;
+  max-width: 48px !important;
+  height: 40px !important;
+  object-fit: contain !important;
+}
+
+.floating-header > nav {
+  justify-self: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+}
+
+.floating-header > nav a {
+  padding: 8px 10px !important;
+  font-size: .68rem !important;
+  border-radius: 11px !important;
+}
+
+.floating-header .mobile-menu {
+  grid-column: 3 !important;
+  justify-self: end !important;
+  margin: 0 !important;
+  width: 44px !important;
+  min-width: 44px !important;
+  height: 44px !important;
+  flex: 0 0 44px !important;
+  border-radius: 12px !important;
+}
+
+.agency-paga-hero {
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #030507 !important;
+  box-shadow: none !important;
+}
+
+.agency-paga-hero::before,
+.agency-paga-hero::after {
+  display: none !important;
+}
+
+.agency-paga-hero-image {
+  object-fit: cover !important;
+  object-position: center !important;
+  opacity: 1 !important;
+  filter: brightness(1.1) contrast(1.08) saturate(.92) !important;
+}
+
+.profile-rail-wrap .media-rail > .profile-card.skorm-artist-card {
+  flex: 0 0 clamp(280px, 23vw, 350px) !important;
+  width: clamp(280px, 23vw, 350px) !important;
+  min-width: clamp(280px, 23vw, 350px) !important;
+}
+
+.profile-card.skorm-artist-card,
+.roster-gallery .profile-card.skorm-artist-card {
+  height: clamp(430px, 38vw, 520px) !important;
+  min-height: 430px !important;
+  max-height: 520px !important;
+  aspect-ratio: auto !important;
+  border-radius: 22px !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-copy h3 {
+  max-width: 90% !important;
+  font-size: clamp(1.45rem, 2vw, 2.2rem) !important;
+  line-height: .94 !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-controls,
+.profile-card.skorm-artist-card:hover .skorm-artist-controls,
+.profile-card.skorm-artist-card:focus-within .skorm-artist-controls {
+  position: absolute !important;
+  right: 12px !important;
+  bottom: 12px !important;
+  left: 12px !important;
+  z-index: 6 !important;
+  display: grid !important;
+  width: auto !important;
+  margin: 0 !important;
+  grid-template-columns: minmax(0, 1fr) 48px !important;
+  grid-template-rows: 48px 48px !important;
+  grid-template-areas: "audio instagram" "audio plus" !important;
+  gap: 8px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio {
+  grid-area: audio !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 104px !important;
+  min-height: 104px !important;
+  grid-template-columns: 58px minmax(0, 1fr) 46px !important;
+  overflow: hidden !important;
+}
+
+.profile-card.skorm-artist-card .skorm-release-cover {
+  width: 58px !important;
+  min-width: 58px !important;
+  height: 58px !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio > div {
+  min-width: 0 !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-audio strong,
+.profile-card.skorm-artist-card .skorm-artist-audio em {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-socials {
+  grid-area: instagram !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-more {
+  grid-area: plus !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-socials,
+.profile-card.skorm-artist-card .skorm-artist-more,
+.profile-card.skorm-artist-card .skorm-artist-socials a {
+  width: 48px !important;
+  min-width: 48px !important;
+  height: 48px !important;
+}
+
+.site-footer .footer-newsletter.footer-newsletter-compact {
+  width: min(720px, calc(100% - 32px)) !important;
+  min-height: 0 !important;
+  margin: 10px auto 8px !important;
+  padding: 4px 0 !important;
+  display: grid !important;
+  grid-template-columns: auto minmax(280px, 510px) !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-align: left !important;
+}
+
+.footer-newsletter.footer-newsletter-compact .eyebrow {
+  margin: 0 !important;
+  font-size: .6rem !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.footer-newsletter.footer-newsletter-compact form {
+  width: 100% !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  margin: 0 !important;
+  padding: 3px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  gap: 4px !important;
+  border: 1px solid rgba(185, 222, 242, .2) !important;
+  border-radius: 11px !important;
+  background: rgba(255, 255, 255, .035) !important;
+}
+
+.footer-newsletter.footer-newsletter-compact input,
+.footer-newsletter.footer-newsletter-compact button {
+  height: 30px !important;
+  min-height: 30px !important;
+}
+
+.footer-newsletter.footer-newsletter-compact input {
+  padding: 0 9px !important;
+  border: 0 !important;
+  background: transparent !important;
+  font-size: .72rem !important;
+}
+
+.footer-newsletter.footer-newsletter-compact button {
+  padding: 0 11px !important;
+  border-radius: 8px !important;
+  font-size: .55rem !important;
+}
+
+.footer-newsletter.footer-newsletter-compact .footer-mail {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .floating-header {
+    grid-template-columns: 52px minmax(0, 1fr) 44px !important;
+    width: calc(100vw - 18px) !important;
+    min-height: 58px !important;
+    padding: 7px 9px !important;
+  }
+
+  .floating-header > nav {
+    display: none !important;
+  }
+
+  .floating-header .brand-logo,
+  .floating-header .brand {
+    width: 48px !important;
+    min-width: 48px !important;
+    max-width: 48px !important;
+    height: 40px !important;
+  }
+
+  .floating-header .brand-logo img,
+  .floating-header .brand img {
+    width: 44px !important;
+    max-width: 44px !important;
+    height: 36px !important;
+  }
+
+  .floating-header .mobile-menu {
+    grid-column: 3 !important;
+    justify-self: end !important;
+    margin: 0 !important;
+  }
+
+  .mobile-navigation {
+    position: fixed !important;
+    top: 72px !important;
+    right: 9px !important;
+    left: auto !important;
+    width: min(320px, calc(100vw - 18px)) !important;
+    padding: 9px !important;
+    border-radius: 17px !important;
+    transform: translateY(-8px) scale(.98) !important;
+    transform-origin: top right !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .mobile-navigation.open {
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .mobile-navigation nav {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 4px !important;
+  }
+
+  .mobile-navigation nav a {
+    min-height: 42px !important;
+    padding: 10px 12px !important;
+    border-radius: 9px !important;
+  }
+
+  .mobile-navigation nav a small {
+    display: none !important;
+  }
+
+  .agency-paga-hero-image {
+    filter: brightness(1.18) contrast(1.06) saturate(.92) !important;
+  }
+
+  .profile-rail-wrap .media-rail > .profile-card.skorm-artist-card {
+    flex: 0 0 min(82vw, 330px) !important;
+    width: min(82vw, 330px) !important;
+    min-width: min(82vw, 330px) !important;
+  }
+
+  .profile-card.skorm-artist-card,
+  .roster-gallery .profile-card.skorm-artist-card {
+    height: min(118vw, 470px) !important;
+    min-height: 410px !important;
+    max-height: 470px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-copy h3 {
+    max-width: 90% !important;
+    font-size: clamp(1.35rem, 7vw, 1.95rem) !important;
+    line-height: .95 !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-controls,
+  .profile-card.skorm-artist-card:hover .skorm-artist-controls,
+  .profile-card.skorm-artist-card:focus-within .skorm-artist-controls {
+    right: 9px !important;
+    bottom: 9px !important;
+    left: 9px !important;
+    grid-template-columns: minmax(0, 1fr) 42px !important;
+    grid-template-rows: 42px 42px !important;
+    gap: 6px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio {
+    height: 90px !important;
+    min-height: 90px !important;
+    grid-template-columns: 46px minmax(0, 1fr) 40px !important;
+    padding: 7px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-release-cover {
+    width: 46px !important;
+    min-width: 46px !important;
+    height: 46px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio strong {
+    font-size: .7rem !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio em {
+    font-size: .5rem !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-socials,
+  .profile-card.skorm-artist-card .skorm-artist-more,
+  .profile-card.skorm-artist-card .skorm-artist-socials a {
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 42px !important;
+  }
+
+  .site-footer .footer-newsletter.footer-newsletter-compact {
+    width: calc(100% - 24px) !important;
+    margin: 8px auto 6px !important;
+    padding: 2px 0 !important;
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+    text-align: center !important;
+  }
+
+  .footer-newsletter.footer-newsletter-compact .eyebrow {
+    text-align: center !important;
+  }
+}
+
+/* FINAL LOCK: header logo + compact roster cards */
+.floating-header .brand.brand-logo{width:88px!important;min-width:88px!important;max-width:88px!important;height:56px!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.floating-header .brand.brand-logo img{display:block!important;width:68px!important;height:48px!important;max-width:none!important;object-fit:contain!important;object-position:center!important}
+.profile-rail-wrap .media-rail>.profile-card.skorm-artist-card{flex:0 0 clamp(235px,20vw,285px)!important;width:clamp(235px,20vw,285px)!important;min-width:clamp(235px,20vw,285px)!important;max-width:285px!important;height:clamp(340px,29vw,400px)!important;min-height:340px!important;max-height:400px!important}
+.roster-gallery{width:min(1120px,calc(100% - 40px))!important;margin-inline:auto!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:20px!important}
+.roster-gallery .profile-card.skorm-artist-card{width:100%!important;min-width:0!important;max-width:none!important;height:clamp(360px,32vw,430px)!important;min-height:360px!important;max-height:430px!important}
+.profile-card.skorm-artist-card .profile-card-name{max-width:84%!important;font-size:clamp(1.05rem,1.65vw,1.55rem)!important;line-height:.96!important;overflow-wrap:normal!important;word-break:normal!important}
+.profile-card.skorm-artist-card .skorm-artist-controls{right:10px!important;bottom:10px!important;left:10px!important;display:grid!important;grid-template-columns:minmax(0,1fr) 40px!important;grid-template-rows:40px 40px!important;grid-template-areas:"audio instagram" "audio plus"!important;gap:6px!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important}
+.profile-card.skorm-artist-card .skorm-artist-audio{grid-area:audio!important;width:100%!important;min-width:0!important;height:86px!important;min-height:86px!important;padding:8px!important;grid-template-columns:48px minmax(0,1fr) 38px!important;gap:8px!important;overflow:hidden!important}
+.profile-card.skorm-artist-card .skorm-release-cover{width:48px!important;height:48px!important;min-width:48px!important}.profile-card.skorm-artist-card .skorm-artist-audio>div{min-width:0!important;overflow:hidden!important}.profile-card.skorm-artist-card .skorm-artist-audio span,.profile-card.skorm-artist-card .skorm-artist-audio strong,.profile-card.skorm-artist-card .skorm-artist-audio em{display:block!important;max-width:100%!important;overflow:hidden!important;white-space:nowrap!important;text-overflow:ellipsis!important}.profile-card.skorm-artist-card .skorm-artist-audio span{font-size:.52rem!important}.profile-card.skorm-artist-card .skorm-artist-audio strong{font-size:.82rem!important;line-height:1.1!important}.profile-card.skorm-artist-card .skorm-artist-audio em{font-size:.62rem!important}
+.profile-card.skorm-artist-card .skorm-artist-audio .media-play-button,.profile-card.skorm-artist-card .skorm-artist-socials a,.profile-card.skorm-artist-card .skorm-artist-more{width:40px!important;min-width:40px!important;height:40px!important;min-height:40px!important}
+.profile-card.skorm-artist-card .skorm-artist-socials{grid-area:instagram!important;display:block!important;width:40px!important;height:40px!important;opacity:1!important;visibility:visible!important}.profile-card.skorm-artist-card .skorm-artist-more{grid-area:plus!important;display:flex!important;opacity:1!important;visibility:visible!important}
+@media(max-width:720px){.floating-header .brand.brand-logo{width:72px!important;min-width:72px!important;max-width:72px!important;height:50px!important}.floating-header .brand.brand-logo img{width:56px!important;height:42px!important}.profile-rail-wrap .media-rail>.profile-card.skorm-artist-card{flex:0 0 min(76vw,305px)!important;width:min(76vw,305px)!important;min-width:min(76vw,305px)!important;max-width:305px!important;height:min(104vw,410px)!important;min-height:370px!important;max-height:410px!important}.roster-gallery{width:calc(100% - 24px)!important;grid-template-columns:1fr!important;gap:14px!important}.roster-gallery .profile-card.skorm-artist-card{height:min(112vw,430px)!important;min-height:380px!important;max-height:430px!important}.profile-card.skorm-artist-card .profile-card-name{font-size:clamp(1rem,5.2vw,1.35rem)!important}.profile-card.skorm-artist-card .skorm-artist-controls{display:grid!important;right:8px!important;bottom:8px!important;left:8px!important;opacity:1!important;visibility:visible!important}}
+
+/* FINAL REQUEST LOCK: 3:4 roster cards, persistent mobile tools and transparent header logo. */
+.floating-header .brand.brand-logo img {
+  width: 58px !important;
+  height: 48px !important;
+  object-fit: contain !important;
+}
+
+.roster-gallery .profile-card.skorm-artist-card {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  aspect-ratio: 3 / 4 !important;
+}
+
+.profile-card.skorm-artist-card .skorm-artist-controls,
+.profile-card.skorm-artist-card:hover .skorm-artist-controls,
+.profile-card.skorm-artist-card:focus-within .skorm-artist-controls,
+.profile-card.skorm-artist-card .skorm-artist-audio,
+.profile-card.skorm-artist-card .skorm-artist-socials,
+.profile-card.skorm-artist-card .skorm-artist-socials a,
+.profile-card.skorm-artist-card .skorm-artist-more {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+@media (max-width: 720px) {
+  .floating-header .brand.brand-logo img {
+    width: 54px !important;
+    height: 44px !important;
+  }
+
+  .profile-rail-wrap .media-rail > .profile-card.skorm-artist-card,
+  .roster-gallery .profile-card.skorm-artist-card {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: 3 / 4 !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-overlay {
+    overflow: visible !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-controls,
+  .profile-card.skorm-artist-card:hover .skorm-artist-controls,
+  .profile-card.skorm-artist-card:focus-within .skorm-artist-controls {
+    display: grid !important;
+    position: absolute !important;
+    right: 8px !important;
+    bottom: 8px !important;
+    left: 8px !important;
+    z-index: 20 !important;
+    grid-template-columns: minmax(0, 1fr) 42px !important;
+    grid-template-rows: 42px 42px !important;
+    grid-template-areas: "audio instagram" "audio plus" !important;
+    gap: 6px !important;
+    transform: none !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio {
+    display: grid !important;
+    grid-area: audio !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 90px !important;
+    min-height: 90px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-socials {
+    display: block !important;
+    grid-area: instagram !important;
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-socials a,
+  .profile-card.skorm-artist-card .skorm-artist-more {
+    display: flex !important;
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-more {
+    grid-area: plus !important;
+  }
+}
+
+/* MOBILE ROSTER LOCK: two profiles in view with permanently visible tools. */
+@media (max-width: 720px) {
+  .profile-rail-wrap {
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .profile-rail-wrap .media-rail {
+    display: flex !important;
+    width: 100% !important;
+    gap: 8px !important;
+    padding: 8px 12px 18px !important;
+    overflow-x: auto !important;
+    overscroll-behavior-x: contain !important;
+    scroll-snap-type: x mandatory !important;
+    touch-action: pan-x !important;
+    scrollbar-width: none !important;
+  }
+
+  .profile-rail-wrap .media-rail > .profile-card.skorm-artist-card {
+    flex: 0 0 calc((100vw - 32px) / 2) !important;
+    width: calc((100vw - 32px) / 2) !important;
+    min-width: calc((100vw - 32px) / 2) !important;
+    max-width: calc((100vw - 32px) / 2) !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: 3 / 4 !important;
+    scroll-snap-align: start !important;
+    border-radius: 15px !important;
+  }
+
+  .profile-rail-wrap .rail-dot {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    z-index: 30 !important;
+  }
+
+  .profile-rail-wrap .rail-dot-left {
+    left: 5px !important;
+  }
+
+  .profile-rail-wrap .rail-dot-right {
+    right: 5px !important;
+  }
+
+  .roster-gallery {
+    width: calc(100% - 16px) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .roster-gallery .profile-card.skorm-artist-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: 3 / 4 !important;
+    border-radius: 15px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-overlay {
+    display: block !important;
+    padding: 8px !important;
+    pointer-events: none !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-copy {
+    width: 100% !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-copy h3 {
+    max-width: 100% !important;
+    font-size: clamp(.82rem, 4.2vw, 1.08rem) !important;
+    line-height: .95 !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-copy .eyebrow {
+    max-width: 100% !important;
+    font-size: .34rem !important;
+    line-height: 1.15 !important;
+    letter-spacing: .1em !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-controls,
+  .profile-card.skorm-artist-card:hover .skorm-artist-controls,
+  .profile-card.skorm-artist-card:focus-within .skorm-artist-controls {
+    display: grid !important;
+    position: absolute !important;
+    right: 6px !important;
+    bottom: 6px !important;
+    left: 6px !important;
+    z-index: 40 !important;
+    width: auto !important;
+    height: 78px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: 42px 30px !important;
+    grid-template-areas: "audio audio" "instagram plus" !important;
+    gap: 4px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio,
+  .profile-card.skorm-artist-card .profile-latest-release-empty {
+    display: grid !important;
+    grid-area: audio !important;
+    grid-template-columns: minmax(0, 1fr) 34px !important;
+    width: 100% !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    padding: 4px 5px 4px 8px !important;
+    gap: 4px !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-release-cover {
+    display: none !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio > div {
+    display: flex !important;
+    min-width: 0 !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio span:not(.profile-release-cover),
+  .profile-card.skorm-artist-card .skorm-artist-audio em {
+    display: none !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio strong {
+    display: block !important;
+    max-width: 100% !important;
+    font-size: .54rem !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-audio .media-play-button,
+  .profile-card.skorm-artist-card .skorm-artist-audio button {
+    display: flex !important;
+    width: 34px !important;
+    min-width: 34px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    border-radius: 9px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-socials {
+    display: block !important;
+    grid-area: instagram !important;
+    width: 100% !important;
+    height: 30px !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-socials a,
+  .profile-card.skorm-artist-card .skorm-artist-more {
+    display: flex !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    border-radius: 9px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-artist-more {
+    grid-area: plus !important;
+    font-size: 1rem !important;
+  }
+
+  .profile-card.skorm-artist-card .instagram-glyph {
+    width: 15px !important;
+    height: 15px !important;
+  }
+}
+
+/* Independent mobile toolbar: deliberately isolated from legacy card rules. */
+.skorm-mobile-tools {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .profile-card.skorm-artist-card .skorm-artist-controls {
+    display: none !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-mobile-tools {
+    position: absolute !important;
+    right: 5px !important;
+    bottom: 5px !important;
+    left: 5px !important;
+    z-index: 999 !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 4px !important;
+    height: 34px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-mobile-sound,
+  .profile-card.skorm-artist-card .skorm-mobile-instagram,
+  .profile-card.skorm-artist-card .skorm-mobile-more {
+    position: relative !important;
+    inset: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid rgba(220, 245, 255, .42) !important;
+    border-radius: 9px !important;
+    background: rgba(5, 8, 13, .86) !important;
+    color: #fff !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .48) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    text-decoration: none !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-mobile-sound .media-play-button,
+  .profile-card.skorm-artist-card .skorm-mobile-sound button {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #fff !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-mobile-sound-cover {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    border-radius: 8px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-mobile-sound-cover img,
+  .profile-card.skorm-artist-card .skorm-mobile-sound-cover .fill-native-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    filter: brightness(.62) contrast(1.08) !important;
+  }
+
+
+  .profile-card.skorm-artist-card .skorm-mobile-sound .media-play-button span,
+  .profile-card.skorm-artist-card .skorm-mobile-sound button span {
+    display: none !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-mobile-instagram .instagram-glyph {
+    display: block !important;
+    width: 16px !important;
+    height: 16px !important;
+    stroke: #fff !important;
+    fill: none !important;
+  }
+
+  .profile-card.skorm-artist-card .skorm-mobile-more {
+    font-size: 1.08rem !important;
+    line-height: 1 !important;
+    font-weight: 500 !important;
+  }
+}
+
+/* Keep the home media viewer above the floating header on phones. */
+.home-media-modal {
+  z-index: 2147483647 !important;
+}
+
+.roster-filter-selects {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  gap: 10px;
+}
+.roster-filter-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: white; }
+.roster-filter-heading button { border: 0; padding: 6px 0; color: #9fdcff; background: transparent; cursor: pointer; }
+.roster-filter-selects label { display: grid; gap: 6px; color: rgba(255,255,255,.7); font-size: .7rem; }
+.roster-filter-selects select { min-height: 42px; padding: 0 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px; color: white; background: #12161c; }
+@media (max-width: 720px) { .roster-filter-selects { grid-template-columns: 1fr; } }
+
+@media (max-width: 860px) {
+  .home-media-modal-close {
+    position: fixed !important;
+    top: max(16px, env(safe-area-inset-top)) !important;
+    right: 16px !important;
+    z-index: 2147483647 !important;
+    background: rgba(8, 12, 18, .92) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .55) !important;
+  }
+}
+
+/* Final roster rail lock: controls stay in side gutters, never on cards. */
+.profile-rail-wrap {
+  box-sizing: border-box !important;
+  padding-inline: 32px !important;
+  overflow: visible !important;
+}
+.profile-rail-wrap .media-rail {
+  box-sizing: border-box !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+.profile-rail-wrap .rail-dot-left { left: 8px !important; }
+.profile-rail-wrap .rail-dot-right { right: 8px !important; }
+.profile-rail-wrap .rail-dot {
+  width: 14px !important;
+  height: 14px !important;
+  z-index: 100 !important;
+  box-shadow: 0 0 0 6px #050a10, 0 0 26px rgba(66,216,255,1) !important;
+}
+@media (max-width: 720px) {
+  .profile-rail-wrap { padding-inline: 27px !important; }
+  .profile-rail-wrap .media-rail { padding-inline: 5px !important; }
+  .profile-rail-wrap .rail-dot-left { left: 6px !important; }
+  .profile-rail-wrap .rail-dot-right { right: 6px !important; }
+}
+
+/* SKORM TV — home media console */
+.skorm-tv { width:min(1500px,calc(100% - 32px)); margin:clamp(60px,8vw,120px) auto; padding:22px; color:#eef8ff; border:1px solid rgba(126,207,255,.23); border-radius:30px; background:radial-gradient(circle at 55% 20%,rgba(0,116,255,.14),transparent 34%),linear-gradient(145deg,#05090f,#020407 70%); box-shadow:0 35px 110px rgba(0,0,0,.58),inset 0 0 70px rgba(23,113,181,.06); }
+.skorm-tv-title { display:flex; align-items:center; justify-content:center; gap:18px; height:46px; }
+.skorm-tv-title h2 { margin:0; color:#4fc8ff; font-size:.72rem; letter-spacing:.55em; font-weight:650; }
+.skorm-tv-title span { width:6px; height:6px; border-radius:50%; background:#19aaff; box-shadow:0 0 18px #19aaff; }
+.skorm-tv-console { display:grid; grid-template-columns:130px minmax(0,1fr) 210px 190px; gap:14px; align-items:stretch; }
+.skorm-tv-categories,.skorm-tv-info,.skorm-tv-remote { border:1px solid rgba(139,207,255,.13); border-radius:20px; background:rgba(4,9,15,.72); }
+.skorm-tv-categories { display:flex; flex-direction:column; gap:8px; padding:20px 12px; }
+.skorm-tv-categories img { width:62px; height:54px; object-fit:contain; margin:0 auto 26px; }
+.skorm-tv-categories button { min-height:42px; padding:0 13px; border:0; border-left:2px solid transparent; color:rgba(223,240,250,.48); background:transparent; text-align:left; text-transform:uppercase; letter-spacing:.12em; cursor:pointer; }
+.skorm-tv-categories button.active { color:#37bdff; border-color:#159eff; background:linear-gradient(90deg,rgba(24,158,255,.12),transparent); }
+.skorm-tv-center { min-width:0; }
+.skorm-tv-screen { position:relative; height:clamp(390px,38vw,630px); overflow:hidden; border:1px solid rgba(131,203,255,.17); border-radius:20px; background:#010306; box-shadow:inset 0 0 80px rgba(0,0,0,.65); }
+.skorm-tv-screen>img,.skorm-tv-screen>iframe { width:100%; height:100%; display:block; border:0; object-fit:contain; background:#010306; }
+.skorm-tv-idle { position:relative; height:100%; overflow:hidden; background:#010306; }
+.skorm-tv-idle img { width:100%; height:100%; object-fit:cover; }
+.skorm-tv-idle p { position:absolute; left:50%; bottom:18px; transform:translateX(-50%); margin:0; padding:8px 13px; border-radius:99px; color:rgba(231,246,255,.72); background:rgba(2,7,12,.62); backdrop-filter:blur(12px); font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; white-space:nowrap; }
+.skorm-tv-screen-play { position:absolute; left:20px; bottom:18px; width:44px; height:44px; display:grid; place-items:center; border:1px solid rgba(85,196,255,.35); border-radius:50%; color:white; background:rgba(2,7,12,.78); cursor:pointer; }
+.skorm-tv-progress { height:32px; display:grid; grid-template-columns:18px 1fr 18px; align-items:center; gap:12px; padding:0 8px; }
+.skorm-tv-progress>span { height:2px; overflow:hidden; background:rgba(255,255,255,.1); }
+.skorm-tv-progress i { display:block; height:100%; background:#1ab3ff; box-shadow:0 0 12px #1ab3ff; transition:.25s; }
+.skorm-tv-blue-dot { width:12px; height:12px; padding:0; border:0; border-radius:50%; background:#31c4ff; box-shadow:0 0 0 6px rgba(49,196,255,.08),0 0 20px #31c4ff; cursor:pointer; }
+.skorm-tv-info { padding:clamp(20px,2.4vw,34px) 20px; overflow:hidden; }
+.skorm-tv-info>small { color:#22b7ff; font-size:.6rem; letter-spacing:.16em; }
+.skorm-tv-info h3 { margin:18px 0 5px; font-size:clamp(1.35rem,2.2vw,2.2rem); font-weight:420; overflow-wrap:anywhere; }
+.skorm-tv-info>strong { display:block; color:#b9ceda; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; }
+.skorm-tv-info>p { min-height:80px; color:rgba(214,232,243,.56); font-size:.72rem; line-height:1.7; }
+.skorm-tv-info dl { margin:20px 0 0; display:grid; gap:12px; }
+.skorm-tv-info dl div { display:grid; grid-template-columns:50px 1fr; gap:8px; border-top:1px solid rgba(255,255,255,.07); padding-top:10px; }
+.skorm-tv-info dt { color:#258fc5; font-size:.55rem; }.skorm-tv-info dd { margin:0; color:#d8e9f3; font-size:.67rem; }
+.skorm-tv-remote { position:relative; min-height:100%; padding:0; overflow:hidden; background-image:url('/skorm-tv-remote.png'); background-position:center center; background-size:222% auto; background-repeat:no-repeat; box-shadow:inset 0 0 35px rgba(30,135,205,.07); }
+.skorm-tv-remote>button { position:absolute; left:50%; z-index:2; transform:translateX(-50%); display:grid; place-items:center; border:0; border-radius:50%; color:#2cbdff; background:rgba(2,7,12,.12); cursor:pointer; }
+.skorm-tv-remote>button:first-child { top:22%; width:42px; height:42px; }
+.skorm-tv-remote .skorm-tv-menu-button { top:33%; width:58px; height:42px; color:transparent; }
+.skorm-tv-remote .skorm-tv-back-button { top:71%; width:58px; height:42px; color:transparent; }
+.skorm-tv-remote-pad { position:absolute; top:41%; left:50%; transform:translateX(-50%); z-index:2; display:grid; grid-template-columns:repeat(3,36px); grid-template-rows:repeat(3,36px); place-items:center; width:124px; height:124px; padding:8px; border:0; border-radius:50%; }
+.skorm-tv-remote-pad button { width:28px; height:28px; display:grid; place-items:center; padding:0; border:0; color:#dff5ff; background:transparent; cursor:pointer; }.skorm-tv-remote-pad button:nth-child(1){grid-column:2}.skorm-tv-remote-pad button:nth-child(2){grid-column:1;grid-row:2}.skorm-tv-remote-pad button:nth-child(3){grid-column:2;grid-row:2;border-radius:50%;background:rgba(41,174,255,.17)}.skorm-tv-remote-pad button:nth-child(4){grid-column:3;grid-row:2}.skorm-tv-remote-pad button:nth-child(5){grid-column:2;grid-row:3}
+.skorm-tv-volume { position:absolute; left:50%; bottom:12%; z-index:2; transform:translateX(-50%); display:flex; align-items:center; gap:18px; }.skorm-tv-volume button { width:32px;height:32px;padding:0;border:0;color:transparent;background:transparent;cursor:pointer}.skorm-tv-volume span{font-size:.65rem;color:transparent}
+.skorm-tv-preview-shell { display:grid; grid-template-columns:18px minmax(0,1fr) 18px; gap:14px; align-items:center; margin:14px 132px 0 144px; }
+.skorm-tv-previews { display:flex; gap:9px; overflow-x:auto; scrollbar-width:none; scroll-snap-type:x mandatory; }.skorm-tv-previews::-webkit-scrollbar{display:none}
+.skorm-tv-previews>button { flex:0 0 170px; height:82px; position:relative; display:grid; grid-template-columns:66px 1fr; gap:8px; align-items:end; overflow:hidden; padding:7px; border:1px solid rgba(126,201,245,.13); border-radius:11px; color:white; background:#050a10; text-align:left; scroll-snap-align:center; cursor:pointer; }.skorm-tv-previews>button.active{border-color:#27baff;box-shadow:0 0 16px rgba(39,186,255,.22)}
+.skorm-tv-previews img { width:66px;height:66px;object-fit:cover;border-radius:7px}.skorm-tv-previews span{min-width:0}.skorm-tv-previews strong,.skorm-tv-previews small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.skorm-tv-previews strong{font-size:.66rem}.skorm-tv-previews small{margin-top:5px;color:rgba(218,234,244,.48);font-size:.55rem}
+.skorm-tv-story { position:relative;height:100%;display:grid;place-content:center;justify-items:center;gap:10px;overflow:hidden }.skorm-tv-story>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.28) blur(2px);transform:scale(1.04)}.skorm-tv-story svg,.skorm-tv-story strong,.skorm-tv-story a{position:relative;z-index:1}.skorm-tv-story svg{width:34px;height:34px}.skorm-tv-story strong{font-size:1.3rem}.skorm-tv-story a{padding:10px 16px;border:1px solid rgba(87,197,255,.34);border-radius:99px;color:#dff5ff;background:rgba(5,12,19,.7)}
+@media(max-width:1050px){.skorm-tv-console{grid-template-columns:100px minmax(0,1fr) 180px}.skorm-tv-remote{grid-column:1/-1;flex-direction:row;justify-content:center}.skorm-tv-remote-pad{width:104px;flex:0 0 104px}.skorm-tv-volume{margin:0}.skorm-tv-preview-shell{margin-inline:0}}
+@media(max-width:720px){.skorm-tv{width:calc(100% - 16px);padding:10px;border-radius:20px}.skorm-tv-title{height:38px}.skorm-tv-console{grid-template-columns:1fr;gap:8px}.skorm-tv-categories{display:grid;grid-template-columns:repeat(4,1fr);padding:5px;gap:4px;border-radius:12px}.skorm-tv-categories img{display:none}.skorm-tv-categories button{min-height:38px;text-align:center;border:0;border-bottom:2px solid transparent;padding:0 3px;font-size:.58rem}.skorm-tv-screen{height:min(62vh,430px);border-radius:14px}.skorm-tv-info{padding:14px;border-radius:14px}.skorm-tv-info>p{min-height:0}.skorm-tv-info dl{grid-template-columns:repeat(2,1fr);gap:8px}.skorm-tv-info dl div{grid-template-columns:42px 1fr}.skorm-tv-remote{padding:10px;gap:12px;border-radius:14px}.skorm-tv-remote>img{display:none}.skorm-tv-remote-pad{width:92px;height:92px;flex-basis:92px;grid-template-columns:repeat(3,26px);grid-template-rows:repeat(3,26px)}.skorm-tv-preview-shell{grid-template-columns:14px minmax(0,1fr) 14px;gap:8px;margin:10px 2px}.skorm-tv-previews>button{flex-basis:136px;height:68px;grid-template-columns:52px 1fr}.skorm-tv-previews img{width:52px;height:52px}}
+@media(max-width:1050px){.skorm-tv-remote{height:230px;min-height:230px;background-size:150% auto;background-position:center 50%}.skorm-tv-remote>button:first-child{top:8%}.skorm-tv-remote .skorm-tv-menu-button{top:26%}.skorm-tv-remote-pad{top:34%}.skorm-tv-remote .skorm-tv-back-button{top:78%}.skorm-tv-volume{bottom:2%}}
+@media(max-width:720px){.skorm-tv-remote{height:190px;min-height:190px;background-size:125% auto}.skorm-tv-remote>button:first-child{top:5%;width:32px;height:32px}.skorm-tv-remote .skorm-tv-menu-button{top:22%;height:30px}.skorm-tv-remote-pad{top:31%;width:92px;height:92px}.skorm-tv-remote .skorm-tv-back-button{top:76%;height:30px}.skorm-tv-volume{bottom:0}}
+
+/* Calibrated invisible hotspots: the supplied remote image is the only visible UI. */
+.skorm-tv-remote>button,
+.skorm-tv-remote-pad,
+.skorm-tv-remote-pad button,
+.skorm-tv-volume,
+.skorm-tv-volume button,
+.skorm-tv-volume span {
+  opacity: 0 !important;
+}
+.skorm-tv-remote>button,
+.skorm-tv-remote-pad button,
+.skorm-tv-volume button { pointer-events: auto !important; }
+.skorm-tv-remote>button:first-child { top:29% !important; width:48px !important; height:48px !important; }
+.skorm-tv-remote .skorm-tv-menu-button { top:39% !important; width:64px !important; height:50px !important; }
+.skorm-tv-remote-pad { top:48% !important; width:132px !important; height:132px !important; grid-template-columns:repeat(3,38px) !important; grid-template-rows:repeat(3,38px) !important; }
+.skorm-tv-remote .skorm-tv-back-button { top:75% !important; width:64px !important; height:50px !important; }
+.skorm-tv-volume { bottom:8% !important; width:128px !important; justify-content:space-between !important; }
+.skorm-tv-story button { position:relative;z-index:1;padding:10px 16px;border:1px solid rgba(87,197,255,.34);border-radius:99px;color:#dff5ff;background:rgba(5,12,19,.7);cursor:pointer }
+.skorm-tv-no-story p,.skorm-tv-no-story small{position:relative;z-index:1;margin:0;text-align:center}.skorm-tv-no-story p{font-size:clamp(1rem,2vw,1.4rem);font-weight:800;color:#fff}.skorm-tv-no-story small{max-width:280px;color:#9bcce6;letter-spacing:.04em}
+@media(max-width:1050px){.skorm-tv-remote>button:first-child{top:20% !important}.skorm-tv-remote .skorm-tv-menu-button{top:34% !important}.skorm-tv-remote-pad{top:37% !important}.skorm-tv-remote .skorm-tv-back-button{top:75% !important}.skorm-tv-volume{bottom:1% !important}}
+@media(max-width:720px){.skorm-tv-remote>button:first-child{top:16% !important}.skorm-tv-remote .skorm-tv-menu-button{top:31% !important}.skorm-tv-remote-pad{top:34% !important;width:100px !important;height:100px !important;grid-template-columns:repeat(3,28px) !important;grid-template-rows:repeat(3,28px) !important}.skorm-tv-remote .skorm-tv-back-button{top:74% !important}.skorm-tv-volume{bottom:0 !important}}
+.skorm-tv-music{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden;background:radial-gradient(circle at 50% 42%,rgba(0,149,255,.2),transparent 36%),#02060b}.skorm-tv-music>img{width:clamp(130px,24vw,240px);aspect-ratio:1;object-fit:cover;border-radius:18px;box-shadow:0 25px 70px rgba(0,0,0,.55),0 0 34px rgba(28,171,255,.18)}.skorm-tv-music>strong{font-size:clamp(1rem,2vw,1.6rem)}.skorm-tv-music>span{color:rgba(218,237,248,.55);font-size:.72rem}.skorm-tv-equalizer{height:38px;display:flex;align-items:center;gap:4px}.skorm-tv-equalizer i{width:3px;height:7px;border-radius:3px;background:#2fc3ff;box-shadow:0 0 10px #2fc3ff;animation:skorm-eq .8s ease-in-out infinite alternate;animation-play-state:paused}.skorm-tv-music.playing .skorm-tv-equalizer i{animation-play-state:running}.skorm-tv-equalizer i:nth-child(3n){animation-delay:.2s}.skorm-tv-equalizer i:nth-child(4n){animation-delay:.4s}.skorm-tv-equalizer i:nth-child(5n){animation-delay:.6s}@keyframes skorm-eq{from{height:6px;opacity:.45}to{height:34px;opacity:1}}
+
+/* SKORM TV menu typography mirrors the main header navigation. */
+.skorm-tv-categories button {
+  min-height: 38px !important;
+  padding: 9px 12px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: #d9dde0 !important;
+  background: transparent !important;
+  font-family: inherit !important;
+  font-size: .71rem !important;
+  font-weight: 650 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+.skorm-tv-categories button:hover { color:#fff !important; background:rgba(255,255,255,.1) !important; }
+.skorm-tv-categories button.active { color:#e9f8ff !important; background:rgba(47,184,255,.16) !important; box-shadow:inset 0 0 0 1px rgba(71,194,255,.28),0 0 18px rgba(26,170,255,.1) !important; }
+.skorm-tv-remote>button:first-child { top:27% !important; }
+.skorm-tv-screen>.skorm-tv-story-frame { width:min(100%,420px) !important; height:100% !important; margin:0 auto !important; background:#000 !important; }
+.skorm-tv-screen>.skorm-tv-story-media { width:100% !important;height:100% !important;display:block !important;object-fit:contain !important;object-position:center !important;background:#000 !important; }
+
+/* Empty remote artwork + fully visible, calibrated controls. */
+.skorm-tv-remote {
+  isolation:isolate !important;
+  overflow:hidden !important;
+  background-image:url('/skorm-tv-remote-empty.png') !important;
+  background-size:auto 100% !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+}
+.skorm-tv-remote>button,
+.skorm-tv-remote-pad,
+.skorm-tv-remote-pad button,
+.skorm-tv-volume,
+.skorm-tv-volume button,
+.skorm-tv-volume span { opacity:1 !important; }
+.skorm-tv-remote>button { color:#dff5ff !important; background:linear-gradient(145deg,rgba(11,20,29,.96),rgba(1,4,8,.96)) !important; border:1px solid rgba(126,211,255,.22) !important; box-shadow:0 8px 20px rgba(0,0,0,.6),inset 0 0 14px rgba(37,164,235,.06) !important; }
+.skorm-tv-remote>button:first-child { top:22% !important; width:46px !important; height:46px !important; color:#2fc3ff !important; }
+.skorm-tv-remote .skorm-tv-menu-button { top:34% !important; width:66px !important; height:40px !important; border-radius:999px !important; color:#cfe7f4 !important; font-size:.62rem !important; letter-spacing:.13em !important; }
+.skorm-tv-remote-pad { top:45% !important; width:142px !important; height:142px !important; padding:10px !important; grid-template-columns:repeat(3,40px) !important; grid-template-rows:repeat(3,40px) !important; border:1px solid #139ff5 !important; background:radial-gradient(circle,rgba(11,22,32,.96),rgba(1,5,9,.98)) !important; box-shadow:0 0 0 4px rgba(20,159,245,.1),0 0 28px rgba(0,157,255,.52),inset 0 0 24px rgba(22,127,196,.12) !important; }
+.skorm-tv-remote-pad button { display:grid !important;place-items:center !important;color:#37c4ff !important;background:transparent !important; }
+.skorm-tv-remote-pad button:nth-child(3) { border:1px solid rgba(121,211,255,.28) !important;background:rgba(20,103,151,.18) !important;box-shadow:0 0 18px rgba(23,177,255,.18) !important; }
+.skorm-tv-remote .skorm-tv-back-button { top:72% !important; width:66px !important; height:40px !important; border-radius:999px !important; color:#cfe7f4 !important; font-size:.62rem !important; letter-spacing:.13em !important; }
+.skorm-tv-volume { bottom:11% !important; width:142px !important; min-height:42px !important; padding:3px 8px !important; border:1px solid rgba(126,211,255,.16) !important; border-radius:999px !important; background:rgba(2,7,12,.92) !important; box-shadow:0 8px 22px rgba(0,0,0,.55) !important; }
+.skorm-tv-volume button { display:grid !important;place-items:center !important;width:34px !important;height:34px !important;color:#32bfff !important; }
+.skorm-tv-volume span { color:#a9dff7 !important;font-size:.6rem !important; }
+@media(max-width:1050px){.skorm-tv-remote{height:480px !important;min-height:480px !important}.skorm-tv-remote>button:first-child{top:20% !important}.skorm-tv-remote .skorm-tv-menu-button{top:32% !important}.skorm-tv-remote-pad{top:42% !important}.skorm-tv-remote .skorm-tv-back-button{top:73% !important}.skorm-tv-volume{bottom:8% !important}}
+@media(max-width:720px){.skorm-tv-remote{height:420px !important;min-height:420px !important}.skorm-tv-remote-pad{width:126px !important;height:126px !important;grid-template-columns:repeat(3,34px) !important;grid-template-rows:repeat(3,34px) !important}.skorm-tv-volume{width:132px !important}}
+
+/* Tablet/mobile: replace the tall remote with a compact translucent control bubble. */
+@media(max-width:1050px){
+  .skorm-tv-remote{height:auto !important;min-height:68px !important;display:flex !important;flex-direction:row !important;align-items:center !important;justify-content:center !important;gap:8px !important;padding:9px !important;border-radius:999px !important;background:rgba(5,11,17,.68) !important;backdrop-filter:blur(18px) !important;box-shadow:0 14px 38px rgba(0,0,0,.35),inset 0 0 0 1px rgba(105,202,255,.12) !important}
+  .skorm-tv-remote>button:first-child{position:relative !important;inset:auto !important;left:auto !important;transform:none !important;width:42px !important;height:42px !important;flex:0 0 42px !important}
+  .skorm-tv-remote .skorm-tv-menu-button,.skorm-tv-remote .skorm-tv-back-button{display:none !important}
+  .skorm-tv-remote-pad{position:relative !important;inset:auto !important;left:auto !important;transform:none !important;display:flex !important;align-items:center !important;justify-content:center !important;width:auto !important;height:46px !important;padding:3px !important;border-radius:999px !important;flex:0 1 auto !important}
+  .skorm-tv-remote-pad button{position:relative !important;inset:auto !important;width:38px !important;height:38px !important;flex:0 0 38px !important}
+  .skorm-tv-remote-pad button:first-child,.skorm-tv-remote-pad button:last-child{display:none !important}
+  .skorm-tv-volume{position:relative !important;inset:auto !important;left:auto !important;bottom:auto !important;transform:none !important;width:auto !important;min-height:42px !important;margin:0 !important;gap:2px !important;flex:0 0 auto !important}
+  .skorm-tv-volume span{display:none !important}
+  .skorm-tv-volume button{width:34px !important;height:34px !important}
+}
+@media(max-width:520px){.skorm-tv-remote{gap:4px !important;padding:7px !important}.skorm-tv-remote>button:first-child{width:36px !important;height:36px !important;flex-basis:36px !important}.skorm-tv-remote-pad button{width:34px !important;height:34px !important;flex-basis:34px !important}.skorm-tv-volume button{width:30px !important;height:30px !important}}
+@media(min-width:1051px){.skorm-tv-console .skorm-tv-remote>button:first-child{top:31% !important}}
+@media(min-width:1051px){
+  .skorm-tv-remote-pad{width:112px !important;height:112px !important;padding:8px !important;grid-template-columns:repeat(3,30px) !important;grid-template-rows:repeat(3,30px) !important;box-shadow:0 0 0 2px rgba(20,159,245,.08),0 0 16px rgba(0,157,255,.42),inset 0 0 18px rgba(22,127,196,.1) !important}
+  .skorm-tv-remote-pad button{width:29px !important;height:29px !important}
+  .skorm-tv-volume{width:108px !important;min-height:38px !important;padding:2px 5px !important;gap:4px !important}
+  .skorm-tv-volume button{width:28px !important;height:28px !important}
+  .skorm-tv-remote .skorm-tv-menu-button{width:58px !important}
+}
+
+/* Floating round controller over the TV on tablet and mobile. */
+@media(max-width:1050px){
+  .skorm-tv-console{position:relative !important}
+  .skorm-tv-remote{position:absolute !important;top:clamp(150px,25vw,230px) !important;right:10px !important;left:auto !important;z-index:80 !important;width:122px !important;height:122px !important;min-height:122px !important;padding:0 !important;border:1px solid rgba(41,184,255,.48) !important;border-radius:50% !important;background:rgba(3,9,15,.42) !important;backdrop-filter:blur(14px) !important;box-shadow:0 0 0 4px rgba(23,164,246,.08),0 0 26px rgba(0,157,255,.32),inset 0 0 26px rgba(14,94,148,.18) !important}
+  .skorm-tv-remote>button,.skorm-tv-volume{display:none !important}
+  .skorm-tv-remote-pad{position:absolute !important;inset:5px !important;left:5px !important;top:5px !important;transform:none !important;display:grid !important;width:112px !important;height:112px !important;padding:7px !important;grid-template-columns:repeat(3,32px) !important;grid-template-rows:repeat(3,32px) !important;border:0 !important;background:transparent !important;box-shadow:none !important}
+  .skorm-tv-remote-pad button,.skorm-tv-remote-pad button:first-child,.skorm-tv-remote-pad button:last-child{display:grid !important;width:32px !important;height:32px !important;place-items:center !important;color:#54cbff !important;opacity:.9 !important}
+  .skorm-tv-remote-pad button:nth-child(3){border-radius:50% !important;background:rgba(23,152,224,.22) !important;box-shadow:0 0 16px rgba(33,181,255,.25) !important}
+}
+@media(max-width:520px){.skorm-tv-remote{top:230px !important;right:7px !important;width:104px !important;height:104px !important;min-height:104px !important}.skorm-tv-remote-pad{inset:4px !important;left:4px !important;top:4px !important;width:96px !important;height:96px !important;padding:5px !important;grid-template-columns:repeat(3,28px) !important;grid-template-rows:repeat(3,28px) !important}.skorm-tv-remote-pad button,.skorm-tv-remote-pad button:first-child,.skorm-tv-remote-pad button:last-child{width:28px !important;height:28px !important}}

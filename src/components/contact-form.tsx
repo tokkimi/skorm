@@ -208,7 +208,7 @@ export function ContactForm({ variant = "contact", lang = "fr" }: { variant?: Fo
               <span>{isEn ? "Artist concerned" : "Artiste concerné"}</span>
               <select name="artist" defaultValue="general">
                 <option value="general">{isEn ? "SKORM / general request" : "SKORM / demande générale"}</option>
-                <option value="cgl-rave-unit">CGL Rave Unit</option>
+                <option value="cgl-rave-unit">CGL</option>
                 <option value="paga">Paga</option>
               </select>
             </label>

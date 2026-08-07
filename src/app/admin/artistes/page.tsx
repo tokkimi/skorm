@@ -40,7 +40,7 @@ export default async function AdminArtistsPage() {
               <span>Instagram</span>
               <b>{artist.instagram_url ? "Connecté" : "À connecter"}</b>
               <a className="admin-magic-link" href={`/api/press-kit/${artist.slug}?lang=fr`}>
-                ✦ Press kit
+                ✨ Press kit
               </a>
               <AdminArtistActions item={artist} />
             </footer>

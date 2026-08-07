@@ -1,18 +1,14 @@
-﻿import Image from "next/image";
-import Link from "next/link";
 import {
-  Bot,
   BriefcaseBusiness,
   CalendarDays,
   Mail,
-  Plane,
   Sparkles,
 } from "lucide-react";
-import { HorizontalRail } from "@/components/horizontal-rail";
+import Link from "next/link";
 import { AgencyHero } from "@/components/agency-hero";
 import { HomeArtistCard } from "@/components/home-artist-card";
-import { HomeMediaDiapo } from "@/components/home-media-diapo";
-import type { HomeDiapoItem } from "@/components/home-media-diapo";
+import { HomeMediaDiapo, type HomeDiapoItem } from "@/components/home-media-diapo";
+import { HorizontalRail } from "@/components/horizontal-rail";
 import { getPublicSiteData } from "@/lib/public-site-data";
 
 export const dynamic = "force-dynamic";
@@ -44,51 +40,68 @@ const features = [
   },
 ];
 
+function instagramStoryUrl(value: string) {
+  try {
+    const url = new URL(value.startsWith("http") ? value : `https://instagram.com/${value.replace(/^@/, "")}`);
+    const parts = url.pathname.split("/").filter(Boolean);
+    const username = parts[0] === "stories" ? parts[1] : parts[0];
+    return username ? `https://www.instagram.com/stories/${username}/` : "";
+  } catch { return ""; }
+}
+
 export default async function Home() {
   const { adminData, artists, dates } = await getPublicSiteData();
-  const { content_items } = adminData;
-  const diapoItems: HomeDiapoItem[] = content_items
+  const diapoItems: HomeDiapoItem[] = adminData.content_items
     .filter((item) => item.platform === "diapo" && item.status === "published" && item.asset_url)
-    .map((item) => ({
+    .map((item) => {
+      let details: Record<string, string> = {};
+      try { details = JSON.parse(item.caption || "{}"); } catch { details = {}; }
+      return ({
       id: item.id,
       title: item.title,
-      meta: [item.artist_name, item.caption, item.publish_at ? new Date(item.publish_at).toLocaleDateString("fr-FR") : ""]
-        .filter(Boolean)
-        .join(" · ") || "SKORM Agency",
-      type: item.content_type === "video" ? "Vidéo" : "Photo",
+      meta:
+        [item.artist_name, item.caption, item.publish_at ? new Date(item.publish_at).toLocaleDateString("fr-FR") : ""]
+          .filter(Boolean)
+          .join(" · ") || "SKORM Agency",
+      type: item.content_type === "story" ? "Story" : item.content_type === "video" ? "Vidéo" : "Photo",
       src: item.asset_url || undefined,
-    }));
+      instagram: item.content_type === "story" ? item.asset_url || undefined : undefined,
+      artist: item.artist_name || undefined,
+      location: details.location,
+      description: details.description,
+      duration: details.duration,
+      date: item.publish_at ? new Date(item.publish_at).toLocaleDateString("fr-FR") : undefined,
+      thumbSrc: details.thumbnail,
+    }); });
+
+  const artistDiapoItems: HomeDiapoItem[] = artists.flatMap((artist) =>
+    artist.media.videos
+      .filter((item) => item.showOnHome !== false && (item.cover || item.href))
+      .map((item, index) => ({
+        id: `artist-${artist.slug}-${index}`,
+        title: item.title || artist.name,
+        meta: item.meta || artist.name,
+        type: item.mediaType === "photo" ? "Photo" as const : "Vidéo" as const,
+        src: item.mediaType === "photo" ? (item.cover || item.href) : item.href,
+        thumbSrc: item.cover,
+        artist: artist.name,
+      })),
+  );
+
+  const musicItems: HomeDiapoItem[] = artists.flatMap((artist) =>
+    [artist.featuredSound, ...artist.media.sounds, ...artist.media.releases]
+      .filter((item): item is NonNullable<typeof item> => Boolean(item && (item.audioUrl || item.fullAudioUrl || item.src || item.previewUrl || item.deezerId)))
+      .map((item, index) => ({ id: `music-${artist.slug}-${index}`, title: item.title, meta: item.meta || artist.name, type: "Music", src: item.cover || artist.homeImage || artist.heroImage, thumbSrc: item.cover || artist.homeImage || artist.heroImage, previewSrc: artist.homeImage || artist.heroImage, artist: artist.name, audioSrc: item.audioUrl || item.fullAudioUrl || item.src || item.previewUrl || (item.deezerId ? `/api/audio-preview/${item.deezerId}` : undefined) })),
+  );
+
+  const storyChannels: HomeDiapoItem[] = artists
+    .map((artist) => ({ artist, storyUrl: instagramStoryUrl(artist.instagram || "") }))
+    .filter(({ storyUrl }) => Boolean(storyUrl))
+    .map(({ artist, storyUrl }) => ({ id: `story-channel-${artist.slug}`, title: `Stories ${artist.name}`, meta: "Compte Instagram du roster", type: "Story", src: artist.homeImage || artist.heroImage, thumbSrc: artist.homeImage || artist.heroImage, artist: artist.name, instagram: storyUrl, storyChannel: true }));
 
   return (
     <main className="home agency-home">
       <AgencyHero dates={dates} />
-
-      <section className="home-contest-feature" aria-labelledby="dj-contest-home-title">
-        <div className="contest-feature-card">
-          <div className="contest-feature-visual">
-            <Image
-              src="/dj-contest-skorm-2026.png"
-              alt="SKORM DJ Contest 2026"
-              fill
-              sizes="(max-width: 900px) 96vw, 620px"
-              priority
-            />
-          </div>
-
-          <div className="contest-feature-copy">
-            <p className="eyebrow">SKORM DJ Contest</p>
-            <h2 id="dj-contest-home-title">Une sélection internationale pour monter sur scène à Séoul.</h2>
-            <p>
-              Inscriptions ouvertes jusqu’au 1er septembre 2026. Participation : 29 €.
-              Les 50 premiers profils retenus renverront ensuite une composition dédiée.
-            </p>
-            <div className="contest-feature-actions">
-              <Link href="/concours-dj">Participer</Link>
-              <span><Plane size={17} /> Finale à Séoul en octobre 2026</span>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section className="home-profiles" id="roster">
         <div className="section-kicker">
@@ -96,53 +109,18 @@ export default async function Home() {
           <h2>Les profils suivis par SKORM.</h2>
         </div>
 
-        <HorizontalRail className="profile-rail-wrap">
-          {artists.map((artist) => {
-            const release = artist.featuredSound || undefined;
-            return (
-              <HomeArtistCard
-                key={artist.slug}
-                artist={artist}
-                release={release}
-              />
-            );
-          })}
+        <HorizontalRail className="profile-rail-wrap" loop>
+          {artists.map((artist) => (
+            <HomeArtistCard
+              key={artist.slug}
+              artist={artist}
+              release={artist.featuredSound || undefined}
+            />
+          ))}
         </HorizontalRail>
       </section>
 
-      <section className="ai-training-home" id="formation-artiste-ia">
-        <div className="ai-training-card">
-          <div className="ai-training-orb" aria-hidden="true">SK</div>
-          <div>
-            <p className="eyebrow">Laboratoire IA musicale</p>
-            <h2>Transformer une idée en identité sonore.</h2>
-            <p>
-              Deux parcours pour cadrer une direction, écrire des prompts utiles,
-              produire proprement et construire un univers qui ne ressemble pas à
-              un simple test génératif.
-            </p>
-          </div>
-          <Link href="/formation-ia">Voir les formations</Link>
-        </div>
-      </section>
-
-      <section className="ai-artist-block" id="artistes-ia">
-        <div className="ai-artist-inner">
-          <span><Bot size={18} /></span>
-          <div>
-            <p className="eyebrow">Projets hybrides</p>
-            <h2>Direction, lancement et suivi d’univers IA.</h2>
-            <p>
-              SKORM accompagne les projets qui mêlent musique, image, narration
-              et outils IA : identité, calendrier de sorties, contenus et stratégie
-              de lancement avant exposition publique.
-            </p>
-          </div>
-          <Link href="/rejoindre-agence">Présenter un projet</Link>
-        </div>
-      </section>
-
-      <HomeMediaDiapo items={diapoItems} />
+      <HomeMediaDiapo items={[...diapoItems, ...artistDiapoItems, ...musicItems]} stories={storyChannels} />
 
       <section className="home-services dot-section" id="services">
         <div className="dot-feature-panel">

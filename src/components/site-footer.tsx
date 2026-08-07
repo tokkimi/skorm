@@ -5,13 +5,13 @@ import { usePathname } from "next/navigation";
 import { CalendarCheck, FileText, Mail, MessageCircle, ShieldCheck, Sparkles, UsersRound } from "lucide-react";
 
 const guideLinksFr = [
-  { icon: UsersRound, title: "Artiste", text: "Dossier, sons, réseaux, dates", href: "/guide-artistes" },
+  { icon: UsersRound, title: "Artistes", text: "Dossier, sons, réseaux, dates", href: "/guide-artistes" },
   { icon: MessageCircle, title: "FAQ", text: "Demandes, booking, suivi", href: "/faq" },
   { icon: FileText, title: "Presse & marques", text: "Sponsors, médias, campagnes", href: "/presse-marques" },
 ];
 
 const guideLinksEn = [
-  { icon: UsersRound, title: "Artist", text: "Profile, tracks, socials, dates", href: "/en/guide-artistes" },
+  { icon: UsersRound, title: "Artists", text: "Profile, tracks, socials, dates", href: "/en/guide-artistes" },
   { icon: MessageCircle, title: "FAQ", text: "Requests, booking, follow-up", href: "/en/faq" },
   { icon: FileText, title: "Press & brands", text: "Sponsors, media, campaigns", href: "/en/presse-marques" },
 ];
@@ -50,7 +50,7 @@ export function SiteFooter() {
                 <span><Icon size={18} /></span>
                 <strong>{title}</strong>
                 <small>{text}</small>
-                <em>→</em>
+                <em aria-hidden="true">→</em>
               </Link>
             ))}
           </div>
@@ -70,14 +70,8 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="footer-newsletter">
+        <div className="footer-newsletter footer-newsletter-compact">
           <p className="eyebrow">Newsletter</p>
-          <h2>{isEn ? "Stay in the loop" : "Rester dans la boucle"}</h2>
-          <p>
-            {isEn
-              ? "Dates, availability, artist projects and partner opportunities — straight to your inbox."
-              : "Dates, disponibilités, projets artistes et propositions partenaires — directement dans ta boîte mail."}
-          </p>
           <form action={isEn ? "/en/contact" : "/contact"} method="get">
             <input
               type="email"
@@ -86,7 +80,7 @@ export function SiteFooter() {
               aria-label={isEn ? "Email address" : "Adresse email"}
               required
             />
-            <button type="submit">{isEn ? "Subscribe" : "S’inscrire"}</button>
+            <button type="submit">{isEn ? "Subscribe" : "S'inscrire"}</button>
           </form>
           <a className="footer-mail" href="mailto:hello@skorm-agency.com">hello@skorm-agency.com</a>
         </div>
@@ -96,23 +90,30 @@ export function SiteFooter() {
             <Link className="footer-brand footer-logo" href={isEn ? "/en" : "/"} aria-label="SKORM Agency">
               <img src="/skorm-logo.png" alt="SKORM Agency" />
             </Link>
-            <p>{isEn ? "Management, communication, partnerships, AI & training for electronic artists." : "Management, communication, partenariats, IA & formation pour artistes électroniques."}</p>
+            <p>
+              {isEn
+                ? "Management, communication, partnerships, AI and training for electronic artists."
+                : "Management, communication, partenariats, IA et formation pour artistes électroniques."}
+            </p>
             <a href="https://www.instagram.com/skormagency/" target="_blank" rel="noreferrer">Instagram</a>
           </div>
 
           <div className="footer-columns">
             <nav>
               <span>{isEn ? "Agency" : "Agence"}</span>
-              <Link href={isEn ? "/en/comment-ca-marche" : "/comment-ca-marche"}>{isEn ? "How it works" : "Comment ça marche"}</Link>
+              <Link href={isEn ? "/en/comment-ca-marche" : "/comment-ca-marche"}>
+                {isEn ? "How it works" : "Comment ça marche"}
+              </Link>
               <Link href={isEn ? "/en/artistes" : "/artistes"}>{isEn ? "Artists" : "Artistes"}</Link>
               <Link href={isEn ? "/en/agenda" : "/agenda"}>Agenda</Link>
-              <Link href={isEn ? "/en/concours-dj" : "/concours-dj"}>DJ Contest</Link>
               <Link href={isEn ? "/en/formation-ia" : "/formation-ia"}>{isEn ? "AI training" : "Formation IA"}</Link>
               <Link href={isEn ? "/en/contact" : "/contact"}>Contact</Link>
             </nav>
             <nav>
               <span>{isEn ? "Entry points" : "Entrées"}</span>
-              <Link href={isEn ? "/en/rejoindre-agence" : "/rejoindre-agence"}>{isEn ? "Submit a profile" : "Déposer un profil"}</Link>
+              <Link href={isEn ? "/en/rejoindre-agence" : "/rejoindre-agence"}>
+                {isEn ? "Submit a profile" : "Déposer un profil"}
+              </Link>
               <Link href={isEn ? "/en/devenir-sponsor" : "/devenir-sponsor"}>Sponsor</Link>
               <Link href={isEn ? "/en/contact" : "/contact"}>Booking</Link>
               <a href="mailto:hello@skorm-agency.com">hello@skorm-agency.com</a>
@@ -120,7 +121,9 @@ export function SiteFooter() {
             <nav>
               <span>{isEn ? "Information" : "Informations"}</span>
               <Link href={isEn ? "/en/faq" : "/faq"}>FAQ</Link>
-              <Link href={isEn ? "/en/presse-marques" : "/presse-marques"}>{isEn ? "Press & brands" : "Presse & marques"}</Link>
+              <Link href={isEn ? "/en/presse-marques" : "/presse-marques"}>
+                {isEn ? "Press & brands" : "Presse & marques"}
+              </Link>
               <Link href="/mentions-legales">{isEn ? "Legal notice" : "Mentions légales"}</Link>
               <Link href="/cgv">CGV</Link>
               <Link href="/cookies">Cookies</Link>

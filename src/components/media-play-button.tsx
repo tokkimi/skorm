@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 
 function getEmbedUrl(href?: string) {
   if (!href) return null;
+  if (/\.(mp4|webm|mov)(?:\?|$)/i.test(href)) return href;
   try {
     const url = new URL(href);
     if (url.hostname.includes("youtube.com")) {
@@ -40,12 +41,18 @@ function getEmbedUrl(href?: string) {
 
 export function MediaPlayButton({
   href,
+  audioUrl,
+  fullAudioUrl,
+  src,
   deezerId,
   previewUrl,
   label = "Lire",
   title,
 }: {
   href?: string;
+  audioUrl?: string;
+  fullAudioUrl?: string;
+  src?: string;
   deezerId?: string;
   previewUrl?: string;
   label?: string;
@@ -55,6 +62,7 @@ export function MediaPlayButton({
   const [playing, setPlaying] = useState(false);
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const directAudio = audioUrl || fullAudioUrl || src || previewUrl || (deezerId ? `/api/audio-preview/${deezerId}` : "");
   const embedUrl = useMemo(() => getEmbedUrl(href), [href]);
   const compactEmbed = embedUrl?.includes("w.soundcloud.com") || embedUrl?.includes("open.spotify.com/embed/");
   const isActive = playing || Boolean(open && compactEmbed);
@@ -73,14 +81,20 @@ export function MediaPlayButton({
   }, [open, compactEmbed]);
 
   async function play() {
-    if (deezerId || previewUrl) {
+    if (directAudio) {
       if (!audio.current) return;
       if (playing) {
         audio.current.pause();
         setPlaying(false);
       } else {
-        await audio.current.play();
-        setPlaying(true);
+        try {
+          await audio.current.play();
+          setPlaying(true);
+        } catch {
+          if (embedUrl && compactEmbed) setOpen(true);
+          else if (embedUrl) setOpen(true);
+          else if (href) setOpen(true);
+        }
       }
       return;
     }
@@ -89,13 +103,13 @@ export function MediaPlayButton({
       return;
     }
     if (embedUrl) setOpen(true);
-    else if (href) window.open(href, "_blank", "noopener,noreferrer");
+    else if (href) setOpen(true);
   }
 
   return (
     <>
-      {(deezerId || previewUrl) && (
-        <audio ref={audio} src={previewUrl || `/api/audio-preview/${deezerId}`} onEnded={() => setPlaying(false)} />
+      {directAudio && (
+        <audio ref={audio} src={directAudio} onEnded={() => setPlaying(false)} onError={() => setPlaying(false)} />
       )}
       <button type="button" className="media-play-button" onClick={play} aria-label={`${label} ${title}`}>
         {isActive ? <Pause size={14} fill="currentColor" /> : <Play size={14} fill="currentColor" />}

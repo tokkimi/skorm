@@ -9,8 +9,24 @@ const mediaSchema = z.object({
   meta: z.string().optional(),
   cover: z.string().optional(),
   href: z.string().optional(),
+  audioUrl: z.string().optional(),
+  fullAudioUrl: z.string().optional(),
+  src: z.string().optional(),
   previewUrl: z.string().optional(),
+  durationSec: z.number().optional(),
+  mediaType: z.enum(["photo", "video"]).optional(),
+  showOnHome: z.boolean().optional(),
+  genres: z.array(z.string()).optional(),
+  styles: z.array(z.string()).optional(),
+  bpm: z.string().optional(),
+  country: z.string().optional(),
+  location: z.string().optional(),
 }).nullable().optional();
+
+const visualMediaSchema = z.object({
+  title: z.string().optional(), meta: z.string().optional(), cover: z.string().optional(), href: z.string().optional(),
+  mediaType: z.enum(["photo", "video"]).optional(), showOnHome: z.boolean().optional(),
+});
 
 const schema = z.object({
   tagline: z.string().optional(),
@@ -19,6 +35,7 @@ const schema = z.object({
   image_url: z.string().optional(),
   home_image_url: z.string().optional(),
   featured_sound: mediaSchema,
+  media_videos: z.array(visualMediaSchema).optional(),
 });
 
 export async function POST(request: Request) {

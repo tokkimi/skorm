@@ -1,0 +1,4 @@
+file 'C:/Users/bello/OneDrive/문서/New project/esterel-communication/outputs/reels/work/andrea-tutti-0.mp4'
+file 'C:/Users/bello/OneDrive/문서/New project/esterel-communication/outputs/reels/work/andrea-tutti-1.mp4'
+file 'C:/Users/bello/OneDrive/문서/New project/esterel-communication/outputs/reels/work/andrea-tutti-2.mp4'
+file 'C:/Users/bello/OneDrive/문서/New project/esterel-communication/outputs/reels/work/andrea-tutti-3.mp4'

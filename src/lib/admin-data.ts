@@ -6,6 +6,7 @@ type ArtistRow = {
   image_url: string | null; instagram_url: string | null;
   home_image_url?: string | null; featured_sound?: unknown | null;
   media_sounds?: unknown[] | null; media_releases?: unknown[] | null; media_videos?: unknown[] | null;
+  updated_at?: string | null;
 };
 type EventRow = { id: string; starts_at: string; title: string; city: string; status: string; artist_name: string | null };
 type InquiryRow = {
@@ -60,7 +61,14 @@ export async function syncPublicArtistsToAdmin() {
   const supabase = await getSupabaseServerClient();
   if (!supabase || !process.env.ADMIN_DB_SECRET) return;
 
-  await Promise.all(publicArtists.map(async (artist, index) => {
+  const existingSlugs = new Set<string>();
+  const { data: existingData } = await supabase.rpc("admin_get_backoffice", { p_secret: process.env.ADMIN_DB_SECRET });
+  const existingArtists = (existingData as Partial<AdminData> | null)?.artists || [];
+  existingArtists.forEach((artist) => {
+    if (artist.slug) existingSlugs.add(artist.slug);
+  });
+
+  await Promise.all(publicArtists.filter((artist) => !existingSlugs.has(artist.slug)).map(async (artist, index) => {
     const media = artistMedia[artist.slug as keyof typeof artistMedia];
     const featuredSound = "featuredSound" in artist ? artist.featuredSound : media?.sounds?.[0] || null;
     const payload = {
@@ -106,7 +114,7 @@ export async function getAdminData(): Promise<AdminData> {
     const featuredSound = (publicArtist as { featuredSound?: unknown } | undefined)?.featuredSound || media?.sounds?.[0] || null;
     return {
       ...artist,
-      home_image_url: artist.home_image_url || publicArtist?.homeImage || artist.image_url,
+      home_image_url: artist.home_image_url || artist.image_url || publicArtist?.homeImage || null,
       featured_sound: artist.featured_sound || featuredSound || null,
       media_sounds: artist.media_sounds?.length ? artist.media_sounds : [...(media?.sounds || [])],
       media_releases: artist.media_releases?.length ? artist.media_releases : [...(media?.releases || [])],

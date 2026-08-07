@@ -11,7 +11,6 @@ import {
   FileText,
   GraduationCap,
   Handshake,
-  Headphones,
   Images,
   Inbox,
   LayoutDashboard,
@@ -24,7 +23,6 @@ import {
 const items = [
   { href: "/admin", label: "Vue d’ensemble", icon: LayoutDashboard },
   { href: "/admin/demandes", label: "Demandes", icon: Inbox },
-  { href: "/admin/concours-dj", label: "Concours DJ", icon: Headphones },
   { href: "/admin/formations", label: "Formations", icon: GraduationCap },
   { href: "/admin/artistes", label: "Artistes", icon: Music2 },
   { href: "/admin/diapo-medias", label: "Diapo médias", icon: Images },

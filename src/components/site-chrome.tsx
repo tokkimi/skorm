@@ -22,7 +22,6 @@ export function SiteChrome() {
     { href: withBase(base, "/"), label: isEn ? "Home" : "Accueil" },
     { href: withBase(base, "/artistes"), label: isEn ? "Artists" : "Artistes" },
     { href: withBase(base, "/agenda"), label: "Agenda" },
-    { href: withBase(base, "/concours-dj"), label: "DJ Contest" },
     { href: withBase(base, "/formation-ia"), label: isEn ? "AI training" : "Formation IA" },
     { href: withBase(base, "/rejoindre-agence"), label: isEn ? "Join the agency" : "Rejoindre l'agence" },
     { href: withBase(base, "/devenir-sponsor"), label: isEn ? "Become a sponsor" : "Devenir sponsor" },
@@ -34,11 +33,10 @@ export function SiteChrome() {
     <>
       <header className="floating-header">
         <Link className="brand brand-logo" href={base || "/"} aria-label="SKORM Agency">
-          <img src="/skorm-logo.png" alt="SKORM Agency" />
+          <img src="/skorm-header-logo.png" alt="SKORM Agency" />
         </Link>
         <nav>
           <Link href={withBase(base, "/artistes")}>{isEn ? "Artists" : "Artistes"}</Link>
-          <Link href={withBase(base, "/concours-dj")}>DJ Contest</Link>
           <Link href={withBase(base, "/formation-ia")}>{isEn ? "Training" : "Formation"}</Link>
           <Link href={withBase(base, "/agenda")}>Agenda</Link>
           <Link className="header-contact" href={withBase(base, "/contact")}>Contact</Link>
@@ -87,7 +85,7 @@ export function SiteChrome() {
       )}
 
       <nav className="floating-dock" aria-label={isEn ? "Quick navigation" : "Navigation rapide"}>
-        <Link href={withBase(base, "/concours-dj")} aria-label="DJ Contest"><span>CONTEST</span></Link>
+        <Link href={withBase(base, "/artistes")} aria-label="Artistes"><span>ARTISTES</span></Link>
         <Link className="dock-center" href={withBase(base, "/contact")} aria-label="Contact"><span>CONTACT</span></Link>
         <Link href={withBase(base, "/formation-ia")} aria-label={isEn ? "AI training" : "Formation IA"}><span>FORMATION</span></Link>
       </nav>

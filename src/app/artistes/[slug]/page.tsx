@@ -84,6 +84,9 @@ function MediaRail({
               <div className={variant === "spotify" ? "spotify-preview" : "artist-card-actions"}>
                 <MediaPlayButton
                   href={item.href}
+                  audioUrl={item.audioUrl}
+                  fullAudioUrl={item.fullAudioUrl}
+                  src={item.src}
                   deezerId={item.deezerId}
                   previewUrl={item.previewUrl}
                   title={item.title}
@@ -106,11 +109,6 @@ function MediaRail({
             {variant === "video" && (
               <div className="artist-card-actions">
                 <MediaPlayButton href={item.href} title={item.title} label="Voir" />
-                {item.href && (
-                  <a href={item.href} target="_blank" rel="noreferrer" aria-label="Ouvrir la source officielle">
-                    <ExternalLink size={14} />
-                  </a>
-                )}
               </div>
             )}
           </article>
@@ -127,7 +125,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   if (!artist) notFound();
 
   const artistDates = datesForArtist(artist, dates);
-  const heroImage = artist.heroImage || artist.homeImage || "/artists/cgl-banner.png";
+  const heroImage = artist.heroImage || artist.homeImage || "/skorm-logo.png";
 
   return (
     <main className="artist-page paga-like-page">
@@ -202,7 +200,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
       <section className="artist-section-shell artist-media-area">
         <MediaRail title="Derniers sons" label="Sounds" variant="sound" image={artist.homeImage || heroImage} items={artist.media.sounds} />
         <MediaRail title="Écoute directe" label="Streaming" variant="spotify" image={artist.homeImage || heroImage} items={artist.media.releases} />
-        <MediaRail title="Dernières vidéos" label="Videos" variant="video" image={heroImage} items={artist.media.videos} />
+        <MediaRail title="Dernières vidéos" label="Videos" variant="video" image={heroImage} items={artist.media.videos.filter((item) => item.mediaType !== "photo")} />
       </section>
     </main>
   );

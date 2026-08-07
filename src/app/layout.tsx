@@ -9,22 +9,44 @@ import "./globals.css";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
+const iconVersion = "skorm-s-20260718e";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.skorm-agency.com"),
-  title: "SKORM Agency — Management, communication & booking",
+  title: "SKORM Agency · Management, communication & booking",
   description:
     "SKORM Agency accompagne les artistes dans leur management, leur communication, leurs partenariats, l'IA, la formation et leurs bookings en Europe.",
   icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/apple-icon.png",
+    icon: [
+      { url: `/favicon.ico?v=${iconVersion}` },
+      { url: `/favicon.png?v=${iconVersion}`, sizes: "64x64", type: "image/png" },
+      { url: `/icon-192.png?v=${iconVersion}`, sizes: "192x192", type: "image/png" },
+      { url: `/icon-512.png?v=${iconVersion}`, sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: `/favicon.ico?v=${iconVersion}`,
+    apple: `/apple-touch-icon.png?v=${iconVersion}`,
   },
   openGraph: {
     title: "SKORM Agency",
     description: "Management · Communication · Partnerships · AI · Training",
     type: "website",
     locale: "fr_FR",
-    images: ["/opengraph-image.png"],
+    url: "https://www.skorm-agency.com",
+    siteName: "SKORM Agency",
+    images: [
+      {
+        url: `/skorm-share-icon.png?v=${iconVersion}`,
+        width: 512,
+        height: 512,
+        alt: "SKORM Agency",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "SKORM Agency",
+    description: "Management · Communication · Partnerships · AI · Training",
+    images: [`/skorm-share-icon.png?v=${iconVersion}`],
   },
   appleWebApp: {
     capable: true,

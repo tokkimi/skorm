@@ -1,0 +1,4 @@
+file 'C:/Users/bello/OneDrive/문서/New project/esterel-communication/outputs/reels/work/enkor-photo-0.mp4'
+file 'C:/Users/bello/OneDrive/문서/New project/esterel-communication/outputs/reels/work/enkor-photo-1.mp4'
+file 'C:/Users/bello/OneDrive/문서/New project/esterel-communication/outputs/reels/work/enkor-photo-2.mp4'
+file 'C:/Users/bello/OneDrive/문서/New project/esterel-communication/outputs/reels/work/enkor-photo-3.mp4'

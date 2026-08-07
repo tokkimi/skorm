@@ -23,6 +23,9 @@ type DiapoDraft = {
   publish_at: string;
   content_type: string;
   asset_url: string;
+  description: string;
+  duration: string;
+  thumbnail: string;
 };
 
 const emptyDraft: DiapoDraft = {
@@ -32,6 +35,9 @@ const emptyDraft: DiapoDraft = {
   publish_at: "",
   content_type: "photo",
   asset_url: "",
+  description: "",
+  duration: "",
+  thumbnail: "",
 };
 
 function fileToDataUrl(file: File) {
@@ -51,14 +57,19 @@ function toLocalDate(value?: string | null) {
 }
 
 function itemToDraft(item: DiapoItem): DiapoDraft {
+  let details: Record<string, string> = {};
+  try { details = JSON.parse(item.caption || "{}"); } catch { details = {}; }
   const captionParts = (item.caption || "").split("·").map((part) => part.trim()).filter(Boolean);
   return {
     title: item.title || "",
     artist_name: item.artist_name || captionParts[0] || "",
-    location: captionParts.length > 1 ? captionParts.slice(1).join(" · ") : item.caption || "",
+    location: details.location || (captionParts.length > 1 ? captionParts.slice(1).join(" · ") : ""),
     publish_at: toLocalDate(item.publish_at),
     content_type: item.content_type || "photo",
     asset_url: item.asset_url || "",
+    description: details.description || "",
+    duration: details.duration || "",
+    thumbnail: details.thumbnail || "",
   };
 }
 
@@ -88,7 +99,7 @@ function AdminDiapoForm({
     const payload = {
       title: draft.title.trim(),
       artist_name: draft.artist_name.trim() || null,
-      caption: [draft.artist_name.trim(), draft.location.trim()].filter(Boolean).join(" · ") || null,
+      caption: JSON.stringify({ location: draft.location.trim(), description: draft.description.trim(), duration: draft.duration.trim(), thumbnail: draft.thumbnail.trim() }),
       publish_at: draft.publish_at ? new Date(`${draft.publish_at}T12:00:00`).toISOString() : null,
       asset_url: draft.asset_url.trim(),
       content_type: draft.content_type,
@@ -164,6 +175,8 @@ function AdminDiapoForm({
               onChange={(event) => setDraft({ ...draft, publish_at: event.target.value })}
             />
           </label>
+          <label>Description détaillée<textarea value={draft.description} onChange={(event) => setDraft({ ...draft, description: event.target.value })} placeholder="Contexte, événement, crédit et informations affichées à droite" /></label>
+          <label>Durée<input value={draft.duration} onChange={(event) => setDraft({ ...draft, duration: event.target.value })} placeholder="02:45" /></label>
         </section>
 
         <section className="admin-app-section">
@@ -176,6 +189,7 @@ function AdminDiapoForm({
             >
               <option value="photo">Photo</option>
               <option value="video">Vidéo</option>
+              <option value="story">Story Instagram</option>
             </select>
           </label>
           {draft.asset_url ? (
@@ -198,6 +212,7 @@ function AdminDiapoForm({
               placeholder="Image, MP4, Drive, YouTube..."
             />
           </label>
+          <label>Miniature de preview<input value={draft.thumbnail} onChange={(event) => setDraft({ ...draft, thumbnail: event.target.value })} placeholder="URL d’une image miniature" /></label>
           <label className="admin-upload-pill">
             Télécharger une image
             <input type="file" accept="image/*" onChange={(event) => void upload(event)} />
@@ -273,7 +288,7 @@ export function AdminDiapoMediaClient({ items }: { items: DiapoItem[] }) {
               <h3>{item.title}</h3>
               <p>{item.artist_name || (item.caption || "").split("·")[0]?.trim() || "Artiste non renseigné"}</p>
               <p className="admin-diapo-meta">
-                <MapPin size={14} /> {(item.caption || "").split("·").slice(1).join(" · ").trim() || item.caption || "Lieu / contexte non renseigné"}
+                <MapPin size={14} /> {itemToDraft(item).location || "Lieu / contexte non renseigné"}
               </p>
               <p className="admin-diapo-meta">
                 <CalendarDays size={14} /> {item.publish_at ? new Date(item.publish_at).toLocaleDateString("fr-FR") : "Date non renseignée"}

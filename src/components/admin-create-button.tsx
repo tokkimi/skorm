@@ -410,7 +410,7 @@ function Fields({ kind, artists }: { kind: Kind; artists: Artist[] }) {
       <label>
         Statut
         <select name="status" defaultValue="pending">
-          <option value="pending">? faire</option>
+          <option value="pending">À faire</option>
           <option value="invoiced">Facturé</option>
           <option value="paid">Payé</option>
           <option value="late">Retard</option>

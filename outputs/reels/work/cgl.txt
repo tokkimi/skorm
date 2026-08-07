@@ -1,0 +1,4 @@
+file 'C:/Users/bello/OneDrive/문서/New project/esterel-communication/outputs/reels/work/cgl-0.mp4'
+file 'C:/Users/bello/OneDrive/문서/New project/esterel-communication/outputs/reels/work/cgl-1.mp4'
+file 'C:/Users/bello/OneDrive/문서/New project/esterel-communication/outputs/reels/work/cgl-2.mp4'
+file 'C:/Users/bello/OneDrive/문서/New project/esterel-communication/outputs/reels/work/cgl-3.mp4'

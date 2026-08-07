@@ -5,7 +5,7 @@ import { commerce } from "@/lib/commerce";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 const schema = z.object({
-  product: z.enum(["dj-contest", "suno-essential", "suno-expert"]),
+  product: z.enum(["suno-essential", "suno-expert"]),
   email: z.string().email().optional().or(z.literal("")),
   name: z.string().max(120).optional().or(z.literal("")),
   details: z.record(z.string(), z.string()).optional(),
@@ -25,20 +25,15 @@ export async function POST(request: Request) {
   if (!stripeKey) {
     return NextResponse.json({ error: "Paiement Stripe non configuré." }, { status: 503 });
   }
-
-  const product = parsed.data.product === "dj-contest"
-    ? commerce.djContest
-    : parsed.data.product === "suno-expert"
-      ? commerce.sunoExpert
-      : commerce.sunoEssential;
+  const product = parsed.data.product === "suno-expert" ? commerce.sunoExpert : commerce.sunoEssential;
   const origin = siteUrl(request);
-  const successPath = parsed.data.product === "dj-contest" ? "/concours-dj/merci" : "/formation-ia/acces";
-  const cancelPath = parsed.data.product === "dj-contest" ? "/concours-dj" : "/formation-ia";
+  const successPath = "/formation-ia/acces";
+  const cancelPath = "/formation-ia";
 
   const supabase = await getSupabaseServerClient();
   if (supabase && parsed.data.email) {
     await supabase.from("inquiries").insert({
-      inquiry_type: parsed.data.product === "dj-contest" ? "artist" : "formation",
+      inquiry_type: "formation",
       contact_name: parsed.data.name || parsed.data.email,
       company: product.name,
       email: parsed.data.email,
@@ -62,12 +57,9 @@ export async function POST(request: Request) {
           unit_amount: product.price,
           product_data: {
             name: product.name,
-            description:
-              parsed.data.product === "dj-contest"
-                ? "Participation officielle au SKORM DJ Contest."
-                : parsed.data.product === "suno-expert"
-                  ? "Accès à la formation Suno Expert."
-                  : "Accès à la formation Suno Essentiel.",
+            description: parsed.data.product === "suno-expert"
+              ? "Accès à la formation IA musicale Expert."
+              : "Accès à la formation IA musicale Fondations.",
           },
         },
         quantity: 1,

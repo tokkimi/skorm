@@ -18,10 +18,6 @@ export default function EnglishFaqPage() {
           text: "Yes, but the request must be complete: identity, tracks, social links, press kit, recent dates, goals and precise needs.",
         },
         {
-          title: "How does the DJ Contest work?",
-          text: "Registration is online with secure payment. The first 50 selected profiles submit a composition, then 10 finalists are announced on September 30, 2026.",
-        },
-        {
           title: "Is the AI training available after payment?",
           text: "Yes. Payment unlocks the access page with modules, exercises, module quizzes and the final questionnaire.",
         },
