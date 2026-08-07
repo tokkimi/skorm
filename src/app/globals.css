@@ -16465,20 +16465,24 @@ iframe.media-hidden-player,
     min-height: 288px !important;
     max-height: 330px !important;
   }
+  .roster-page .roster-gallery,
   .roster-gallery {
-    width: min(1180px, calc(100% - 40px)) !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    width: min(1280px, calc(100% - 40px)) !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
     gap: 16px !important;
   }
+  .roster-page .roster-gallery .profile-card.skorm-artist-card,
   .roster-gallery .profile-card.skorm-artist-card {
-    height: clamp(300px, 23vw, 350px) !important;
-    min-height: 300px !important;
-    max-height: 350px !important;
+    height: clamp(280px, 21vw, 340px) !important;
+    min-height: 280px !important;
+    max-height: 340px !important;
   }
 }
-@media (min-width: 1180px) {
+/* Tablette : 3 par ligne pour rester lisible */
+@media (min-width: 721px) and (max-width: 940px) {
+  .roster-page .roster-gallery,
   .roster-gallery {
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 }
 
