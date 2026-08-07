@@ -4,7 +4,7 @@ import type { ChangeEvent, FormEvent, ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
-import { ImagePlus, Music2, Pencil, Plus, Trash2, Video, X } from "lucide-react";
+import { ChevronDown, ChevronUp, ImagePlus, Music2, Pencil, Plus, Trash2, Video, X } from "lucide-react";
 import { artistBpms, artistGenres, artistStyles } from "@/lib/artist-filters";
 
 type MediaItem = {
@@ -169,6 +169,14 @@ function MediaEditor({
     onChange(items.map((item, itemIndex) => itemIndex === index ? { ...item, ...patch } : item));
   }
 
+  function move(index: number, direction: -1 | 1) {
+    const target = index + direction;
+    if (target < 0 || target >= items.length) return;
+    const next = [...items];
+    [next[index], next[target]] = [next[target], next[index]];
+    onChange(next);
+  }
+
   return (
     <section className="admin-app-section wide">
       <header>
@@ -177,6 +185,11 @@ function MediaEditor({
           <Plus size={15} /> Ajouter
         </button>
       </header>
+      {items.length > 1 && (
+        <p className="admin-muted admin-order-hint">
+          Ordre d’affichage : le 1ᵉʳ en haut apparaît en premier. Place le plus récent tout en haut avec les flèches ↑ ↓.
+        </p>
+      )}
       <div className="admin-media-editor-list">
         {items.length === 0 && <p className="admin-muted">Aucun élément pour l’instant.</p>}
         {items.map((item, index) => (
@@ -221,9 +234,19 @@ function MediaEditor({
                 </label>
               </>
             )}
-            <button className="admin-small-danger" type="button" onClick={() => onChange(items.filter((_, itemIndex) => itemIndex !== index))}>
-              <Trash2 size={14} /> Retirer
-            </button>
+            <div className="admin-media-editor-actions">
+              <div className="admin-media-order-buttons">
+                <button type="button" aria-label="Monter" disabled={index === 0} onClick={() => move(index, -1)}>
+                  <ChevronUp size={14} />
+                </button>
+                <button type="button" aria-label="Descendre" disabled={index === items.length - 1} onClick={() => move(index, 1)}>
+                  <ChevronDown size={14} />
+                </button>
+              </div>
+              <button className="admin-small-danger" type="button" onClick={() => onChange(items.filter((_, itemIndex) => itemIndex !== index))}>
+                <Trash2 size={14} /> Retirer
+              </button>
+            </div>
           </article>
         ))}
       </div>

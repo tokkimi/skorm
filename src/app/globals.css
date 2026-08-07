@@ -16506,3 +16506,28 @@ iframe.media-hidden-player,
 }
 .admin-diapo-bulk strong { font-size: 1.02rem; }
 .admin-diapo-bulk p { margin: 0; font-size: 0.82rem; color: #9bcce6; }
+
+/* Admin — réordonnancement des médias (sons, sorties, vidéos) */
+.admin-order-hint { margin: 2px 0 6px; font-size: 0.72rem; opacity: 0.75; }
+.admin-media-editor-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 6px;
+}
+.admin-media-order-buttons { display: inline-flex; gap: 6px; }
+.admin-media-order-buttons button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 30px;
+  border: 1px solid rgba(120, 190, 255, 0.35);
+  border-radius: 9px;
+  background: rgba(10, 22, 34, 0.6);
+  color: #dff2ff;
+  cursor: pointer;
+}
+.admin-media-order-buttons button:disabled { opacity: 0.35; cursor: not-allowed; }
+.admin-media-order-buttons button:not(:disabled):hover { border-color: rgba(120, 190, 255, 0.8); }
