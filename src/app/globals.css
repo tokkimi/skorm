@@ -16553,11 +16553,10 @@ iframe.media-hidden-player,
   text-transform: uppercase;
   line-height: 0.95;
   letter-spacing: 0.03em;
-  /* Proportionnel à la largeur de la carte, avec un plafond pour ne jamais
-     être trop gros ; se replie sur plusieurs lignes plutôt que d'être coupé */
-  font-size: clamp(0.78rem, 10cqw, 1.5rem);
+  /* Toujours sur UNE seule ligne, taille calée sur la largeur de la carte
+     pour que même les noms longs tiennent sans être coupés */
+  white-space: nowrap;
+  font-size: clamp(0.6rem, 7.2cqw, 1.3rem);
   color: rgba(255, 255, 255, 0.5); /* 50% de transparence */
-  overflow-wrap: anywhere;
-  word-break: break-word;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
 }
