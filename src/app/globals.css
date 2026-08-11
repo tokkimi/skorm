@@ -16556,7 +16556,7 @@ iframe.media-hidden-player,
   /* Proportionnel à la largeur de la carte, avec un plafond pour ne jamais
      être trop gros ; se replie sur plusieurs lignes plutôt que d'être coupé */
   font-size: clamp(0.78rem, 10cqw, 1.5rem);
-  color: rgba(255, 255, 255, 0.95); /* 5% de transparence : net et lisible */
+  color: rgba(255, 255, 255, 0.5); /* 50% de transparence */
   overflow-wrap: anywhere;
   word-break: break-word;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
