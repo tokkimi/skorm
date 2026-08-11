@@ -16555,18 +16555,8 @@ iframe.media-hidden-player,
   letter-spacing: 0.03em;
   /* Proportionnel à la largeur de la carte : jamais coupé, toujours centré */
   font-size: clamp(1.1rem, 17cqw, 3rem);
-  color: rgba(255, 255, 255, 0.72); /* 25% ~ de transparence, bien lisible */
+  color: rgba(255, 255, 255, 0.95); /* 5% de transparence : net et lisible */
   overflow-wrap: anywhere;
   word-break: break-word;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
-}
-.skorm-centername-genre {
-  max-width: 100%;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  font-size: clamp(0.52rem, 4cqw, 0.85rem);
-  color: rgba(255, 255, 255, 0.6);
-  overflow-wrap: anywhere;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
 }

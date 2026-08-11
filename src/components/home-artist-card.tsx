@@ -76,7 +76,6 @@ export function HomeArtistCard({
         )}
         <div className="skorm-artist-centername" aria-hidden="true">
           <span className="skorm-centername-name">{displayName}</span>
-          <span className="skorm-centername-genre">{displayGenre}</span>
         </div>
       </Link>
 
