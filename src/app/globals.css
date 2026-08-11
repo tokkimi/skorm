@@ -16553,8 +16553,9 @@ iframe.media-hidden-player,
   text-transform: uppercase;
   line-height: 0.95;
   letter-spacing: 0.03em;
-  /* Proportionnel à la largeur de la carte : jamais coupé, toujours centré */
-  font-size: clamp(1.1rem, 17cqw, 3rem);
+  /* Proportionnel à la largeur de la carte, avec un plafond pour ne jamais
+     être trop gros ; se replie sur plusieurs lignes plutôt que d'être coupé */
+  font-size: clamp(0.78rem, 10cqw, 1.5rem);
   color: rgba(255, 255, 255, 0.95); /* 5% de transparence : net et lisible */
   overflow-wrap: anywhere;
   word-break: break-word;
