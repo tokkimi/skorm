@@ -16531,32 +16531,3 @@ iframe.media-hidden-player,
 }
 .admin-media-order-buttons button:disabled { opacity: 0.35; cursor: not-allowed; }
 .admin-media-order-buttons button:not(:disabled):hover { border-color: rgba(120, 190, 255, 0.8); }
-
-/* Nom de l'artiste affiché centré, en transparence, au milieu de la vignette */
-.profile-card.skorm-artist-card { container-type: inline-size; }
-.skorm-artist-centername {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4em;
-  padding: 0 8%;
-  text-align: center;
-  pointer-events: none;
-}
-.skorm-centername-name {
-  max-width: 100%;
-  font-weight: 900;
-  text-transform: uppercase;
-  line-height: 0.95;
-  letter-spacing: 0.03em;
-  /* Toujours sur UNE seule ligne, taille calée sur la largeur de la carte
-     pour que même les noms longs tiennent sans être coupés */
-  white-space: nowrap;
-  font-size: clamp(0.6rem, 7.2cqw, 1.3rem);
-  color: rgba(255, 255, 255, 0.5); /* 50% de transparence */
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
-}
