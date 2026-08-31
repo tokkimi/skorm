@@ -1,5 +1,6 @@
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { artistMedia, artists as publicArtists } from "@/lib/content";
+import { adminArtistSnapshot } from "@/lib/admin-artist-snapshot";
 
 type ArtistRow = {
   id: string; name: string; slug: string; tagline: string | null; bio: string | null;
@@ -57,12 +58,20 @@ const empty: AdminData = {
   content_items: [], contacts: [], tasks: [], financial_transactions: [],
 };
 
+function snapshotAdminData(): AdminData {
+  return {
+    ...empty,
+    artists: adminArtistSnapshot.map((artist) => ({ ...artist })),
+  };
+}
+
 export async function syncPublicArtistsToAdmin() {
   const supabase = await getSupabaseServerClient();
   if (!supabase || !process.env.ADMIN_DB_SECRET) return;
 
   const existingSlugs = new Set<string>();
-  const { data: existingData } = await supabase.rpc("admin_get_backoffice", { p_secret: process.env.ADMIN_DB_SECRET });
+  const { data: existingData, error: existingError } = await supabase.rpc("admin_get_backoffice", { p_secret: process.env.ADMIN_DB_SECRET });
+  if (existingError || !existingData) return;
   const existingArtists = (existingData as Partial<AdminData> | null)?.artists || [];
   existingArtists.forEach((artist) => {
     if (artist.slug) existingSlugs.add(artist.slug);
@@ -108,10 +117,10 @@ export async function syncPublicArtistsToAdmin() {
 
 export async function getAdminData(): Promise<AdminData> {
   const supabase = await getSupabaseServerClient();
-  if (!supabase || !process.env.ADMIN_DB_SECRET) return empty;
+  if (!supabase || !process.env.ADMIN_DB_SECRET) return snapshotAdminData();
   await syncPublicArtistsToAdmin();
   const { data, error } = await supabase.rpc("admin_get_backoffice", { p_secret: process.env.ADMIN_DB_SECRET });
-  if (error || !data) return empty;
+  if (error || !data) return snapshotAdminData();
   const backoffice = data as AdminData;
   backoffice.artists = backoffice.artists.map((artist) => {
     const publicArtist = publicArtists.find((item) => item.slug === artist.slug);
