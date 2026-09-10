@@ -118,8 +118,11 @@ export async function syncPublicArtistsToAdmin() {
 export async function getAdminData(): Promise<AdminData> {
   const supabase = await getSupabaseServerClient();
   if (!supabase || !process.env.ADMIN_DB_SECRET) return snapshotAdminData();
-  await syncPublicArtistsToAdmin();
-  const { data, error } = await supabase.rpc("admin_get_backoffice", { p_secret: process.env.ADMIN_DB_SECRET });
+  // Reading a page must not seed the database or wait indefinitely for it.
+  // Keep the existing roster snapshot available during a Supabase outage.
+  const { data, error } = await supabase
+    .rpc("admin_get_backoffice", { p_secret: process.env.ADMIN_DB_SECRET })
+    .abortSignal(AbortSignal.timeout(5000));
   if (error || !data) return snapshotAdminData();
   const backoffice = data as AdminData;
   backoffice.artists = backoffice.artists.map((artist) => {
