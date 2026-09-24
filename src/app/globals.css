@@ -13399,13 +13399,75 @@ iframe.media-hidden-player {
 }
 
 @media (max-width: 860px) {
+  .paga-hero-dates {
+    width: min(100%, 360px);
+    margin: 0 auto;
+    padding-inline: 0;
+  }
+
+  .hero-date-rail .media-rail {
+    grid-auto-columns: minmax(0, 1fr);
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .hero-date-rail .paga-date-card {
+    width: 100%;
+    min-height: 154px;
+  }
+
   .artist-private-shell {
-    padding: 100px 14px 110px;
+    padding: 88px 12px 96px;
+  }
+
+  .artist-private-hero,
+  .artist-private-card {
+    border-radius: 20px;
+  }
+
+  .artist-private-hero {
+    margin-bottom: 14px;
+    padding: 22px 18px;
+  }
+
+  .artist-private-hero h1 {
+    font-size: clamp(2.35rem, 14vw, 4rem);
+  }
+
+  .artist-private-hero div {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 9px;
   }
 
   .artist-private-grid,
   .artist-private-fields {
     grid-template-columns: 1fr;
+  }
+
+  .artist-private-grid {
+    gap: 14px;
+  }
+
+  .artist-private-card {
+    padding: 16px;
+  }
+
+  .artist-private-featured {
+    margin-top: 22px;
+    padding-top: 18px;
+  }
+
+  .artist-private-image-field div {
+    height: 128px;
+  }
+
+  .artist-private-fields input,
+  .artist-private-fields textarea,
+  .artist-private-image-field input:not([type="file"]),
+  .artist-private-fields select {
+    min-height: 46px;
+    font-size: 16px;
   }
 
   .artist-private-form header {
