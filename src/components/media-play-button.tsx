@@ -3,9 +3,12 @@
 import { Pause, Play, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { mediaLink, directAudioUrl } from "@/lib/media-links";
 
 function getEmbedUrl(href?: string) {
   if (!href) return null;
+  const official = mediaLink(href);
+  if (official?.embed) return official.embed;
   if (/\.(mp4|webm|mov)(?:\?|$)/i.test(href)) return href;
   try {
     const url = new URL(href);
@@ -61,15 +64,11 @@ export function MediaPlayButton({
   const audio = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const directAudio = audioUrl || fullAudioUrl || src || previewUrl || (deezerId ? `/api/audio-preview/${deezerId}` : "");
-  const embedUrl = useMemo(() => getEmbedUrl(href), [href]);
-  const compactEmbed = embedUrl?.includes("w.soundcloud.com") || embedUrl?.includes("open.spotify.com/embed/");
-  const isActive = playing || Boolean(open && compactEmbed);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const playbackHref = [href,audioUrl,fullAudioUrl,previewUrl].find(value => mediaLink(value)?.embed) || href;
+  const directAudio = [audioUrl,fullAudioUrl,src,previewUrl].map(directAudioUrl).find(Boolean) || (deezerId ? `/api/audio-preview/${deezerId}` : /\.(mp3|wav|ogg|m4a)(\?|$)/i.test(href || '') ? href : "");
+  const embedUrl = useMemo(() => getEmbedUrl(playbackHref), [playbackHref]);
+  const compactEmbed = false;
+  const isActive = playing;
 
   useEffect(() => {
     if (!open || compactEmbed) return;
@@ -125,18 +124,19 @@ export function MediaPlayButton({
           tabIndex={-1}
         />
       )}
-      {mounted && open && embedUrl && !compactEmbed && createPortal(
+      {open && !compactEmbed && createPortal(
         <div className="media-modal" role="dialog" aria-modal="true" aria-label={title}>
           <button type="button" className="media-modal-close" onClick={() => setOpen(false)} aria-label="Fermer">
             <X size={18} />
           </button>
           <div className="media-modal-frame">
-            <iframe
+            {embedUrl ? <iframe
               src={embedUrl}
               title={title}
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
               allowFullScreen
-            />
+            /> : <p>Cette plateforme ne propose pas de lecteur intégré pour ce lien.</p>}
+            {mediaLink(playbackHref) && <a href={mediaLink(playbackHref)!.href} target="_blank" rel="noreferrer">Ouvrir sur la plateforme ↗</a>}
           </div>
         </div>,
         document.body

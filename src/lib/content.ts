@@ -674,7 +674,9 @@ export function isPlayableAudioItem(item?: ArtistMediaItem | null) {
       hostname.includes("soundcloud.com") ||
       hostname.includes("open.spotify.com") ||
       hostname.includes("deezer.com") ||
-      hostname.includes("music.apple.com")
+      hostname.includes("music.apple.com") ||
+      hostname === "youtube.com" || hostname === "www.youtube.com" || hostname === "music.youtube.com" || hostname === "youtu.be" ||
+      hostname === "spotify.link" || hostname === "on.soundcloud.com" || /\.(mp3|wav|ogg|m4a)(\?|$)/i.test(item.href)
     );
   } catch {
     return false;

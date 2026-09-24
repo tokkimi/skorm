@@ -4,6 +4,7 @@ import { z } from "zod";
 import { getArtistSessionSlug } from "@/lib/artist-auth";
 import { getAdminData } from "@/lib/admin-data";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { resolveMediaMetadata } from "@/lib/media-metadata";
 
 const mediaSchema = z.object({
   title: z.string().optional(),
@@ -14,6 +15,7 @@ const mediaSchema = z.object({
   fullAudioUrl: z.string().optional(),
   src: z.string().optional(),
   previewUrl: z.string().optional(),
+  deezerId: z.string().optional(),
   durationSec: z.number().optional(),
   mediaType: z.enum(["photo", "video"]).optional(),
   showOnHome: z.boolean().optional(),
@@ -42,6 +44,7 @@ const schema = z.object({
 });
 
 export async function POST(request: Request) {
+  if (request.headers.get("origin") !== new URL(request.url).origin) return NextResponse.json({error:"Origine invalide"},{status:403});
   const slug = await getArtistSessionSlug();
   if (!slug) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
@@ -55,22 +58,33 @@ export async function POST(request: Request) {
   const supabase = await getSupabaseServerClient();
   if (!supabase || !process.env.ADMIN_DB_SECRET) return NextResponse.json({ error: "Unavailable" }, { status: 503 });
 
-  const { error } = await supabase.rpc("admin_update_backoffice_item", {
+  const readiness = await supabase.from("artists").select("featured_sound,media_sounds,media_releases,media_videos,home_image_url").eq("id",artist.id).single();
+  if(readiness.error) return NextResponse.json({error:"La base médias doit être mise à jour. Rien n’a été enregistré : conserve tes liens dans le formulaire."},{status:503});
+  async function enrich(item: z.infer<typeof mediaSchema>) {
+    if(!item) return item;
+    const href=item.href || item.audioUrl || item.fullAudioUrl;
+    if(!href || (item.title && item.cover)) return item;
+    try {const data=await resolveMediaMetadata(href);return {...item,href:data.href,title:item.title||data.title,cover:item.cover||data.cover,meta:item.meta||data.meta};} catch {return item;}
+  }
+  const payload={...parsed.data};
+  if(payload.featured_sound) payload.featured_sound=await enrich(payload.featured_sound);
+  if(payload.media_sounds) payload.media_sounds=await Promise.all(payload.media_sounds.map(enrich));
+  const { error } = await supabase.rpc("artist_save_profile", {
     p_secret: process.env.ADMIN_DB_SECRET,
-    p_kind: "artist",
     p_id: artist.id,
-    p_payload: {
-      ...parsed.data,
-      // Le son mis en avant doit aussi alimenter le rail public des sons.
-      media_sounds: parsed.data.media_sounds !== undefined
-        ? parsed.data.media_sounds
-        : parsed.data.featured_sound?.title
-          ? [parsed.data.featured_sound]
-          : [],
-    },
+    p_payload: payload,
   });
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: "Sauvegarde impossible. La base médias doit être mise à jour ; tes modifications restent dans le formulaire." }, { status: 503 });
+  const check=await supabase.from("artists").select("*").eq("id",artist.id).single();
+  if(check.error) return NextResponse.json({error:"Sauvegarde non vérifiée. Recharge avant de réessayer."},{status:503});
+  const same=(a:unknown,b:unknown):boolean => {
+    if(a===b) return true;
+    if(a===null||b===null||typeof a!=="object"||typeof b!=="object") return false;
+    const aa=a as Record<string,unknown>,bb=b as Record<string,unknown>;
+    return Object.keys(aa).length===Object.keys(bb).length&&Object.keys(aa).every(k=>same(aa[k],bb[k]));
+  };
+  if(Object.entries(payload).some(([key,value])=>!same(JSON.parse(JSON.stringify(value)),check.data[key]))) return NextResponse.json({error:"Les données enregistrées ne correspondent pas. Conserve tes modifications et réessaie."},{status:503});
 
   revalidatePath("/");
   revalidatePath("/artistes");

@@ -59,7 +59,7 @@ function MediaRail({
   const publicItems = items.filter((item) => {
     const value = `${item.title} ${item.meta || ""} ${item.href || ""}`.toLowerCase();
     if (value.includes("press kit") || value.includes("presskit") || value.includes("bannière officielle")) return false;
-    if ((variant === "sound" || variant === "spotify") && !isPlayableAudioItem(item)) return false;
+    if ((variant === "sound" || variant === "spotify") && !isPlayableAudioItem(item) && !item.href) return false;
     return true;
   });
 
@@ -75,7 +75,7 @@ function MediaRail({
         {publicItems.map((item, index) => (
           <article className={`artist-mini-card ${variant}`} key={`${title}-${item.title}-${index}`}>
             <div className={`artist-mini-thumb thumb-${index % 3}`}>
-              <Image src={item.cover || image} alt={`Miniature officielle ${item.title}`} fill sizes="260px" />
+              <Image src={item.cover || image} alt={`Miniature ${item.title}`} fill sizes="260px" unoptimized />
             </div>
             <small>{label} · {String(index + 1).padStart(2, "0")}</small>
             <strong>{item.title}</strong>

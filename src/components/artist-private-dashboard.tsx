@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CalendarDays, ImagePlus, Music2, Plus, Trash2, Video, UserRound } from "lucide-react";
 import { ArtistAgenda } from "@/components/artist-agenda";
+import { MediaLinkImport } from "@/components/media-link-import";
 import { artistBpms, artistGenres, artistStyles } from "@/lib/artist-filters";
 
 type MediaItem = {
@@ -173,7 +174,8 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
       }),
     });
     if (!response.ok) {
-      setMessage("Impossible d’enregistrer pour le moment.");
+      const result = await response.json().catch(()=>({}));
+      setMessage(result.error || "Impossible d’enregistrer pour le moment.");
       return;
     }
     setMessage("Sauvegardé.");
@@ -224,6 +226,7 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
 
           <section className="artist-private-featured" hidden={tab !== "sons"}>
             <h2><Music2 size={17} /> Son mis en avant</h2>
+            <MediaLinkImport onImport={item=>{setFeaturedHref(item.href);setFeaturedTitle(item.title);setFeaturedCover(item.cover);setFeaturedMeta(item.meta);setFeaturedAudio("");setFeaturedPreview("");}} />
             <div className="artist-private-fields">
               <ImageInput label="Miniature officielle" value={featuredCover} onChange={setFeaturedCover} />
               <label>Titre<input value={featuredTitle} onChange={(event) => setFeaturedTitle(event.target.value)} /></label>
@@ -238,6 +241,7 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
           <section className="artist-private-featured" hidden={tab !== "sons"}>
             <h2><Music2 size={17} /> Derniers sons</h2>
             <p>Ajoute plusieurs titres : ils apparaîtront en cartes dans la section « Derniers sons » de ta page publique.</p>
+            <MediaLinkImport onImport={item=>setSounds(current=>[...current.filter(sound=>sound.title||sound.href||sound.audioUrl),item])} />
             {sounds.map((item, index) => (
               <div className="artist-private-fields" key={`sound-${index}`}>
                 <ImageInput label="Cover" value={item.cover || ""} onChange={(value) => setSounds((current) => current.map((sound, soundIndex) => soundIndex === index ? { ...sound, cover: value } : sound))} />

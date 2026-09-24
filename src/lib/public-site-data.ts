@@ -67,9 +67,9 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 function mediaItemFromUnknown(value: unknown): PublicMediaItem | null {
   if (!isRecord(value)) return null;
   const hasFilters = Array.isArray(value.genres) || Array.isArray(value.styles) || typeof value.bpm === "string" || typeof value.country === "string" || typeof value.location === "string";
-  if ((!value.title || typeof value.title !== "string" || !value.title.trim()) && !hasFilters) return null;
+  if ((!value.title || typeof value.title !== "string" || !value.title.trim()) && !hasFilters && !value.href && !value.audioUrl && !value.fullAudioUrl) return null;
   return {
-    title: typeof value.title === "string" ? cleanPublicText(value.title) : "",
+    title: typeof value.title === "string" && value.title.trim() ? cleanPublicText(value.title) : value.href || value.audioUrl || value.fullAudioUrl ? "Écouter ce titre" : "",
     meta: typeof value.meta === "string" ? cleanPublicText(value.meta) : undefined,
     cover: typeof value.cover === "string" ? value.cover : undefined,
     href: typeof value.href === "string" ? value.href : undefined,
@@ -324,7 +324,8 @@ export function publicArtistsFromAdmin(data: AdminData): PublicArtist[] {
       [fallback && getFeaturedAudioForArtist(fallback), ...sounds, ...releases].find(isPlayableAudioItem) ||
       visualFallback?.featuredSound ||
       null;
-    const publishedSounds = Array.isArray(artist.media_sounds) ? sounds : sounds.length ? sounds : featured ? [featured] : [];
+    const publishedSounds = [...sounds];
+    if (profileMedia && (profileMedia.href || profileMedia.audioUrl || profileMedia.fullAudioUrl) && !publishedSounds.some(item => (item.href && item.href === profileMedia.href) || (item.audioUrl && item.audioUrl === profileMedia.audioUrl))) publishedSounds.unshift(profileMedia);
     const instagram = artist.instagram_url || fallback?.instagram || "#";
     const adminHomeImage = versionedAssetUrl(firstText(artist.home_image_url, artist.image_url), artist.updated_at);
     const adminHeroImage = versionedAssetUrl(firstText(artist.image_url, artist.home_image_url), artist.updated_at);

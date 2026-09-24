@@ -7,12 +7,18 @@ const other = {id:randomUUID(),slug:'other',name:'Other'};
 let events = [{id:randomUUID(),artist_id:other.id,title:'PRIVATE OTHER',category:'artist-personal',notes:'SECRET',starts_at:'2027-01-01T10:00:00Z'}];
 let publicEvents=[];
 let imagesEnabled=false;
+let mediaReady=false;
 const db=createServer(async(req,res)=>{
   let raw=''; for await (const chunk of req) raw+=chunk;
   const p=raw ? JSON.parse(raw):{};
   const route=req.url.split('?')[0];
   let data;
   if(route.endsWith('/admin_get_artist_workspace')) data={artists:[owner,other],events,notes:[{artist_id:owner.id,content:'MANAGER ONLY'}]};
+  else if(route.endsWith('/artist_save_profile')) {Object.assign(owner,p.p_payload);data=null;}
+  else if(route.endsWith('/artists')) {
+    if(!mediaReady){res.writeHead(400,{'Content-Type':'application/json'});res.end(JSON.stringify({code:'42703',message:'missing media columns'}));return;}
+    data=owner;
+  }
   else if(route.endsWith('/admin_create_private_event')) { const item={id:randomUUID(),artist_id:p.p_artist_id,title:p.p_title,starts_at:p.p_starts_at,ends_at:p.p_ends_at,category:p.p_category,location:p.p_location,notes:p.p_notes}; events.push(item);data=item.id; }
   else if(route.endsWith('/admin_update_private_event')) { const e=events.find(e=>e.id===p.p_id);Object.assign(e,{title:p.p_title,starts_at:p.p_starts_at,ends_at:p.p_ends_at,category:p.p_category,location:p.p_location,notes:p.p_notes});data=null; }
   else if(route.endsWith('/admin_delete_private_event')) {events=events.filter(e=>e.id!==p.p_id);data=null;}
@@ -78,5 +84,15 @@ try {
   assert.equal((await call({action:'delete',visibility:'public',id:publicEvents.find(e=>e.title==='Delete fallback').id})).status,200);
   assert.equal((await call({action:'delete',id:mine[0].id})).status,200);
   assert.equal((await (await call()).json()).events.filter(e=>e.visibility==='private').length,0);
+  const saveProfile=payload=>fetch(base+'/api/artist/profile',{method:'POST',headers:{Cookie:cookie,Origin:base,'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  const sample={title:'YouTube test',href:'https://www.youtube.com/watch?v=_3-LrpbWuwU',cover:'https://i.ytimg.com/vi/_3-LrpbWuwU/hqdefault.jpg'};
+  assert.equal((await saveProfile({media_sounds:[sample]})).status,503,'Never report success when media schema is missing');
+  mediaReady=true;
+  assert.equal((await saveProfile({featured_sound:sample,media_sounds:[]})).status,200);
+  assert.ok((await (await fetch(base+'/artistes/test-artist')).text()).includes('YouTube test'),'Featured sound must render even with an empty sound list');
+  assert.equal((await saveProfile({media_sounds:[sample]})).status,200);
+  assert.equal((await saveProfile({bio:'Only a bio edit'})).status,200);
+  assert.equal(owner.media_sounds.length,1,'Unrelated saves preserve sounds');
+  assert.ok((await (await fetch(base+'/artistes/test-artist')).text()).includes('YouTube test'));
   console.log('PASS: unauthenticated access, ownership isolation, private create/update/delete, notebook persistence, public date publication and no private content on public page.');
 } finally { app.kill();db.close(); }
