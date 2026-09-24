@@ -96,7 +96,7 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
   const [tab, setTab] = useState("profil");
   const [saving, setSaving] = useState(false);
   function navigate(next: string) { setTab(next); window.scrollTo({top:0,behavior:"smooth"}); }
-  function addSound() { setSounds(current => [...current, {}]); navigate("sons"); }
+  function addSound() { navigate("sons"); }
   const featured = artist.featured_sound || {};
   const [message, setMessage] = useState("");
   const [tagline, setTagline] = useState(artist.tagline || "");
@@ -232,9 +232,9 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
               <label>Titre<input value={featuredTitle} onChange={(event) => setFeaturedTitle(event.target.value)} /></label>
               <label>Artiste / plateforme<input value={featuredMeta} onChange={(event) => setFeaturedMeta(event.target.value)} /></label>
               <label className="wide">Lien officiel<input value={featuredHref} onChange={(event) => setFeaturedHref(event.target.value)} /></label>
-              <label className="wide">Audio complet MP3/WAV<input value={featuredAudio} onChange={(event) => setFeaturedAudio(event.target.value)} placeholder="https://.../titre-complet.mp3" /></label>
+              <details className="wide"><summary>Options audio avancées (facultatif)</summary><label className="wide">Audio complet MP3/WAV<input value={featuredAudio} onChange={(event) => setFeaturedAudio(event.target.value)} placeholder="https://.../titre-complet.mp3" /></label>
               <label>Durée en secondes<input value={featuredDuration} onChange={(event) => setFeaturedDuration(event.target.value)} inputMode="numeric" placeholder="Ex : 214" /></label>
-              <label className="wide">Preview / secours<input value={featuredPreview} onChange={(event) => setFeaturedPreview(event.target.value)} /></label>
+              <label className="wide">Preview / secours<input value={featuredPreview} onChange={(event) => setFeaturedPreview(event.target.value)} /></label></details>
             </div>
           </section>
 

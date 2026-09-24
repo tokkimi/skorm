@@ -22,6 +22,22 @@ export async function resolveMediaMetadata(raw: string) {
   let title=link.provider || 'Écouter ce titre';
   let cover=link.thumbnail || '';
   let meta=link.provider || '';
+  if(link.provider==='Apple Music') {
+    const apple=new URL(link.href);
+    const id=apple.searchParams.get('i') || apple.pathname.match(/\/(\d+)\/?$/)?.[1];
+    const country=apple.pathname.split('/')[1];
+    if(id && /^\d+$/.test(id)) try {
+      const response=await fetch(`https://itunes.apple.com/lookup?id=${id}&country=${/^[a-z]{2}$/.test(country)?country:'fr'}`,{redirect:'error',signal:AbortSignal.timeout(5000),next:{revalidate:86400}});
+      if(response.ok) {const data=(await response.json()).results?.[0];if(data){title=data.trackName||data.collectionName||title;meta=data.artistName||meta;if(/^https:\/\//.test(data.artworkUrl100||''))cover=data.artworkUrl100.replace('100x100','600x600');}}
+    } catch { /* Link and official player remain available. */ }
+  }
+  if(link.provider==='Deezer') {
+    const match=new URL(link.href).pathname.match(/\/(track|album|playlist|artist)\/(\d+)/);
+    if(match) try {
+      const response=await fetch(`https://api.deezer.com/${match[1]}/${match[2]}`,{redirect:'error',signal:AbortSignal.timeout(5000),next:{revalidate:86400}});
+      if(response.ok){const data=await response.json();title=data.title||data.name||title;meta=data.artist?.name||meta;const candidate=data.album?.cover_big||data.cover_big||data.picture_big;if(typeof candidate==='string'&&candidate.startsWith('https://'))cover=candidate;}
+    } catch { /* Link and official player remain available. */ }
+  }
   if(link.endpoint) {
     try {
       const response=await fetch(link.endpoint,{redirect:'error',signal:AbortSignal.timeout(5000),next:{revalidate:86400}});
