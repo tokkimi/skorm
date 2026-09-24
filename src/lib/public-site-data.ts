@@ -321,6 +321,7 @@ export function publicArtistsFromAdmin(data: AdminData): PublicArtist[] {
       [fallback && getFeaturedAudioForArtist(fallback), ...sounds, ...releases].find(isPlayableAudioItem) ||
       visualFallback?.featuredSound ||
       null;
+    const publishedSounds = sounds.length ? sounds : featured ? [featured] : [];
     const instagram = artist.instagram_url || fallback?.instagram || "#";
     const adminHomeImage = versionedAssetUrl(firstText(artist.home_image_url, artist.image_url), artist.updated_at);
     const adminHeroImage = versionedAssetUrl(firstText(artist.image_url, artist.home_image_url), artist.updated_at);
@@ -352,7 +353,7 @@ export function publicArtistsFromAdmin(data: AdminData): PublicArtist[] {
       ],
       featuredSound: featured,
       filters: { genres: profileMedia?.genres || [], styles: profileMedia?.styles || [], bpm: profileMedia?.bpm, country: profileMedia?.country, location: profileMedia?.location },
-      media: { sounds, releases, videos },
+      media: { sounds: publishedSounds, releases, videos },
     };
   });
 

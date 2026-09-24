@@ -59,7 +59,15 @@ export async function POST(request: Request) {
     p_secret: process.env.ADMIN_DB_SECRET,
     p_kind: "artist",
     p_id: artist.id,
-    p_payload: parsed.data,
+    p_payload: {
+      ...parsed.data,
+      // Le son mis en avant doit aussi alimenter le rail public des sons.
+      media_sounds: parsed.data.media_sounds?.length
+        ? parsed.data.media_sounds
+        : parsed.data.featured_sound?.title
+          ? [parsed.data.featured_sound]
+          : [],
+    },
   });
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
