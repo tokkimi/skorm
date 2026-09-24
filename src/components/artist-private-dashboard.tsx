@@ -34,6 +34,7 @@ type ArtistPrivateItem = {
   image_url?: string | null;
   home_image_url?: string | null;
   featured_sound?: MediaItem | null;
+  media_sounds?: MediaItem[] | null;
   media_videos?: MediaItem[] | null;
 };
 
@@ -110,6 +111,13 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
   const [country, setCountry] = useState(featured.country || "");
   const [location, setLocation] = useState(featured.location || "");
   const [visuals, setVisuals] = useState<MediaItem[]>(Array.isArray(artist.media_videos) ? artist.media_videos : []);
+  const [sounds, setSounds] = useState<MediaItem[]>(
+    Array.isArray(artist.media_sounds) && artist.media_sounds.length
+      ? artist.media_sounds
+      : artist.featured_sound?.title
+        ? [artist.featured_sound]
+        : [],
+  );
 
   function updateVisual(index: number, patch: Partial<MediaItem>) {
     setVisuals((current) => current.map((item, itemIndex) => itemIndex === index ? { ...item, ...patch } : item));
@@ -142,6 +150,10 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
           country,
           location,
         },
+        media_sounds: sounds.filter((item) => item.title || item.href || item.audioUrl).map((item) => ({
+          ...item,
+          durationSec: item.durationSec ? Number(item.durationSec) : undefined,
+        })),
         media_videos: visuals.filter((item) => item.cover || item.href).map((item) => ({
           title: item.title || artist.name,
           meta: item.meta || "Média officiel",
@@ -209,6 +221,22 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
               <label>Durée en secondes<input value={featuredDuration} onChange={(event) => setFeaturedDuration(event.target.value)} inputMode="numeric" placeholder="Ex : 214" /></label>
               <label className="wide">Preview / secours<input value={featuredPreview} onChange={(event) => setFeaturedPreview(event.target.value)} /></label>
             </div>
+          </section>
+
+          <section className="artist-private-featured">
+            <h2><Music2 size={17} /> Derniers sons</h2>
+            <p>Ajoute plusieurs titres : ils apparaîtront en cartes dans la section « Derniers sons » de ta page publique.</p>
+            {sounds.map((item, index) => (
+              <div className="artist-private-fields" key={`sound-${index}`}>
+                <ImageInput label="Cover" value={item.cover || ""} onChange={(value) => setSounds((current) => current.map((sound, soundIndex) => soundIndex === index ? { ...sound, cover: value } : sound))} />
+                <label>Titre<input value={item.title || ""} onChange={(event) => setSounds((current) => current.map((sound, soundIndex) => soundIndex === index ? { ...sound, title: event.target.value } : sound))} /></label>
+                <label>Artiste / plateforme<input value={item.meta || ""} onChange={(event) => setSounds((current) => current.map((sound, soundIndex) => soundIndex === index ? { ...sound, meta: event.target.value } : sound))} /></label>
+                <label className="wide">Lien officiel<input value={item.href || ""} onChange={(event) => setSounds((current) => current.map((sound, soundIndex) => soundIndex === index ? { ...sound, href: event.target.value } : sound))} /></label>
+                <label className="wide">Audio / preview<input value={item.audioUrl || item.previewUrl || ""} onChange={(event) => setSounds((current) => current.map((sound, soundIndex) => soundIndex === index ? { ...sound, audioUrl: event.target.value, previewUrl: event.target.value } : sound))} /></label>
+                <button type="button" onClick={() => setSounds((current) => current.filter((_, soundIndex) => soundIndex !== index))}><Trash2 size={14} /> Retirer</button>
+              </div>
+            ))}
+            <button type="button" onClick={() => setSounds((current) => [...current, { mediaType: "photo" }])}><Plus size={15} /> Ajouter un son</button>
           </section>
 
           <section className="artist-private-featured">
