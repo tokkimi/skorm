@@ -6,6 +6,7 @@ import { CalendarDays, ImagePlus, Music2, Plus, Trash2, Video, UserRound } from 
 import { ArtistAgenda } from "@/components/artist-agenda";
 import { MediaLinkImport } from "@/components/media-link-import";
 import { artistBpms, artistGenres, artistStyles } from "@/lib/artist-filters";
+import { mediaLink } from "@/lib/media-links";
 
 type MediaItem = {
   title?: string;
@@ -243,7 +244,8 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
             <p>Ajoute plusieurs titres : ils apparaîtront en cartes dans la section « Derniers sons » de ta page publique.</p>
             <MediaLinkImport onImport={item=>setSounds(current=>[...current.filter(sound=>sound.title||sound.href||sound.audioUrl),item])} />
             {sounds.map((item, index) => (
-              <div className="artist-private-fields" key={`sound-${index}`}>
+              <div className="artist-private-fields artist-sound-card" key={`sound-${index}`}>
+                <div className="artist-sound-card-heading"><strong>{mediaLink(item.href)?.provider || "Lien officiel"}</strong><span>Son {String(index + 1).padStart(2, "0")}</span></div>
                 <ImageInput label="Cover" value={item.cover || ""} onChange={(value) => setSounds((current) => current.map((sound, soundIndex) => soundIndex === index ? { ...sound, cover: value } : sound))} />
                 <label>Titre<input value={item.title || ""} onChange={(event) => setSounds((current) => current.map((sound, soundIndex) => soundIndex === index ? { ...sound, title: event.target.value } : sound))} /></label>
                 <label>Artiste / plateforme<input value={item.meta || ""} onChange={(event) => setSounds((current) => current.map((sound, soundIndex) => soundIndex === index ? { ...sound, meta: event.target.value } : sound))} /></label>

@@ -16627,3 +16627,13 @@ iframe.media-hidden-player,
 .admin-media-order-buttons button:disabled { opacity: 0.35; cursor: not-allowed; }
 .admin-media-order-buttons button:not(:disabled):hover { border-color: rgba(120, 190, 255, 0.8); }
 .event-poster { display:block; width:100%; max-width:280px; max-height:320px; object-fit:contain; border-radius:12px; }
+.artist-sound-card { position:relative; border:1px solid rgba(255,255,255,.14); border-radius:18px; padding:16px; background:rgba(255,255,255,.035); }
+.artist-sound-card-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; color:#9bc2ff; text-transform:uppercase; letter-spacing:.08em; font-size:12px; }
+@media (max-width: 640px) {
+  .artist-sound-card { display:grid; grid-template-columns: minmax(84px, 96px) 1fr; gap:10px; padding:12px; }
+  .artist-sound-card-heading { grid-column:1 / -1; margin-bottom:0; }
+  .artist-sound-card .artist-private-image-field { grid-row:2 / span 4; }
+  .artist-sound-card label, .artist-sound-card button { grid-column:2; }
+  .artist-sound-card .wide { grid-column:1 / -1; }
+  .artist-sound-card input { min-height:42px; }
+}
