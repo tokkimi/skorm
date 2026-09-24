@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { getArtistSessionSlug } from "@/lib/artist-auth";
 import { getAdminData } from "@/lib/admin-data";
@@ -35,6 +36,8 @@ const schema = z.object({
   image_url: z.string().optional(),
   home_image_url: z.string().optional(),
   featured_sound: mediaSchema,
+  media_sounds: z.array(mediaSchema).optional(),
+  media_releases: z.array(mediaSchema).optional(),
   media_videos: z.array(visualMediaSchema).optional(),
 });
 
@@ -59,5 +62,13 @@ export async function POST(request: Request) {
     p_payload: parsed.data,
   });
 
-  return error ? NextResponse.json({ error: error.message }, { status: 500 }) : NextResponse.json({ ok: true });
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  revalidatePath("/");
+  revalidatePath("/artistes");
+  revalidatePath(`/artistes/${artist.slug}`);
+  revalidatePath("/en");
+  revalidatePath("/en/artistes");
+  revalidatePath(`/en/artistes/${artist.slug}`);
+  return NextResponse.json({ ok: true });
 }

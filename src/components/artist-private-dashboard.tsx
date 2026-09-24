@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { CalendarDays, FileText, ImagePlus, WandSparkles, Music2, ReceiptText, Plus, Trash2, Video } from "lucide-react";
+import { CalendarDays, FileText, ImagePlus, Music2, ReceiptText, Plus, Trash2, Video } from "lucide-react";
 import { artistBpms, artistGenres, artistStyles } from "@/lib/artist-filters";
 
 type MediaItem = {
@@ -165,11 +165,9 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
       <section className="artist-private-hero">
         <small>ESPACE ARTISTE SKORM</small>
         <h1>{artist.name}</h1>
-        <p>Gère ton profil, tes visuels, ton son mis en avant et les documents privés liés à SKORM.</p>
+        <p>Gère ton profil public, tes visuels et ton son mis en avant.</p>
         <div>
           <a href={`/artistes/${artist.slug}`} target="_blank">Voir ma page publique</a>
-          <a href={`/api/press-kit/${artist.slug}?lang=fr`}><WandSparkles size={16} /> Press kit FR</a>
-          <a href={`/api/press-kit/${artist.slug}?lang=en`}><WandSparkles size={16} /> Press kit EN</a>
         </div>
       </section>
 
@@ -241,8 +239,8 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
             <p>Espace factures SKORM ↔ artiste : émission, téléchargement PDF et suivi des paiements.</p>
           </article>
           <article className="artist-private-card">
-            <span><FileText size={17} /> Contrats</span>
-            <p>Contrats, documents privés et press kits générés restent dans cet espace, jamais sur la page publique.</p>
+            <span><FileText size={17} /> Documents</span>
+            <p>Les contrats et documents privés seront disponibles ici lorsqu’ils seront activés par SKORM.</p>
           </article>
         </aside>
       </section>
