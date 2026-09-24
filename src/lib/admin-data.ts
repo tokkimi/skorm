@@ -133,9 +133,9 @@ export async function getAdminData(): Promise<AdminData> {
       ...artist,
       home_image_url: artist.home_image_url || artist.image_url || publicArtist?.homeImage || null,
       featured_sound: artist.featured_sound || featuredSound || null,
-      media_sounds: artist.media_sounds?.length ? artist.media_sounds : [...(media?.sounds || [])],
-      media_releases: artist.media_releases?.length ? artist.media_releases : [...(media?.releases || [])],
-      media_videos: artist.media_videos?.length ? artist.media_videos : [...(media?.videos || [])],
+      media_sounds: artist.media_sounds ?? [...(media?.sounds || [])],
+      media_releases: artist.media_releases ?? [...(media?.releases || [])],
+      media_videos: artist.media_videos ?? [...(media?.videos || [])],
     };
   });
   return backoffice;

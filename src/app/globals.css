@@ -13197,6 +13197,39 @@ iframe.media-hidden-player {
   object-fit: cover;
 }
 
+/* Artist workspace: one surface, persistent navigation. */
+.artist-studio [hidden] { display: none !important; }
+.artist-studio .artist-private-grid { display: block; max-width: 880px; }
+.artist-studio .artist-private-hero { max-width: 880px; border: 0; box-shadow: none; background: none; backdrop-filter: none; padding: 16px 0; }
+.artist-studio .artist-private-card { border: 0; border-radius: 0; padding: 0; background: none; box-shadow: none; backdrop-filter: none; }
+.artist-studio .artist-private-featured > .artist-private-fields { padding-block: 18px; border-bottom: 1px solid #ffffff1c; margin-bottom: 16px; }
+.artist-studio-top { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px max(16px,calc((100vw - 880px)/2)); background: #080b10; border-bottom: 1px solid #ffffff20; }
+.artist-studio-top strong { font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.artist-studio-top summary { cursor: pointer; padding: 10px; }
+.artist-studio-top nav { position: absolute; right: 12px; top: 64px; display: grid; min-width: 245px; padding: 12px; border: 1px solid #ffffff25; border-radius: 16px; background: #10161e; box-shadow: 0 12px 40px #0008; }
+.artist-studio-top nav a, .artist-studio-top nav button { padding: 12px; text-align: left; font-size: 14px; color: #eef6ff; }
+.artist-studio-dock { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; gap: 4px; padding: 8px 8px calc(8px + env(safe-area-inset-bottom)); background: #0b1018; border-top: 1px solid #ffffff25; }
+.artist-studio-dock button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; width: min(24%,160px); min-height: 54px; border-radius: 12px; font-size: 12px; color: #b7c7d9; }
+.artist-studio-dock button[aria-pressed="true"] { background: #7dd3fc20; color: #7dd3fc; }
+.artist-studio button:disabled { opacity: .5; cursor: wait; }
+.artist-studio button:focus-visible, .artist-studio summary:focus-visible { outline: 2px solid #7dd3fc; outline-offset: 3px; }
+.artist-agenda > p { color: #b4c1d1; line-height: 1.6; margin: 14px 0; }
+.artist-agenda h2 { font-size: 26px; }
+.artist-agenda h3 { margin: 18px 0 10px; }
+.artist-agenda button { min-height: 44px; padding: 10px 14px; border-radius: 10px; background: #ffffff0e; color: #d8f1ff; }
+.artist-calendar-heading { display: flex; justify-content: space-between; align-items: center; margin: 20px 0 12px; text-transform: capitalize; }
+.artist-calendar { display: grid; grid-template-columns: repeat(7,minmax(0,1fr)); gap: 4px; text-align: center; }
+.artist-calendar button { display: grid; padding: 8px 2px; min-width: 0; }
+.artist-calendar button[aria-pressed="true"] { background: #7dd3fc; color: #07111c; }
+.artist-calendar small { font-size: 11px; }
+.artist-agenda-entry { padding: 16px 0; border-bottom: 1px solid #ffffff22; }
+.artist-agenda-entry div, .artist-agenda-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+.artist-notebook { margin-top: 28px; }
+.artist-notebook textarea { display: block; width: 100%; margin: 12px 0; padding: 16px; background: #ffffff08; border: 1px solid #ffffff25; border-radius: 12px; color: white; font-size: 16px; }
+.artist-studio .artist-private-fields { min-width: 0; }
+.artist-studio .artist-private-fields input, .artist-studio .artist-private-fields select { max-width: 100%; min-width: 0; }
+.artist-studio .artist-private-fields input[type="checkbox"] { width: 20px; min-height: 20px; }
+
 /* Private artist portal */
 .artist-private-shell {
   min-height: 100vh;

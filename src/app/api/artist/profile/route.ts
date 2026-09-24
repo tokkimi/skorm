@@ -62,7 +62,7 @@ export async function POST(request: Request) {
     p_payload: {
       ...parsed.data,
       // Le son mis en avant doit aussi alimenter le rail public des sons.
-      media_sounds: parsed.data.media_sounds?.length
+      media_sounds: parsed.data.media_sounds !== undefined
         ? parsed.data.media_sounds
         : parsed.data.featured_sound?.title
           ? [parsed.data.featured_sound]

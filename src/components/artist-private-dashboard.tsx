@@ -2,7 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { CalendarDays, FileText, ImagePlus, Music2, ReceiptText, Plus, Trash2, Video } from "lucide-react";
+import { CalendarDays, ImagePlus, Music2, Plus, Trash2, Video, UserRound } from "lucide-react";
+import { ArtistAgenda } from "@/components/artist-agenda";
 import { artistBpms, artistGenres, artistStyles } from "@/lib/artist-filters";
 
 type MediaItem = {
@@ -91,6 +92,10 @@ function ImageInput({ label, value, onChange }: { label: string; value: string; 
 
 export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }) {
   const router = useRouter();
+  const [tab, setTab] = useState("profil");
+  const [saving, setSaving] = useState(false);
+  function navigate(next: string) { setTab(next); window.scrollTo({top:0,behavior:"smooth"}); }
+  function addSound() { setSounds(current => [...current, {}]); navigate("sons"); }
   const featured = artist.featured_sound || {};
   const [message, setMessage] = useState("");
   const [tagline, setTagline] = useState(artist.tagline || "");
@@ -125,7 +130,10 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
 
   async function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (saving) return;
+    setSaving(true);
     setMessage("Enregistrement...");
+    try {
     const response = await fetch("/api/artist/profile", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -170,27 +178,31 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
     }
     setMessage("Sauvegardé.");
     router.refresh();
+    } catch { setMessage("Connexion interrompue. Tes modifications restent dans le formulaire : réessaie."); }
+    finally { setSaving(false); }
   }
 
   return (
-    <main className="artist-private-shell">
+    <main className="artist-private-shell artist-studio">
+      <header className="artist-studio-top"><strong>Mon espace · {artist.name}</strong><details><summary>Menu</summary><nav aria-label="Menu artiste">{[["profil","Mon profil"],["sons","Mes sons"],["videos","Photos et vidéos"],["agenda","Agenda privé"],["date","Ajouter une date publique"],["notes","Bloc-notes"]].map(([value,label])=><button key={value} onClick={e=>{navigate(value);e.currentTarget.closest("details")?.removeAttribute("open");}}>{label}</button>)}<button onClick={e=>{addSound();e.currentTarget.closest("details")?.removeAttribute("open");}}>Ajouter un son</button><a href={`/artistes/${artist.slug}`} target="_blank" rel="noreferrer">Voir ma page publique ↗</a></nav></details></header>
       <section className="artist-private-hero">
         <small>ESPACE ARTISTE SKORM</small>
         <h1>{artist.name}</h1>
-        <p>Gère ton profil public, tes visuels et ton son mis en avant.</p>
+        <p>Ta page, tes sons et ton planning, au même endroit.</p>
         <div>
           <a href={`/artistes/${artist.slug}`} target="_blank">Voir ma page publique</a>
         </div>
       </section>
 
       <section className="artist-private-grid">
-        <form className="artist-private-card artist-private-form" onSubmit={save}>
+        {["agenda","date","notes"].includes(tab) && <ArtistAgenda key={tab} action={tab as "agenda" | "date" | "notes"} />}
+        <form hidden={["agenda","date","notes"].includes(tab)} className="artist-private-card artist-private-form" onSubmit={save}>
           <header>
-            <span><ImagePlus size={17} /> Profil public</span>
-            <button type="submit">Sauvegarder</button>
+            <span><ImagePlus size={17} /> {tab === "sons" ? "Mes sons" : tab === "videos" ? "Photos et vidéos" : "Mon profil"}</span>
+            <button type="submit" disabled={saving}>{saving ? "Enregistrement…" : "Sauvegarder"}</button>
           </header>
 
-          <div className="artist-private-fields">
+          <div className="artist-private-fields" hidden={tab !== "profil"}>
             <label>Style / rôle<input value={tagline} onChange={(event) => setTagline(event.target.value)} /></label>
             <label>Instagram<input value={instagram} onChange={(event) => setInstagram(event.target.value)} placeholder="https://instagram.com/..." /></label>
             <label className="wide">Bio<textarea value={bio} onChange={(event) => setBio(event.target.value)} rows={5} /></label>
@@ -198,7 +210,7 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
             <ImageInput label="Photo affichée sur la home" value={homeImage} onChange={setHomeImage} />
           </div>
 
-          <section className="artist-private-featured">
+          <section className="artist-private-featured" hidden={tab !== "profil"}>
             <h2>Filtres du roster</h2>
             <p>Ces choix servent uniquement à la recherche du roster et ne s’affichent pas en bulles sur ton profil.</p>
             <div className="artist-private-fields">
@@ -210,7 +222,7 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
             </div>
           </section>
 
-          <section className="artist-private-featured">
+          <section className="artist-private-featured" hidden={tab !== "sons"}>
             <h2><Music2 size={17} /> Son mis en avant</h2>
             <div className="artist-private-fields">
               <ImageInput label="Miniature officielle" value={featuredCover} onChange={setFeaturedCover} />
@@ -223,7 +235,7 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
             </div>
           </section>
 
-          <section className="artist-private-featured">
+          <section className="artist-private-featured" hidden={tab !== "sons"}>
             <h2><Music2 size={17} /> Derniers sons</h2>
             <p>Ajoute plusieurs titres : ils apparaîtront en cartes dans la section « Derniers sons » de ta page publique.</p>
             {sounds.map((item, index) => (
@@ -239,7 +251,7 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
             <button type="button" onClick={() => setSounds((current) => [...current, { mediaType: "photo" }])}><Plus size={15} /> Ajouter un son</button>
           </section>
 
-          <section className="artist-private-featured">
+          <section className="artist-private-featured" hidden={tab !== "videos"}>
             <h2><Video size={17} /> Photos & vidéos</h2>
             <p>Ces médias apparaissent dans ton diaporama. Active « home » pour les ajouter aussi au diaporama d’accueil.</p>
             {visuals.map((item, index) => (
@@ -254,24 +266,17 @@ export function ArtistPrivateDashboard({ artist }: { artist: ArtistPrivateItem }
             ))}
             <button type="button" onClick={() => setVisuals((current) => [...current, { mediaType: "photo", showOnHome: true }])}><Plus size={15} /> Ajouter une photo ou vidéo</button>
           </section>
-          {message && <p className="artist-private-message">{message}</p>}
+          {message && <p role="status" className="artist-private-message">{message}</p>}
+          <button type="submit" disabled={saving}>{saving ? "Enregistrement…" : "Sauvegarder mes modifications"}</button>
         </form>
 
-        <aside className="artist-private-side">
-          <article className="artist-private-card">
-            <span><CalendarDays size={17} /> Agenda & collabs</span>
-            <p>Module privé relié à l’agenda SKORM : dates, collabs, moodboards et documents liés à venir ici.</p>
-          </article>
-          <article className="artist-private-card">
-            <span><ReceiptText size={17} /> Facturation</span>
-            <p>Espace factures SKORM ↔ artiste : émission, téléchargement PDF et suivi des paiements.</p>
-          </article>
-          <article className="artist-private-card">
-            <span><FileText size={17} /> Documents</span>
-            <p>Les contrats et documents privés seront disponibles ici lorsqu’ils seront activés par SKORM.</p>
-          </article>
-        </aside>
       </section>
+      <nav className="artist-studio-dock" aria-label="Actions artiste">
+        <button aria-pressed={tab === "profil"} onClick={()=>navigate("profil")}><UserRound size={20}/>Profil</button>
+        <button aria-pressed={tab === "agenda"} onClick={()=>navigate("agenda")}><CalendarDays size={20}/>Agenda</button>
+        <button aria-pressed={tab === "date"} onClick={()=>navigate("date")}><Plus size={20}/>Ajouter date</button>
+        <button onClick={addSound}><Music2 size={20}/>Ajouter son</button>
+      </nav>
     </main>
   );
 }

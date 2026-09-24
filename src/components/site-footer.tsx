@@ -32,7 +32,7 @@ const trustItemsEn = [
 
 export function SiteFooter() {
   const pathname = usePathname();
-  if (pathname.startsWith("/admin") || pathname === "/connexion") return null;
+  if (pathname.startsWith("/admin") || pathname === "/connexion" || pathname.startsWith("/espace-artiste")) return null;
 
   const isEn = pathname.startsWith("/en");
   const isHome = pathname === "/" || pathname === "/en";

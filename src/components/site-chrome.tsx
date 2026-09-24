@@ -16,7 +16,7 @@ export function SiteChrome() {
   const isEn = pathname.startsWith("/en");
   const base = isEn ? "/en" : "";
 
-  if (pathname.startsWith("/admin") || pathname === "/connexion") return null;
+  if (pathname.startsWith("/admin") || pathname === "/connexion" || pathname.startsWith("/espace-artiste")) return null;
 
   const mobileLinks = [
     { href: withBase(base, "/"), label: isEn ? "Home" : "Accueil" },
