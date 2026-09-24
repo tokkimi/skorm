@@ -47,7 +47,7 @@ function FillVisualImage({
   sizes: string;
   priority?: boolean;
 }) {
-  if (src.startsWith("data:")) {
+  if (src.startsWith("data:") || src.startsWith("http://") || src.startsWith("https://")) {
     return <img src={src} alt={alt} className="fill-native-image" />;
   }
   return <Image src={src} alt={alt} fill sizes={sizes} priority={priority} />;
