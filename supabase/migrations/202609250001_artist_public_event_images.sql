@@ -16,8 +16,8 @@ begin
   end if;
   if p_action <> 'event' then raise exception 'invalid action'; end if;
   if p_id is null then
-    insert into public.events(artist_id,title,venue,city,starts_at,is_published,image_url)
-    values(p_artist_id,p_payload->>'title',p_payload->>'venue',p_payload->>'city',
+    insert into public.events(artist_id,title,venue,city,country_code,starts_at,is_published,image_url)
+    values(p_artist_id,p_payload->>'title',p_payload->>'venue',p_payload->>'city',coalesce(nullif(p_payload->>'country_code',''),'FR'),
       (p_payload->>'starts_at')::timestamptz,true,nullif(p_payload->>'image_url','')) returning id into result_id;
   else
     update public.events set title=p_payload->>'title',venue=p_payload->>'venue',city=p_payload->>'city',
