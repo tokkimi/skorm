@@ -16627,6 +16627,8 @@ iframe.media-hidden-player,
 .admin-media-order-buttons button:disabled { opacity: 0.35; cursor: not-allowed; }
 .admin-media-order-buttons button:not(:disabled):hover { border-color: rgba(120, 190, 255, 0.8); }
 .event-poster { display:block; width:100%; max-width:280px; max-height:320px; object-fit:contain; border-radius:12px; }
+.artist-mini-cover { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.artist-mini-cover-empty { background:linear-gradient(135deg,#111827,#263449); }
 .artist-sound-card { position:relative; border:1px solid rgba(255,255,255,.14); border-radius:18px; padding:16px; background:rgba(255,255,255,.035); }
 .artist-studio, .artist-studio * { max-width:100%; }
 .artist-studio { overflow-x:hidden; }

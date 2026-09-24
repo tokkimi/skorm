@@ -75,7 +75,7 @@ function MediaRail({
         {publicItems.map((item, index) => (
           <article className={`artist-mini-card ${variant}`} key={`${title}-${item.title}-${index}`}>
             <div className={`artist-mini-thumb thumb-${index % 3}`}>
-              <Image src={item.cover || image} alt={`Miniature ${item.title}`} fill sizes="260px" unoptimized />
+              {item.cover ? <img src={item.cover} alt={`Pochette officielle ${item.title}`} className="artist-mini-cover" /> : <div className="artist-mini-cover artist-mini-cover-empty" aria-label="Pochette non fournie par la plateforme" />}
             </div>
             <small>{label} · {String(index + 1).padStart(2, "0")}</small>
             <strong>{item.title}</strong>
