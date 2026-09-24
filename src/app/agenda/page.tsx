@@ -11,6 +11,7 @@ export default async function AgendaPage() {
       <section className="agenda-list">
         {dates.map((date) => (
           <article key={`${date.iso}-${date.event}`}>
+            {date.imageUrl && <img src={date.imageUrl} alt={`Affiche ${date.event}`} className="event-poster" />}
             <time><b>{date.day}</b><span>{date.month}</span></time>
             <div><small>{date.artist}</small><h2>{date.event}</h2></div>
             <p>{date.location}</p>

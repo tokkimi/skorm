@@ -9,7 +9,7 @@ type ArtistRow = {
   media_sounds?: unknown[] | null; media_releases?: unknown[] | null; media_videos?: unknown[] | null;
   updated_at?: string | null;
 };
-type EventRow = { id: string; starts_at: string; title: string; city: string; status: string; artist_name: string | null };
+type EventRow = { id: string; artist_id?: string; is_published?: boolean; image_url?: string | null; starts_at: string; title: string; city: string; status: string; artist_name: string | null };
 type InquiryRow = {
   id: string; contact_name: string; company: string | null; email: string; inquiry_type: string;
   artist_slug: string | null; message: string; status: string; created_at: string;

@@ -10,6 +10,7 @@ type Lang = "fr" | "en";
 export function AgencyHero({ lang = "fr", dates = [] }: { lang?: Lang; dates?: PublicDate[] }) {
   const isEn = lang === "en";
   const base = isEn ? "/en" : "";
+  dates = dates.filter(date => !date.past);
 
   return (
     <section className="agency-paga-hero agency-centered-hero agency-hero-clean">

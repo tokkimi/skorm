@@ -48,6 +48,9 @@ export type PublicArtist = {
 };
 
 export type PublicDate = {
+  past?: boolean;
+  imageUrl?: string;
+  artistSlug?: string;
   iso: string;
   day: string;
   month: string;
@@ -365,11 +368,14 @@ export function publicArtistsFromAdmin(data: AdminData): PublicArtist[] {
 
 export function publicDatesFromAdmin(data: AdminData): PublicDate[] {
   const adminDates = data.events
-    .filter((event) => isUpcoming(event.starts_at))
+    .filter((event) => event.is_published !== false)
     .map((event) => {
       const parts = dateParts(event.starts_at);
       return {
         ...parts,
+        past: !isUpcoming(event.starts_at),
+        imageUrl: event.image_url || undefined,
+        artistSlug: data.artists.find(artist => artist.id === event.artist_id)?.slug,
         artist: cleanPublicText(event.artist_name, "SKORM"),
         event: cleanPublicText(event.title),
         location: cleanPublicText(event.city, "Lieu à confirmer"),

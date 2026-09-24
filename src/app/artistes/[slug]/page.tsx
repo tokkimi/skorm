@@ -37,6 +37,7 @@ function datesForArtist(artist: PublicArtist, dates: PublicDate[]) {
   const artistName = normalize(artist.name);
   const artistSlug = normalize(artist.slug);
   return dates.filter((date) => {
+    if (date.artistSlug) return date.artistSlug === artist.slug;
     const value = normalize(date.artist);
     return value === artistName || value === artistSlug || value.includes(artistName) || artistName.includes(value);
   });
@@ -125,6 +126,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   if (!artist) notFound();
 
   const artistDates = datesForArtist(artist, dates);
+  const upcomingDates = artistDates.filter(date => !date.past);
   const heroImage = artist.heroImage || artist.homeImage || "/skorm-logo.png";
 
   return (
@@ -156,8 +158,9 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           <aside className="paga-hero-dates" aria-label="Prochaines dates">
             <p className="eyebrow">Next dates</p>
             <HorizontalRail className="hero-date-rail">
-              {artistDates.length ? artistDates.slice(0, 5).map((date) => (
+              {upcomingDates.length ? upcomingDates.slice(0, 5).map((date) => (
                 <Link href="#dates" className="paga-date-card" key={`${date.iso}-${date.event}`}>
+                  {date.imageUrl && <img src={date.imageUrl} alt={`Affiche ${date.event}`} className="event-poster" />}
                   <time><span>{date.day}</span>{date.month}</time>
                   <strong>{date.event}</strong>
                   <small>{date.location}</small>
@@ -173,15 +176,15 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
       <section id="dates" className="artist-section-shell artist-date-section">
         <div className="artist-section-heading">
           <p className="eyebrow">Live</p>
-          <h2>Prochaines dates</h2>
+          <h2>Dates & historique</h2>
         </div>
         <div className="paga-date-list">
-          {artistDates.length ? artistDates.map((date, index) => (
+          {artistDates.length ? [...artistDates].sort((a,b)=>Number(Boolean(a.past))-Number(Boolean(b.past)) || (a.past ? b.iso.localeCompare(a.iso) : a.iso.localeCompare(b.iso))).map((date) => (
             <details className="paga-date-row" key={`${date.iso}-${date.event}`}>
               <summary>
-                <time><span>{date.day}</span>{date.month} 2026</time>
+                <time><span>{date.day}</span>{date.month} {date.iso.slice(0,4)}</time>
                 <div className="paga-date-main">
-                  {index % 2 === 0 && <span>Featured</span>}
+                  <span>{date.past ? "Date passée" : "À venir"}</span>
                   <strong>{date.event}</strong>
                   <small><MapPin size={11} /> {date.location} / {date.artist}</small>
                 </div>
@@ -190,6 +193,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
               <div>
                 <p><b>Artiste :</b> {date.artist}</p>
                 <p><b>Statut :</b> {date.status}</p>
+                {date.imageUrl && <img src={date.imageUrl} alt={`Affiche ${date.event}`} className="event-poster" />}
                 <p><b>Lieu :</b> {date.location}</p>
               </div>
             </details>

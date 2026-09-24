@@ -16626,3 +16626,4 @@ iframe.media-hidden-player,
 }
 .admin-media-order-buttons button:disabled { opacity: 0.35; cursor: not-allowed; }
 .admin-media-order-buttons button:not(:disabled):hover { border-color: rgba(120, 190, 255, 0.8); }
+.event-poster { display:block; width:100%; max-width:280px; max-height:320px; object-fit:contain; border-radius:12px; }
